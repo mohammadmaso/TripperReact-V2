@@ -9,8 +9,8 @@ const colors = {
 };
 
 const fonts = {
-    heading: "iransans",
-    body: "iransans",
+    heading: "iranyekan",
+    body: "iranyekan",
 }
 const direction = "rtl"
 
