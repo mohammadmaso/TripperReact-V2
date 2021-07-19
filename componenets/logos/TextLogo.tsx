@@ -7,7 +7,7 @@ export default function TextLogo(props: any) {
   return (
     <Box {...props}>
       <Image
-        src={!props.darkLogo ? '/logo-dark.svg' : '/logo-dark.svg'}
+        src={!props.darkLogo ? '/HeaderLogo.svg' : '/HeaderLogo.svg'}
         height={props.height ?? 100}
         width={props.width ?? 100}
         layout="intrinsic"
