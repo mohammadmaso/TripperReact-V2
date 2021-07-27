@@ -1,0 +1,11 @@
+mutation CreateTrip(
+  $createTripTripInput: TripInput!
+  $createTripTripRelatedInput: TripRelatedInput!
+) {
+  createTrip(
+    tripInput: $createTripTripInput
+    tripRelatedInput: $createTripTripRelatedInput
+  ) {
+    success
+  }
+}

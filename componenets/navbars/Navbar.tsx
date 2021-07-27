@@ -74,7 +74,7 @@ const NavBar = (props: any) => {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Link href="/">
+          <Link href="/" passHref>
             <Box
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}

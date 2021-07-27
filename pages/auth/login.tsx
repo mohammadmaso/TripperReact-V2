@@ -1,0 +1,153 @@
+import {
+  Button,
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Center,
+  Text,
+  Box,
+  Spinner,
+  Image,
+  useToast,
+} from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
+import TextLogo from '../../componenets/logos/TextLogo';
+import Link from 'next/link';
+
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { useTokenAuthMutation } from '../../graphql/generated/types';
+
+export default function SignIn() {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const toast = useToast();
+
+  const [signIn, { loading, error, data }] = useTokenAuthMutation({
+    onCompleted: (data) => {
+      if (data.tokenAuth?.success) {
+        localStorage.setItem('token', data.tokenAuth?.token as string);
+        localStorage.setItem(
+          'refresh-token',
+          data.tokenAuth?.refreshToken as string
+        );
+        router.push('/');
+      }
+    },
+  });
+
+  function onSubmit(e: any) {
+    e.preventDefault();
+    signIn({
+      variables: {
+        tokenAuthPhoneNumber: phoneNumber,
+        tokenAuthPassword: password,
+      },
+    });
+  }
+  useEffect(() => {
+    if (router.query?.toast == 'registered') {
+      toast({
+        title: 'سفر خوش',
+        description: 'حساب کاربری شما با موفقیت ساخته شد',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+    }
+    if (router.query?.toast == 'passwod-changed') {
+      toast({
+        title: 'رمزعبور با موفقیت تغییر کرد',
+        description: 'اکنون با رمزعبور جدید وارد شوید.',
+        status: 'info',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+    }
+  });
+
+  return (
+    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      <Head>
+        <title>تریپر | ورود</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Flex p={8} flex="1" align={'center'} justify={'center'}>
+        <Stack spacing={6} w={'full'} maxW={'md'}>
+          <TextLogo height="100" width="200" />
+          {/* <Heading fontWeight="medium" fontSize={'xl'}>
+            ورود به حساب کاربری
+          </Heading> */}
+          {error ? <Text>{error.message}</Text> : null}
+
+          <form onSubmit={onSubmit}>
+            <Stack>
+              <FormControl id="phone">
+                <FormLabel>شماره موبایل</FormLabel>
+                <Input
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  type="phone"
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel>رمزعبور</FormLabel>
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                />
+              </FormControl>
+            </Stack>
+            <Stack spacing={6}>
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                align={'start'}
+                justify={'space-between'}
+                mt="2"
+              >
+                <Link href="/auth/register">ثبت نام</Link>
+                <Link href="/auth/password-forgot">فراموشی رمز عبور</Link>
+              </Stack>
+              <Button
+                colorScheme="primary"
+                rounded="full"
+                variant={'solid'}
+                type="submit"
+              >
+                {loading ? <Spinner /> : 'ورود'}
+              </Button>
+
+              <Button
+                w={'full'}
+                maxW={'md'}
+                rounded="full"
+                variant={'outline'}
+                leftIcon={<FcGoogle />}
+              >
+                <Center>
+                  <Text>ورود با گوگل</Text>
+                </Center>
+              </Button>
+            </Stack>
+          </form>
+        </Stack>
+      </Flex>
+
+      <Flex flex="1">
+        <Image
+          alt={'Login Image'}
+          objectFit={'cover'}
+          src={'/images/angelo-pantazis-zXVk8mNl9M0-unsplash.jpg'}
+        />
+      </Flex>
+    </Stack>
+  );
+}

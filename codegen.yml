@@ -1,12 +1,20 @@
+# watch: true
 overwrite: true
 schema: 'https://tripper-backend.herokuapp.com/api/'
-# documents: "graphql/**/*.graphql"
+documents: 'graphql/**/*.graphql'
 generates:
-  graphql/generated/types.d.ts:
+  graphql/generated/types.ts:
+    config:
+      withHooks: true
+      namingConvention:
+        enumValues: keep
     plugins:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
-  ./graphql.schema.json:
+  graphql/graphql.schema.json:
     plugins:
       - 'introspection'
+  graphql/fragment-matcher.ts:
+    plugins:
+      - fragment-matcher

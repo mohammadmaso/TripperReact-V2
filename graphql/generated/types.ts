@@ -1,8 +1,10 @@
 import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -123,11 +125,11 @@ export type AccessoryCategoryType = Node & {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   image: Scalars['String'];
-  accessorymodelSet: AccessoryTypeConnection;
+  accessoriesCategories: AccessoryTypeConnection;
 };
 
 
-export type AccessoryCategoryTypeAccessorymodelSetArgs = {
+export type AccessoryCategoryTypeAccessoriesCategoriesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -159,6 +161,18 @@ export type AccessoryCollectionsType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   user: UserType;
+  savedAccessories: AccessoryTypeConnection;
+};
+
+
+export type AccessoryCollectionsTypeSavedAccessoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
 };
 
 export type AccessoryCollectionsTypeConnection = {
@@ -211,6 +225,16 @@ export type AccessoryLikeTypeEdge = {
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
+
+/** An enumeration. */
+export enum AccessoryModelPriceUnit {
+  /** United state dollor */
+  USD = 'USD',
+  /** Iranin rial */
+  IRI = 'IRI',
+  /** Iranin toman */
+  TOM = 'TOM'
+}
 
 export type AccessoryReferenceyType = Node & {
   __typename?: 'AccessoryReferenceyType';
@@ -268,7 +292,7 @@ export type AccessorySiteType = Node & {
   logo: Scalars['String'];
   serviceZone: ServiceZoneTypeConnection;
   isWorldwide: Scalars['Boolean'];
-  accessoryreferencemodelSet: AccessoryReferenceyTypeConnection;
+  accessoriesSites: AccessoryReferenceyTypeConnection;
 };
 
 
@@ -282,7 +306,7 @@ export type AccessorySiteTypeServiceZoneArgs = {
 };
 
 
-export type AccessorySiteTypeAccessoryreferencemodelSetArgs = {
+export type AccessorySiteTypeAccessoriesSitesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -318,11 +342,16 @@ export type AccessoryType = Node & {
   category: AccessoryCategoryTypeConnection;
   image: Scalars['String'];
   likes: Scalars['Int'];
+  priceUnit: AccessoryModelPriceUnit;
   price: Scalars['Decimal'];
   discountPrice?: Maybe<Scalars['Decimal']>;
   priceUpdateDate?: Maybe<Scalars['Date']>;
   referenceLinks: AccessoryReferenceyTypeConnection;
+  tripmodelSet: TripTypeConnection;
+  plansAccessories: TripPlanTypeConnection;
   accessoryLikes?: Maybe<AccessoryLikeType>;
+  articlemodelSet: ArticleTypeConnection;
+  accessorycollectionsmodelSet: AccessoryCollectionsTypeConnection;
 };
 
 
@@ -344,6 +373,50 @@ export type AccessoryTypeReferenceLinksArgs = {
   last?: Maybe<Scalars['Int']>;
   site?: Maybe<Array<Maybe<Scalars['ID']>>>;
   link?: Maybe<Scalars['String']>;
+};
+
+
+export type AccessoryTypeTripmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type AccessoryTypePlansAccessoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type AccessoryTypeArticlemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type AccessoryTypeAccessorycollectionsmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+  savedAccessories?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type AccessoryTypeConnection = {
@@ -459,7 +532,6 @@ export type ArticleImageType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['String'];
   image: Scalars['String'];
-  isDefault: Scalars['Boolean'];
   subject: Scalars['String'];
   description: Scalars['String'];
   latitude: Scalars['String'];
@@ -653,6 +725,7 @@ export type ArticleType = Node & {
   images: ArticleImageTypeConnection;
   reviews: ArticleReviewTypeConnection;
   places: PlaceTypeConnection;
+  accessories: AccessoryTypeConnection;
   likes: Scalars['Int'];
   articleLikes?: Maybe<ArticleLikeType>;
 };
@@ -693,7 +766,6 @@ export type ArticleTypeImagesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  isDefault?: Maybe<Scalars['Boolean']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['String']>;
@@ -722,6 +794,17 @@ export type ArticleTypePlacesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+};
+
+
+export type ArticleTypeAccessoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
 };
 
 export type ArticleTypeConnection = {
@@ -843,6 +926,7 @@ export type CreateTourReview = {
 export type CreateTrip = {
   __typename?: 'CreateTrip';
   trip?: Maybe<TripType>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type CreateTripImages = {
@@ -857,23 +941,16 @@ export type CreateTripLike = {
   like?: Maybe<Scalars['Boolean']>;
 };
 
-export type CreateTripPlanInput = {
-  planInput?: Maybe<TripPlanInput>;
-  planRelatedInput?: Maybe<TripPlanRelatedInput>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateTripPlanPayload = {
-  __typename?: 'CreateTripPlanPayload';
+export type CreateTripPlan = {
+  __typename?: 'CreateTripPlan';
   plan?: Maybe<TripPlanType>;
   success?: Maybe<Scalars['Boolean']>;
-  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateTripReviewInput = {
+  tripId: Scalars['ID'];
   subject?: Maybe<Scalars['String']>;
   description: Scalars['String'];
-  tripId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -901,6 +978,11 @@ export type DeleteAccount = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
+export type DeletePlace = {
+  __typename?: 'DeletePlace';
+  deleted?: Maybe<Scalars['Boolean']>;
+};
+
 /** delete tour mutation.  */
 export type DeleteTour = {
   __typename?: 'DeleteTour';
@@ -913,19 +995,19 @@ export type DeleteTourReview = {
   deleted?: Maybe<Scalars['Boolean']>;
 };
 
-/** delete trip mutation.  */
+/** delete trip mutation. */
 export type DeleteTrip = {
   __typename?: 'DeleteTrip';
   deleted?: Maybe<Scalars['Boolean']>;
 };
 
-/** delete trip plan mutation.  */
+/** delete trip plan mutation. */
 export type DeleteTripPlan = {
   __typename?: 'DeleteTripPlan';
   deleted?: Maybe<Scalars['Boolean']>;
 };
 
-/** delete trip review mutation.  */
+/** delete trip review mutation. */
 export type DeleteTripReview = {
   __typename?: 'DeleteTripReview';
   deleted?: Maybe<Scalars['Boolean']>;
@@ -1023,6 +1105,221 @@ export type DiscountTypeTypeDiscountmodelSetArgs = {
 };
 
 
+export type ExperienceCategoryType = Node & {
+  __typename?: 'ExperienceCategoryType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  svg: Scalars['String'];
+  experiencemodelSet: ExperienceImageTypeConnection;
+};
+
+
+export type ExperienceCategoryTypeExperiencemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type ExperienceCategoryTypeConnection = {
+  __typename?: 'ExperienceCategoryTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<ExperienceCategoryTypeEdge>>;
+};
+
+/** A Relay edge containing a `ExperienceCategoryType` and its cursor. */
+export type ExperienceCategoryTypeEdge = {
+  __typename?: 'ExperienceCategoryTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<ExperienceCategoryType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type ExperienceImageType = Node & {
+  __typename?: 'ExperienceImageType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  author: UserType;
+  place: PlaceType;
+  defaultImage: Scalars['String'];
+  category: ExperienceCategoryTypeConnection;
+  description?: Maybe<Scalars['String']>;
+  published: Scalars['Boolean'];
+  videos: ExperienceVideoTypeConnection;
+  tripmodelSet: TripTypeConnection;
+};
+
+
+export type ExperienceImageTypeCategoryArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type ExperienceImageTypeVideosArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type ExperienceImageTypeTripmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+export type ExperienceImageTypeConnection = {
+  __typename?: 'ExperienceImageTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<ExperienceImageTypeEdge>>;
+};
+
+/** A Relay edge containing a `ExperienceImageType` and its cursor. */
+export type ExperienceImageTypeEdge = {
+  __typename?: 'ExperienceImageTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<ExperienceImageType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type ExperienceInput = {
+  title: Scalars['String'];
+  description: Scalars['String'];
+};
+
+export type ExperienceMutation = {
+  __typename?: 'ExperienceMutation';
+  experience?: Maybe<ExperienceType>;
+  success?: Maybe<Scalars['Boolean']>;
+  message?: Maybe<Scalars['String']>;
+};
+
+export type ExperienceRelatedInputs = {
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  image?: Maybe<Array<Maybe<Scalars['ID']>>>;
+};
+
+export type ExperienceType = Node & {
+  __typename?: 'ExperienceType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  author: UserType;
+  place: PlaceType;
+  defaultImage: Scalars['String'];
+  category: ExperienceCategoryTypeConnection;
+  description?: Maybe<Scalars['String']>;
+  published: Scalars['Boolean'];
+  videos: ExperienceVideoTypeConnection;
+  tripmodelSet: TripTypeConnection;
+};
+
+
+export type ExperienceTypeCategoryArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type ExperienceTypeVideosArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type ExperienceTypeTripmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+export type ExperienceTypeConnection = {
+  __typename?: 'ExperienceTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<ExperienceTypeEdge>>;
+};
+
+/** A Relay edge containing a `ExperienceType` and its cursor. */
+export type ExperienceTypeEdge = {
+  __typename?: 'ExperienceTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<ExperienceType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type ExperienceVideoType = Node & {
+  __typename?: 'ExperienceVideoType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  uuid: Scalars['UUID'];
+  video?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  latitude: Scalars['String'];
+  longitude: Scalars['String'];
+  user?: Maybe<UserType>;
+  copyrightName?: Maybe<Scalars['String']>;
+  experiencemodelSet: ExperienceImageTypeConnection;
+};
+
+
+export type ExperienceVideoTypeExperiencemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type ExperienceVideoTypeConnection = {
+  __typename?: 'ExperienceVideoTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<ExperienceVideoTypeEdge>>;
+};
+
+/** A Relay edge containing a `ExperienceVideoType` and its cursor. */
+export type ExperienceVideoTypeEdge = {
+  __typename?: 'ExperienceVideoTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<ExperienceVideoType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
 export type FollowOrUnfollowInput = {
   followedId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -1060,14 +1357,18 @@ export type FollowingTypeEdge = {
   cursor: Scalars['String'];
 };
 
-
-export type IdInputType = {
-  id?: Maybe<Scalars['UUID']>;
+/** send forgotten passworld sms verification */
+export type ForgotPasswordSms = {
+  __typename?: 'ForgotPasswordSMS';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
+
 
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createExperience?: Maybe<ExperienceMutation>;
   /** create tour mutation */
   createTour?: Maybe<CreateTour>;
   /** create review for tour mutation */
@@ -1082,18 +1383,23 @@ export type Mutation = {
   userUnregisterTour?: Maybe<UnRegisterTourMutation>;
   createPlace?: Maybe<CreatePlace>;
   addPlaceImages?: Maybe<AddPlaceImages>;
+  deletePlace?: Maybe<DeletePlace>;
   /** create trip mutation. */
   createTrip?: Maybe<CreateTrip>;
   createTripLike?: Maybe<CreateTripLike>;
   createTripReview?: Maybe<CreateTripReviewPayload>;
   createTripImages?: Maybe<CreateTripImages>;
-  createTripPlan?: Maybe<CreateTripPlanPayload>;
-  /** delete trip mutation.  */
+  createTripPlan?: Maybe<CreateTripPlan>;
+  /** update trip review mutation. */
+  updateTrip?: Maybe<UpdateTrip>;
+  /** update trip review mutation. */
+  updateTripReview?: Maybe<UpdateTripReview>;
+  /** delete trip mutation. */
   deleteTrip?: Maybe<DeleteTrip>;
-  /** delete trip review mutation.  */
+  /** delete trip review mutation. */
   deleteTripReview?: Maybe<DeleteTripReview>;
-  /** delete trip plan mutation.  */
-  deleteTripPan?: Maybe<DeleteTripPlan>;
+  /** delete trip plan mutation. */
+  deleteTripPlan?: Maybe<DeleteTripPlan>;
   /**
    * Register user with fields defined in the settings.
    *
@@ -1197,16 +1503,45 @@ export type Mutation = {
    * User must be verified and confirm password.
    */
   deleteAccount?: Maybe<DeleteAccount>;
-  /** Obtain JSON Web Token mutation */
-  tokenAuth?: Maybe<ObtainJsonWebToken>;
   verifyToken?: Maybe<Verify>;
   refreshToken?: Maybe<Refresh>;
   /** Same as `grapgql_jwt` implementation, with standard output. */
   revokeToken?: Maybe<RevokeToken>;
+  /**
+   * Obtain JSON web token for given user.
+   *
+   * Allow to perform login with different fields,
+   * and secondary email if set. The fields are
+   * defined on settings.
+   *
+   * Not verified users can login by default. This
+   * can be changes on settings.
+   *
+   * If user is archived, make it unarchive and
+   * return `unarchiving=True` on output.
+   */
+  tokenAuth?: Maybe<ObtainJsonWebToken>;
   updateProfile?: Maybe<UpdateProfilePayload>;
   followOrUnfollow?: Maybe<FollowOrUnfollowPayload>;
   /** Social Auth Mutation for Relay */
   socialAuth?: Maybe<SocialAuthPayload>;
+  /** Register user and send verification code */
+  registerSms?: Maybe<RegisterSms>;
+  /** Verify user using verification code that send with sms */
+  verifySms?: Maybe<VerifySms>;
+  /** Resend sms to user */
+  resendVerificationSms?: Maybe<ResendVerificationSms>;
+  /** reset password */
+  resetPasswordSms?: Maybe<ResetPasswordSms>;
+  /** send forgotten passworld sms verification */
+  forgotPasswordSms?: Maybe<ForgotPasswordSms>;
+};
+
+
+export type MutationCreateExperienceArgs = {
+  experienceInput: ExperienceInput;
+  experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
+  place: Scalars['ID'];
 };
 
 
@@ -1241,9 +1576,14 @@ export type MutationAddPlaceImagesArgs = {
 };
 
 
+export type MutationDeletePlaceArgs = {
+  placeId?: Maybe<Scalars['ID']>;
+};
+
+
 export type MutationCreateTripArgs = {
-  tripData: TripInput;
-  tripRelatedData: TripRelatedInput;
+  tripInput: TripInput;
+  tripRelatedInput: TripRelatedInput;
 };
 
 
@@ -1263,7 +1603,22 @@ export type MutationCreateTripImagesArgs = {
 
 
 export type MutationCreateTripPlanArgs = {
-  input: CreateTripPlanInput;
+  planInput: TripPlanInput;
+  planRelatedInput: TripPlanRelatedInput;
+};
+
+
+export type MutationUpdateTripArgs = {
+  tripData: TripInput;
+  tripId?: Maybe<Scalars['ID']>;
+  tripRelatedData: TripRelatedInput;
+};
+
+
+export type MutationUpdateTripReviewArgs = {
+  description: Scalars['String'];
+  subject: Scalars['String'];
+  tripReviewId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1277,7 +1632,7 @@ export type MutationDeleteTripReviewArgs = {
 };
 
 
-export type MutationDeleteTripPanArgs = {
+export type MutationDeleteTripPlanArgs = {
   tripPlanId: Scalars['ID'];
 };
 
@@ -1342,12 +1697,6 @@ export type MutationDeleteAccountArgs = {
 };
 
 
-export type MutationTokenAuthArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
 export type MutationVerifyTokenArgs = {
   token: Scalars['String'];
 };
@@ -1360,6 +1709,14 @@ export type MutationRefreshTokenArgs = {
 
 export type MutationRevokeTokenArgs = {
   refreshToken: Scalars['String'];
+};
+
+
+export type MutationTokenAuthArgs = {
+  password: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 
@@ -1377,16 +1734,64 @@ export type MutationSocialAuthArgs = {
   input: SocialAuthInput;
 };
 
+
+export type MutationRegisterSmsArgs = {
+  password1: Scalars['String'];
+  password2: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationVerifySmsArgs = {
+  code: Scalars['String'];
+  phoneNumber: Scalars['String'];
+};
+
+
+export type MutationResendVerificationSmsArgs = {
+  phoneNumber: Scalars['String'];
+};
+
+
+export type MutationResetPasswordSmsArgs = {
+  code: Scalars['String'];
+  newPassword1: Scalars['String'];
+  newPassword2: Scalars['String'];
+  phoneNumber: Scalars['String'];
+};
+
+
+export type MutationForgotPasswordSmsArgs = {
+  phoneNumber: Scalars['String'];
+};
+
 /** An object with an ID */
 export type Node = {
   /** The ID of the object. */
   id: Scalars['ID'];
 };
 
-/** Obtain JSON Web Token mutation */
+/**
+ * Obtain JSON web token for given user.
+ *
+ * Allow to perform login with different fields,
+ * and secondary email if set. The fields are
+ * defined on settings.
+ *
+ * Not verified users can login by default. This
+ * can be changes on settings.
+ *
+ * If user is archived, make it unarchive and
+ * return `unarchiving=True` on output.
+ */
 export type ObtainJsonWebToken = {
   __typename?: 'ObtainJSONWebToken';
   token?: Maybe<Scalars['String']>;
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  user?: Maybe<UserNode>;
+  unarchiving?: Maybe<Scalars['Boolean']>;
   refreshToken?: Maybe<Scalars['String']>;
 };
 
@@ -1501,7 +1906,7 @@ export type PlaceFeelType = Node & {
   __typename?: 'PlaceFeelType';
   /** The ID of the object. */
   id: Scalars['ID'];
-  place: PlaceType;
+  place?: Maybe<PlaceType>;
   user: UserTypeConnection;
   feel: PlaceFeelFeel;
 };
@@ -1536,7 +1941,6 @@ export type PlaceImageInputType = {
   description?: Maybe<Scalars['String']>;
   image: Scalars['Upload'];
   subject: Scalars['String'];
-  isDefault?: Maybe<Scalars['Boolean']>;
   latitude?: Maybe<Scalars['Float']>;
   longitude?: Maybe<Scalars['Float']>;
 };
@@ -1547,11 +1951,12 @@ export type PlaceImageType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['UUID'];
   image: Scalars['String'];
-  isDefault: Scalars['Boolean'];
   subject: Scalars['String'];
   description: Scalars['String'];
   latitude: Scalars['String'];
   longitude: Scalars['String'];
+  user?: Maybe<UserType>;
+  photographerName?: Maybe<Scalars['String']>;
   placemodelSet: PlaceTypeConnection;
 };
 
@@ -1597,20 +2002,28 @@ export type PlaceType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['UUID'];
   name: Scalars['String'];
+  nameEn?: Maybe<Scalars['String']>;
+  nameFa?: Maybe<Scalars['String']>;
   description: Scalars['String'];
+  descriptionEn?: Maybe<Scalars['String']>;
+  descriptionFa?: Maybe<Scalars['String']>;
   images: PlaceImageTypeConnection;
   longitude: Scalars['Decimal'];
   latitude: Scalars['Decimal'];
   phone?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   website?: Maybe<Scalars['String']>;
+  defaultImage: Scalars['String'];
   facilities?: Maybe<Scalars['JSONString']>;
-  tourmodelSet: TourTypeConnection;
+  activities: TripActivitieTypeConnection;
+  videos: PlaceVideoTypeConnection;
+  toursPlaces: TourTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansPlaces: TripPlanTypeConnection;
   placeFeels?: Maybe<PlaceFeelType>;
   articlemodelSet: ArticleTypeConnection;
   placecollectionsmodelSet: PlaceCollectionsTypeConnection;
+  experiencemodelSet: ExperienceImageTypeConnection;
 };
 
 
@@ -1620,11 +2033,29 @@ export type PlaceTypeImagesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  isDefault?: Maybe<Scalars['Boolean']>;
 };
 
 
-export type PlaceTypeTourmodelSetArgs = {
+export type PlaceTypeActivitiesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+};
+
+
+export type PlaceTypeVideosArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type PlaceTypeToursPlacesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -1696,6 +2127,15 @@ export type PlaceTypePlacecollectionsmodelSetArgs = {
   savedPlaces?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
+
+export type PlaceTypeExperiencemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type PlaceTypeConnection = {
   __typename?: 'PlaceTypeConnection';
   /** Pagination data for this connection. */
@@ -1709,6 +2149,48 @@ export type PlaceTypeEdge = {
   __typename?: 'PlaceTypeEdge';
   /** The item at the end of the edge */
   node?: Maybe<PlaceType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type PlaceVideoType = Node & {
+  __typename?: 'PlaceVideoType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  uuid: Scalars['UUID'];
+  video?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  latitude: Scalars['String'];
+  longitude: Scalars['String'];
+  user?: Maybe<UserType>;
+  copyrightName?: Maybe<Scalars['String']>;
+  placemodelSet: PlaceTypeConnection;
+};
+
+
+export type PlaceVideoTypePlacemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type PlaceVideoTypeConnection = {
+  __typename?: 'PlaceVideoTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<PlaceVideoTypeEdge>>;
+};
+
+/** A Relay edge containing a `PlaceVideoType` and its cursor. */
+export type PlaceVideoTypeEdge = {
+  __typename?: 'PlaceVideoTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<PlaceVideoType>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
@@ -1798,6 +2280,12 @@ export type Query = {
   tourCollection?: Maybe<TourCollectionsType>;
   myTourCollection?: Maybe<TourCollectionsTypeConnection>;
   /** The ID of the object */
+  experience?: Maybe<ExperienceType>;
+  allExperience?: Maybe<ExperienceTypeConnection>;
+  /** The ID of the object */
+  myExperiences?: Maybe<ExperienceType>;
+  allMyExperiences?: Maybe<ExperienceTypeConnection>;
+  /** The ID of the object */
   article?: Maybe<ArticleType>;
   allArticle?: Maybe<ArticleTypeConnection>;
   /** The ID of the object */
@@ -1834,6 +2322,12 @@ export type Query = {
   /** The ID of the object */
   tripPlan?: Maybe<TripPlanType>;
   allTripPlan?: Maybe<TripPlanTypeConnection>;
+  /** The ID of the object */
+  myTrips?: Maybe<TripType>;
+  allMyTrip?: Maybe<TripTypeConnection>;
+  /** The ID of the object */
+  myTripPlans?: Maybe<TripPlanType>;
+  allMyTripPlans?: Maybe<TripPlanTypeConnection>;
   /** The ID of the object */
   myTimeLine?: Maybe<TripType>;
   allMyTimeLine?: Maybe<TripTypeConnection>;
@@ -1884,6 +2378,38 @@ export type QueryMyTourCollectionArgs = {
   last?: Maybe<Scalars['Int']>;
   user?: Maybe<Scalars['ID']>;
   savedTours?: Maybe<Array<Maybe<Scalars['ID']>>>;
+};
+
+
+export type QueryExperienceArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllExperienceArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+};
+
+
+export type QueryMyExperiencesArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllMyExperiencesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2091,6 +2617,38 @@ export type QueryAllTripPlanArgs = {
 };
 
 
+export type QueryMyTripsArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllMyTripArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryMyTripPlansArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllMyTripPlansArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
 export type QueryMyTimeLineArgs = {
   id: Scalars['ID'];
 };
@@ -2120,10 +2678,10 @@ export type QueryAllTripReviewArgs = {
   last?: Maybe<Scalars['Int']>;
   uuid?: Maybe<Scalars['UUID']>;
   trip?: Maybe<Scalars['ID']>;
+  author?: Maybe<Scalars['ID']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Scalars['ID']>;
   likesCount?: Maybe<Scalars['Int']>;
   likes?: Maybe<Scalars['Int']>;
 };
@@ -2198,6 +2756,13 @@ export type Register = {
   token?: Maybe<Scalars['String']>;
 };
 
+/** Register user and send verification code */
+export type RegisterSms = {
+  __typename?: 'RegisterSMS';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
 /** user register to tour mutation.  */
 export type RegisterTourMutation = {
   __typename?: 'RegisterTourMutation';
@@ -2216,6 +2781,20 @@ export type RegisterTourMutation = {
  */
 export type ResendActivationEmail = {
   __typename?: 'ResendActivationEmail';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+/** Resend sms to user */
+export type ResendVerificationSms = {
+  __typename?: 'ResendVerificationSMS';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+/** reset password */
+export type ResetPasswordSms = {
+  __typename?: 'ResetPasswordSMS';
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
@@ -2250,11 +2829,11 @@ export type ServiceZoneType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   country: Scalars['String'];
-  accessorysitemodelSet: AccessorySiteTypeConnection;
+  accessoriesServiceZone: AccessorySiteTypeConnection;
 };
 
 
-export type ServiceZoneTypeAccessorysitemodelSetArgs = {
+export type ServiceZoneTypeAccessoriesServiceZoneArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -2520,14 +3099,17 @@ export type TripActivitieType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['UUID'];
   title: Scalars['String'];
-  tourmodelSet: TourTypeConnection;
+  titleEn?: Maybe<Scalars['String']>;
+  titleFa?: Maybe<Scalars['String']>;
+  toursActivities: TourTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansActivities: TripPlanTypeConnection;
+  placeActivitites: PlaceTypeConnection;
   articlemodelSet: ArticleTypeConnection;
 };
 
 
-export type TripActivitieTypeTourmodelSetArgs = {
+export type TripActivitieTypeToursActivitiesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -2578,6 +3160,16 @@ export type TripActivitieTypePlansActivitiesArgs = {
 };
 
 
+export type TripActivitieTypePlaceActivititesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+
 export type TripActivitieTypeArticlemodelSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -2611,15 +3203,19 @@ export type TripCategoryType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['UUID'];
   title: Scalars['String'];
+  titleEn?: Maybe<Scalars['String']>;
+  titleFa?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
-  image: Scalars['String'];
-  tourmodelSet: TourTypeConnection;
+  descriptionEn?: Maybe<Scalars['String']>;
+  descriptionFa?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  toursCategories: TourTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansCategory: TripPlanTypeConnection;
 };
 
 
-export type TripCategoryTypeTourmodelSetArgs = {
+export type TripCategoryTypeToursCategoriesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -2726,7 +3322,6 @@ export type TripImageInputType = {
   description?: Maybe<Scalars['String']>;
   image: Scalars['Upload'];
   subject: Scalars['String'];
-  isDefault?: Maybe<Scalars['Boolean']>;
   latitude?: Maybe<Scalars['Float']>;
   longitude?: Maybe<Scalars['Float']>;
 };
@@ -2738,10 +3333,11 @@ export type TripImageType = Node & {
   uuid: Scalars['UUID'];
   image: Scalars['String'];
   subject?: Maybe<Scalars['String']>;
-  isDefault: Scalars['Boolean'];
   description: Scalars['String'];
   latitude: Scalars['String'];
   longitude: Scalars['String'];
+  user?: Maybe<UserType>;
+  photographerName?: Maybe<Scalars['String']>;
   tripmodelSet: TripTypeConnection;
   plansImages: TripPlanTypeConnection;
 };
@@ -2875,6 +3471,7 @@ export type TripPlanType = Node & {
   category: TripCategoryTypeConnection;
   creator?: Maybe<UserType>;
   companions: UserTypeConnection;
+  accessories: AccessoryTypeConnection;
   Places: PlaceTypeConnection;
   country?: Maybe<CountryType>;
 };
@@ -2918,6 +3515,17 @@ export type TripPlanTypeCompanionsArgs = {
 };
 
 
+export type TripPlanTypeAccessoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
 export type TripPlanTypePlacesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -2945,16 +3553,16 @@ export type TripPlanTypeEdge = {
 };
 
 export type TripRelatedInput = {
-  activities?: Maybe<Array<Maybe<IdInputType>>>;
-  category?: Maybe<Array<Maybe<IdInputType>>>;
-  companions?: Maybe<Array<Maybe<IdInputType>>>;
-  images?: Maybe<Array<Maybe<IdInputType>>>;
-  reviews?: Maybe<Array<Maybe<IdInputType>>>;
-  Places?: Maybe<Array<Maybe<IdInputType>>>;
-  accessories?: Maybe<Array<Maybe<IdInputType>>>;
-  transfers?: Maybe<Array<Maybe<IdInputType>>>;
-  accommodation?: Maybe<Array<Maybe<IdInputType>>>;
-  countryId?: Maybe<Array<Maybe<IdInputType>>>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  companions?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  Places?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accessories?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  countryId?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 /** An enumeration. */
@@ -2962,7 +3570,7 @@ export enum TripReviewLikeModelValue {
   /** Up */
   A_1 = 'A_1',
   /** Down */
-  '1' = '_1'
+  _1 = '_1'
 }
 
 export type TripReviewLikeType = Node & {
@@ -2997,10 +3605,10 @@ export type TripReviewType = Node & {
   id: Scalars['ID'];
   uuid: Scalars['UUID'];
   trip: TripType;
+  author: UserType;
   subject: Scalars['String'];
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
-  author: UserType;
   likesCount: Scalars['Int'];
   likes: Scalars['Int'];
   tripreviewlikemodelSet: TripReviewLikeTypeConnection;
@@ -3061,6 +3669,7 @@ export type TripType = Node & {
   tripMap?: Maybe<Scalars['JSONString']>;
   gpsTrack?: Maybe<Scalars['JSONString']>;
   published: Scalars['Boolean'];
+  defaultImage: Scalars['String'];
   costs?: Maybe<Scalars['GenericScalar']>;
   checkList?: Maybe<Scalars['GenericScalar']>;
   todoList?: Maybe<Scalars['GenericScalar']>;
@@ -3069,8 +3678,11 @@ export type TripType = Node & {
   category: TripCategoryTypeConnection;
   companions: UserTypeConnection;
   images: TripImageTypeConnection;
+  videos: TripVideoTypeConnection;
   reviews: TripReviewTypeConnection;
   Places: PlaceTypeConnection;
+  accessories: AccessoryTypeConnection;
+  experiences: ExperienceImageTypeConnection;
   country: CountryTypeConnection;
   likes: Scalars['Int'];
   tripreviewmodelSet: TripReviewTypeConnection;
@@ -3122,6 +3734,16 @@ export type TripTypeImagesArgs = {
 
 
 /** Trip description */
+export type TripTypeVideosArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+/** Trip description */
 export type TripTypeReviewsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -3130,10 +3752,10 @@ export type TripTypeReviewsArgs = {
   last?: Maybe<Scalars['Int']>;
   uuid?: Maybe<Scalars['UUID']>;
   trip?: Maybe<Scalars['ID']>;
+  author?: Maybe<Scalars['ID']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Scalars['ID']>;
   likesCount?: Maybe<Scalars['Int']>;
   likes?: Maybe<Scalars['Int']>;
 };
@@ -3147,6 +3769,28 @@ export type TripTypePlacesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
+};
+
+
+/** Trip description */
+export type TripTypeAccessoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+
+/** Trip description */
+export type TripTypeExperiencesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3173,10 +3817,10 @@ export type TripTypeTripreviewmodelSetArgs = {
   last?: Maybe<Scalars['Int']>;
   uuid?: Maybe<Scalars['UUID']>;
   trip?: Maybe<Scalars['ID']>;
+  author?: Maybe<Scalars['ID']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Scalars['ID']>;
   likesCount?: Maybe<Scalars['Int']>;
   likes?: Maybe<Scalars['Int']>;
 };
@@ -3210,6 +3854,49 @@ export type TripTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type TripVideoType = Node & {
+  __typename?: 'TripVideoType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  uuid: Scalars['UUID'];
+  video?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  latitude: Scalars['String'];
+  longitude: Scalars['String'];
+  user?: Maybe<UserType>;
+  copyrightName?: Maybe<Scalars['String']>;
+  tripmodelSet: TripTypeConnection;
+};
+
+
+export type TripVideoTypeTripmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category_Title?: Maybe<Scalars['String']>;
+};
+
+export type TripVideoTypeConnection = {
+  __typename?: 'TripVideoTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<TripVideoTypeEdge>>;
+};
+
+/** A Relay edge containing a `TripVideoType` and its cursor. */
+export type TripVideoTypeEdge = {
+  __typename?: 'TripVideoTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<TripVideoType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
 
 /** unregister user from tour mutation.  */
 export type UnRegisterTourMutation = {
@@ -3239,14 +3926,26 @@ export type UpdateProfilePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+/** update trip review mutation. */
+export type UpdateTrip = {
+  __typename?: 'UpdateTrip';
+  trip?: Maybe<TripType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
+/** update trip review mutation. */
+export type UpdateTripReview = {
+  __typename?: 'UpdateTripReview';
+  review?: Maybe<TripReviewType>;
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 
 export type UserNode = Node & {
   __typename?: 'UserNode';
   /** The ID of the object. */
   id: Scalars['ID'];
   lastLogin?: Maybe<Scalars['DateTime']>;
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
-  username: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   /** Designates whether the user can log into this admin site. */
@@ -3254,8 +3953,13 @@ export type UserNode = Node & {
   /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
   isActive: Scalars['Boolean'];
   dateJoined: Scalars['DateTime'];
-  email: Scalars['String'];
+  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+  username: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   avatar: Scalars['String'];
+  verified?: Maybe<Scalars['Boolean']>;
+  archived?: Maybe<Scalars['Boolean']>;
   profilemodel?: Maybe<ProfileType>;
   user: FollowingTypeConnection;
   followed: FollowingTypeConnection;
@@ -3264,6 +3968,8 @@ export type UserNode = Node & {
   tourReviews: Array<TourReviewType>;
   userregisteredtourmodelSet: UserRegisteredTourTypeConnection;
   tourLike: Array<TourLikeType>;
+  tripvideomodelSet: TripVideoTypeConnection;
+  tripimagemodelSet: TripImageTypeConnection;
   reviews: TripReviewTypeConnection;
   tripreviewlikemodelSet: TripReviewLikeTypeConnection;
   trips: TripTypeConnection;
@@ -3271,6 +3977,8 @@ export type UserNode = Node & {
   requirementTripLikes: TripLikeTypeConnection;
   plans: TripPlanTypeConnection;
   plansInCompanion: TripPlanTypeConnection;
+  placeimagemodelSet: PlaceImageTypeConnection;
+  placevideomodelSet: PlaceVideoTypeConnection;
   requirementPlaceFeels: PlaceFeelTypeConnection;
   requirementAccessoryLikes: AccessoryLikeTypeConnection;
   articleReviews: ArticleReviewTypeConnection;
@@ -3283,9 +3991,9 @@ export type UserNode = Node & {
   tourcollectionsmodelSet: TourCollectionsTypeConnection;
   accessorycollectionsmodelSet: AccessoryCollectionsTypeConnection;
   discountcollectionsmodelSet: DiscountCollectionsTypeConnection;
+  experiencevideomodelSet: ExperienceVideoTypeConnection;
+  experiencemodelSet: ExperienceImageTypeConnection;
   pk?: Maybe<Scalars['Int']>;
-  archived?: Maybe<Scalars['Boolean']>;
-  verified?: Maybe<Scalars['Boolean']>;
   secondaryEmail?: Maybe<Scalars['String']>;
 };
 
@@ -3365,6 +4073,24 @@ export type UserNodeUserregisteredtourmodelSetArgs = {
 };
 
 
+export type UserNodeTripvideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserNodeTripimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type UserNodeReviewsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -3373,10 +4099,10 @@ export type UserNodeReviewsArgs = {
   last?: Maybe<Scalars['Int']>;
   uuid?: Maybe<Scalars['UUID']>;
   trip?: Maybe<Scalars['ID']>;
+  author?: Maybe<Scalars['ID']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Scalars['ID']>;
   likesCount?: Maybe<Scalars['Int']>;
   likes?: Maybe<Scalars['Int']>;
 };
@@ -3446,6 +4172,24 @@ export type UserNodePlansInCompanionArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Array<Maybe<Scalars['ID']>>>;
   category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type UserNodePlaceimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserNodePlacevideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3584,6 +4328,24 @@ export type UserNodeDiscountcollectionsmodelSetArgs = {
   discount?: Maybe<Scalars['ID']>;
 };
 
+
+export type UserNodeExperiencevideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserNodeExperiencemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type UserNodeConnection = {
   __typename?: 'UserNodeConnection';
   /** Pagination data for this connection. */
@@ -3631,8 +4393,6 @@ export type UserType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   lastLogin?: Maybe<Scalars['DateTime']>;
-  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
-  username: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   /** Designates whether the user can log into this admin site. */
@@ -3640,8 +4400,13 @@ export type UserType = Node & {
   /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
   isActive: Scalars['Boolean'];
   dateJoined: Scalars['DateTime'];
-  email: Scalars['String'];
+  /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
+  username: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
   avatar: Scalars['String'];
+  verified: Scalars['Boolean'];
+  archived: Scalars['Boolean'];
   profilemodel?: Maybe<ProfileType>;
   user: FollowingTypeConnection;
   followed: FollowingTypeConnection;
@@ -3650,6 +4415,8 @@ export type UserType = Node & {
   tourReviews: Array<TourReviewType>;
   userregisteredtourmodelSet: UserRegisteredTourTypeConnection;
   tourLike: Array<TourLikeType>;
+  tripvideomodelSet: TripVideoTypeConnection;
+  tripimagemodelSet: TripImageTypeConnection;
   reviews: TripReviewTypeConnection;
   tripreviewlikemodelSet: TripReviewLikeTypeConnection;
   trips: TripTypeConnection;
@@ -3657,6 +4424,8 @@ export type UserType = Node & {
   requirementTripLikes: TripLikeTypeConnection;
   plans: TripPlanTypeConnection;
   plansInCompanion: TripPlanTypeConnection;
+  placeimagemodelSet: PlaceImageTypeConnection;
+  placevideomodelSet: PlaceVideoTypeConnection;
   requirementPlaceFeels: PlaceFeelTypeConnection;
   requirementAccessoryLikes: AccessoryLikeTypeConnection;
   articleReviews: ArticleReviewTypeConnection;
@@ -3669,7 +4438,8 @@ export type UserType = Node & {
   tourcollectionsmodelSet: TourCollectionsTypeConnection;
   accessorycollectionsmodelSet: AccessoryCollectionsTypeConnection;
   discountcollectionsmodelSet: DiscountCollectionsTypeConnection;
-  password: Scalars['String'];
+  experiencevideomodelSet: ExperienceVideoTypeConnection;
+  experiencemodelSet: ExperienceImageTypeConnection;
   /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars['Boolean'];
 };
@@ -3750,6 +4520,24 @@ export type UserTypeUserregisteredtourmodelSetArgs = {
 };
 
 
+export type UserTypeTripvideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserTypeTripimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type UserTypeReviewsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -3758,10 +4546,10 @@ export type UserTypeReviewsArgs = {
   last?: Maybe<Scalars['Int']>;
   uuid?: Maybe<Scalars['UUID']>;
   trip?: Maybe<Scalars['ID']>;
+  author?: Maybe<Scalars['ID']>;
   subject?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
-  author?: Maybe<Scalars['ID']>;
   likesCount?: Maybe<Scalars['Int']>;
   likes?: Maybe<Scalars['Int']>;
 };
@@ -3831,6 +4619,24 @@ export type UserTypePlansInCompanionArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Array<Maybe<Scalars['ID']>>>;
   category_Title?: Maybe<Scalars['String']>;
+};
+
+
+export type UserTypePlaceimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserTypePlacevideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3969,6 +4775,24 @@ export type UserTypeDiscountcollectionsmodelSetArgs = {
   discount?: Maybe<Scalars['ID']>;
 };
 
+
+export type UserTypeExperiencevideomodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserTypeExperiencemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type UserTypeConnection = {
   __typename?: 'UserTypeConnection';
   /** Pagination data for this connection. */
@@ -4003,3 +4827,752 @@ export type VerifyAccount = {
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
+
+/** Verify user using verification code that send with sms */
+export type VerifySms = {
+  __typename?: 'VerifySMS';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type VerifySmsMutationVariables = Exact<{
+  verifySmsCode: Scalars['String'];
+  verifySmsPhoneNumber: Scalars['String'];
+}>;
+
+
+export type VerifySmsMutation = (
+  { __typename?: 'Mutation' }
+  & { verifySms?: Maybe<(
+    { __typename?: 'VerifySMS' }
+    & Pick<VerifySms, 'success' | 'errors'>
+  )> }
+);
+
+export type RegisterSmsMutationVariables = Exact<{
+  registerSmsPassword1: Scalars['String'];
+  registerSmsPassword2: Scalars['String'];
+  registerSmsPhoneNumber: Scalars['String'];
+  registerSmsUsername?: Maybe<Scalars['String']>;
+}>;
+
+
+export type RegisterSmsMutation = (
+  { __typename?: 'Mutation' }
+  & { registerSms?: Maybe<(
+    { __typename?: 'RegisterSMS' }
+    & Pick<RegisterSms, 'success' | 'errors'>
+  )> }
+);
+
+export type RefreshTokenMutationVariables = Exact<{
+  refreshTokenRefreshToken: Scalars['String'];
+}>;
+
+
+export type RefreshTokenMutation = (
+  { __typename?: 'Mutation' }
+  & { refreshToken?: Maybe<(
+    { __typename?: 'Refresh' }
+    & Pick<Refresh, 'token' | 'payload' | 'refreshToken'>
+  )> }
+);
+
+export type ResetPasswordSmsMutationVariables = Exact<{
+  resetPasswordSmsCode: Scalars['String'];
+  resetPasswordSmsNewPassword1: Scalars['String'];
+  resetPasswordSmsNewPassword2: Scalars['String'];
+  resetPasswordSmsPhoneNumber: Scalars['String'];
+}>;
+
+
+export type ResetPasswordSmsMutation = (
+  { __typename?: 'Mutation' }
+  & { resetPasswordSms?: Maybe<(
+    { __typename?: 'ResetPasswordSMS' }
+    & Pick<ResetPasswordSms, 'success' | 'errors'>
+  )> }
+);
+
+export type ForgotPasswordSmsMutationVariables = Exact<{
+  forgotPasswordSmsPhoneNumber: Scalars['String'];
+}>;
+
+
+export type ForgotPasswordSmsMutation = (
+  { __typename?: 'Mutation' }
+  & { forgotPasswordSms?: Maybe<(
+    { __typename?: 'ForgotPasswordSMS' }
+    & Pick<ForgotPasswordSms, 'success' | 'errors'>
+  )> }
+);
+
+export type TokenAuthMutationVariables = Exact<{
+  tokenAuthPassword: Scalars['String'];
+  tokenAuthPhoneNumber?: Maybe<Scalars['String']>;
+  tokenAuthEmail?: Maybe<Scalars['String']>;
+  tokenAuthUsername?: Maybe<Scalars['String']>;
+}>;
+
+
+export type TokenAuthMutation = (
+  { __typename?: 'Mutation' }
+  & { tokenAuth?: Maybe<(
+    { __typename?: 'ObtainJSONWebToken' }
+    & Pick<ObtainJsonWebToken, 'token' | 'success' | 'errors' | 'refreshToken'>
+  )> }
+);
+
+export type ResendVerificationSmsMutationVariables = Exact<{
+  resendVerificationSmsPhoneNumber: Scalars['String'];
+}>;
+
+
+export type ResendVerificationSmsMutation = (
+  { __typename?: 'Mutation' }
+  & { resendVerificationSms?: Maybe<(
+    { __typename?: 'ResendVerificationSMS' }
+    & Pick<ResendVerificationSms, 'success' | 'errors'>
+  )> }
+);
+
+export type CreateTripMutationVariables = Exact<{
+  createTripTripInput: TripInput;
+  createTripTripRelatedInput: TripRelatedInput;
+}>;
+
+
+export type CreateTripMutation = (
+  { __typename?: 'Mutation' }
+  & { createTrip?: Maybe<(
+    { __typename?: 'CreateTrip' }
+    & Pick<CreateTrip, 'success'>
+  )> }
+);
+
+export type TripsQueryVariables = Exact<{
+  allTripFirst?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type TripsQuery = (
+  { __typename?: 'Query' }
+  & { allTrip?: Maybe<(
+    { __typename?: 'TripTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripTypeEdge' }
+      & Pick<TripTypeEdge, 'cursor'>
+      & { node?: Maybe<(
+        { __typename?: 'TripType' }
+        & Pick<TripType, 'title' | 'id' | 'description' | 'createdAt' | 'startDate' | 'endDate'>
+        & { author?: Maybe<(
+          { __typename?: 'UserType' }
+          & Pick<UserType, 'avatar' | 'username' | 'id'>
+        )>, category: (
+          { __typename?: 'TripCategoryTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripCategoryTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripCategoryType' }
+              & Pick<TripCategoryType, 'title'>
+            )> }
+          )>> }
+        ), activities: (
+          { __typename?: 'TripActivitieTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripActivitieTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripActivitieType' }
+              & Pick<TripActivitieType, 'title'>
+            )> }
+          )>> }
+        ), country: (
+          { __typename?: 'CountryTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'CountryTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'CountryType' }
+              & Pick<CountryType, 'name'>
+            )> }
+          )>> }
+        ), images: (
+          { __typename?: 'TripImageTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripImageTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripImageType' }
+              & Pick<TripImageType, 'image'>
+            )> }
+          )>> }
+        ) }
+      )> }
+    )>>, pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage' | 'endCursor'>
+    ) }
+  )> }
+);
+
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserNode' }
+    & Pick<UserNode, 'username' | 'avatar' | 'verified'>
+  )> }
+);
+
+export type MeDetailQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeDetailQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserNode' }
+    & Pick<UserNode, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined' | 'firstName' | 'lastName'>
+    & { profilemodel?: Maybe<(
+      { __typename?: 'ProfileType' }
+      & Pick<ProfileType, 'about' | 'tripStatus' | 'header' | 'gender' | 'followersCount' | 'followingsCount'>
+    )> }
+  )> }
+);
+
+export type MeFollowedQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeFollowedQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserNode' }
+    & { followed: (
+      { __typename?: 'FollowingTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'FollowingTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'FollowingType' }
+          & { user: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'username' | 'avatar'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+
+export const VerifySmsDocument = gql`
+    mutation VerifySms($verifySmsCode: String!, $verifySmsPhoneNumber: String!) {
+  verifySms(code: $verifySmsCode, phoneNumber: $verifySmsPhoneNumber) {
+    success
+    errors
+  }
+}
+    `;
+export type VerifySmsMutationFn = Apollo.MutationFunction<VerifySmsMutation, VerifySmsMutationVariables>;
+
+/**
+ * __useVerifySmsMutation__
+ *
+ * To run a mutation, you first call `useVerifySmsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useVerifySmsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [verifySmsMutation, { data, loading, error }] = useVerifySmsMutation({
+ *   variables: {
+ *      verifySmsCode: // value for 'verifySmsCode'
+ *      verifySmsPhoneNumber: // value for 'verifySmsPhoneNumber'
+ *   },
+ * });
+ */
+export function useVerifySmsMutation(baseOptions?: Apollo.MutationHookOptions<VerifySmsMutation, VerifySmsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<VerifySmsMutation, VerifySmsMutationVariables>(VerifySmsDocument, options);
+      }
+export type VerifySmsMutationHookResult = ReturnType<typeof useVerifySmsMutation>;
+export type VerifySmsMutationResult = Apollo.MutationResult<VerifySmsMutation>;
+export type VerifySmsMutationOptions = Apollo.BaseMutationOptions<VerifySmsMutation, VerifySmsMutationVariables>;
+export const RegisterSmsDocument = gql`
+    mutation RegisterSms($registerSmsPassword1: String!, $registerSmsPassword2: String!, $registerSmsPhoneNumber: String!, $registerSmsUsername: String) {
+  registerSms(
+    password1: $registerSmsPassword1
+    password2: $registerSmsPassword2
+    phoneNumber: $registerSmsPhoneNumber
+    username: $registerSmsUsername
+  ) {
+    success
+    errors
+  }
+}
+    `;
+export type RegisterSmsMutationFn = Apollo.MutationFunction<RegisterSmsMutation, RegisterSmsMutationVariables>;
+
+/**
+ * __useRegisterSmsMutation__
+ *
+ * To run a mutation, you first call `useRegisterSmsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterSmsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerSmsMutation, { data, loading, error }] = useRegisterSmsMutation({
+ *   variables: {
+ *      registerSmsPassword1: // value for 'registerSmsPassword1'
+ *      registerSmsPassword2: // value for 'registerSmsPassword2'
+ *      registerSmsPhoneNumber: // value for 'registerSmsPhoneNumber'
+ *      registerSmsUsername: // value for 'registerSmsUsername'
+ *   },
+ * });
+ */
+export function useRegisterSmsMutation(baseOptions?: Apollo.MutationHookOptions<RegisterSmsMutation, RegisterSmsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterSmsMutation, RegisterSmsMutationVariables>(RegisterSmsDocument, options);
+      }
+export type RegisterSmsMutationHookResult = ReturnType<typeof useRegisterSmsMutation>;
+export type RegisterSmsMutationResult = Apollo.MutationResult<RegisterSmsMutation>;
+export type RegisterSmsMutationOptions = Apollo.BaseMutationOptions<RegisterSmsMutation, RegisterSmsMutationVariables>;
+export const RefreshTokenDocument = gql`
+    mutation RefreshToken($refreshTokenRefreshToken: String!) {
+  refreshToken(refreshToken: $refreshTokenRefreshToken) {
+    token
+    payload
+    refreshToken
+  }
+}
+    `;
+export type RefreshTokenMutationFn = Apollo.MutationFunction<RefreshTokenMutation, RefreshTokenMutationVariables>;
+
+/**
+ * __useRefreshTokenMutation__
+ *
+ * To run a mutation, you first call `useRefreshTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRefreshTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [refreshTokenMutation, { data, loading, error }] = useRefreshTokenMutation({
+ *   variables: {
+ *      refreshTokenRefreshToken: // value for 'refreshTokenRefreshToken'
+ *   },
+ * });
+ */
+export function useRefreshTokenMutation(baseOptions?: Apollo.MutationHookOptions<RefreshTokenMutation, RefreshTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RefreshTokenMutation, RefreshTokenMutationVariables>(RefreshTokenDocument, options);
+      }
+export type RefreshTokenMutationHookResult = ReturnType<typeof useRefreshTokenMutation>;
+export type RefreshTokenMutationResult = Apollo.MutationResult<RefreshTokenMutation>;
+export type RefreshTokenMutationOptions = Apollo.BaseMutationOptions<RefreshTokenMutation, RefreshTokenMutationVariables>;
+export const ResetPasswordSmsDocument = gql`
+    mutation ResetPasswordSms($resetPasswordSmsCode: String!, $resetPasswordSmsNewPassword1: String!, $resetPasswordSmsNewPassword2: String!, $resetPasswordSmsPhoneNumber: String!) {
+  resetPasswordSms(
+    code: $resetPasswordSmsCode
+    newPassword1: $resetPasswordSmsNewPassword1
+    newPassword2: $resetPasswordSmsNewPassword2
+    phoneNumber: $resetPasswordSmsPhoneNumber
+  ) {
+    success
+    errors
+  }
+}
+    `;
+export type ResetPasswordSmsMutationFn = Apollo.MutationFunction<ResetPasswordSmsMutation, ResetPasswordSmsMutationVariables>;
+
+/**
+ * __useResetPasswordSmsMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordSmsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordSmsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordSmsMutation, { data, loading, error }] = useResetPasswordSmsMutation({
+ *   variables: {
+ *      resetPasswordSmsCode: // value for 'resetPasswordSmsCode'
+ *      resetPasswordSmsNewPassword1: // value for 'resetPasswordSmsNewPassword1'
+ *      resetPasswordSmsNewPassword2: // value for 'resetPasswordSmsNewPassword2'
+ *      resetPasswordSmsPhoneNumber: // value for 'resetPasswordSmsPhoneNumber'
+ *   },
+ * });
+ */
+export function useResetPasswordSmsMutation(baseOptions?: Apollo.MutationHookOptions<ResetPasswordSmsMutation, ResetPasswordSmsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResetPasswordSmsMutation, ResetPasswordSmsMutationVariables>(ResetPasswordSmsDocument, options);
+      }
+export type ResetPasswordSmsMutationHookResult = ReturnType<typeof useResetPasswordSmsMutation>;
+export type ResetPasswordSmsMutationResult = Apollo.MutationResult<ResetPasswordSmsMutation>;
+export type ResetPasswordSmsMutationOptions = Apollo.BaseMutationOptions<ResetPasswordSmsMutation, ResetPasswordSmsMutationVariables>;
+export const ForgotPasswordSmsDocument = gql`
+    mutation ForgotPasswordSms($forgotPasswordSmsPhoneNumber: String!) {
+  forgotPasswordSms(phoneNumber: $forgotPasswordSmsPhoneNumber) {
+    success
+    errors
+  }
+}
+    `;
+export type ForgotPasswordSmsMutationFn = Apollo.MutationFunction<ForgotPasswordSmsMutation, ForgotPasswordSmsMutationVariables>;
+
+/**
+ * __useForgotPasswordSmsMutation__
+ *
+ * To run a mutation, you first call `useForgotPasswordSmsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useForgotPasswordSmsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [forgotPasswordSmsMutation, { data, loading, error }] = useForgotPasswordSmsMutation({
+ *   variables: {
+ *      forgotPasswordSmsPhoneNumber: // value for 'forgotPasswordSmsPhoneNumber'
+ *   },
+ * });
+ */
+export function useForgotPasswordSmsMutation(baseOptions?: Apollo.MutationHookOptions<ForgotPasswordSmsMutation, ForgotPasswordSmsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ForgotPasswordSmsMutation, ForgotPasswordSmsMutationVariables>(ForgotPasswordSmsDocument, options);
+      }
+export type ForgotPasswordSmsMutationHookResult = ReturnType<typeof useForgotPasswordSmsMutation>;
+export type ForgotPasswordSmsMutationResult = Apollo.MutationResult<ForgotPasswordSmsMutation>;
+export type ForgotPasswordSmsMutationOptions = Apollo.BaseMutationOptions<ForgotPasswordSmsMutation, ForgotPasswordSmsMutationVariables>;
+export const TokenAuthDocument = gql`
+    mutation TokenAuth($tokenAuthPassword: String!, $tokenAuthPhoneNumber: String, $tokenAuthEmail: String, $tokenAuthUsername: String) {
+  tokenAuth(
+    password: $tokenAuthPassword
+    phoneNumber: $tokenAuthPhoneNumber
+    email: $tokenAuthEmail
+    username: $tokenAuthUsername
+  ) {
+    token
+    success
+    errors
+    refreshToken
+  }
+}
+    `;
+export type TokenAuthMutationFn = Apollo.MutationFunction<TokenAuthMutation, TokenAuthMutationVariables>;
+
+/**
+ * __useTokenAuthMutation__
+ *
+ * To run a mutation, you first call `useTokenAuthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useTokenAuthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [tokenAuthMutation, { data, loading, error }] = useTokenAuthMutation({
+ *   variables: {
+ *      tokenAuthPassword: // value for 'tokenAuthPassword'
+ *      tokenAuthPhoneNumber: // value for 'tokenAuthPhoneNumber'
+ *      tokenAuthEmail: // value for 'tokenAuthEmail'
+ *      tokenAuthUsername: // value for 'tokenAuthUsername'
+ *   },
+ * });
+ */
+export function useTokenAuthMutation(baseOptions?: Apollo.MutationHookOptions<TokenAuthMutation, TokenAuthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<TokenAuthMutation, TokenAuthMutationVariables>(TokenAuthDocument, options);
+      }
+export type TokenAuthMutationHookResult = ReturnType<typeof useTokenAuthMutation>;
+export type TokenAuthMutationResult = Apollo.MutationResult<TokenAuthMutation>;
+export type TokenAuthMutationOptions = Apollo.BaseMutationOptions<TokenAuthMutation, TokenAuthMutationVariables>;
+export const ResendVerificationSmsDocument = gql`
+    mutation ResendVerificationSms($resendVerificationSmsPhoneNumber: String!) {
+  resendVerificationSms(phoneNumber: $resendVerificationSmsPhoneNumber) {
+    success
+    errors
+  }
+}
+    `;
+export type ResendVerificationSmsMutationFn = Apollo.MutationFunction<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>;
+
+/**
+ * __useResendVerificationSmsMutation__
+ *
+ * To run a mutation, you first call `useResendVerificationSmsMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResendVerificationSmsMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resendVerificationSmsMutation, { data, loading, error }] = useResendVerificationSmsMutation({
+ *   variables: {
+ *      resendVerificationSmsPhoneNumber: // value for 'resendVerificationSmsPhoneNumber'
+ *   },
+ * });
+ */
+export function useResendVerificationSmsMutation(baseOptions?: Apollo.MutationHookOptions<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>(ResendVerificationSmsDocument, options);
+      }
+export type ResendVerificationSmsMutationHookResult = ReturnType<typeof useResendVerificationSmsMutation>;
+export type ResendVerificationSmsMutationResult = Apollo.MutationResult<ResendVerificationSmsMutation>;
+export type ResendVerificationSmsMutationOptions = Apollo.BaseMutationOptions<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>;
+export const CreateTripDocument = gql`
+    mutation CreateTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput!) {
+  createTrip(
+    tripInput: $createTripTripInput
+    tripRelatedInput: $createTripTripRelatedInput
+  ) {
+    success
+  }
+}
+    `;
+export type CreateTripMutationFn = Apollo.MutationFunction<CreateTripMutation, CreateTripMutationVariables>;
+
+/**
+ * __useCreateTripMutation__
+ *
+ * To run a mutation, you first call `useCreateTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTripMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTripMutation, { data, loading, error }] = useCreateTripMutation({
+ *   variables: {
+ *      createTripTripInput: // value for 'createTripTripInput'
+ *      createTripTripRelatedInput: // value for 'createTripTripRelatedInput'
+ *   },
+ * });
+ */
+export function useCreateTripMutation(baseOptions?: Apollo.MutationHookOptions<CreateTripMutation, CreateTripMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTripMutation, CreateTripMutationVariables>(CreateTripDocument, options);
+      }
+export type CreateTripMutationHookResult = ReturnType<typeof useCreateTripMutation>;
+export type CreateTripMutationResult = Apollo.MutationResult<CreateTripMutation>;
+export type CreateTripMutationOptions = Apollo.BaseMutationOptions<CreateTripMutation, CreateTripMutationVariables>;
+export const TripsDocument = gql`
+    query Trips($allTripFirst: Int) {
+  allTrip(first: $allTripFirst) {
+    edges {
+      cursor
+      node {
+        title
+        id
+        description
+        createdAt
+        startDate
+        endDate
+        author {
+          avatar
+          username
+          id
+        }
+        category {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        activities {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        country {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        images {
+          edges {
+            node {
+              image
+            }
+          }
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}
+    `;
+
+/**
+ * __useTripsQuery__
+ *
+ * To run a query within a React component, call `useTripsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTripsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTripsQuery({
+ *   variables: {
+ *      allTripFirst: // value for 'allTripFirst'
+ *   },
+ * });
+ */
+export function useTripsQuery(baseOptions?: Apollo.QueryHookOptions<TripsQuery, TripsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TripsQuery, TripsQueryVariables>(TripsDocument, options);
+      }
+export function useTripsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TripsQuery, TripsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TripsQuery, TripsQueryVariables>(TripsDocument, options);
+        }
+export type TripsQueryHookResult = ReturnType<typeof useTripsQuery>;
+export type TripsLazyQueryHookResult = ReturnType<typeof useTripsLazyQuery>;
+export type TripsQueryResult = Apollo.QueryResult<TripsQuery, TripsQueryVariables>;
+export const MeDocument = gql`
+    query Me {
+  me {
+    username
+    avatar
+    verified
+  }
+}
+    `;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+      }
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+        }
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MeDetailDocument = gql`
+    query MeDetail {
+  me {
+    username
+    avatar
+    verified
+    email
+    phoneNumber
+    dateJoined
+    firstName
+    lastName
+    profilemodel {
+      about
+      tripStatus
+      header
+      gender
+      followersCount
+      followingsCount
+    }
+  }
+}
+    `;
+
+/**
+ * __useMeDetailQuery__
+ *
+ * To run a query within a React component, call `useMeDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeDetailQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeDetailQuery(baseOptions?: Apollo.QueryHookOptions<MeDetailQuery, MeDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeDetailQuery, MeDetailQueryVariables>(MeDetailDocument, options);
+      }
+export function useMeDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeDetailQuery, MeDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeDetailQuery, MeDetailQueryVariables>(MeDetailDocument, options);
+        }
+export type MeDetailQueryHookResult = ReturnType<typeof useMeDetailQuery>;
+export type MeDetailLazyQueryHookResult = ReturnType<typeof useMeDetailLazyQuery>;
+export type MeDetailQueryResult = Apollo.QueryResult<MeDetailQuery, MeDetailQueryVariables>;
+export const MeFollowedDocument = gql`
+    query MeFollowed {
+  me {
+    followed {
+      edges {
+        node {
+          user {
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useMeFollowedQuery__
+ *
+ * To run a query within a React component, call `useMeFollowedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeFollowedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeFollowedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeFollowedQuery(baseOptions?: Apollo.QueryHookOptions<MeFollowedQuery, MeFollowedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeFollowedQuery, MeFollowedQueryVariables>(MeFollowedDocument, options);
+      }
+export function useMeFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeFollowedQuery, MeFollowedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeFollowedQuery, MeFollowedQueryVariables>(MeFollowedDocument, options);
+        }
+export type MeFollowedQueryHookResult = ReturnType<typeof useMeFollowedQuery>;
+export type MeFollowedLazyQueryHookResult = ReturnType<typeof useMeFollowedLazyQuery>;
+export type MeFollowedQueryResult = Apollo.QueryResult<MeFollowedQuery, MeFollowedQueryVariables>;

@@ -3,11 +3,16 @@ import Head from 'next/head';
 import React, { ReactElement } from 'react';
 import MainFooter from '../componenets/footers/MainFooter';
 import NavBarView from '../views/NavBarView';
+// import NavBarView from '../views/NavBarView';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
-  title: string;
-}
+  title?: string;
+} & typeof defaultProps;
+
+const defaultProps = {
+  title: 'تریپر | راهکار جامع گردشگری',
+};
 
 const BaseLayout = (props: Props): ReactElement => {
   return (
@@ -26,5 +31,7 @@ const BaseLayout = (props: Props): ReactElement => {
     </>
   );
 };
+
+BaseLayout.defaultProps = defaultProps;
 
 export default BaseLayout;

@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, MoonIcon } from '@chakra-ui/icons';
 import {
   Avatar,
   Flex,
@@ -8,6 +8,8 @@ import {
   MenuList,
   MenuItem,
   Button,
+  useColorMode,
+  Switch,
 } from '@chakra-ui/react';
 
 import { FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
@@ -15,10 +17,16 @@ import { FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
 import React from 'react';
 
 import Link from 'next/link';
+import { MdCardTravel } from 'react-icons/md';
 
-interface Props {}
+interface Props {
+  signOut: () => void;
+  user: any;
+}
 
-const NavProfile = (props: any) => {
+const NavProfile = (props: Props) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <div>
       <Menu>
@@ -31,22 +39,25 @@ const NavProfile = (props: any) => {
             <Avatar
               shadow="lg"
               // name={data.me.firstName + data.me.lastName}
-              src={props.me.avatar}
+              src={props.user?.avatar}
             />
             <Text
               display={{ base: 'none', md: 'unset' }}
               fontSize={{ base: '12px', md: '14px' }}
               pl={2}
             >
-              {props.me.firstName} {props.me.lastName}
+              {props.user?.username}
             </Text>
           </Flex>
         </MenuButton>
         <MenuList>
-          <Link href="/me/profile">
-            <MenuItem icon={<FiUser />}>حساب کاربری</MenuItem>
+          <Link href="/me" passHref>
+            <MenuItem icon={<FiUser />}>پروفایل من</MenuItem>
           </Link>
-          <MenuItem icon={<FiBookOpen />}>دوره‌های من</MenuItem>
+          <MenuItem icon={<MdCardTravel />}>سفرهای من</MenuItem>
+          <MenuItem onClick={toggleColorMode} icon={<MoonIcon />}>
+            حالت شب
+          </MenuItem>
           <MenuItem onClick={props.signOut} icon={<FiLogOut />}>
             خروج
           </MenuItem>

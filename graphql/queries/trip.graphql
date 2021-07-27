@@ -1,0 +1,52 @@
+query Trips($allTripFirst: Int) {
+  allTrip(first: $allTripFirst) {
+    edges {
+      cursor
+      node {
+        title
+        id
+        description
+        createdAt
+        startDate
+        endDate
+        author {
+          avatar
+          username
+          id
+        }
+        category {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        activities {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        country {
+          edges {
+            node {
+              name
+            }
+          }
+        }
+        images {
+          edges {
+            node {
+              image
+            }
+          }
+        }
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

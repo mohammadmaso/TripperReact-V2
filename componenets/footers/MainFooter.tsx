@@ -31,7 +31,7 @@ import TextLogo from '../logos/TextLogo';
 
 export default function LargeWithNewsletter() {
   return (
-    <Box boxShadow="2xl">
+    <Box boxShadow="inner" bgColor={useColorModeValue('gray.50', 'gray.900')}>
       <Container as={Stack} maxW={'7xl'} py="10">
         <SimpleGrid columns={{ base: 1, sm: 1, md: 3 }} spacing={8}>
           <Box>
@@ -45,19 +45,21 @@ export default function LargeWithNewsletter() {
               </Text>
             </Stack>
           </Box>
-          <Flex>
+          <Flex columns={{ base: 1, sm: 1, md: 2 }}>
             <Stack fontSize="sm" textColor="primary">
-              <Link>دوره‌ها</Link>
-              <Link>اساتید</Link>
-              <Link>درباره‌ی نیمکت آکادمی</Link>
-              <Link>مجله نیمکت</Link>
-              <Link>پشتیبانی</Link>
+              <Link>سفرنامه‌ها</Link>
+              <Link>همسفر</Link>
+              <Link>سفرساز</Link>
+              <Link>جاذبه‌ها</Link>
+              <Link>مقالات</Link>
             </Stack>
             <Spacer />
             <Stack fontSize="sm" textColor="primary">
-              <Link> سیاست حفظ حریم خصوصی</Link>
+              <Link>درباره تریپر</Link>
+              <Link>سیاست حفظ حریم خصوصی</Link>
               <Link>قوانین و مقررات</Link>
               <Link>فرصت شغلی</Link>
+              <Link>پشتبانی</Link>
             </Stack>
           </Flex>
           <Flex
@@ -66,7 +68,7 @@ export default function LargeWithNewsletter() {
             direction="row"
           >
             <Stack>
-              {/* <Box>
+              <Box>
                 <Image
                   src="/images/samandehi.png"
                   layout="fixed"
@@ -81,7 +83,7 @@ export default function LargeWithNewsletter() {
                   height={150 / 1.3}
                   alt="enamad"
                 />
-              </Box> */}
+              </Box>
               <Grid
                 templateColumns="repeat(5, 1fr)"
                 gap={1}
@@ -95,7 +97,7 @@ export default function LargeWithNewsletter() {
               </Grid>
               <Text textColor="primary">
                 {' '}
-                تمامی حقوق برای اکادمی نیمکت محفوظ است. | ۱۴۰۰{' '}
+                تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰{' '}
               </Text>
             </Stack>
           </Flex>

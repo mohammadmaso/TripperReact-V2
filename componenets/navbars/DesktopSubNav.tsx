@@ -26,7 +26,7 @@ export const DesktopSubNav = ({ label, href, subLabel, icon }: NavItem) => {
         {icon}
         <Box>
           <Flex align="center">
-            <Link href={href ?? '#'}>
+            <Link href={href ?? '#'} passHref>
               <Text
                 transition={'all .3s ease'}
                 _groupHover={{ color: 'green.400' }}

@@ -1,0 +1,43 @@
+query Me {
+  me {
+    username
+    avatar
+    verified
+  }
+}
+
+query MeDetail {
+  me {
+    username
+    avatar
+    verified
+    email
+    phoneNumber
+    dateJoined
+    firstName
+    lastName
+    profilemodel {
+      about
+      tripStatus
+      header
+      gender
+      followersCount
+      followingsCount
+    }
+  }
+}
+
+query MeFollowed {
+  me {
+    followed {
+      edges {
+        node {
+          user {
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,14 @@
 import React from 'react';
+import CategoryCarousal from '../componenets/carousals/CategoryCarousal';
 
 import BaseLayout from '../layouts/BaseLayout';
 
 export default function Home() {
   return (
-    <BaseLayout title={'نیمکت آکادمی'}>
-      <div></div>
+    <BaseLayout>
+      <div>
+        <CategoryCarousal />
+      </div>
     </BaseLayout>
   );
 }
