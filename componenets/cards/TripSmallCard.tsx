@@ -25,7 +25,7 @@ import { HiLocationMarker } from 'react-icons/hi';
 
 export default function TripSmallCard(props: any) {
   return (
-    <Center py={6} m={2}>
+    <Center py={6} m={2} textColor="white">
       <Box
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'md'}
