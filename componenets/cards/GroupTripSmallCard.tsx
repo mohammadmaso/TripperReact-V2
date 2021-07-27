@@ -14,29 +14,25 @@ import {
   Tag,
   Wrap,
   WrapItem,
+  AvatarGroup,
+  Button,
 } from '@chakra-ui/react';
-import { FiHeart, FiMapPin } from 'react-icons/fi';
-import { TimeIcon } from '@chakra-ui/icons';
+import { FiArrowLeft, FiHeart, FiMapPin } from 'react-icons/fi';
+import { ArrowLeftIcon, TimeIcon } from '@chakra-ui/icons';
+import { BiArrowFromRight } from 'react-icons/bi';
 
-export default function TripSmallCard(props: any) {
+export default function GroupTripSmallCard(props: any) {
   return (
-    <Center py={6} m={2} textColor="white">
+    <Center py={6} m={2}>
       <Box
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'md'}
         rounded={'md'}
-        overflow={'hidden'}
         w={'full'}
-        position="relative"
         transition={'all .3s ease'}
-        // _hover={{ transform: 'scale(1.1,1.1)' }}
+        _hover={{ transform: 'scale(1.1,1.1)' }}
       >
         <Flex
-          position="absolute"
-          top="0"
-          right="0"
-          bgGradient="linear(to-b, #000000,#ffffff00)"
-          height="40%"
           width="full"
           align="flex-start"
           justifyContent="space-between"
@@ -44,12 +40,12 @@ export default function TripSmallCard(props: any) {
           py={4}
         >
           <Box>
-            <Stack spacing="1" justifyItems="center">
-              <FiHeart />
-              <Text fontSize="sm">{props.likes}</Text>
-            </Stack>
+            <Flex direction="column" justify="center">
+              <Text fontWeight="bold">۱۲</Text>
+              <Text fontSize="sm">خرداد</Text>
+            </Flex>
           </Box>
-          <Flex textColor="white" justify="flex-start">
+          <Flex justify="flex-end">
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>
                 {props.username}
@@ -77,18 +73,7 @@ export default function TripSmallCard(props: any) {
           </Flex>
         </Flex>
 
-        <Image
-          alt="Test"
-          src={props.image}
-          objectFit={'cover'}
-          // fallbackSrc="https://via.placeholder.com/150"
-        />
-        <Flex
-          position="absolute"
-          bottom="0"
-          right="0"
-          bgGradient="linear(to-t, #000000,#ffffff00)"
-          height="50%"
+        <Stack
           width="full"
           align="flex-end"
           justify="flex-end"
@@ -105,11 +90,34 @@ export default function TripSmallCard(props: any) {
               <TimeIcon h="3.5" w="3.5" />
             </Wrap>
             <Wrap align="center" spacing="1">
-              <Text>{props.city}</Text>
+              <Text>کیش</Text>
+              <FiArrowLeft />
+              <Text>تهران</Text>
               <FiMapPin />
             </Wrap>
           </Wrap>
-        </Flex>
+          <AvatarGroup size="sm" max={4} mt="2">
+            <Avatar name="Ryan Florence" src="https://bit.ly/ryan-florence" />
+            <Avatar name="Segun Adebayo" src="https://bit.ly/sage-adebayo" />
+            <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+            <Avatar
+              name="Prosper Otemuyiwa"
+              src="https://bit.ly/prosper-baba"
+            />
+            <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
+          </AvatarGroup>
+        </Stack>
+        <Button
+          m="3"
+          rounded="full"
+          size="sm"
+          fontWeight="300"
+          variant="ghost"
+          colorScheme="primary"
+          width="90%"
+        >
+          جزییات بیشتر و درخواست
+        </Button>
       </Box>
     </Center>
   );
