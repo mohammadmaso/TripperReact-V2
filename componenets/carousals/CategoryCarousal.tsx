@@ -47,7 +47,7 @@ export default function CategoryCarousal({
   };
   return (
     <Box py={10}>
-      <Heading size="lg" fontWeight="۵۰۰" ml={3}>
+      <Heading size="lg" fontWeight="500" ml={3}>
         انواع سفر‌
       </Heading>
       <Slider {...settings}>
