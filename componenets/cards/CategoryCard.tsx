@@ -21,7 +21,7 @@ export default function CategoryCard(props: any) {
         rounded={'md'}
         overflow={'hidden'}
         h={'150px'}
-        w={'full'}
+        maxW={'270px'}
         position="relative"
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}

@@ -28,6 +28,7 @@ import {
 } from 'react-icons/ai';
 
 import TextLogo from '../logos/TextLogo';
+import { SocialButtons } from './SocialButtons';
 
 export default function LargeWithNewsletter() {
   return (
@@ -84,20 +85,10 @@ export default function LargeWithNewsletter() {
                   alt="enamad"
                 />
               </Box>
-              <Grid
-                templateColumns="repeat(5, 1fr)"
-                gap={1}
-                textColor="primary"
-                fontSize="xl"
-              >
-                <AiOutlineTwitter />
-                <AiOutlineWhatsApp />
-                <AiOutlineYoutube />
-                <AiOutlineInstagram />
-              </Grid>
+              <SocialButtons />
               <Text textColor="primary">
                 {' '}
-                تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰{' '}
+                تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰ ©{' '}
               </Text>
             </Stack>
           </Flex>

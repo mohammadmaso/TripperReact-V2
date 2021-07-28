@@ -43,11 +43,11 @@ export default function CallToActionWithVideo() {
                 zIndex: -1,
               }}
             >
-              لذت سفر
+              نمی‌دونی کجا بری؟
             </Text>
             <br />
             <Text as={'span'} color={'primary.500'}>
-              به همسفر خوبه..
+              ما می‌دونیم..
             </Text>
           </Heading>
           <Text color={'gray.500'}>
@@ -68,16 +68,10 @@ export default function CallToActionWithVideo() {
               px={6}
               colorScheme={'primary'}
             >
-              همسفر‌ها
+              سفرساز
             </Button>
-            <Button
-              rounded={'full'}
-              size={'lg'}
-              fontWeight={'normal'}
-              px={6}
-              leftIcon={<PlayIcon h={4} w={4} color={'gray.300'} />}
-            >
-              چطور کار می‌کنه؟
+            <Button rounded={'full'} size={'lg'} fontWeight={'normal'} px={6}>
+              گشتن میان سفرنامه‌ها
             </Button>
           </Stack>
         </Stack>
@@ -95,7 +89,8 @@ export default function CallToActionWithVideo() {
             top={'-20%'}
             left={0}
             zIndex={-1}
-            color={useColorModeValue('primary.50', 'primary.400')}
+            color={useColorModeValue('primary.200', 'primary.200')}
+            opacity="0.5"
           />
           <Box
             position={'relative'}

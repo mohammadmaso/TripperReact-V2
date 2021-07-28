@@ -27,6 +27,7 @@ export default function TripSmallCard(props: any) {
         rounded={'md'}
         overflow={'hidden'}
         w={'full'}
+        maxW={'270px'}
         position="relative"
         transition={'all .3s ease'}
         // _hover={{ transform: 'scale(1.1,1.1)' }}

@@ -18,7 +18,6 @@ export const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'سفر',
     icon: <MdCardTravel />,
-    href: '/travel_solutions',
     children: [
       {
         label: 'سفرنامه‌ها',

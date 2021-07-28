@@ -22,22 +22,27 @@ export default function CallToActionCreateGroupTrip() {
       <VStack
         w={'full'}
         justify={'center'}
+        align="flex-start"
         px={useBreakpointValue({ base: 4, md: 8 })}
         bgGradient={'linear(to-l, blackAlpha.900, transparent)'}
         rounded="md"
       >
-        <Stack maxW={'full'} align={'flex-start'} spacing={6}>
-          <Text
-            color={'white'}
-            fontWeight={600}
-            lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
-          >
-            دنبال همسفر می‌گردی؟ اینجا می‌تونی همراه‌‌های سفر بعدیت رو پیدا
-            کنی..
-          </Text>
+        <Stack maxW={'full'} align={'flex-start'} spacing={4}>
+          <Stack>
+            <Text
+              color={'white'}
+              fontWeight={400}
+              lineHeight={1.2}
+              fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}
+            >
+              دنبال همسفر می‌گردی؟
+            </Text>
+            <Text color={'white'}>
+              اینجا می‌تونی همراه‌‌های سفر بعدیت رو پیدا کنی..
+            </Text>
+          </Stack>
           <Stack direction={'row'}>
-            <Button colorScheme="primary" rounded={'full'} color={'white'}>
+            <Button colorScheme="primary" rounded={'full'}>
               جستجو میان سفرهای گروهی
             </Button>
             <Button

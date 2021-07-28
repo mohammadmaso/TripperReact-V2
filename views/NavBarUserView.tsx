@@ -25,7 +25,9 @@ import Link from 'next/link';
 import NavProfile from '../componenets/navbars/NavProfile';
 import { useMeQuery } from '../graphql/generated/types';
 
-interface Props {}
+interface Props {
+  minimal?: boolean;
+}
 
 const NavBarUserView = (props: Props) => {
   const router = useRouter();
@@ -44,7 +46,7 @@ const NavBarUserView = (props: Props) => {
 
   return (
     <>
-      <NavProfile user={data?.me} signOut={signOut} />
+      <NavProfile minimal={props.minimal} user={data?.me} signOut={signOut} />
     </>
   );
 };

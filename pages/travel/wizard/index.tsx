@@ -1,11 +1,11 @@
 import React from 'react';
 
-import BaseLayout from '../../../layouts/BaseLayout';
+import MinimalLayout from '../../../layouts/MinimalLayout';
 
 export default function Home() {
   return (
-    <BaseLayout>
+    <MinimalLayout selected="none">
       <div></div>
-    </BaseLayout>
+    </MinimalLayout>
   );
 }

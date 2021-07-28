@@ -37,7 +37,6 @@ export const DesktopNav = () => {
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
-                bg="white"
                 p={4}
                 rounded={'md'}
                 minW={'sm'}

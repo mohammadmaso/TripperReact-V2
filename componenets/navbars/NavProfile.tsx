@@ -12,16 +12,19 @@ import {
   Switch,
 } from '@chakra-ui/react';
 
-import { FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
+import { FiLogOut, FiUser, FiBookOpen, FiFeather } from 'react-icons/fi';
 
 import React from 'react';
 
 import Link from 'next/link';
 import { MdCardTravel } from 'react-icons/md';
+import { BiListPlus } from 'react-icons/bi';
+import { HiUser } from 'react-icons/hi';
 
 interface Props {
   signOut: () => void;
   user: any;
+  minimal?: boolean;
 }
 
 const NavProfile = (props: Props) => {
@@ -35,22 +38,32 @@ const NavProfile = (props: Props) => {
           bgColor="transparent"
           rightIcon={<ChevronDownIcon />}
         >
-          <Flex direction="row-reverse" alignItems="center">
-            <Avatar
-              shadow="lg"
-              // name={data.me.firstName + data.me.lastName}
-              src={props.user?.avatar}
-            />
-            <Text
-              display={{ base: 'none', md: 'unset' }}
-              fontSize={{ base: '12px', md: '14px' }}
-              pl={2}
-            >
-              {props.user?.username}
-            </Text>
-          </Flex>
+          {props.minimal ? (
+            <FiUser />
+          ) : (
+            <Flex direction="row-reverse" alignItems="center">
+              <Avatar
+                shadow="lg"
+                // name={data.me.firstName + data.me.lastName}
+                src={props.user?.avatar}
+              />
+              <Text
+                display={{ base: 'none', md: 'unset' }}
+                fontSize={{ base: '12px', md: '14px' }}
+                pl={2}
+              >
+                {props.user?.username}
+              </Text>
+            </Flex>
+          )}
         </MenuButton>
         <MenuList>
+          <Link href="/travels/travelogue/new" passHref>
+            <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
+          </Link>
+          <Link href="/travels/wizard/" passHref>
+            <MenuItem icon={<BiListPlus />}>برنامه‌ریزی سفر</MenuItem>
+          </Link>
           <Link href="/me" passHref>
             <MenuItem icon={<FiUser />}>پروفایل من</MenuItem>
           </Link>
