@@ -58,10 +58,10 @@ const NavProfile = (props: Props) => {
           )}
         </MenuButton>
         <MenuList>
-          <Link href="/travels/travelogue/new" passHref>
+          <Link href="/travel/travelogue/new" passHref>
             <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
           </Link>
-          <Link href="/travels/wizard/" passHref>
+          <Link href="/travel/wizard/" passHref>
             <MenuItem icon={<BiListPlus />}>برنامه‌ریزی سفر</MenuItem>
           </Link>
           <Link href="/me" passHref>

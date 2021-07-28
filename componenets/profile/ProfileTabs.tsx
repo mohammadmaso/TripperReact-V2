@@ -8,13 +8,7 @@ interface Props {}
 
 const ProfileTabs = (props: Props) => {
   return (
-    <Tabs
-      isLazy
-      colorScheme="primary"
-      size="sm"
-      align="center"
-      variant="soft-rounded"
-    >
+    <Tabs isLazy colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
         <Tab>سفرهای گروهی</Tab>
