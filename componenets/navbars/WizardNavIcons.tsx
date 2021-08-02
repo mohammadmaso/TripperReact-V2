@@ -1,4 +1,10 @@
-import { Icon as ChakraIcon, Tooltip, Wrap, WrapItem } from '@chakra-ui/react';
+import {
+  Icon as ChakraIcon,
+  Tooltip,
+  useColorModeValue,
+  Wrap,
+  WrapItem,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import React from 'react';
 import {
@@ -28,7 +34,7 @@ const WizardNavIcons = (props: Props) => {
         <WrapItem>
           <Icon
             value="selectActivity"
-            {...props.selected}
+            selected={props.selected}
             as={FiActivity}
             name="فعالیت‌ها"
           />
@@ -68,7 +74,7 @@ const Icon = (props: any) => {
       <span>
         <Link passHref href={`/travel/wizard/${props.value}`}>
           <ChakraIcon
-            color={props.selected == props.value ? 'primary.600' : 'gray.500'}
+            color={props.selected == props.value ? 'primary.500' : 'gray.500'}
             height={props.selected == props.value ? 7 : 5}
             width={props.selected == props.value ? 7 : 5}
             transition={'all .5s ease'}

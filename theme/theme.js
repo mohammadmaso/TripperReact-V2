@@ -45,8 +45,8 @@ const config = {
 
 
 const fonts = {
-    heading: "iransans",
-    body: "iransans",
+    heading: "peyda",
+    body: "iranyekan",
 }
 const direction = "rtl"
 
