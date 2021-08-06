@@ -131,6 +131,7 @@ export default function SignIn() {
                 rounded="full"
                 variant={'outline'}
                 leftIcon={<FcGoogle />}
+                disabled
               >
                 <Center>
                   <Text>ورود با گوگل</Text>
