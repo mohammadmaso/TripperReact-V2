@@ -57,7 +57,7 @@ const NavBar = (props: any) => {
         position="fixed"
         w="100%"
         shadow="lg"
-        zIndex={2}
+        zIndex={100}
       >
         <Flex
           flex={{ base: 'flex', md: 'auto' }}

@@ -1,16 +1,18 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import '~react-image-gallery/styles/css/image-gallery.css';
 
-a {
-  color: inherit;
-  text-decoration: none;
+.image-gallery-image {
+  border-radius: 7px;
 }
-
-* {
-  box-sizing: border-box;
+.image-gallery-thumbnail-image {
+  border-radius: 5px;
+}
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:focus,
+.image-gallery-thumbnail:hover {
+  outline: none;
+  border: 1px solid #009d21;
+  border-radius: 5px;
+}
+.mapboxgl-map {
+  border-radius: 7px;
 }

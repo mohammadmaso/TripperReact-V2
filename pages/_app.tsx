@@ -4,6 +4,8 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import '../styles/globals.css';
 
 import theme from '../theme/theme';
 import Fonts from '../theme/Font';
