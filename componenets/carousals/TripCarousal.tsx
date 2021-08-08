@@ -8,11 +8,11 @@ interface Props {
   slideToShow?: number;
 }
 
-export default function TripCarousal({ slideToShow = 4 }: Props): ReactElement {
+export default function TripCarousal(props: Props): ReactElement {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: slideToShow,
+    slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
     arrows: false,

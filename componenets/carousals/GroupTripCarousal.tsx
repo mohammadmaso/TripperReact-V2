@@ -9,13 +9,11 @@ interface Props {
   slideToShow?: number;
 }
 
-export default function GroupTripCarousal({
-  slideToShow = 4,
-}: Props): ReactElement {
+export default function GroupTripCarousal(props: Props): ReactElement {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: slideToShow,
+    slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
     arrows: false,

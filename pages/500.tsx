@@ -7,7 +7,7 @@ interface Props {}
 const Page500 = (props: Props) => {
   return (
     <Flex direction="column" height="100vh" align="center" justify="center">
-      <Heading>خطای سمت سرور | ۵۰۰</Heading>
+      <Heading fontWeight="thin">خطای سمت سرور | ۵۰۰</Heading>
     </Flex>
   );
 };
