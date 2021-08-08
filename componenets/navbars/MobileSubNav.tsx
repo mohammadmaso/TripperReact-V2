@@ -4,6 +4,7 @@ import {
   Stack,
   Collapse,
   Icon,
+  Wrap,
   Link as ChakraLink,
   useColorModeValue,
   useDisclosure,
@@ -16,7 +17,7 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Stack spacing={4} onClick={children && onToggle}>
+    <Stack spacing={4} onClick={children && onToggle} width="full">
       <Flex
         py={2}
         as={ChakraLink}
@@ -26,15 +27,18 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
           textDecoration: 'none',
         }}
       >
-        {icon}
-        <Link href={href ?? '#'}>
-          <Text
-            pr={3}
-            fontWeight={600}
-            color={useColorModeValue('gray.600', 'gray.200')}
-          >
-            {label}
-          </Text>
+        <Link href={href ?? '#'} passHref>
+          <Wrap>
+            {icon}
+
+            <Text
+              pr={3}
+              fontWeight={600}
+              color={useColorModeValue('gray.600', 'gray.200')}
+            >
+              {label}
+            </Text>
+          </Wrap>
         </Link>
         {children && (
           <Icon
