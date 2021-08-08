@@ -27,7 +27,11 @@ export default function CallToActionCreateGroupTrip() {
         bgGradient={'linear(to-l, blackAlpha.900, transparent)'}
         rounded="md"
       >
-        <Stack align={'flex-start'} spacing={4}>
+        <Stack
+          align={'flex-start'}
+          spacing={4}
+          px={useBreakpointValue({ base: 4, md: 8 })}
+        >
           <Stack>
             <Text
               color={'white'}
