@@ -31,14 +31,14 @@ function AccessoryCard() {
   );
 }
 
-const Accessories = (props: Props) => {
+const ArticleAccessories = (props: Props) => {
   return (
     <Stack>
       <Wrap align="center">
         <FiShoppingBag />
         <Text>تجهیزات</Text>
       </Wrap>
-      <Wrap spacing="5" justify="center">
+      <Wrap spacing="5" justify={{ base: 'center', md: 'right' }}>
         <AccessoryCard />
         <AccessoryCard />
         <AccessoryCard />
@@ -48,4 +48,4 @@ const Accessories = (props: Props) => {
   );
 };
 
-export default Accessories;
+export default ArticleAccessories;

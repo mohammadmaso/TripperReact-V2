@@ -54,7 +54,7 @@ function CityList() {
   );
 }
 
-export function Places() {
+export function ArticlePlaces() {
   return (
     <Stack>
       <Wrap align="center">

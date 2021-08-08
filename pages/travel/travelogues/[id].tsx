@@ -28,24 +28,22 @@ import Companions from '../../../componenets/travelogue/Companions';
 import { Experiences } from '../../../componenets/travelogue/Experiences';
 import { Places } from '../../../componenets/travelogue/Places';
 import Accessories from '../../../componenets/travelogue/Accessories';
+import { Transfers } from '../../../componenets/travelogue/Transfers';
+import Activities from '../../../componenets/travelogue/Activities';
 
 export default function Travelogue() {
-  const [viewport, setViewport] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8,
-  });
   return (
-    <BaseLayout title="تریپر | سفر به شیراز">
+    <BaseLayout title="سفر به شیراز" subNav={<Header />}>
       <Wrap>
-        <Header></Header>
         <Divider />
         <Flex direction={{ base: 'column', md: 'row', lg: 'row' }} w="full">
-          <Container>
+          <Wrap flex="1">
             <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4">
               <Gallery />
               <Divider />
               <Accomodations />
+              <Divider />
+              <Transfers />
               <Divider />
               <Places />
               <Divider />
@@ -55,15 +53,17 @@ export default function Travelogue() {
               <Divider />
               <Companions />
             </Stack>
-          </Container>
+          </Wrap>
 
-          <Container>
-            <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4">
-              <Map viewport={viewport} setViewport={setViewport}></Map>
+          <Wrap flex="1" pt={{ base: '5', md: '0', lg: '0' }}>
+            <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4">
+              <Map />
+              <Divider />
+              <Activities />
               <Divider />
               <Accessories />
             </Stack>
-          </Container>
+          </Wrap>
         </Flex>
       </Wrap>
       <Box h="5vh" />

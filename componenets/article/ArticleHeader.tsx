@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 
-export function Header() {
+export function ArticleHeader() {
   const [stickyHeader, setStickyHeader] = useState(false);
 
   const handleScroll = () => {
@@ -45,7 +45,7 @@ export function Header() {
       <Text as="h1" fontSize="xl" fontWeight="semibold">
         گشت و گذار در شیراز
       </Text>
-      <Wrap fontWeight="light" fontSize="sm">
+      <Wrap fontWeight="light" fontSize="sm" align="center">
         <HStack align={'center'} justify="space-between">
           <Avatar
             src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
@@ -62,17 +62,7 @@ export function Header() {
         <Divider orientation="vertical" />
         <Wrap align="center">
           <TimeIcon ml="1" />
-          <Text>۲ روز</Text>
-        </Wrap>
-        <Divider orientation="vertical" />
-        <Wrap align="center">
-          <CalendarIcon ml="1" />
-          <Text>۱۴۰۰ پاییز</Text>
-        </Wrap>
-        <Divider orientation="vertical" />
-        <Wrap align="center">
-          <HiLocationMarker />
-          <Text>شیراز - ایران</Text>
+          <Text>۱۰ دقیقه</Text>
         </Wrap>
       </Wrap>
     </Stack>

@@ -1,4 +1,4 @@
-import { Stack, Wrap, Text, Box, Divider } from '@chakra-ui/react';
+import { Stack, Wrap, Text, Box, Divider, Image, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { FiEye, FiUsers } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
@@ -14,6 +14,7 @@ function ExperienceCard() {
           <HiLocationMarker />
           <Text>شیراز - ایران</Text>
         </Wrap>
+
         <Wrap fontSize="sm" fontWeight="light" p="2">
           <Divider />
           <Text>

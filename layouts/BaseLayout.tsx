@@ -7,6 +7,7 @@ import NavBarView from '../views/NavBarView';
 
 type Props = {
   children: React.ReactNode;
+  subNav?: React.ReactNode;
   title?: string;
 } & typeof defaultProps;
 
@@ -18,12 +19,13 @@ const BaseLayout = (props: Props): ReactElement => {
   return (
     <>
       <Head>
-        <title>{props.title}</title>
+        <title>{`تریپر | ${props.title} `}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBarView />
-      <Box height="15vh" />
-      <Box minHeight="78vh" px={[2, 2, 120]}>
+      <Box height="13vh" />
+      {props.subNav}
+      <Box minHeight="78vh" px={[4, 4, 120]}>
         {props.children}
       </Box>
       <MainFooter />

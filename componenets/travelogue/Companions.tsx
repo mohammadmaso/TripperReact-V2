@@ -1,4 +1,12 @@
-import { Stack, Wrap, Text, Avatar, HStack, Flex } from '@chakra-ui/react';
+import {
+  Stack,
+  Wrap,
+  Text,
+  Avatar,
+  HStack,
+  Flex,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { FiFeather, FiUsers } from 'react-icons/fi';
 
@@ -8,7 +16,7 @@ function CompanionCard() {
   return (
     <HStack
       align={'center'}
-      bgColor="gray.100"
+      bgColor={useColorModeValue('gray.100', 'gray.700')}
       pr="1"
       pl="3"
       py="1"

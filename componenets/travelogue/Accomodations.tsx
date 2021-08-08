@@ -1,4 +1,11 @@
-import { Flex, Stack, Wrap, Text, Center } from '@chakra-ui/react';
+import {
+  Flex,
+  Stack,
+  Wrap,
+  Text,
+  Center,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { FaCampground } from 'react-icons/fa';
 import { FiHome } from 'react-icons/fi';
@@ -14,7 +21,7 @@ export function Accomodations() {
         <Flex
           justify="space-between"
           borderRadius="full"
-          bgColor="gray.100"
+          bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"
           h="2.7rem"
           align="center"
@@ -31,7 +38,7 @@ export function Accomodations() {
         <Flex
           justify="space-between"
           borderRadius="full"
-          bgColor="gray.100"
+          bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"
           h="2.7rem"
           align="center"
