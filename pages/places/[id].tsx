@@ -12,14 +12,14 @@ import {
   useEventListener,
 } from '@chakra-ui/react';
 import React from 'react';
-import PlaceActivities from '../../../componenets/place/PlaceActivities';
-import { PlaceDescription } from '../../../componenets/place/PlaceDescription';
-import PlaceFacilities from '../../../componenets/place/PlaceFacilities';
-import { PlaceGallery } from '../../../componenets/place/PlaceGallery';
-import { PlaceHeader } from '../../../componenets/place/PlaceHeader';
-import { PlaceInfo } from '../../../componenets/place/PlaceInfo';
+import PlaceActivities from '../../componenets/place/PlaceActivities';
+import { PlaceDescription } from '../../componenets/place/PlaceDescription';
+import PlaceFacilities from '../../componenets/place/PlaceFacilities';
+import { PlaceGallery } from '../../componenets/place/PlaceGallery';
+import { PlaceHeader } from '../../componenets/place/PlaceHeader';
+import { PlaceInfo } from '../../componenets/place/PlaceInfo';
 
-import BaseLayout from '../../../layouts/BaseLayout';
+import BaseLayout from '../../layouts/BaseLayout';
 
 export default function Travelogue() {
   return (

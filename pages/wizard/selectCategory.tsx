@@ -1,8 +1,8 @@
 import { Box, Wrap } from '@chakra-ui/react';
 import React from 'react';
-import CategoryList from '../../../componenets/lists/CategoryList';
+import CategoryList from '../../componenets/lists/CategoryList';
 
-import MinimalLayout from '../../../layouts/MinimalLayout';
+import MinimalLayout from '../../layouts/MinimalLayout';
 
 export default function SlectCategory() {
   return (

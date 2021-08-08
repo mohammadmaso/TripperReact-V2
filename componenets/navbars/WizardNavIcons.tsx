@@ -72,7 +72,7 @@ const Icon = (props: any) => {
   return (
     <Tooltip hasArrow label={props.name} fontSize="md" placement="bottom">
       <span>
-        <Link passHref href={`/travel/wizard/${props.value}`}>
+        <Link passHref href={`/wizard/${props.value}`}>
           <ChakraIcon
             color={props.selected == props.value ? 'primary.500' : 'gray.500'}
             height={props.selected == props.value ? 7 : 5}

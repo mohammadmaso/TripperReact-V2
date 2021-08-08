@@ -12,24 +12,19 @@ import {
   useEventListener,
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { FaHome, FaLocationArrow } from 'react-icons/fa';
-import { ImLocation } from 'react-icons/im';
-import { IoPin } from 'react-icons/io5';
-import { MdLocationOn } from 'react-icons/md';
-import CategoryCard from '../../../componenets/cards/CategoryCard';
 
-import BaseLayout from '../../../layouts/BaseLayout';
-import { Accomodations } from '../../../componenets/travelogue/Accomodations';
-import { Map } from '../../../componenets/travelogue/Map';
-import { Header } from '../../../componenets/travelogue/Header';
-import { Gallery } from '../../../componenets/travelogue/Gallery';
-import { Description } from '../../../componenets/travelogue/Description';
-import Companions from '../../../componenets/travelogue/Companions';
-import { Experiences } from '../../../componenets/travelogue/Experiences';
-import { Places } from '../../../componenets/travelogue/Places';
-import Accessories from '../../../componenets/travelogue/Accessories';
-import { Transfers } from '../../../componenets/travelogue/Transfers';
-import Activities from '../../../componenets/travelogue/Activities';
+import BaseLayout from '../../layouts/BaseLayout';
+import { Accomodations } from '../../componenets/travelogue/Accomodations';
+import { Map } from '../../componenets/travelogue/Map';
+import { Header } from '../../componenets/travelogue/Header';
+import { Gallery } from '../../componenets/travelogue/Gallery';
+import { Description } from '../../componenets/travelogue/Description';
+import Companions from '../../componenets/travelogue/Companions';
+import { Experiences } from '../../componenets/travelogue/Experiences';
+import { Places } from '../../componenets/travelogue/Places';
+import Accessories from '../../componenets/travelogue/Accessories';
+import { Transfers } from '../../componenets/travelogue/Transfers';
+import Activities from '../../componenets/travelogue/Activities';
 
 export default function Travelogue() {
   return (
