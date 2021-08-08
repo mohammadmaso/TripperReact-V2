@@ -37,6 +37,9 @@ export default function WikiCarusal({}: Props): ReactElement {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
+          initialSlide: 2,
+          dots: true,
         },
       },
     ],

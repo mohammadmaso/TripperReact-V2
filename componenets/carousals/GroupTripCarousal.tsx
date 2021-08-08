@@ -40,6 +40,9 @@ export default function GroupTripCarousal(props: Props): ReactElement {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: true,
+          initialSlide: 2,
+          dots: true,
         },
       },
     ],

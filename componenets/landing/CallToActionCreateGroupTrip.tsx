@@ -5,6 +5,7 @@ import {
   Text,
   VStack,
   useBreakpointValue,
+  Wrap,
 } from '@chakra-ui/react';
 
 export default function CallToActionCreateGroupTrip() {
@@ -23,11 +24,10 @@ export default function CallToActionCreateGroupTrip() {
         w={'full'}
         justify={'center'}
         align="flex-start"
-        px={useBreakpointValue({ base: 4, md: 8 })}
         bgGradient={'linear(to-l, blackAlpha.900, transparent)'}
         rounded="md"
       >
-        <Stack maxW={'full'} align={'flex-start'} spacing={4}>
+        <Stack align={'flex-start'} spacing={4}>
           <Stack>
             <Text
               color={'white'}
@@ -41,7 +41,7 @@ export default function CallToActionCreateGroupTrip() {
               اینجا می‌تونی همراه‌‌های سفر بعدیت رو پیدا کنی..
             </Text>
           </Stack>
-          <Stack direction={'row'}>
+          <Wrap>
             <Button colorScheme="primary" rounded={'full'}>
               جستجو میان سفرهای گروهی
             </Button>
@@ -53,7 +53,7 @@ export default function CallToActionCreateGroupTrip() {
             >
               ساختن یک برنامه سفر
             </Button>
-          </Stack>
+          </Wrap>
         </Stack>
       </VStack>
     </Flex>
