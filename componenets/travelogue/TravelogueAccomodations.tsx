@@ -10,7 +10,7 @@ import React from 'react';
 import { FaCampground } from 'react-icons/fa';
 import { FiHome } from 'react-icons/fi';
 
-export function Accomodations() {
+export function TravelogueAccomodations() {
   return (
     <Stack>
       <Wrap align="center">

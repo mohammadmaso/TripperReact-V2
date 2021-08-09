@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 
-export function Header() {
+export function TravelogueHeader() {
   const [stickyHeader, setStickyHeader] = useState(false);
 
   const handleScroll = () => {

@@ -5,14 +5,14 @@ import AccessoryCard from '../cards/AccessoryCard';
 
 interface Props {}
 
-const ArticleAccessories = (props: Props) => {
+const TravelogueAccessories = (props: Props) => {
   return (
     <Stack>
       <Wrap align="center">
         <FiShoppingBag />
         <Text>تجهیزات</Text>
       </Wrap>
-      <Wrap spacing="5" justify={{ base: 'center', md: 'right' }}>
+      <Wrap spacing="5" justify="center">
         <AccessoryCard />
         <AccessoryCard />
         <AccessoryCard />
@@ -22,4 +22,4 @@ const ArticleAccessories = (props: Props) => {
   );
 };
 
-export default ArticleAccessories;
+export default TravelogueAccessories;

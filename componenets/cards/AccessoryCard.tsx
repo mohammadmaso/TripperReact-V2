@@ -30,22 +30,4 @@ function AccessoryCard() {
     </Box>
   );
 }
-
-const Accessories = (props: Props) => {
-  return (
-    <Stack>
-      <Wrap align="center">
-        <FiShoppingBag />
-        <Text>تجهیزات</Text>
-      </Wrap>
-      <Wrap spacing="5" justify="center">
-        <AccessoryCard />
-        <AccessoryCard />
-        <AccessoryCard />
-        <AccessoryCard />
-      </Wrap>
-    </Stack>
-  );
-};
-
-export default Accessories;
+export default AccessoryCard;

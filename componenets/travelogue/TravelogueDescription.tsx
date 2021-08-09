@@ -3,7 +3,7 @@ import React from 'react';
 import { FaCampground } from 'react-icons/fa';
 import { FiFeather, FiHome } from 'react-icons/fi';
 
-export function Description() {
+export function TravelogueDescription() {
   return (
     <Stack>
       <Wrap align="center">

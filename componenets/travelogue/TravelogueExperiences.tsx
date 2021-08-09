@@ -29,7 +29,7 @@ function ExperienceCard() {
   );
 }
 
-export const Experiences = (props: Props) => {
+export const TravelogueExperiences = (props: Props) => {
   return (
     <Stack>
       <Wrap align="center">

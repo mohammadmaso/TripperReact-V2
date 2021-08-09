@@ -19,6 +19,7 @@ class Document extends NextDocument {
     return (
       <Html dir="rtl" lang="fa">
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <script
             type="text/javascript"
             dangerouslySetInnerHTML={{

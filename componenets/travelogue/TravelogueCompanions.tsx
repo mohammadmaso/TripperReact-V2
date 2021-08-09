@@ -36,7 +36,7 @@ function CompanionCard() {
   );
 }
 
-const Companions = (props: Props) => {
+const TravelogueCompanions = (props: Props) => {
   return (
     <Stack>
       <Wrap align="center">
@@ -51,4 +51,4 @@ const Companions = (props: Props) => {
   );
 };
 
-export default Companions;
+export default TravelogueCompanions;

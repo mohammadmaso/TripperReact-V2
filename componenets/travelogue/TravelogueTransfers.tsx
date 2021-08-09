@@ -13,7 +13,7 @@ import { FaCampground } from 'react-icons/fa';
 import { FiArrowLeft, FiHome } from 'react-icons/fi';
 import { MdFlightTakeoff, MdPlace } from 'react-icons/md';
 
-function TransferCard() {
+function TravelogueTransferCard() {
   return (
     <Flex
       justify="space-between"
@@ -47,8 +47,8 @@ export function Transfers() {
         <Text>رفت و آمد</Text>
       </Wrap>
       <Wrap>
-        <TransferCard />
-        <TransferCard />
+        <TravelogueTransferCard />
+        <TravelogueTransferCard />
       </Wrap>
     </Stack>
   );

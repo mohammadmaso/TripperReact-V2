@@ -17,7 +17,7 @@ function ActivityCard() {
   );
 }
 
-const Activities = (props: Props) => {
+const TravelogueActivities = (props: Props) => {
   return (
     <Stack>
       <Wrap align="center">
@@ -31,4 +31,4 @@ const Activities = (props: Props) => {
   );
 };
 
-export default Activities;
+export default TravelogueActivities;

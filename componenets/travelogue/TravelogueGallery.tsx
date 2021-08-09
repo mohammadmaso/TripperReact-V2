@@ -21,7 +21,7 @@ const images = [
 ];
 interface Props {}
 
-export const Gallery = (props: Props) => {
+export const TravelogueGallery = (props: Props) => {
   return (
     <div>
       <Stack>
