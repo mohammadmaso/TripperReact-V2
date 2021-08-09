@@ -22,9 +22,8 @@ export function PWAInstallPrompt() {
   React.useEffect(() => {
     if (prompt) {
       setVisibleState(true);
-      onToggle;
     }
-  }, [onToggle, prompt]);
+  }, [prompt]);
 
   if (!isVisible) {
     return <div />;
@@ -32,41 +31,36 @@ export function PWAInstallPrompt() {
 
   return (
     <>
-      <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-        <Box
-          roundedTop="md"
-          bgColor="#009d21"
-          boxShadow="inner"
-          bottom="0"
-          //   h="26vh"
-          w="full"
-          p="3"
-        >
-          <Stack justify="center" textAlign="center" textColor="white">
-            <CloseButton mb="-40px" onClick={onToggle} />
-            <Image
-              src="/CircleLogo.svg"
-              h="5rem"
-              alt="Logo"
-              onClick={onToggle}
-            />
-            <Heading fontWeight="bold" fontSize="lg">
-              تجربه سریع‌تر و امکان مرور آفلاین
-            </Heading>
-            <Text fontWeight="light" fontSize="lg">
-              با نصب نسخه وب تریپر
-            </Text>
-            <Button
-              onClick={promptToInstall}
-              variant="outline"
-              fontWeight="light"
-              rounded="full"
-            >
-              نصب سریع
-            </Button>
-          </Stack>
-        </Box>
-      </Slide>
+      {/* <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}> */}
+      <Box
+        roundedTop="md"
+        bgColor="#009d21"
+        boxShadow="inner"
+        bottom="0"
+        //   h="26vh"
+        w="full"
+        p="3"
+      >
+        <Stack justify="center" textAlign="center" textColor="white">
+          <CloseButton mb="-40px" onClick={onToggle} />
+          <Image src="/CircleLogo.svg" h="5rem" alt="Logo" onClick={onToggle} />
+          <Heading fontWeight="bold" fontSize="lg">
+            تجربه سریع‌تر و امکان مرور آفلاین
+          </Heading>
+          <Text fontWeight="light" fontSize="lg">
+            با نصب نسخه وب تریپر
+          </Text>
+          <Button
+            onClick={promptToInstall}
+            variant="outline"
+            fontWeight="light"
+            rounded="full"
+          >
+            نصب سریع
+          </Button>
+        </Stack>
+      </Box>
+      {/* </Slide> */}
     </>
   );
 }
