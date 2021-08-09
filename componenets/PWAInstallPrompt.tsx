@@ -37,6 +37,7 @@ export function PWAInstallPrompt() {
         bgColor="#009d21"
         boxShadow="inner"
         bottom="0"
+        zIndex="overlay"
         position="fixed"
         //   h="26vh"
         w="full"
