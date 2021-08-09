@@ -1,4 +1,14 @@
-import { Box, Slide, useDisclosure, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Slide,
+  useDisclosure,
+  Button,
+  Stack,
+  Image,
+  Heading,
+  Text,
+  CloseButton,
+} from '@chakra-ui/react';
 import * as React from 'react';
 import { useAddToHomescreenPrompt } from '../hooks/useAddToHomescreenPrompt';
 
@@ -9,31 +19,52 @@ export function PWAInstallPrompt() {
   const hide = () => setVisibleState(false);
   const { isOpen, onToggle } = useDisclosure();
 
-  //   React.useEffect(() => {
-  //     if (prompt) {
-  //       setVisibleState(true);
-  //     }
-  //   }, [prompt]);
+  React.useEffect(() => {
+    if (prompt) {
+      setVisibleState(true);
+      onToggle;
+    }
+  }, [onToggle, prompt]);
 
-  // if (!isVisible) {
-  //   return <div />;
-  // }
+  if (!isVisible) {
+    return <div />;
+  }
 
   return (
     <>
-      <Button zIndex="overlay" onClick={onToggle}>
-        Click Me
-      </Button>
       <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
         <Box
           roundedTop="md"
-          bgColor="gray.50"
+          bgColor="#009d21"
+          boxShadow="inner"
           bottom="0"
-          position="fixed"
-          h="30vh"
+          //   h="26vh"
           w="full"
+          p="3"
         >
-          <div>sgh</div>
+          <Stack justify="center" textAlign="center" textColor="white">
+            <CloseButton mb="-40px" onClick={onToggle} />
+            <Image
+              src="/CircleLogo.svg"
+              h="5rem"
+              alt="Logo"
+              onClick={onToggle}
+            />
+            <Heading fontWeight="bold" fontSize="lg">
+              تجربه سریع‌تر و امکان مرور آفلاین
+            </Heading>
+            <Text fontWeight="light" fontSize="lg">
+              با نصب نسخه وب تریپر
+            </Text>
+            <Button
+              onClick={promptToInstall}
+              variant="outline"
+              fontWeight="light"
+              rounded="full"
+            >
+              نصب سریع
+            </Button>
+          </Stack>
         </Box>
       </Slide>
     </>
