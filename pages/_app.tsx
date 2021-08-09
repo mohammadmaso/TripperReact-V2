@@ -24,6 +24,7 @@ import { relayStylePagination } from '@apollo/client/utilities';
 
 import { setContext } from '@apollo/client/link/context';
 import { RefreshTokenDocument } from '../graphql/generated/types';
+import { PWAInstallPrompt } from '../componenets/PWAInstallPrompt';
 
 const getNewToken = () => {
   return client.mutate({ mutation: RefreshTokenDocument }).then((response) => {
@@ -102,6 +103,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <ChakraProvider theme={theme}>
         <Fonts />
+        <PWAInstallPrompt />
         <Component {...pageProps} />
       </ChakraProvider>
     </ApolloProvider>
