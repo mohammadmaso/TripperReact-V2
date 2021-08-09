@@ -37,13 +37,14 @@ export function PWAInstallPrompt() {
         bgColor="#009d21"
         boxShadow="inner"
         bottom="0"
+        position="fixed"
         //   h="26vh"
         w="full"
         p="3"
       >
         <Stack justify="center" textAlign="center" textColor="white">
-          <CloseButton mb="-40px" onClick={onToggle} />
-          <Image src="/CircleLogo.svg" h="5rem" alt="Logo" onClick={onToggle} />
+          <CloseButton mb="-40px" onClick={hide} />
+          <Image src="/CircleLogo.svg" h="5rem" alt="Logo" onClick={hide} />
           <Heading fontWeight="bold" fontSize="lg">
             تجربه سریع‌تر و امکان مرور آفلاین
           </Heading>
