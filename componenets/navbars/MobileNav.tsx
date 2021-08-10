@@ -10,6 +10,9 @@ import {
   VStack,
   DrawerFooter,
   HStack,
+  Button,
+  Stack,
+  Wrap,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import {
@@ -21,6 +24,7 @@ import {
 import { MobileSubNav } from './MobileSubNav';
 import { NAV_ITEMS } from './NAV_ITEMS';
 import Logo from '../logos/TextLogo';
+import { useAddToHomescreenPrompt } from '../../hooks/useAddToHomescreenPrompt';
 
 export const MobileNav = ({
   onClose,
@@ -29,6 +33,8 @@ export const MobileNav = ({
   onClose: any;
   isOpen: any;
 }) => {
+  const [prompt, promptToInstall] = useAddToHomescreenPrompt();
+
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
       <DrawerOverlay>
@@ -47,15 +53,24 @@ export const MobileNav = ({
             </VStack>
           </DrawerBody>
           <Divider />
-
+          <Button
+            rounded="none"
+            colorScheme="primary"
+            size="sm"
+            onClick={promptToInstall}
+          >
+            نصب نسخه PWA
+          </Button>
           <DrawerFooter textColor="primary" justifyContent="center">
-            <HStack spacing="10px">
-              <IoLogoSoundcloud />
-              <IoLogoInstagram />
-              <IoLogoSoundcloud />
-              <IoLogoYoutube />
-              <IoLogoTwitter />
-            </HStack>
+            <Stack>
+              <Wrap spacing="10px">
+                <IoLogoSoundcloud />
+                <IoLogoInstagram />
+                <IoLogoSoundcloud />
+                <IoLogoYoutube />
+                <IoLogoTwitter />
+              </Wrap>
+            </Stack>
           </DrawerFooter>
         </DrawerContent>
       </DrawerOverlay>

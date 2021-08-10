@@ -18,6 +18,13 @@ const colors = {
 
 const components = {
     Button: { baseStyle: { _focus: { boxShadow: "none" } } },
+    // Menu: {
+    //   sizes :{
+    //     sm :{
+    //       h:"30px",
+    //     }
+    //   }
+    // },
     Switch: {
       baseStyle: {
         track: {

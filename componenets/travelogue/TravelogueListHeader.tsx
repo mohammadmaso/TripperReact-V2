@@ -52,8 +52,10 @@ export function TravelogueListHeader() {
       justify="space-between"
     >
       <Wrap>
-        <Menu closeOnSelect={false}>
+        <Menu closeOnSelect={false} isLazy>
           <MenuButton
+            h="30px"
+            fontSize="sm"
             fontWeight="light"
             as={Button}
             rightIcon={<ChevronDownIcon />}
@@ -70,8 +72,10 @@ export function TravelogueListHeader() {
             </MenuItemOption>
           </MenuList>
         </Menu>
-        <Menu closeOnSelect={false}>
+        <Menu closeOnSelect={false} isLazy>
           <MenuButton
+            h="30px"
+            fontSize="sm"
             fontWeight="light"
             as={Button}
             rightIcon={<ChevronDownIcon />}
@@ -90,10 +94,12 @@ export function TravelogueListHeader() {
         </Menu>
       </Wrap>
       <Wrap>
-        <Menu closeOnSelect={false}>
+        <Menu closeOnSelect={false} isLazy>
           <MenuButton
             fontWeight="light"
             as={Button}
+            h="30px"
+            fontSize="sm"
             rightIcon={<ChevronDownIcon />}
           >
             مرتب سازی
