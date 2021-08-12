@@ -1,4 +1,4 @@
-import { ChevronDownIcon, MoonIcon } from '@chakra-ui/icons';
+import { AtSignIcon, ChevronDownIcon, MoonIcon } from '@chakra-ui/icons';
 import {
   Avatar,
   Flex,
@@ -10,6 +10,7 @@ import {
   Button,
   useColorMode,
   Switch,
+  Divider,
 } from '@chakra-ui/react';
 
 import { FiLogOut, FiUser, FiBookOpen, FiFeather } from 'react-icons/fi';
@@ -47,17 +48,21 @@ const NavProfile = (props: Props) => {
                 // name={data.me.firstName + data.me.lastName}
                 src={props.user?.avatar}
               />
-              <Text
+              {/* <Text
                 display={{ base: 'none', md: 'unset' }}
                 fontSize={{ base: '12px', md: '14px' }}
                 pl={2}
               >
                 {props.user?.username}
-              </Text>
+              </Text> */}
             </Flex>
           )}
         </MenuButton>
         <MenuList>
+          <MenuItem icon={<AtSignIcon />} fontWeight="light">
+            {props.user?.username}
+          </MenuItem>
+          <Divider />
           <Link href="/travelogue/new" passHref>
             <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
           </Link>

@@ -12,7 +12,7 @@ type Props = {
 } & typeof defaultProps;
 
 const defaultProps = {
-  title: 'تریپر | راهکار جامع گردشگری',
+  title: 'راهکار جامع گردشگری',
 };
 
 const BaseLayout = (props: Props): ReactElement => {
@@ -29,7 +29,6 @@ const BaseLayout = (props: Props): ReactElement => {
         {props.children}
       </Box>
       <MainFooter />
-      {/* <LargeFooter /> */}
     </>
   );
 };

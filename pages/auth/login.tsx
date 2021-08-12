@@ -21,7 +21,10 @@ import Link from 'next/link';
 
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import { useTokenAuthMutation } from '../../graphql/generated/types';
+import {
+  TokenAuthMutation,
+  useTokenAuthMutation,
+} from '../../graphql/generated/types';
 
 export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -30,16 +33,23 @@ export default function SignIn() {
 
   const toast = useToast();
 
+  const setTokens = (
+    data: TokenAuthMutation | null | undefined,
+    callback: () => void
+  ) => {
+    if (data?.tokenAuth?.success) {
+      localStorage.setItem('token', data.tokenAuth?.token as string);
+      localStorage.setItem(
+        'refresh-token',
+        data.tokenAuth?.refreshToken as string
+      );
+      callback();
+    }
+  };
+
   const [signIn, { loading, error, data }] = useTokenAuthMutation({
     onCompleted: (data) => {
-      if (data.tokenAuth?.success) {
-        localStorage.setItem('token', data.tokenAuth?.token as string);
-        localStorage.setItem(
-          'refresh-token',
-          data.tokenAuth?.refreshToken as string
-        );
-        router.push('/');
-      }
+      setTokens(data, () => router.push('/'));
     },
   });
 
