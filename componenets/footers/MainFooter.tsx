@@ -14,6 +14,7 @@ import {
   VStack,
   Spacer,
   Grid,
+  Center,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
@@ -32,9 +33,17 @@ import { SocialButtons } from './SocialButtons';
 
 export default function LargeWithNewsletter() {
   return (
-    <Box boxShadow="inner" bgColor={useColorModeValue('gray.50', 'gray.900')}>
-      <Container as={Stack} maxW={'7xl'} py="10">
-        <SimpleGrid columns={{ base: 1, sm: 1, md: 3 }} spacing={8}>
+    <Box
+      boxShadow="inner"
+      bgColor={useColorModeValue('gray.50', 'gray.900')}
+      fontWeight="light"
+    >
+      <Container maxW={'full'} py="10" px={[4, 4, 120]}>
+        <SimpleGrid
+          columns={{ base: 1, sm: 1, md: 3 }}
+          spacing={8}
+          alignItems="end"
+        >
           <Box>
             <Stack>
               <TextLogo width="140" height="50" />
@@ -46,7 +55,7 @@ export default function LargeWithNewsletter() {
               </Text>
             </Stack>
           </Box>
-          <Flex columns={{ base: 1, sm: 1, md: 2 }}>
+          <Flex columns={{ base: 1, sm: 1, md: 2 }} justify="space-around">
             <Stack fontSize="sm" textColor="primary">
               <Link>سفرنامه‌ها</Link>
               <Link>همسفر</Link>
@@ -54,7 +63,6 @@ export default function LargeWithNewsletter() {
               <Link>جاذبه‌ها</Link>
               <Link>مقالات</Link>
             </Stack>
-            <Spacer />
             <Stack fontSize="sm" textColor="primary">
               <Link>درباره تریپر</Link>
               <Link>سیاست حفظ حریم خصوصی</Link>
@@ -63,35 +71,41 @@ export default function LargeWithNewsletter() {
               <Link>پشتبانی</Link>
             </Stack>
           </Flex>
-          <Flex
-            justifyContent="flex-end"
-            justifyItems="flex-end"
-            direction="row"
+          <Stack
+            justify={{
+              base: 'center',
+              sm: 'center',
+              md: 'flex-end',
+              lg: 'flex-end',
+            }}
+            alignItems={{
+              base: 'center',
+              sm: 'center',
+              md: 'flex-end',
+              lg: 'flex-end',
+            }}
           >
-            <Stack>
-              <Box>
-                <Image
-                  src="/images/samandehi.png"
-                  layout="fixed"
-                  width={115 / 1.3}
-                  height={150 / 1.3}
-                  alt="samandehi"
-                />
-                <Image
-                  src="/images/enamad.png"
-                  layout="fixed"
-                  width={138 / 1.3}
-                  height={150 / 1.3}
-                  alt="enamad"
-                />
-              </Box>
-              <SocialButtons />
-              <Text textColor="primary">
-                {' '}
-                تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰ ©{' '}
-              </Text>
-            </Stack>
-          </Flex>
+            <Box>
+              <Image
+                src="/images/samandehi.png"
+                layout="fixed"
+                width={115 / 1.3}
+                height={150 / 1.3}
+                alt="samandehi"
+              />
+              <Image
+                src="/images/enamad.png"
+                layout="fixed"
+                width={138 / 1.3}
+                height={150 / 1.3}
+                alt="enamad"
+              />
+            </Box>
+            <SocialButtons />
+            <Text fontSize="xs" textColor="primary">
+              تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰ ©
+            </Text>
+          </Stack>
         </SimpleGrid>
       </Container>
     </Box>

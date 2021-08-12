@@ -42,7 +42,7 @@ export const MobileNav = ({
           <DrawerCloseButton />
 
           <DrawerHeader>
-            <Logo darkLogo height={70} width={150} />
+            <Logo height={70} width={150} />
             <Divider />
           </DrawerHeader>
           <DrawerBody>

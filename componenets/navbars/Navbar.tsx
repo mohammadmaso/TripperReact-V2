@@ -81,7 +81,6 @@ const NavBar = (props: any) => {
               color={useColorModeValue('gray.800', 'white')}
             >
               <Logo
-                darkLogo
                 height={stickyNav ? 50 : 50}
                 width={stickyNav ? 120 : 120}
               />

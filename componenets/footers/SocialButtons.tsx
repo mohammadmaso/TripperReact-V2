@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react';
+import { Grid, Wrap } from '@chakra-ui/react';
 import React from 'react';
 import {
   AiOutlineTwitter,
@@ -11,16 +11,11 @@ interface Props {}
 
 export const SocialButtons = (props: Props) => {
   return (
-    <Grid
-      templateColumns="repeat(5, 1fr)"
-      gap={1}
-      textColor="primary"
-      fontSize="xl"
-    >
+    <Wrap>
       <AiOutlineTwitter />
       <AiOutlineWhatsApp />
       <AiOutlineYoutube />
       <AiOutlineInstagram />
-    </Grid>
+    </Wrap>
   );
 };
