@@ -49,11 +49,12 @@ const NavBar = (props: any) => {
         color={useColorModeValue('gray.600', 'white')}
         minH={'60px'}
         py={{ base: 2 }}
-        px={[5, 124, 124]}
+        px={[4, 4, 120]}
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
+        justify="space-around"
         position="fixed"
         w="100%"
         shadow="lg"
@@ -63,6 +64,7 @@ const NavBar = (props: any) => {
           flex={{ base: 'flex', md: 'auto' }}
           ml={{ base: -2 }}
           display={{ base: 'flex', md: 'none' }}
+          w="7rem"
         >
           <IconButton
             onClick={onToggle}
