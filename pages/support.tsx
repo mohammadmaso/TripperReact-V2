@@ -70,7 +70,12 @@ export default function Home() {
               latitude={35.7407193}
               offsetTop={-30}
             >
-              <Icon as={HiLocationMarker} h="40px" w="40px" color="red.500" />
+              <Icon
+                as={HiLocationMarker}
+                h="40px"
+                w="40px"
+                color="primary.500"
+              />
             </Marker>
           </ReactMapGL>
         </Box>
