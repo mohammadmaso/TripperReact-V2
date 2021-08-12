@@ -16,6 +16,7 @@ import { BiLocationPlus } from 'react-icons/bi';
 import { FiPhone, FiLink } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
 import ReactMapGL, { Marker } from 'react-map-gl';
+import { SocialButtons } from '../componenets/SocialButtons';
 
 import BaseLayout from '../layouts/BaseLayout';
 
@@ -53,6 +54,9 @@ export default function Home() {
               <Link dir="ltr">support@mytripper.ir</Link>
             </Wrap>
             <Divider />
+            <Wrap justify="center">
+              <SocialButtons />
+            </Wrap>
           </Stack>
         </Center>
         <Box p="0" rounded="lg" shadow="lg">

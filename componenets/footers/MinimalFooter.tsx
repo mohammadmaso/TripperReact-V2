@@ -12,7 +12,7 @@ import {
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { ReactNode } from 'react';
 import CircleLogo from '../logos/CircleLogo';
-import { SocialButtons } from './SocialButtons';
+import { SocialButtons } from '../SocialButtons';
 
 export default function MinimalFooter() {
   return (

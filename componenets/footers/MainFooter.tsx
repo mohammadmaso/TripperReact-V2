@@ -29,7 +29,7 @@ import {
 } from 'react-icons/ai';
 
 import TextLogo from '../logos/TextLogo';
-import { SocialButtons } from './SocialButtons';
+import { SocialButtons } from '../SocialButtons';
 
 export default function LargeWithNewsletter() {
   return (

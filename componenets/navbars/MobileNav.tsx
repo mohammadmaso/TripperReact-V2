@@ -25,6 +25,7 @@ import { MobileSubNav } from './MobileSubNav';
 import { NAV_ITEMS } from './NAV_ITEMS';
 import Logo from '../logos/TextLogo';
 import { useAddToHomescreenPrompt } from '../../hooks/useAddToHomescreenPrompt';
+import { SocialButtons } from '../SocialButtons';
 
 export const MobileNav = ({
   onClose,
@@ -63,13 +64,7 @@ export const MobileNav = ({
           </Button>
           <DrawerFooter textColor="primary" justifyContent="center">
             <Stack>
-              <Wrap spacing="10px">
-                <IoLogoSoundcloud />
-                <IoLogoInstagram />
-                <IoLogoSoundcloud />
-                <IoLogoYoutube />
-                <IoLogoTwitter />
-              </Wrap>
+              <SocialButtons />
             </Stack>
           </DrawerFooter>
         </DrawerContent>
