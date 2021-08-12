@@ -13,6 +13,7 @@ import {
   Flex,
   Wrap,
   WrapItem,
+  SimpleGrid,
 } from '@chakra-ui/react';
 
 interface Props {}
@@ -21,21 +22,15 @@ export const WikiCategoryList = (props: Props) => {
   return (
     <>
       <Wrap spacing="4">
-        <WrapItem>
-          <WikiCategoryBox name="سفر جاده‌ای" />
-        </WrapItem>
-        <WrapItem>
-          <WikiCategoryBox name="هیچهایک" />
-        </WrapItem>
-        <WrapItem>
-          <WikiCategoryBox name="غذا و نوشیدنی" />
-        </WrapItem>
-        <WrapItem>
-          <WikiCategoryBox name="کوهنوردی" />
-        </WrapItem>
-        <WrapItem>
-          <WikiCategoryBox name="طبیعت‌گردی" />
-        </WrapItem>
+        <WikiCategoryBox name="سفر جاده‌ای" />
+
+        <WikiCategoryBox name="هیچهایک" />
+
+        <WikiCategoryBox name="غذا و نوشیدنی" />
+
+        <WikiCategoryBox name="کوهنوردی" />
+
+        <WikiCategoryBox name="طبیعت‌گردی" />
       </Wrap>
     </>
   );
@@ -44,7 +39,7 @@ export const WikiCategoryList = (props: Props) => {
 const WikiCategoryBox = (props: any) => {
   return (
     <div>
-      <Center py={6}>
+      <Center>
         <Box
           bg={useColorModeValue('green.100', 'green.900')}
           boxShadow={'sm'}
