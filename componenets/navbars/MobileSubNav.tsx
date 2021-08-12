@@ -28,7 +28,7 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
         }}
       >
         <Link href={href ?? '#'} passHref>
-          <Wrap>
+          <Wrap align="center">
             {icon}
 
             <Text
@@ -63,10 +63,10 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
           {children &&
             children.map((child) => (
               <ChakraLink key={child.label} py={2} href={child.href}>
-                <Flex>
+                <Wrap align="center" spacing="4">
                   {child.icon}
                   {child.label}
-                </Flex>
+                </Wrap>
               </ChakraLink>
             ))}
         </Stack>
