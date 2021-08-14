@@ -23,7 +23,7 @@ import { useFormikContext, Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Head from 'next/head';
-import TermOfUseModal from '../../componenets/portals/TermOfUseModal';
+import TermOfUseModal from '../../componenets/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
 
 export default function SingUp() {
