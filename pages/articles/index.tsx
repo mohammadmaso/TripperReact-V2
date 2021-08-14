@@ -8,7 +8,7 @@ import LastArticlesView from '../../views/article/LastArticlesView';
 
 export default function Home() {
   return (
-    <BaseLayout>
+    <BaseLayout title="مجله سفر">
       <ArticleCategoriesView />
       <LastArticlesView />
     </BaseLayout>

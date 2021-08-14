@@ -1,28 +1,18 @@
-import { Button, Divider, Wrap } from '@chakra-ui/react';
 import React from 'react';
-import { FcNext } from 'react-icons/fc';
-import { FiArrowDown } from 'react-icons/fi';
-import TripListCard from '../../componenets/cards/TripListCard';
-import { TravelogueListHeader } from '../../componenets/travelogue/TravelogueListHeader';
+import WikiCarusal from '../../componenets/carousals/WikiCarousal';
+import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
 
 import BaseLayout from '../../layouts/BaseLayout';
+import ArticleCategoriesView from '../../views/article/ArticleCategoriesView';
+import LastArticlesView from '../../views/article/LastArticlesView';
+import LastTripsView from '../../views/trip/LastTripsView';
+import TripCategoriesView from '../../views/trip/TripCategoriesView';
 
 export default function Home() {
   return (
-    <BaseLayout title="سفر‌نامه‌ها" subNav={<TravelogueListHeader />}>
-      <Wrap spacing="3" mb="4" justify="center">
-        <Divider />
-        <TripListCard />
-        <TripListCard />
-        <TripListCard />
-        <Button
-          colorScheme="primary"
-          rounded="full"
-          rightIcon={<FiArrowDown />}
-        >
-          نتایج بیشتر
-        </Button>
-      </Wrap>
+    <BaseLayout title="سفرنامه‌ها">
+      <TripCategoriesView />
+      <LastTripsView />
     </BaseLayout>
   );
 }

@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { FiHeart, FiMapPin } from 'react-icons/fi';
 import { TimeIcon } from '@chakra-ui/icons';
+import { getDays } from '../../utils/time';
 
 export default function TripSmallCard(props: any) {
   return (
@@ -26,8 +27,8 @@ export default function TripSmallCard(props: any) {
         boxShadow={'md'}
         rounded={'md'}
         overflow={'hidden'}
-        w={'full'}
-        maxW={'270px'}
+        maxW={'full'}
+        h="300px"
         position="relative"
         transition={'all .3s ease'}
         // _hover={{ transform: 'scale(1.1,1.1)' }}
@@ -44,44 +45,46 @@ export default function TripSmallCard(props: any) {
           p={3}
           py={4}
         >
+          <Flex textColor="white" justify="flex-start">
+            <Avatar
+              showBorder
+              size="md"
+              ml="1"
+              mr="1"
+              src={props.author.avatar}
+              alt={props.author.username}
+            />
+            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+              <Text mr="1" textAlign="right" fontWeight={400}>
+                {props.author.username}
+              </Text>
+              <Wrap spacing="1">
+                {props.categories.edges.map((item: any) => (
+                  <Tag
+                    size="sm"
+                    key={item.node}
+                    colorScheme="primary"
+                    variant="solid"
+                  >
+                    {item.node.title}
+                  </Tag>
+                ))}
+              </Wrap>
+            </Stack>
+          </Flex>
           <Box>
             <Stack spacing="1" justifyItems="center">
               <FiHeart />
               <Text fontSize="sm">{props.likes}</Text>
             </Stack>
           </Box>
-          <Flex textColor="white" justify="flex-start">
-            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-              <Text mr="1" textAlign="right" fontWeight={400}>
-                {props.username}
-              </Text>
-              <Wrap spacing="1">
-                {props.categories.map((item: any) => (
-                  <Tag
-                    size="sm"
-                    key={item}
-                    colorScheme="primary"
-                    variant="solid"
-                  >
-                    {item}
-                  </Tag>
-                ))}
-              </Wrap>
-            </Stack>
-            <Avatar
-              showBorder
-              size="md"
-              ml="1"
-              src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-              alt={'Author'}
-            />
-          </Flex>
         </Flex>
 
         <Image
           alt="Test"
-          src={props.image}
-          objectFit={'cover'}
+          src={props.defaultImage}
+          objectFit="cover"
+          h="full"
           // fallbackSrc="https://via.placeholder.com/150"
         />
         <Flex
@@ -91,18 +94,19 @@ export default function TripSmallCard(props: any) {
           bgGradient="linear(to-t, #000000,#ffffff00)"
           height="50%"
           width="full"
-          align="flex-end"
+          align="flex-sttart"
           justify="flex-end"
           p="3"
           direction="column"
         >
-          <Text width="full" textAlign="right" fontWeight={500}>
-            {props.name}
+          <Text width="full" fontWeight={500}>
+            {props.title}
           </Text>
           <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
             <Wrap align="center" spacing="1">
+              <Text>{getDays(props.startDate, props.endDate)}</Text>
               <Text>روز</Text>
-              <Text>{props.days}</Text>
+
               <TimeIcon h="3.5" w="3.5" />
             </Wrap>
             <Wrap align="center" spacing="1">

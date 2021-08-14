@@ -3,9 +3,11 @@ import React, { ReactElement } from 'react';
 import Slider from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import TripSmallCard from '../cards/TripSmallCard';
+import { AllTripQuery } from '../../graphql/generated/types';
 
 interface Props {
   slideToShow?: number;
+  data: AllTripQuery | undefined;
 }
 
 export default function TripCarousal(props: Props): ReactElement {
@@ -29,9 +31,9 @@ export default function TripCarousal(props: Props): ReactElement {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
       {
@@ -52,66 +54,9 @@ export default function TripCarousal(props: Props): ReactElement {
         جذاب‌ترین سفرنامه‌ها‌
       </Heading>
       <Slider {...settings}>
-        <TripSmallCard
-          categories={['ماجراجویی', 'خانوادگی']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={4}
-          username="MohammadMaso"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <TripSmallCard
-          categories={['ماجراجویی', 'طبیعت']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={4}
-          username="Sarazaman"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <TripSmallCard
-          categories={['ماجراجویی', 'خانوادگی']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={'۴'}
-          username="MohammadMaso"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <TripSmallCard
-          categories={['ماجراجویی', 'خانوادگی']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={'۴'}
-          username="MohammadMaso"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <TripSmallCard
-          categories={['ماجراجویی', 'خانوادگی']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={'۴'}
-          username="MohammadMaso"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <TripSmallCard
-          categories={['ماجراجویی', 'خانوادگی']}
-          name="سفر دو روزه به کیش"
-          likes={347}
-          city="تهران"
-          days={'۴'}
-          username="MohammadMaso"
-          avatar="https://avatars0.githubusercontent.com/u/1164541?v=4"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
+        {props.data?.allTrip?.edges.map((item) => (
+          <TripSmallCard key={item!.node!.id!} {...item?.node!} />
+        ))}
       </Slider>
     </Box>
   );

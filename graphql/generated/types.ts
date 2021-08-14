@@ -5032,6 +5032,23 @@ export type AllTripQuery = (
   )> }
 );
 
+export type AllTripCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTripCategoriesQuery = (
+  { __typename?: 'Query' }
+  & { allTripCategories?: Maybe<(
+    { __typename?: 'TripCategoryTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripCategoryTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripCategoryType' }
+        & Pick<TripCategoryType, 'id' | 'title' | 'image'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5678,6 +5695,46 @@ export function useAllTripLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Al
 export type AllTripQueryHookResult = ReturnType<typeof useAllTripQuery>;
 export type AllTripLazyQueryHookResult = ReturnType<typeof useAllTripLazyQuery>;
 export type AllTripQueryResult = Apollo.QueryResult<AllTripQuery, AllTripQueryVariables>;
+export const AllTripCategoriesDocument = gql`
+    query AllTripCategories {
+  allTripCategories {
+    edges {
+      node {
+        id
+        title
+        image
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllTripCategoriesQuery__
+ *
+ * To run a query within a React component, call `useAllTripCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTripCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTripCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTripCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>(AllTripCategoriesDocument, options);
+      }
+export function useAllTripCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>(AllTripCategoriesDocument, options);
+        }
+export type AllTripCategoriesQueryHookResult = ReturnType<typeof useAllTripCategoriesQuery>;
+export type AllTripCategoriesLazyQueryHookResult = ReturnType<typeof useAllTripCategoriesLazyQuery>;
+export type AllTripCategoriesQueryResult = Apollo.QueryResult<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {

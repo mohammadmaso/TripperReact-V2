@@ -6,14 +6,18 @@ import CallToActionCreateGroupTrip from '../componenets/landing/CallToActionCrea
 import CallToActionWithVideo from '../componenets/landing/CallToActionWithVideo';
 
 import BaseLayout from '../layouts/BaseLayout';
+import LastArticlesView from '../views/article/LastArticlesView';
+import LastTripsView from '../views/trip/LastTripsView';
+import TripCategoriesView from '../views/trip/TripCategoriesView';
 
 export default function Home() {
   return (
     <BaseLayout>
       <CallToActionWithVideo />
-      <TripCarousal />
-      <CategoryCarousal />
+      <LastTripsView />
+      <TripCategoriesView />
       <CallToActionCreateGroupTrip />
+      <LastArticlesView />
     </BaseLayout>
   );
 }

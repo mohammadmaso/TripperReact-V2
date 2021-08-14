@@ -6,6 +6,7 @@ import CategoryCard from '../cards/CategoryCard';
 
 interface Props {
   slideToShow?: number;
+  categories: any;
 }
 
 export default function CategoryCarousal(props: Props): ReactElement {
@@ -32,6 +33,7 @@ export default function CategoryCarousal(props: Props): ReactElement {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          dots: true,
         },
       },
       {
@@ -52,30 +54,16 @@ export default function CategoryCarousal(props: Props): ReactElement {
         انواع سفر‌
       </Heading>
       <Slider {...settings}>
-        <CategoryCard
-          name="ماجراجویی"
-          image={'https://source.unsplash.com/800x600/?nature'}
-        />
-        <CategoryCard
-          name="غذا"
-          image={'https://source.unsplash.com/802x600/?nature'}
-        />
-        <CategoryCard
-          name="فرهنگ"
-          image={'https://source.unsplash.com/800x602/?nature'}
-        />
-        <CategoryCard
-          name="کوه‌نوردی"
-          image={'https://source.unsplash.com/800x603/?nature'}
-        />
-        <CategoryCard
-          name="خانوادگی"
-          image={'https://source.unsplash.com/800x604/?nature'}
-        />
-        <CategoryCard
-          name="کمپینگ"
-          image={'https://source.unsplash.com/800x605/?nature'}
-        />
+        {props.categories.map((item: any) => (
+          <>
+            <CategoryCard
+              key={item.node.id}
+              id={item.node.id}
+              title={item.node.title}
+              image={item.node.image}
+            />
+          </>
+        ))}
       </Slider>
     </Box>
   );

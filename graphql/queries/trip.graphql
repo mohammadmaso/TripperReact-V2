@@ -68,3 +68,15 @@ query AllTrip(
     }
   }
 }
+
+query AllTripCategories {
+  allTripCategories {
+    edges {
+      node {
+        id
+        title
+        image
+      }
+    }
+  }
+}

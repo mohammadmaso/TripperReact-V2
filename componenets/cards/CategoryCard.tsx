@@ -21,17 +21,12 @@ export default function CategoryCard(props: any) {
         rounded={'md'}
         overflow={'hidden'}
         h={'150px'}
-        maxW={'270px'}
+        minW={'230px'}
         position="relative"
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}
       >
-        <Image
-          alt="Test"
-          src={props.image}
-          objectFit={'cover'}
-          // fallbackSrc="https://via.placeholder.com/150"
-        />
+        <Image alt={props.title} src={props.image} objectFit={'cover'} />
         <Flex
           position="absolute"
           bottom="0"
@@ -48,7 +43,7 @@ export default function CategoryCard(props: any) {
             color={'white'}
             p="3"
           >
-            {props.name}
+            {props.title}
           </Text>
         </Flex>
       </Box>
