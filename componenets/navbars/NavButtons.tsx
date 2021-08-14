@@ -13,7 +13,7 @@ const NavButtons = () => {
       spacing={3}
     >
       <Button as={'a'} fontSize={'sm'} fontWeight={500} variant={'link'}>
-        <Link href="auth/login">ورود</Link>
+        <Link href="/auth/login">ورود</Link>
       </Button>
       <Button
         display={{ base: 'none', md: 'inline-flex' }}
@@ -23,7 +23,7 @@ const NavButtons = () => {
         rounded="3xl"
         size="sm"
       >
-        <Link href="auth/register">ثبت‌‌نام</Link>
+        <Link href="/auth/register">ثبت‌‌نام</Link>
       </Button>
     </Stack>
   );

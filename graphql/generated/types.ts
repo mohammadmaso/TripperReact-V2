@@ -4904,6 +4904,66 @@ export type AllArticleCategoryiesQuery = (
   )> }
 );
 
+export type ArticleQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type ArticleQuery = (
+  { __typename?: 'Query' }
+  & { article?: Maybe<(
+    { __typename?: 'ArticleType' }
+    & Pick<ArticleType, 'title' | 'shortDescription' | 'content' | 'createdAt' | 'likes' | 'timeToRead' | 'image'>
+    & { author: (
+      { __typename?: 'UserType' }
+      & Pick<UserType, 'id' | 'username' | 'avatar'>
+    ), category?: Maybe<(
+      { __typename?: 'ArticleCategoryType' }
+      & Pick<ArticleCategoryType, 'title' | 'id'>
+    )>, activities: (
+      { __typename?: 'TripActivitieTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripActivitieTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripActivitieType' }
+          & Pick<TripActivitieType, 'title' | 'svg'>
+        )> }
+      )>> }
+    ), places: (
+      { __typename?: 'PlaceTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'PlaceTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'PlaceType' }
+          & Pick<PlaceType, 'name'>
+        )> }
+      )>> }
+    ), accessories: (
+      { __typename?: 'AccessoryTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'AccessoryTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'AccessoryType' }
+          & Pick<AccessoryType, 'name' | 'image'>
+        )> }
+      )>> }
+    ), reviewsOfArticle: (
+      { __typename?: 'ArticleReviewTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'ArticleReviewTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'ArticleReviewType' }
+          & Pick<ArticleReviewType, 'description'>
+          & { author: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'username' | 'avatar'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type AllTripQueryVariables = Exact<{
   allTripOffset?: Maybe<Scalars['Int']>;
   allTripBefore?: Maybe<Scalars['String']>;
@@ -5436,6 +5496,90 @@ export function useAllArticleCategoryiesLazyQuery(baseOptions?: Apollo.LazyQuery
 export type AllArticleCategoryiesQueryHookResult = ReturnType<typeof useAllArticleCategoryiesQuery>;
 export type AllArticleCategoryiesLazyQueryHookResult = ReturnType<typeof useAllArticleCategoryiesLazyQuery>;
 export type AllArticleCategoryiesQueryResult = Apollo.QueryResult<AllArticleCategoryiesQuery, AllArticleCategoryiesQueryVariables>;
+export const ArticleDocument = gql`
+    query Article($articleId: ID!) {
+  article(id: $articleId) {
+    title
+    shortDescription
+    content
+    createdAt
+    likes
+    timeToRead
+    image
+    author {
+      id
+      username
+      avatar
+    }
+    category {
+      title
+      id
+    }
+    activities {
+      edges {
+        node {
+          title
+          svg
+        }
+      }
+    }
+    places {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    accessories {
+      edges {
+        node {
+          name
+          image
+        }
+      }
+    }
+    reviewsOfArticle {
+      edges {
+        node {
+          author {
+            username
+            avatar
+          }
+          description
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useArticleQuery__
+ *
+ * To run a query within a React component, call `useArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticleQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useArticleQuery(baseOptions: Apollo.QueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
+      }
+export function useArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
+        }
+export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
+export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
+export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
 export const AllTripDocument = gql`
     query AllTrip($allTripOffset: Int, $allTripBefore: String, $allTripAfter: String, $allTripFirst: Int, $allTripLast: Int, $allTripCategories: [ID]) {
   allTrip(

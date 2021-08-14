@@ -53,3 +53,58 @@ query AllArticleCategoryies {
     }
   }
 }
+
+query Article($articleId: ID!) {
+  article(id: $articleId) {
+    title
+    shortDescription
+    content
+    createdAt
+    likes
+    timeToRead
+    image
+    author {
+      id
+      username
+      avatar
+    }
+    category {
+      title
+      id
+    }
+    activities {
+      edges {
+        node {
+          title
+          svg
+        }
+      }
+    }
+    places {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    accessories {
+      edges {
+        node {
+          name
+          image
+        }
+      }
+    }
+    reviewsOfArticle {
+      edges {
+        node {
+          author {
+            username
+            avatar
+          }
+          description
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Center, Stack, Wrap, Text } from '@chakra-ui/react';
+import { Center, Stack, Wrap, Text, Image } from '@chakra-ui/react';
 import React from 'react';
 import { FaFire } from 'react-icons/fa';
 import { FiActivity } from 'react-icons/fi';
@@ -6,18 +6,18 @@ import { IoCloudyNight } from 'react-icons/io5';
 
 interface Props {}
 
-function ActivityCard() {
+function ActivityCard(props: any) {
   return (
     <Center p="3" rounded="sm" shadow="sm">
       <Stack align="center">
-        <FaFire />
-        <Text fontSize="xs">آتش نشینی</Text>
+        <Image src={props.svg} alt={props.title} w="40px" />
+        <Text fontSize="xs">{props.title}</Text>
       </Stack>
     </Center>
   );
 }
 
-const ArticleActivities = (props: Props) => {
+const ArticleActivities = (props: any) => {
   return (
     <Stack>
       <Wrap align="center">
@@ -25,7 +25,9 @@ const ArticleActivities = (props: Props) => {
         <Text>فعالیت‌ها</Text>
       </Wrap>
       <Wrap>
-        <ActivityCard />
+        {props.data.map((item: any) => (
+          <ActivityCard key={item.node.id} {...item.node} />
+        ))}
       </Wrap>
     </Stack>
   );

@@ -23,8 +23,15 @@ import { ArticleContent } from '../../componenets/article/ArticleContent';
 import { ArticlePlaces } from '../../componenets/article/ArticlePlaces';
 import ArticleView from '../../views/article/ArticleView';
 import { useRouter } from 'next/router';
+import ArticleFilterView from '../../views/article/ArticleFilterView';
+import ArticleCategoriesView from '../../views/article/ArticleCategoriesView';
 
 export default function Travelogue() {
   const router = useRouter();
-  return <ArticleView id={router.query.id! as string} />;
+  return (
+    <BaseLayout>
+      <ArticleCategoriesView />
+      <ArticleFilterView categoryId={router.query.categoryId as string} />
+    </BaseLayout>
+  );
 }

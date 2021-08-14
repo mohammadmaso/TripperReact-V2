@@ -20,6 +20,7 @@ import {
   ArticleCategoryTypeConnection,
   ArticleCategoryTypeEdge,
 } from '../../graphql/generated/types';
+import Link from 'next/link';
 
 interface Props {
   categories: any;
@@ -30,7 +31,13 @@ export const WikiCategoryList = (props: Props) => {
     <>
       <Wrap spacing="4">
         {props.categories.map((item: any) => (
-          <WikiCategoryBox key={item.node.id} name={item.node.title} />
+          <>
+            <WikiCategoryBox
+              key={item.node.id}
+              id={item.node.id}
+              name={item.node.title}
+            />
+          </>
         ))}
       </Wrap>
     </>
@@ -40,27 +47,35 @@ export const WikiCategoryList = (props: Props) => {
 const WikiCategoryBox = (props: any) => {
   return (
     <div>
-      <Center>
-        <Box
-          bg={useColorModeValue('green.100', 'green.900')}
-          boxShadow={'sm'}
-          rounded={'md'}
-          overflow={'hidden'}
-          w={'full'}
-          position="relative"
-          transition={'all .3s ease'}
-          _hover={{ transform: 'scale(1.1,1.1)' }}
-        >
-          <Text
-            width="full"
-            fontWeight={500}
-            color={useColorModeValue('green.600', 'green.100')}
-            p="3"
+      <Link
+        href={{
+          pathname: '/articles/list',
+          query: { categoryId: props.id },
+        }}
+        passHref
+      >
+        <Center>
+          <Box
+            bg={useColorModeValue('green.100', 'green.900')}
+            boxShadow={'sm'}
+            rounded={'md'}
+            overflow={'hidden'}
+            w={'full'}
+            position="relative"
+            transition={'all .3s ease'}
+            _hover={{ transform: 'scale(1.1,1.1)' }}
           >
-            {props.name}
-          </Text>
-        </Box>
-      </Center>
+            <Text
+              width="full"
+              fontWeight={500}
+              color={useColorModeValue('green.600', 'green.100')}
+              p="3"
+            >
+              {props.name}
+            </Text>
+          </Box>
+        </Center>
+      </Link>
     </div>
   );
 };

@@ -13,7 +13,7 @@ import {
 import React, { useState } from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 
-export function ArticleHeader() {
+export function ArticleHeader(props: any) {
   const [stickyHeader, setStickyHeader] = useState(false);
 
   const handleScroll = () => {
@@ -36,33 +36,32 @@ export function ArticleHeader() {
       pt={stickyHeader ? '4' : '2'}
       pb={stickyHeader ? '2' : '2'}
       boxShadow={stickyHeader ? 'md' : '0'}
-      bgColor={stickyHeader ? 'white' : 'transparent'}
+      bgColor={useColorModeValue('white', 'gray.700')}
       zIndex="90"
       top={stickyHeader ? '60px' : undefined}
       w="full"
       transitionDuration="2"
     >
       <Text as="h1" fontSize="xl" fontWeight="semibold">
-        گشت و گذار در شیراز
+        {props.title}
       </Text>
       <Wrap fontWeight="light" fontSize="sm" align="center">
         <HStack align={'center'} justify="space-between">
           <Avatar
-            src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-            alt={'Author'}
+            src={props.author.avatar}
+            alt={props.author.username}
             size="sm"
             ml="2"
           />
           <Text fontWeight={300} fontSize="sm" dir="ltr">
-            @mohammadmaso
+            {props.author.username}
           </Text>
         </HStack>
-        <Tag colorScheme="primary">خانوادگی</Tag>
-        <Tag colorScheme="primary">ماجراجویی</Tag>
+        <Tag colorScheme="primary">{props.category.title}</Tag>
         <Divider orientation="vertical" />
         <Wrap align="center">
           <TimeIcon ml="1" />
-          <Text>۱۰ دقیقه</Text>
+          <Text>{props.timeToRead} دقیقه</Text>
         </Wrap>
       </Wrap>
     </Stack>

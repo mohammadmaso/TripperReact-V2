@@ -4,7 +4,7 @@ import { FiBookmark, FiShoppingBag } from 'react-icons/fi';
 
 interface Props {}
 
-function AccessoryCard() {
+function AccessoryCard(props: any) {
   return (
     <Box boxShadow="md" p="2" rounded="md" fontSize="sm" fontWeight="light">
       <Stack spacing="3">
@@ -18,13 +18,8 @@ function AccessoryCard() {
           />
         </Flex>
 
-        <Image
-          fit="contain"
-          w="full"
-          src="/images/image 3.png"
-          alt="accessories"
-        />
-        <Text px="3">چادر کوهنوردی کله‌گاوی - ظرفیت ۳ نفر</Text>
+        <Image fit="contain" w="full" src={props.image} alt="accessories" />
+        <Text px="3">{props.name}</Text>
         <Button>خرید در دیجیکالا</Button>
       </Stack>
     </Box>

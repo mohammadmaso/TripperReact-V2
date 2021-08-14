@@ -5,7 +5,7 @@ import AccessoryCard from '../cards/AccessoryCard';
 
 interface Props {}
 
-const ArticleAccessories = (props: Props) => {
+const ArticleAccessories = (props: any) => {
   return (
     <Stack>
       <Wrap align="center">
@@ -13,10 +13,9 @@ const ArticleAccessories = (props: Props) => {
         <Text>تجهیزات</Text>
       </Wrap>
       <Wrap spacing="5" justify={{ base: 'center', md: 'right' }}>
-        <AccessoryCard />
-        <AccessoryCard />
-        <AccessoryCard />
-        <AccessoryCard />
+        {props.data?.map((item: any) => (
+          <AccessoryCard key={item.node.id} {...item.node} />
+        ))}
       </Wrap>
     </Stack>
   );
