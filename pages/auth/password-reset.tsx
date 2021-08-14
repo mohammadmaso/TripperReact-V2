@@ -14,6 +14,7 @@ import {
   useDisclosure,
   Link as ChakraLink,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 import React, { useContext, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
@@ -33,7 +34,7 @@ export default function SingUp() {
   const router = useRouter();
 
   const [phone, setPhone] = useState('');
-
+  const toast = useToast();
   const modal = useDisclosure();
 
   const [resetPassword, { loading, data }] = useResetPasswordSmsMutation({
@@ -41,7 +42,14 @@ export default function SingUp() {
       if (data && data.resetPasswordSms?.success) {
         router.push({
           pathname: '/auth/login',
-          query: { toast: 'passwod-changed' },
+        });
+        toast({
+          title: 'رمزعبور با موفقیت تغییر کرد',
+          description: 'اکنون با رمزعبور جدید وارد شوید.',
+          status: 'info',
+          duration: 6000,
+          isClosable: true,
+          position: 'top-right',
         });
       }
     },

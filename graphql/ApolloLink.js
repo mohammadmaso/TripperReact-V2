@@ -52,6 +52,7 @@ const errorLink = onError(
 );
 
 const httpLink = createHttpLink({
+  ssrMode: typeof window === "undefined",
   uri: 'https://tripper-backend.herokuapp.com/api/',
 });
 
@@ -66,19 +67,21 @@ const authLink = setContext( (_, { headers }) =>  {
     },
   };
 });
+const cache = new InMemoryCache({    
+  possibleTypes: introspectionResult.possibleTypes,
+  typePolicies: {
+    Query: {
+      fields: {
+        allArticle: relayStylePagination(),
+      },
+    },
+  },
+});
+
 
 export const client = new ApolloClient({
   // link: authLink.concat(httpLink),
   // to use errorLink functinality
   link: ApolloLink.from([errorLink, authLink, httpLink]),
-  cache: new InMemoryCache({
-    possibleTypes: introspectionResult.possibleTypes,
-    typePolicies: {
-      Query: {
-        fields: {
-          comments: relayStylePagination(),
-        },
-      },
-    },
-  }),
+  cache: cache
 });

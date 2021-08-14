@@ -13,6 +13,7 @@ import {
   Box,
   Spinner,
   Image,
+  useToast,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
@@ -31,6 +32,7 @@ import Head from 'next/head';
 
 export default function SignIn() {
   const [code, setCode] = useState('');
+  const toast = useToast();
 
   const [result, setResult] = useState('');
   const router = useRouter();
@@ -50,7 +52,14 @@ export default function SignIn() {
         if (data && data.verifySms?.success) {
           router.push({
             pathname: '/auth/login',
-            query: { toast: 'registered' },
+          });
+          toast({
+            title: 'سفر خوش',
+            description: 'حساب کاربری شما با موفقیت ساخته شد',
+            status: 'success',
+            duration: 8000,
+            isClosable: true,
+            position: 'top-right',
           });
         }
       }

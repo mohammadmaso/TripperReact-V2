@@ -62,28 +62,6 @@ export default function SignIn() {
       },
     });
   }
-  useEffect(() => {
-    if (router.query?.toast == 'registered') {
-      toast({
-        title: 'سفر خوش',
-        description: 'حساب کاربری شما با موفقیت ساخته شد',
-        status: 'success',
-        duration: 4000,
-        isClosable: true,
-        position: 'bottom-right',
-      });
-    }
-    if (router.query?.toast == 'passwod-changed') {
-      toast({
-        title: 'رمزعبور با موفقیت تغییر کرد',
-        description: 'اکنون با رمزعبور جدید وارد شوید.',
-        status: 'info',
-        duration: 4000,
-        isClosable: true,
-        position: 'bottom-right',
-      });
-    }
-  });
 
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>

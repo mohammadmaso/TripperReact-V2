@@ -15,22 +15,23 @@ import {
   WrapItem,
   SimpleGrid,
 } from '@chakra-ui/react';
+import {
+  ArticleCategoryType,
+  ArticleCategoryTypeConnection,
+  ArticleCategoryTypeEdge,
+} from '../../graphql/generated/types';
 
-interface Props {}
+interface Props {
+  categories: any;
+}
 
 export const WikiCategoryList = (props: Props) => {
   return (
     <>
       <Wrap spacing="4">
-        <WikiCategoryBox name="سفر جاده‌ای" />
-
-        <WikiCategoryBox name="هیچهایک" />
-
-        <WikiCategoryBox name="غذا و نوشیدنی" />
-
-        <WikiCategoryBox name="کوهنوردی" />
-
-        <WikiCategoryBox name="طبیعت‌گردی" />
+        {props.categories.map((item: any) => (
+          <WikiCategoryBox key={item.node.id} name={item.node.title} />
+        ))}
       </Wrap>
     </>
   );

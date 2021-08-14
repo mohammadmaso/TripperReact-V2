@@ -29,10 +29,11 @@ query MeDetail {
 
 query MeFollowed {
   me {
-    followed {
+    followingUsers {
       edges {
         node {
-          user {
+          followed {
+            id
             username
             avatar
           }

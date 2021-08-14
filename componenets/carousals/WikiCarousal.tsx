@@ -3,10 +3,18 @@ import React, { ReactElement } from 'react';
 import Slider from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import WikiCard from '../cards/WikiCard';
+import {
+  AllArticleQuery,
+  ArticleType,
+  ArticleTypeConnection,
+} from '../../graphql/generated/types';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
-interface Props {}
+interface Props {
+  data: AllArticleQuery | undefined;
+}
 
-export default function WikiCarusal({}: Props): ReactElement {
+export default function WikiCarusal(props: Props): ReactElement {
   const settings = {
     dots: true,
     infinite: true,
@@ -50,26 +58,9 @@ export default function WikiCarusal({}: Props): ReactElement {
         آخرین مقاله‌ها
       </Heading>
       <Slider {...settings}>
-        <WikiCard
-          category="کوهنوردی"
-          image="https://source.unsplash.com/802x602/?nature"
-        />
-        <WikiCard
-          category="کمپ"
-          image="https://source.unsplash.com/803x600/?nature"
-        />
-        <WikiCard
-          category="سفرجاده‌ای"
-          image="https://source.unsplash.com/804x600/?nature"
-        />
-        <WikiCard
-          category="غذا و نوشیدنی"
-          image="https://source.unsplash.com/805x600/?food"
-        />
-        <WikiCard
-          category="تجهیزات"
-          image="https://source.unsplash.com/805x605/?nature"
-        />
+        {props.data?.allArticle?.edges.map((item) => (
+          <WikiCard key={item!.node!.id!} {...item?.node!} />
+        ))}
       </Slider>
     </Box>
   );

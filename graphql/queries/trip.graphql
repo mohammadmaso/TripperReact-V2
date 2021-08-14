@@ -1,52 +1,70 @@
-query Trips($allTripFirst: Int) {
-  allTrip(first: $allTripFirst) {
+query AllTrip(
+  $allTripOffset: Int
+  $allTripBefore: String
+  $allTripAfter: String
+  $allTripFirst: Int
+  $allTripLast: Int
+  $allTripCategories: [ID]
+) {
+  allTrip(
+    offset: $allTripOffset
+    before: $allTripBefore
+    after: $allTripAfter
+    first: $allTripFirst
+    last: $allTripLast
+    categories: $allTripCategories
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
     edges {
       cursor
       node {
-        title
         id
+        title
         description
         createdAt
         startDate
         endDate
+        defaultImage
         author {
-          avatar
-          username
           id
+          username
+          avatar
         }
-        category {
+        categories {
           edges {
             node {
               title
             }
           }
         }
-        activities {
-          edges {
-            node {
-              title
-            }
-          }
-        }
-        country {
+        likes
+        countries {
           edges {
             node {
               name
             }
           }
         }
-        images {
+        places {
           edges {
             node {
-              image
+              id
+            }
+          }
+        }
+        experiences {
+          edges {
+            node {
+              id
             }
           }
         }
       }
-    }
-    pageInfo {
-      hasNextPage
-      endCursor
     }
   }
 }

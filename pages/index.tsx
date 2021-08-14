@@ -14,7 +14,6 @@ export default function Home() {
       <TripCarousal />
       <CategoryCarousal />
       <CallToActionCreateGroupTrip />
-      <WikiCarusal />
     </BaseLayout>
   );
 }

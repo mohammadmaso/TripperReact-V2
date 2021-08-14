@@ -1,0 +1,55 @@
+query AllArticle(
+  $allArticleOffset: Int
+  $allArticleBefore: String
+  $allArticleAfter: String
+  $allArticleFirst: Int
+  $allArticleLast: Int
+  $allArticleCategory: ID
+) {
+  allArticle(
+    offset: $allArticleOffset
+    before: $allArticleBefore
+    after: $allArticleAfter
+    first: $allArticleFirst
+    last: $allArticleLast
+    category: $allArticleCategory
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        title
+        shortDescription
+        likes
+        timeToRead
+        image
+        author {
+          firstName
+          lastName
+          avatar
+        }
+        category {
+          title
+        }
+      }
+    }
+  }
+}
+
+query AllArticleCategoryies {
+  allArticleCategories {
+    edges {
+      node {
+        id
+        title
+        svg
+      }
+    }
+  }
+}
