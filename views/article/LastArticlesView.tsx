@@ -1,7 +1,9 @@
 import { Spinner } from '@chakra-ui/react';
 import React from 'react';
 import WikiCarusal from '../../componenets/carousals/WikiCarousal';
+import ApiLoading from '../../componenets/ApiLoading';
 import { useAllArticleQuery } from '../../graphql/generated/types';
+import ApiError from '../../componenets/ApiError';
 
 interface Props {}
 
@@ -10,10 +12,10 @@ const LastArticlesView = (props: Props) => {
     variables: { allArticleLast: 10 },
   });
   if (loading) {
-    return <Spinner />;
+    return <ApiLoading />;
   }
   if (error) {
-    return <p>error</p>;
+    return <ApiError />;
   }
   return (
     <div>

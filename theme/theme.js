@@ -53,7 +53,7 @@ const config = {
 
 const fonts = {
     heading: "peyda",
-    body: "iranyekan",
+    body: "iranyekanfanum",
 }
 const direction = "rtl"
 
