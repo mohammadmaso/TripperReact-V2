@@ -12,6 +12,7 @@ generates:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
+      - 'named-operations-object'
   graphql/graphql.schema.json:
     plugins:
       - 'introspection'

@@ -80,3 +80,47 @@ query AllTripCategories {
     }
   }
 }
+
+fragment TripSimpleFields on TripType {
+  id
+  title
+  description
+  createdAt
+  startDate
+  endDate
+  defaultImage
+  author {
+    id
+    username
+    avatar
+  }
+  categories {
+    edges {
+      node {
+        title
+      }
+    }
+  }
+  likes
+  countries {
+    edges {
+      node {
+        name
+      }
+    }
+  }
+  places {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+  experiences {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}

@@ -5049,6 +5049,51 @@ export type AllTripCategoriesQuery = (
   )> }
 );
 
+export type TripSimpleFieldsFragment = (
+  { __typename?: 'TripType' }
+  & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'likes'>
+  & { author: (
+    { __typename?: 'UserType' }
+    & Pick<UserType, 'id' | 'username' | 'avatar'>
+  ), categories: (
+    { __typename?: 'TripCategoryTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripCategoryTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripCategoryType' }
+        & Pick<TripCategoryType, 'title'>
+      )> }
+    )>> }
+  ), countries: (
+    { __typename?: 'CountryTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'CountryTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'CountryType' }
+        & Pick<CountryType, 'name'>
+      )> }
+    )>> }
+  ), places: (
+    { __typename?: 'PlaceTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'PlaceTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'PlaceType' }
+        & Pick<PlaceType, 'id'>
+      )> }
+    )>> }
+  ), experiences: (
+    { __typename?: 'ExperienceImageTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'ExperienceImageTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'ExperienceImageType' }
+        & Pick<ExperienceImageType, 'id'>
+      )> }
+    )>> }
+  ) }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5067,11 +5112,20 @@ export type MeDetailQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'UserType' }
-    & Pick<UserType, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined' | 'firstName' | 'lastName'>
     & { profilemodel?: Maybe<(
       { __typename?: 'ProfileType' }
-      & Pick<ProfileType, 'about' | 'tripStatus' | 'header' | 'gender' | 'followersCount' | 'followingsCount'>
-    )> }
+      & ProfileFieldsFragment
+    )>, trips: (
+      { __typename?: 'TripTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripType' }
+          & TripSimpleFieldsFragment
+        )> }
+      )>> }
+    ) }
+    & UserFieldsFragment
   )> }
 );
 
@@ -5098,7 +5152,81 @@ export type MeFollowedQuery = (
   )> }
 );
 
+export type UserFieldsFragment = (
+  { __typename?: 'UserType' }
+  & Pick<UserType, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
+);
 
+export type ProfileFieldsFragment = (
+  { __typename?: 'ProfileType' }
+  & Pick<ProfileType, 'about' | 'tripStatus' | 'header' | 'gender' | 'followersCount' | 'followingsCount'>
+);
+
+export const TripSimpleFieldsFragmentDoc = gql`
+    fragment TripSimpleFields on TripType {
+  id
+  title
+  description
+  createdAt
+  startDate
+  endDate
+  defaultImage
+  author {
+    id
+    username
+    avatar
+  }
+  categories {
+    edges {
+      node {
+        title
+      }
+    }
+  }
+  likes
+  countries {
+    edges {
+      node {
+        name
+      }
+    }
+  }
+  places {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+  experiences {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+    `;
+export const UserFieldsFragmentDoc = gql`
+    fragment UserFields on UserType {
+  username
+  avatar
+  verified
+  email
+  phoneNumber
+  dateJoined
+}
+    `;
+export const ProfileFieldsFragmentDoc = gql`
+    fragment ProfileFields on ProfileType {
+  about
+  tripStatus
+  header
+  gender
+  followersCount
+  followingsCount
+}
+    `;
 export const VerifySmsDocument = gql`
     mutation VerifySms($verifySmsCode: String!, $verifySmsPhoneNumber: String!) {
   verifySms(code: $verifySmsCode, phoneNumber: $verifySmsPhoneNumber) {
@@ -5774,25 +5902,22 @@ export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const MeDetailDocument = gql`
     query MeDetail {
   me {
-    username
-    avatar
-    verified
-    email
-    phoneNumber
-    dateJoined
-    firstName
-    lastName
+    ...UserFields
     profilemodel {
-      about
-      tripStatus
-      header
-      gender
-      followersCount
-      followingsCount
+      ...ProfileFields
+    }
+    trips {
+      edges {
+        node {
+          ...TripSimpleFields
+        }
+      }
     }
   }
 }
-    `;
+    ${UserFieldsFragmentDoc}
+${ProfileFieldsFragmentDoc}
+${TripSimpleFieldsFragmentDoc}`;
 
 /**
  * __useMeDetailQuery__
@@ -5864,3 +5989,30 @@ export function useMeFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type MeFollowedQueryHookResult = ReturnType<typeof useMeFollowedQuery>;
 export type MeFollowedLazyQueryHookResult = ReturnType<typeof useMeFollowedLazyQuery>;
 export type MeFollowedQueryResult = Apollo.QueryResult<MeFollowedQuery, MeFollowedQueryVariables>;
+export const namedOperations = {
+  Query: {
+    AllArticle: 'AllArticle',
+    AllArticleCategoryies: 'AllArticleCategoryies',
+    Article: 'Article',
+    AllTrip: 'AllTrip',
+    AllTripCategories: 'AllTripCategories',
+    Me: 'Me',
+    MeDetail: 'MeDetail',
+    MeFollowed: 'MeFollowed'
+  },
+  Mutation: {
+    VerifySms: 'VerifySms',
+    RegisterSms: 'RegisterSms',
+    RefreshToken: 'RefreshToken',
+    ResetPasswordSms: 'ResetPasswordSms',
+    ForgotPasswordSms: 'ForgotPasswordSms',
+    TokenAuth: 'TokenAuth',
+    ResendVerificationSms: 'ResendVerificationSms',
+    CreateTrip: 'CreateTrip'
+  },
+  Fragment: {
+    TripSimpleFields: 'TripSimpleFields',
+    UserFields: 'UserFields',
+    ProfileFields: 'ProfileFields'
+  }
+}

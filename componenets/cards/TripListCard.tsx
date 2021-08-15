@@ -11,6 +11,7 @@ import {
   Flex,
   Image,
   Center,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import React from 'react';
 import { FaFire } from 'react-icons/fa';
@@ -40,6 +41,7 @@ const TripListCard = (props: Props) => {
       p="3"
       rounded="md"
       justify="center"
+      bgColor={useColorModeValue('white', 'gray.900')}
     >
       <Stack flex="3">
         <Wrap spacing="1">

@@ -94,14 +94,12 @@ export default function TripSmallCard(props: any) {
           bgGradient="linear(to-t, #000000,#ffffff00)"
           height="50%"
           width="full"
-          align="flex-sttart"
+          align="flex-start"
           justify="flex-end"
           p="3"
           direction="column"
         >
-          <Text width="full" fontWeight={500}>
-            {props.title}
-          </Text>
+          <Text fontWeight={500}>{props.title}</Text>
           <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
             <Wrap align="center" spacing="1">
               <Text>{getDays(props.startDate, props.endDate)}</Text>

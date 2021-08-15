@@ -8,21 +8,16 @@ query Me {
 
 query MeDetail {
   me {
-    username
-    avatar
-    verified
-    email
-    phoneNumber
-    dateJoined
-    firstName
-    lastName
+    ...UserFields
     profilemodel {
-      about
-      tripStatus
-      header
-      gender
-      followersCount
-      followingsCount
+      ...ProfileFields
+    }
+    trips {
+      edges {
+        node {
+          ...TripSimpleFields
+        }
+      }
     }
   }
 }
@@ -41,4 +36,24 @@ query MeFollowed {
       }
     }
   }
+}
+
+fragment UserFields on UserType {
+  username
+  avatar
+  verified
+  email
+  phoneNumber
+  dateJoined
+  # firstName
+  # lastName
+}
+
+fragment ProfileFields on ProfileType {
+  about
+  tripStatus
+  header
+  gender
+  followersCount
+  followingsCount
 }

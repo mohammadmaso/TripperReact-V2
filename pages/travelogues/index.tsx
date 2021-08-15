@@ -11,7 +11,7 @@ import TripCategoriesView from '../../views/trip/TripCategoriesView';
 export default function Home() {
   return (
     <BaseLayout title="سفرنامه‌ها">
-      <TripCategoriesView />
+      <TripCategoriesView listView />
       <LastTripsView />
     </BaseLayout>
   );

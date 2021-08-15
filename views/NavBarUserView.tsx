@@ -24,6 +24,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import NavProfile from '../componenets/navbars/NavProfile';
 import { useMeQuery } from '../graphql/generated/types';
+import { BeatLoader } from 'react-spinners';
 
 interface Props {
   minimal?: boolean;
@@ -41,7 +42,7 @@ const NavBarUserView = (props: Props) => {
   };
 
   if (loading) {
-    return null;
+    return <BeatLoader size={8} color="#009d21" />;
   }
 
   return (

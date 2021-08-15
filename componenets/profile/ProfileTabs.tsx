@@ -4,20 +4,22 @@ import TripCarousal from '../carousals/TripCarousal';
 import TripList from '../lists/TripList';
 import GroupTripList from '../lists/GroupTripList';
 
-interface Props {}
+interface Props {
+  trips: any;
+}
 
 const ProfileTabs = (props: Props) => {
   return (
     <Tabs isLazy colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
-        <Tab>سفرهای گروهی</Tab>
-        <Tab>مدال‌ها</Tab>
+        {/* <Tab>سفرهای گروهی</Tab> */}
+        <Tab>دست‌آوردها</Tab>
       </TabList>
 
       <TabPanels>
         <TabPanel>
-          <TripList />
+          <TripList data={props.trips} />
         </TabPanel>
         <TabPanel>
           <GroupTripList />

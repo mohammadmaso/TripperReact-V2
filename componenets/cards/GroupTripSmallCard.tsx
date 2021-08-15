@@ -25,7 +25,7 @@ export default function GroupTripSmallCard(props: any) {
   return (
     <Center py={6} m={2}>
       <Box
-        bg={useColorModeValue('white', 'gray.900')}
+        bgColor={useColorModeValue('white', 'gray.800')}
         boxShadow={'md'}
         rounded={'md'}
         w={'full'}
@@ -39,13 +39,14 @@ export default function GroupTripSmallCard(props: any) {
           p={3}
           py={4}
         >
-          <Box>
-            <Flex direction="column" justify="center">
-              <Text fontWeight="bold">۱۲</Text>
-              <Text fontSize="sm">خرداد</Text>
-            </Flex>
-          </Box>
           <Flex justify="flex-end">
+            <Avatar
+              showBorder
+              size="md"
+              ml="1"
+              src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
+              alt={'Author'}
+            />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>
                 {props.username}
@@ -63,26 +64,23 @@ export default function GroupTripSmallCard(props: any) {
                 ))}
               </Wrap>
             </Stack>
-            <Avatar
-              showBorder
-              size="md"
-              ml="1"
-              src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-              alt={'Author'}
-            />
           </Flex>
+          <Box>
+            <Flex direction="column" justify="center">
+              <Text fontWeight="bold">۱۲</Text>
+              <Text fontSize="sm">خرداد</Text>
+            </Flex>
+          </Box>
         </Flex>
 
         <Stack
           width="full"
-          align="flex-end"
+          align="flex-start"
           justify="flex-end"
           p="3"
           direction="column"
         >
-          <Text width="full" textAlign="right" fontWeight={500}>
-            {props.name}
-          </Text>
+          <Text fontWeight={500}>{props.name}</Text>
           <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
             <Wrap align="center" spacing="1">
               <Text>روز</Text>
