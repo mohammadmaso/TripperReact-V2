@@ -26,7 +26,12 @@ export default function CategoryCard(props: any) {
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}
       >
-        <Image alt={props.title} src={props.image} objectFit={'cover'} />
+        <Image
+          alt={props.title}
+          src={props.image}
+          objectFit={'cover'}
+          objectPosition="top"
+        />
         <Flex
           position="absolute"
           bottom="0"
