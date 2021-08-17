@@ -35,7 +35,7 @@ export default function LargeWithNewsletter() {
   return (
     <Box
       boxShadow="inner"
-      bgColor={useColorModeValue('gray.50', 'gray.900')}
+      bgColor={useColorModeValue('#f2f2f2', 'gray.900')}
       fontWeight="light"
     >
       <Container maxW={'full'} py="10" px={[4, 4, 120]}>

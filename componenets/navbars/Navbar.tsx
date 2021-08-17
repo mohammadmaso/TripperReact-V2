@@ -48,7 +48,7 @@ const NavBar = (props: any) => {
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
+        minH={'2rem'}
         py={{ base: 2 }}
         px={[4, 4, 120]}
         borderBottom={1}
