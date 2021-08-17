@@ -8,10 +8,7 @@ import MinimalLayout from '../../layouts/MinimalLayout';
 export default function SlectCategory() {
   return (
     <MinimalLayout selected="selectOrigin">
-      <DevelopingPortal />
-      <Wrap mt={20}>
-        <TripCategoryList />
-      </Wrap>
+      <div></div>
     </MinimalLayout>
   );
 }

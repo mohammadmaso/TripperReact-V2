@@ -6,7 +6,7 @@ import MinimalLayout from '../../layouts/MinimalLayout';
 export default function Home() {
   return (
     <MinimalLayout selected="none">
-      <DevelopingPortal />
+      <div></div>
     </MinimalLayout>
   );
 }
