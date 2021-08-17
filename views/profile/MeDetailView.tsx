@@ -5,6 +5,7 @@ import ApiLoading from '../../componenets/ApiLoading';
 import {
   useAllArticleQuery,
   useMeDetailQuery,
+  useMeFollowingsLazyQuery,
 } from '../../graphql/generated/types';
 import ApiError from '../../componenets/ApiError';
 import ProfileContainer from '../../componenets/profile/ProfileContainer';

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function TextLogo(props: any) {
   return (
-    <Box {...props}>
+    <Box {...props} cursor="pointer">
       <Link href="/" passHref>
         <Image
           src={useColorModeValue(

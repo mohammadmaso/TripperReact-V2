@@ -15,7 +15,7 @@ interface Props {
   onClose: any;
 }
 
-const FollowersModal = (props: any) => {
+const FollowersModal = (props: Props) => {
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>

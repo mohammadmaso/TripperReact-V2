@@ -34,7 +34,7 @@ interface Props {
   };
 }
 
-const ProfileHeader = ({ isSelf, data }: Props) => {
+const ProfileHeader = ({ isSelf, data, ...rest }: Props) => {
   const modalFollowers = useDisclosure();
   const modalFollowings = useDisclosure();
 
@@ -46,6 +46,7 @@ const ProfileHeader = ({ isSelf, data }: Props) => {
         alt={data.username}
         src={data.profilemodel.header as string}
         objectFit={'cover'}
+        fallbackSrc="/images/placeholder.png"
       />
       {isSelf ? (
         <Flex justify={'left'} m="2">

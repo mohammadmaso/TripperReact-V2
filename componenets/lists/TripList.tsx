@@ -2,12 +2,14 @@ import { SimpleGrid, Wrap, WrapItem } from '@chakra-ui/react';
 import React from 'react';
 import TravelerCard from '../cards/TravelerCard';
 import TripSmallCard from '../cards/TripSmallCard';
+import EmptyResult from '../EmptyResult';
 
 interface Props {
   data: any;
 }
 
 const TripList = (props: Props) => {
+  if (props.data.length == 0) return <EmptyResult title="سفرنامه" />;
   return (
     <SimpleGrid
       spacing="2"

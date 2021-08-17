@@ -372,8 +372,22 @@ export type AccessoryTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -741,8 +755,22 @@ export type CountryTypeTripsOfCountryArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -1081,8 +1109,22 @@ export type ExperienceImageTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 export type ExperienceImageTypeConnection = {
@@ -1160,8 +1202,22 @@ export type ExperienceTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 export type ExperienceTypeConnection = {
@@ -2077,8 +2133,22 @@ export type PlaceTypeTripsInPlaceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -2281,6 +2351,7 @@ export type Query = {
   /** The ID of the object */
   profile?: Maybe<ProfileType>;
   allProfile?: Maybe<ProfileConnection>;
+  followedUser?: Maybe<Scalars['Boolean']>;
   /** The ID of the object */
   placeCollection?: Maybe<PlaceCollectionsType>;
   /** The ID of the object */
@@ -2338,9 +2409,11 @@ export type Query = {
   /** The ID of the object */
   myTimeLine?: Maybe<TripType>;
   allMyTimeLine?: Maybe<TripTypeConnection>;
+  /** The ID of the object */
+  tripReview?: Maybe<TripReviewType>;
   allTripReview?: Maybe<TripReviewTypeConnection>;
   /** The ID of the object */
-  tripReview?: Maybe<TripImageType>;
+  tripImage?: Maybe<TripImageType>;
   allTripImages?: Maybe<TripImageTypeConnection>;
 };
 
@@ -2409,6 +2482,11 @@ export type QueryAllProfileArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+export type QueryFollowedUserArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -2649,8 +2727,22 @@ export type QueryAllTripArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -2696,8 +2788,22 @@ export type QueryAllMyTripArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -2712,8 +2818,27 @@ export type QueryAllMyTimeLineArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryTripReviewArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -2732,7 +2857,7 @@ export type QueryAllTripReviewArgs = {
 };
 
 
-export type QueryTripReviewArgs = {
+export type QueryTripImageArgs = {
   id: Scalars['ID'];
 };
 
@@ -3105,8 +3230,22 @@ export type TripActivitieTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3221,8 +3360,22 @@ export type TripCategoryTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3307,8 +3460,22 @@ export type TripImageTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3350,6 +3517,8 @@ export type TripInput = {
   costs?: Maybe<Scalars['JSONString']>;
   checkList?: Maybe<Scalars['JSONString']>;
   todoList?: Maybe<Scalars['JSONString']>;
+  country?: Maybe<Scalars['ID']>;
+  province?: Maybe<Scalars['ID']>;
 };
 
 export type TripLikeType = Node & {
@@ -3511,7 +3680,7 @@ export type TripRelatedInput = {
   accessories?: Maybe<Array<Maybe<Scalars['ID']>>>;
   transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  countryId?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 /** An enumeration. */
@@ -3569,8 +3738,22 @@ export type TripReviewTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3619,7 +3802,10 @@ export type TripType = Node & {
   costs?: Maybe<Scalars['GenericScalar']>;
   checkList?: Maybe<Scalars['GenericScalar']>;
   todoList?: Maybe<Scalars['GenericScalar']>;
+  viewsCount: Scalars['Int'];
+  isPrivate: Scalars['Boolean'];
   author: UserType;
+  country: CountryType;
   activities: TripActivitieTypeConnection;
   categories: TripCategoryTypeConnection;
   companions: UserTypeConnection;
@@ -3629,7 +3815,6 @@ export type TripType = Node & {
   places: PlaceTypeConnection;
   accessories: AccessoryTypeConnection;
   experiences: ExperienceImageTypeConnection;
-  countries: CountryTypeConnection;
   likes: Scalars['Int'];
   tripLikes?: Maybe<TripLikeType>;
   reviewsOfTrip: TripReviewTypeConnection;
@@ -3740,18 +3925,6 @@ export type TripTypeExperiencesArgs = {
 
 
 /** Trip description */
-export type TripTypeCountriesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-  alpha2?: Maybe<Scalars['String']>;
-};
-
-
-/** Trip description */
 export type TripTypeReviewsOfTripArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -3815,8 +3988,22 @@ export type TripVideoTypeTripmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 export type TripVideoTypeConnection = {
@@ -4043,8 +4230,22 @@ export type UserNodeTripsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4054,8 +4255,22 @@ export type UserNodeTripsInCompanionArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4471,8 +4686,22 @@ export type UserTypeTripsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4482,8 +4711,22 @@ export type UserTypeTripsInCompanionArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title?: Maybe<Scalars['String']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4970,7 +5213,7 @@ export type AllTripQueryVariables = Exact<{
   allTripAfter?: Maybe<Scalars['String']>;
   allTripFirst?: Maybe<Scalars['Int']>;
   allTripLast?: Maybe<Scalars['Int']>;
-  allTripCategories?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
+  allTripCategories?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>> | Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>>;
 }>;
 
 
@@ -4997,15 +5240,6 @@ export type AllTripQuery = (
             & { node?: Maybe<(
               { __typename?: 'TripCategoryType' }
               & Pick<TripCategoryType, 'title'>
-            )> }
-          )>> }
-        ), countries: (
-          { __typename?: 'CountryTypeConnection' }
-          & { edges: Array<Maybe<(
-            { __typename?: 'CountryTypeEdge' }
-            & { node?: Maybe<(
-              { __typename?: 'CountryType' }
-              & Pick<CountryType, 'name'>
             )> }
           )>> }
         ), places: (
@@ -5064,15 +5298,6 @@ export type TripSimpleFieldsFragment = (
         & Pick<TripCategoryType, 'title'>
       )> }
     )>> }
-  ), countries: (
-    { __typename?: 'CountryTypeConnection' }
-    & { edges: Array<Maybe<(
-      { __typename?: 'CountryTypeEdge' }
-      & { node?: Maybe<(
-        { __typename?: 'CountryType' }
-        & Pick<CountryType, 'name'>
-      )> }
-    )>> }
   ), places: (
     { __typename?: 'PlaceTypeConnection' }
     & { edges: Array<Maybe<(
@@ -5129,14 +5354,37 @@ export type MeDetailQuery = (
   )> }
 );
 
-export type MeFollowedQueryVariables = Exact<{ [key: string]: never; }>;
+export type MeFollowingsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeFollowedQuery = (
+export type MeFollowingsQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'UserType' }
     & { followingUsers: (
+      { __typename?: 'FollowingTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'FollowingTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'FollowingType' }
+          & { followed: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'id' | 'username' | 'avatar'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type MeFollowersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeFollowersQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserType' }
+    & { followerUsers: (
       { __typename?: 'FollowingTypeConnection' }
       & { edges: Array<Maybe<(
         { __typename?: 'FollowingTypeEdge' }
@@ -5184,13 +5432,6 @@ export const TripSimpleFieldsFragmentDoc = gql`
     }
   }
   likes
-  countries {
-    edges {
-      node {
-        name
-      }
-    }
-  }
   places {
     edges {
       node {
@@ -5726,14 +5967,14 @@ export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
 export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
 export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
 export const AllTripDocument = gql`
-    query AllTrip($allTripOffset: Int, $allTripBefore: String, $allTripAfter: String, $allTripFirst: Int, $allTripLast: Int, $allTripCategories: [ID]) {
+    query AllTrip($allTripOffset: Int, $allTripBefore: String, $allTripAfter: String, $allTripFirst: Int, $allTripLast: Int, $allTripCategories: [[ID]]) {
   allTrip(
     offset: $allTripOffset
     before: $allTripBefore
     after: $allTripAfter
     first: $allTripFirst
     last: $allTripLast
-    categories: $allTripCategories
+    categories_In: $allTripCategories
   ) {
     pageInfo {
       hasNextPage
@@ -5764,13 +6005,6 @@ export const AllTripDocument = gql`
           }
         }
         likes
-        countries {
-          edges {
-            node {
-              name
-            }
-          }
-        }
         places {
           edges {
             node {
@@ -5945,8 +6179,8 @@ export function useMeDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<M
 export type MeDetailQueryHookResult = ReturnType<typeof useMeDetailQuery>;
 export type MeDetailLazyQueryHookResult = ReturnType<typeof useMeDetailLazyQuery>;
 export type MeDetailQueryResult = Apollo.QueryResult<MeDetailQuery, MeDetailQueryVariables>;
-export const MeFollowedDocument = gql`
-    query MeFollowed {
+export const MeFollowingsDocument = gql`
+    query MeFollowings {
   me {
     followingUsers {
       edges {
@@ -5964,31 +6198,75 @@ export const MeFollowedDocument = gql`
     `;
 
 /**
- * __useMeFollowedQuery__
+ * __useMeFollowingsQuery__
  *
- * To run a query within a React component, call `useMeFollowedQuery` and pass it any options that fit your needs.
- * When your component renders, `useMeFollowedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMeFollowingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeFollowingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMeFollowedQuery({
+ * const { data, loading, error } = useMeFollowingsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useMeFollowedQuery(baseOptions?: Apollo.QueryHookOptions<MeFollowedQuery, MeFollowedQueryVariables>) {
+export function useMeFollowingsQuery(baseOptions?: Apollo.QueryHookOptions<MeFollowingsQuery, MeFollowingsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MeFollowedQuery, MeFollowedQueryVariables>(MeFollowedDocument, options);
+        return Apollo.useQuery<MeFollowingsQuery, MeFollowingsQueryVariables>(MeFollowingsDocument, options);
       }
-export function useMeFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeFollowedQuery, MeFollowedQueryVariables>) {
+export function useMeFollowingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeFollowingsQuery, MeFollowingsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MeFollowedQuery, MeFollowedQueryVariables>(MeFollowedDocument, options);
+          return Apollo.useLazyQuery<MeFollowingsQuery, MeFollowingsQueryVariables>(MeFollowingsDocument, options);
         }
-export type MeFollowedQueryHookResult = ReturnType<typeof useMeFollowedQuery>;
-export type MeFollowedLazyQueryHookResult = ReturnType<typeof useMeFollowedLazyQuery>;
-export type MeFollowedQueryResult = Apollo.QueryResult<MeFollowedQuery, MeFollowedQueryVariables>;
+export type MeFollowingsQueryHookResult = ReturnType<typeof useMeFollowingsQuery>;
+export type MeFollowingsLazyQueryHookResult = ReturnType<typeof useMeFollowingsLazyQuery>;
+export type MeFollowingsQueryResult = Apollo.QueryResult<MeFollowingsQuery, MeFollowingsQueryVariables>;
+export const MeFollowersDocument = gql`
+    query MeFollowers {
+  me {
+    followerUsers {
+      edges {
+        node {
+          followed {
+            id
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useMeFollowersQuery__
+ *
+ * To run a query within a React component, call `useMeFollowersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeFollowersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeFollowersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeFollowersQuery(baseOptions?: Apollo.QueryHookOptions<MeFollowersQuery, MeFollowersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeFollowersQuery, MeFollowersQueryVariables>(MeFollowersDocument, options);
+      }
+export function useMeFollowersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeFollowersQuery, MeFollowersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeFollowersQuery, MeFollowersQueryVariables>(MeFollowersDocument, options);
+        }
+export type MeFollowersQueryHookResult = ReturnType<typeof useMeFollowersQuery>;
+export type MeFollowersLazyQueryHookResult = ReturnType<typeof useMeFollowersLazyQuery>;
+export type MeFollowersQueryResult = Apollo.QueryResult<MeFollowersQuery, MeFollowersQueryVariables>;
 export const namedOperations = {
   Query: {
     AllArticle: 'AllArticle',
@@ -5998,7 +6276,8 @@ export const namedOperations = {
     AllTripCategories: 'AllTripCategories',
     Me: 'Me',
     MeDetail: 'MeDetail',
-    MeFollowed: 'MeFollowed'
+    MeFollowings: 'MeFollowings',
+    MeFollowers: 'MeFollowers'
   },
   Mutation: {
     VerifySms: 'VerifySms',

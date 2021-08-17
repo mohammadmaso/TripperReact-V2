@@ -33,7 +33,7 @@ const DevelopingPortal = (props: Props) => {
       <ModalOverlay />
       <ModalContent rounded="none">
         <ModalBody>
-          <Center flexDir="column" h="50vh">
+          <Center flexDir="column">
             <Image
               src="/images/3911319.svg"
               alt="Developing"

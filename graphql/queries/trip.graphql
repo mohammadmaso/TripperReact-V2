@@ -4,7 +4,7 @@ query AllTrip(
   $allTripAfter: String
   $allTripFirst: Int
   $allTripLast: Int
-  $allTripCategories: [ID]
+  $allTripCategories: [[ID]]
 ) {
   allTrip(
     offset: $allTripOffset
@@ -12,7 +12,7 @@ query AllTrip(
     after: $allTripAfter
     first: $allTripFirst
     last: $allTripLast
-    categories: $allTripCategories
+    categories_In: $allTripCategories
   ) {
     pageInfo {
       hasNextPage
@@ -43,13 +43,6 @@ query AllTrip(
           }
         }
         likes
-        countries {
-          edges {
-            node {
-              name
-            }
-          }
-        }
         places {
           edges {
             node {
@@ -102,13 +95,6 @@ fragment TripSimpleFields on TripType {
     }
   }
   likes
-  countries {
-    edges {
-      node {
-        name
-      }
-    }
-  }
   places {
     edges {
       node {

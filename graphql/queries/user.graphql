@@ -22,9 +22,25 @@ query MeDetail {
   }
 }
 
-query MeFollowed {
+query MeFollowings {
   me {
     followingUsers {
+      edges {
+        node {
+          followed {
+            id
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+
+query MeFollowers {
+  me {
+    followerUsers {
       edges {
         node {
           followed {

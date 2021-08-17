@@ -53,7 +53,7 @@ const errorLink = onError(
 
 const httpLink = createHttpLink({
   ssrMode: typeof window === "undefined",
-  uri: 'https://tripper-backend.herokuapp.com/api/',
+  uri: 'https://service.mytripper.ir/api/',
 });
 
 const authLink = setContext( (_, { headers }) =>  {
