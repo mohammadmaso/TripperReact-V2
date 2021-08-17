@@ -13,7 +13,7 @@ interface Props {}
 
 export const SocialButtons = (props: Props) => {
   return (
-    <Wrap>
+    <Wrap cursor="pointer">
       <Link href="http://twitter.com/mytripper_ir" passHref>
         <AiOutlineTwitter />
       </Link>
