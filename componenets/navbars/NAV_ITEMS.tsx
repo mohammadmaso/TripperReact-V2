@@ -8,11 +8,16 @@ import {
 import { BiBed, BiBook, BiSupport } from 'react-icons/bi';
 import { MdCardTravel, MdFlightTakeoff } from 'react-icons/md';
 import { RiArticleLine, RiMapPinUserLine, RiRoadMapLine } from 'react-icons/ri';
-import { FiFeather, FiShoppingBag } from 'react-icons/fi';
+import { FiFeather, FiPhone, FiShoppingBag } from 'react-icons/fi';
 import { FiBookOpen, FiUsers } from 'react-icons/fi';
+import { Badge } from '@chakra-ui/react';
 
 import { NavItem } from './NavItem';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+
+function ComingSoonBadge() {
+  return <Badge colorScheme="green">به‌ زودی</Badge>;
+}
 
 export const NAV_ITEMS: Array<NavItem> = [
   {
@@ -35,7 +40,8 @@ export const NAV_ITEMS: Array<NavItem> = [
         label: 'جاذبه‌ها',
         icon: <HiOutlineLocationMarker />,
         subLabel: 'از میان جاذبه‌ها و فعالیت‌ها کشف کنید',
-        href: '/places',
+        // href: '/places',
+        badge: <ComingSoonBadge />,
       },
       {
         label: 'مقالات',
@@ -48,12 +54,14 @@ export const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'همسفر',
     icon: <AiOutlineUsergroupAdd />,
-    href: '/fellow-traveler',
+    // href: '/fellow-traveler',
+    badge: <ComingSoonBadge />,
   },
   {
     label: 'سفرساز',
     icon: <ImMagicWand />,
-    href: '/wizard',
+    // href: '/wizard',
+    badge: <ComingSoonBadge />,
   },
   {
     label: 'درباره تریپر',
@@ -61,8 +69,8 @@ export const NAV_ITEMS: Array<NavItem> = [
     href: '/about',
   },
   {
-    label: 'پشتیبانی',
-    icon: <BiSupport />,
-    href: '/support',
+    label: 'تماس‌ با ‌ما',
+    icon: <FiPhone />,
+    href: '/contact',
   },
 ];

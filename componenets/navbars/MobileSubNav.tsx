@@ -13,7 +13,13 @@ import { ChevronDownIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { NavItem } from './NavItem';
 
-export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
+export const MobileSubNav = ({
+  label,
+  children,
+  href,
+  icon,
+  badge,
+}: NavItem) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -38,6 +44,7 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
             >
               {label}
             </Text>
+            {badge}
           </Wrap>
         </Link>
         {children && (
@@ -66,6 +73,7 @@ export const MobileSubNav = ({ label, children, href, icon }: NavItem) => {
                 <Wrap align="center" spacing="4">
                   {child.icon}
                   {child.label}
+                  {child.badge}
                 </Wrap>
               </ChakraLink>
             ))}

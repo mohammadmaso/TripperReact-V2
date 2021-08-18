@@ -8,6 +8,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
+  Wrap,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { DesktopSubNav } from './DesktopSubNav';
@@ -20,17 +21,13 @@ export const DesktopNav = () => {
         <Box key={navItem.label}>
           <Popover trigger={'hover'} placement={'bottom-end'}>
             <PopoverTrigger>
-              <Flex align="center">
+              <Wrap align="center">
                 {navItem.icon}
-                <ChakraLink
-                  p={2}
-                  fontSize={'sm'}
-                  fontWeight={500}
-                  color="primary"
-                >
+                <ChakraLink fontSize={'sm'} fontWeight={500} color="primary">
                   <Link href={navItem.href ?? '#'}>{navItem.label}</Link>
                 </ChakraLink>
-              </Flex>
+                {navItem.badge}
+              </Wrap>
             </PopoverTrigger>
 
             {navItem.children && (

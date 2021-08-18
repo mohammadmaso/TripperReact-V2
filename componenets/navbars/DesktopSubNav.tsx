@@ -7,12 +7,19 @@ import {
   Icon,
   Link as ChakraLink,
   useColorModeValue,
+  Wrap,
 } from '@chakra-ui/react';
-import { ChevronRightIcon } from '@chakra-ui/icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { NavItem } from './NavItem';
 
-export const DesktopSubNav = ({ label, href, subLabel, icon }: NavItem) => {
+export const DesktopSubNav = ({
+  label,
+  href,
+  subLabel,
+  icon,
+  badge,
+}: NavItem) => {
   return (
     <ChakraLink
       href={href}
@@ -25,7 +32,7 @@ export const DesktopSubNav = ({ label, href, subLabel, icon }: NavItem) => {
       <Stack direction={'row'} align={'center'}>
         {icon}
         <Box>
-          <Flex align="center">
+          <Wrap align="center">
             <Link href={href ?? '#'} passHref>
               <Text
                 transition={'all .3s ease'}
@@ -34,8 +41,9 @@ export const DesktopSubNav = ({ label, href, subLabel, icon }: NavItem) => {
               >
                 {label}
               </Text>
-            </Link>
-          </Flex>
+            </Link>{' '}
+            {badge}
+          </Wrap>
           <Text fontSize={'sm'}>{subLabel}</Text>
         </Box>
         <Flex
@@ -47,7 +55,7 @@ export const DesktopSubNav = ({ label, href, subLabel, icon }: NavItem) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'green.400'} w={5} h={5} as={ChevronLeftIcon} />
         </Flex>
       </Stack>
     </ChakraLink>

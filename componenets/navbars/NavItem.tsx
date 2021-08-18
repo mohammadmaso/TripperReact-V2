@@ -6,4 +6,5 @@ export interface NavItem {
   children?: Array<NavItem>;
   href?: string;
   icon?: React.ReactNode;
+  badge?: React.ReactNode;
 }
