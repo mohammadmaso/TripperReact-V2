@@ -1,21 +1,10 @@
-import { Center, Stack, Wrap, Text } from '@chakra-ui/react';
+import { Stack, Wrap, Text } from '@chakra-ui/react';
 import React from 'react';
-import { FaFire } from 'react-icons/fa';
 import { FiActivity } from 'react-icons/fi';
 import { IoCloudyNight } from 'react-icons/io5';
+import { ActivityCard } from '../cards/ActivityCard';
 
 interface Props {}
-
-function ActivityCard() {
-  return (
-    <Center p="3" rounded="sm" shadow="sm">
-      <Stack align="center">
-        <FaFire />
-        <Text fontSize="xs">آتش نشینی</Text>
-      </Stack>
-    </Center>
-  );
-}
 
 const TravelogueActivities = (props: Props) => {
   return (
@@ -24,9 +13,7 @@ const TravelogueActivities = (props: Props) => {
         <FiActivity />
         <Text>فعالیت‌ها</Text>
       </Wrap>
-      <Wrap>
-        <ActivityCard />
-      </Wrap>
+      <Wrap>{/* <ActivityCard /> */}</Wrap>
     </Stack>
   );
 };

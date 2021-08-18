@@ -110,3 +110,15 @@ fragment TripSimpleFields on TripType {
     }
   }
 }
+
+query AllActivities {
+  allActivities {
+    edges {
+      node {
+        svg
+        title
+        description
+      }
+    }
+  }
+}

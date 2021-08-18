@@ -14,14 +14,14 @@ import {
 
 export default function CategoryCard(props: any) {
   return (
-    <Center py={6} m={2}>
+    <Center m={2}>
       <Box
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'md'}
         rounded={'md'}
         overflow={'hidden'}
         h={'150px'}
-        minW={'230px'}
+        minW={'210px'}
         position="relative"
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}

@@ -1,6 +1,6 @@
 # watch: true
 overwrite: true
-schema: 'https://tripper-backend.herokuapp.com/api/'
+schema: 'https://service.mytripper.ir/api/'
 documents: 'graphql/**/*.graphql'
 generates:
   graphql/generated/types.ts:

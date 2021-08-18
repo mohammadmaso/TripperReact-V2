@@ -861,6 +861,13 @@ export type CreateAccessorySiteMutation = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
+export type CreateExperienceMutation = {
+  __typename?: 'CreateExperienceMutation';
+  experience?: Maybe<ExperienceType>;
+  success?: Maybe<Scalars['Boolean']>;
+  message?: Maybe<Scalars['String']>;
+};
+
 export type CreatePlace = {
   __typename?: 'CreatePlace';
   place?: Maybe<PlaceType>;
@@ -939,6 +946,11 @@ export type DeleteAccount = {
   __typename?: 'DeleteAccount';
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type DeleteExperienceMutation = {
+  __typename?: 'DeleteExperienceMutation';
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type DeletePlace = {
@@ -1149,16 +1161,15 @@ export type ExperienceInput = {
   description: Scalars['String'];
 };
 
-export type ExperienceMutation = {
-  __typename?: 'ExperienceMutation';
-  experience?: Maybe<ExperienceType>;
-  success?: Maybe<Scalars['Boolean']>;
-  message?: Maybe<Scalars['String']>;
+export type ExperienceInputUpdate = {
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
 export type ExperienceRelatedInputs = {
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   image?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  video?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type ExperienceType = Node & {
@@ -1468,7 +1479,9 @@ export type Mutation = {
   createAccessoryCategory?: Maybe<CreateAccessoryCategoryMutation>;
   createAccessoryBrand?: Maybe<CreateAccessoryBrandMutation>;
   createAccessorySite?: Maybe<CreateAccessorySiteMutation>;
-  createExperience?: Maybe<ExperienceMutation>;
+  createExperience?: Maybe<CreateExperienceMutation>;
+  updateExperience?: Maybe<UpdateExperienceMutation>;
+  deleteExperience?: Maybe<DeleteExperienceMutation>;
   /** create tour mutation */
   createTour?: Maybe<CreateTour>;
   /** create review for tour mutation */
@@ -1675,6 +1688,18 @@ export type MutationCreateExperienceArgs = {
   experienceInput: ExperienceInput;
   experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
   place: Scalars['ID'];
+};
+
+
+export type MutationUpdateExperienceArgs = {
+  experienceId: Scalars['ID'];
+  experienceInput?: Maybe<ExperienceInputUpdate>;
+  experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
+};
+
+
+export type MutationDeleteExperienceArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -2415,6 +2440,7 @@ export type Query = {
   /** The ID of the object */
   tripImage?: Maybe<TripImageType>;
   allTripImages?: Maybe<TripImageTypeConnection>;
+  allActivities?: Maybe<TripActivitieTypeConnection>;
 };
 
 
@@ -2871,6 +2897,16 @@ export type QueryAllTripImagesArgs = {
   user?: Maybe<Scalars['ID']>;
 };
 
+
+export type QueryAllActivitiesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+};
+
 export type Refresh = {
   __typename?: 'Refresh';
   token?: Maybe<Scalars['String']>;
@@ -3317,7 +3353,7 @@ export type TripCategoryType = Node & {
   descriptionEn?: Maybe<Scalars['String']>;
   descriptionFa?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
-  svg: Scalars['String'];
+  svg?: Maybe<Scalars['String']>;
   toursCategories: TourTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansCategory: TripPlanTypeConnection;
@@ -4039,6 +4075,12 @@ export type UpdateAccount = {
   __typename?: 'UpdateAccount';
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type UpdateExperienceMutation = {
+  __typename?: 'UpdateExperienceMutation';
+  experience?: Maybe<ExperienceType>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type UpdateProfileInput = {
@@ -5319,6 +5361,23 @@ export type TripSimpleFieldsFragment = (
   ) }
 );
 
+export type AllActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllActivitiesQuery = (
+  { __typename?: 'Query' }
+  & { allActivities?: Maybe<(
+    { __typename?: 'TripActivitieTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripActivitieTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripActivitieType' }
+        & Pick<TripActivitieType, 'svg' | 'title' | 'description'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6097,6 +6156,46 @@ export function useAllTripCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type AllTripCategoriesQueryHookResult = ReturnType<typeof useAllTripCategoriesQuery>;
 export type AllTripCategoriesLazyQueryHookResult = ReturnType<typeof useAllTripCategoriesLazyQuery>;
 export type AllTripCategoriesQueryResult = Apollo.QueryResult<AllTripCategoriesQuery, AllTripCategoriesQueryVariables>;
+export const AllActivitiesDocument = gql`
+    query AllActivities {
+  allActivities {
+    edges {
+      node {
+        svg
+        title
+        description
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllActivitiesQuery__
+ *
+ * To run a query within a React component, call `useAllActivitiesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllActivitiesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllActivitiesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllActivitiesQuery(baseOptions?: Apollo.QueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, options);
+      }
+export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllActivitiesQuery, AllActivitiesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllActivitiesQuery, AllActivitiesQueryVariables>(AllActivitiesDocument, options);
+        }
+export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
+export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
+export type AllActivitiesQueryResult = Apollo.QueryResult<AllActivitiesQuery, AllActivitiesQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -6274,6 +6373,7 @@ export const namedOperations = {
     Article: 'Article',
     AllTrip: 'AllTrip',
     AllTripCategories: 'AllTripCategories',
+    AllActivities: 'AllActivities',
     Me: 'Me',
     MeDetail: 'MeDetail',
     MeFollowings: 'MeFollowings',
