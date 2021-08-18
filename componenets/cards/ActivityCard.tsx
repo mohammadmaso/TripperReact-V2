@@ -14,6 +14,7 @@ export function ActivityCard(props: Props) {
       rounded="sm"
       // shadow="sm"
       _hover={{ transform: 'scale(1.1,1.1)' }}
+      transition={'all .3s ease'}
     >
       <Stack align="center">
         <Image src={props.svg} alt={props.title} />
