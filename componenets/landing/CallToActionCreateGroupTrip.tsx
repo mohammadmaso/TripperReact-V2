@@ -14,9 +14,7 @@ export default function CallToActionCreateGroupTrip() {
       w={'full'}
       h={'30vh'}
       rounded="md"
-      backgroundImage={
-        'url(https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1789&q=80)'
-      }
+      backgroundImage={'url(/images/angelo-pantazis-zXVk8mNl9M0-unsplash.jpg)'}
       backgroundSize={'cover'}
       backgroundPosition={'center center'}
     >

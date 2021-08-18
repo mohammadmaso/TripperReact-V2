@@ -118,9 +118,7 @@ export default function CallToActionWithVideo() {
               align={'center'}
               w={'100%'}
               h={'100%'}
-              src={
-                'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1789&q=80'
-              }
+              src={'/images/angelo-pantazis-zXVk8mNl9M0-unsplash.jpg'}
             />
           </Box>
         </Flex>
