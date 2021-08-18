@@ -11,66 +11,79 @@ import {
   useColorModeValue,
   Tag,
   Wrap,
+  Tooltip,
 } from '@chakra-ui/react';
 import React from 'react';
+import { UserType } from '../../graphql/generated/types';
 
-export default function TravelerCard() {
+export default function TravelerCard(props: UserType) {
   return (
     <Center py={6}>
-      <Box
+      <Stack
         maxW={'270px'}
         w={'full'}
+        h={'400px'}
         bg={useColorModeValue('white', 'gray.800')}
         boxShadow={'lg'}
         rounded={'md'}
         overflow={'hidden'}
+        justify="space-around"
       >
-        <Image
-          h={'120px'}
-          w={'full'}
-          alt="Traveler"
-          src={
-            'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
-          }
-          objectFit={'cover'}
-        />
-        <Flex justify={'center'} mt={-12}>
-          <Avatar
-            size={'xl'}
-            src={
-              'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-            }
-            alt={'Author'}
-            css={{
-              border: '2px solid white',
-            }}
+        <Box>
+          <Image
+            h={'120px'}
+            w={'full'}
+            alt={props.username}
+            src={props.profilemodel?.header as string}
+            objectFit={'cover'}
+            fallbackSrc={'/images/placeholder.png'}
           />
-        </Flex>
-
+          <Flex justify={'center'} mt={-12}>
+            <Tooltip
+              isDisabled={!props.profilemodel?.tripStatus}
+              hasArrow
+              label="در سفر"
+              bg="gray.300"
+              color="black"
+            >
+              <Avatar
+                size={'xl'}
+                src={props.avatar}
+                alt={props.username}
+                css={
+                  props.profilemodel?.tripStatus == false
+                    ? {
+                        border: '2px solid white',
+                      }
+                    : { border: '3px solid #00801a' }
+                }
+              />
+            </Tooltip>
+          </Flex>
+        </Box>
         <Box p={6}>
           <Stack spacing={2} align={'center'} mb={5}>
             <Heading fontSize={'2xl'} fontWeight={300} fontFamily={'body'}>
-              Mohammadmao
+              {props.username}
             </Heading>
-            <Wrap>
-              <Tag size="sm" colorScheme="primary" variant="solid">
-                طبیعت گردی
-              </Tag>
-              <Tag size="sm" colorScheme="primary" variant="solid">
-                کوه‌نوردی
-              </Tag>
-            </Wrap>
+            {/* <Wrap>
+              {props.profilemodel?.tripStatus == true ? (
+                <Tag size="sm" colorScheme="primary" variant="solid">
+                  در سفر
+                </Tag>
+              ) : null}
+            </Wrap> */}
           </Stack>
 
           <Stack direction={'row'} justify={'center'} spacing={6}>
             <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>۲۳</Text>
+              <Text fontWeight={600}>{props.trips.edges.length}</Text>
               <Text fontSize={'sm'} color={'gray.500'}>
                 سفرنامه
               </Text>
             </Stack>
             <Stack spacing={0} align={'center'}>
-              <Text fontWeight={600}>۲۴۵</Text>
+              <Text fontWeight={600}>{props.profilemodel?.followersCount}</Text>
               <Text fontSize={'sm'} color={'gray.500'}>
                 دنبال‌کننده
               </Text>
@@ -89,7 +102,7 @@ export default function TravelerCard() {
             جزییات بیشتر
           </Button>
         </Box>
-      </Box>
+      </Stack>
     </Center>
   );
 }

@@ -54,6 +54,39 @@ query MeFollowers {
   }
 }
 
+query AllProfiles {
+  users {
+    edges {
+      node {
+        id
+        username
+        avatar
+        trips {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        profilemodel {
+          tripStatus
+          header
+          followersCount
+          followingsCount
+          achievements {
+            edges {
+              node {
+                title
+                image
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 fragment UserFields on UserType {
   username
   avatar

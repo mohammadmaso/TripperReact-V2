@@ -5459,6 +5459,46 @@ export type MeFollowersQuery = (
   )> }
 );
 
+export type AllProfilesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllProfilesQuery = (
+  { __typename?: 'Query' }
+  & { users?: Maybe<(
+    { __typename?: 'UserNodeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'UserNodeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'UserNode' }
+        & Pick<UserNode, 'id' | 'username' | 'avatar'>
+        & { trips: (
+          { __typename?: 'TripTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripType' }
+              & Pick<TripType, 'id'>
+            )> }
+          )>> }
+        ), profilemodel?: Maybe<(
+          { __typename?: 'ProfileType' }
+          & Pick<ProfileType, 'tripStatus' | 'header' | 'followersCount' | 'followingsCount'>
+          & { achievements: (
+            { __typename?: 'AchivmentTypeConnection' }
+            & { edges: Array<Maybe<(
+              { __typename?: 'AchivmentTypeEdge' }
+              & { node?: Maybe<(
+                { __typename?: 'AchivmentType' }
+                & Pick<AchivmentType, 'title' | 'image'>
+              )> }
+            )>> }
+          ) }
+        )> }
+      )> }
+    )>> }
+  )> }
+);
+
 export type UserFieldsFragment = (
   { __typename?: 'UserType' }
   & Pick<UserType, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
@@ -6366,6 +6406,67 @@ export function useMeFollowersLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type MeFollowersQueryHookResult = ReturnType<typeof useMeFollowersQuery>;
 export type MeFollowersLazyQueryHookResult = ReturnType<typeof useMeFollowersLazyQuery>;
 export type MeFollowersQueryResult = Apollo.QueryResult<MeFollowersQuery, MeFollowersQueryVariables>;
+export const AllProfilesDocument = gql`
+    query AllProfiles {
+  users {
+    edges {
+      node {
+        id
+        username
+        avatar
+        trips {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        profilemodel {
+          tripStatus
+          header
+          followersCount
+          followingsCount
+          achievements {
+            edges {
+              node {
+                title
+                image
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllProfilesQuery__
+ *
+ * To run a query within a React component, call `useAllProfilesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllProfilesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllProfilesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllProfilesQuery(baseOptions?: Apollo.QueryHookOptions<AllProfilesQuery, AllProfilesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllProfilesQuery, AllProfilesQueryVariables>(AllProfilesDocument, options);
+      }
+export function useAllProfilesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllProfilesQuery, AllProfilesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllProfilesQuery, AllProfilesQueryVariables>(AllProfilesDocument, options);
+        }
+export type AllProfilesQueryHookResult = ReturnType<typeof useAllProfilesQuery>;
+export type AllProfilesLazyQueryHookResult = ReturnType<typeof useAllProfilesLazyQuery>;
+export type AllProfilesQueryResult = Apollo.QueryResult<AllProfilesQuery, AllProfilesQueryVariables>;
 export const namedOperations = {
   Query: {
     AllArticle: 'AllArticle',
@@ -6377,7 +6478,8 @@ export const namedOperations = {
     Me: 'Me',
     MeDetail: 'MeDetail',
     MeFollowings: 'MeFollowings',
-    MeFollowers: 'MeFollowers'
+    MeFollowers: 'MeFollowers',
+    AllProfiles: 'AllProfiles'
   },
   Mutation: {
     VerifySms: 'VerifySms',

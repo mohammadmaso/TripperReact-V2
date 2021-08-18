@@ -1,8 +1,11 @@
 import { SimpleGrid, Wrap, WrapItem } from '@chakra-ui/react';
 import React from 'react';
 import TravelerCard from '../cards/TravelerCard';
+import CategoryCard from "../cards/CategoryCard";
 
-interface Props {}
+interface Props {
+    profiles?: any
+}
 
 const TravelerList = (props: Props) => {
   return (
@@ -12,11 +15,14 @@ const TravelerList = (props: Props) => {
         columns={{ base: 2, sm: 2, md: 4 }}
         justify="center"
       >
-        <TravelerCard />
-        <TravelerCard />
-        <TravelerCard />
-        <TravelerCard />
-        <TravelerCard />
+          {props.profiles?.map((item: any) => (
+              <>
+                  <TravelerCard
+                      key={item.node.id}
+                      {...item.node}
+                  />
+              </>
+          ))}
       </SimpleGrid>
     </div>
   );
