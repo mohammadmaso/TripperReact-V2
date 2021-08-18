@@ -1,20 +1,43 @@
 import React from 'react';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import {
+  Tabs,
+  TabList,
+  TabPanels,
+  Tab,
+  TabPanel,
+  Text,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import TripCarousal from '../carousals/TripCarousal';
 import TripList from '../lists/TripList';
 import GroupTripList from '../lists/GroupTripList';
+import ApiLoading from '../ApiLoading';
+import TripSmallCard from '../cards/TripSmallCard';
+import { Exact, MeSavedTripsQuery } from '../../graphql/generated/types';
+import { LazyQueryResult } from '@apollo/client/react/types/types';
 
 interface Props {
   trips: any;
+  actions: any;
+  queries: {
+    savedTripsQuery: LazyQueryResult<
+      MeSavedTripsQuery,
+      Exact<{
+        [key: string]: never;
+      }>
+    >;
+  };
 }
 
 const ProfileTabs = (props: Props) => {
   return (
-    <Tabs isLazy colorScheme="primary" size="sm" align="center">
+    <Tabs colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
-        {/* <Tab>سفرهای گروهی</Tab> */}
-        <Tab>دست‌آوردها</Tab>
+        <Tab onClick={() => props.actions?.getSavedTrips()}>
+          سفرهای موردعلاقه{' '}
+        </Tab>
+        <Tab isDisabled>دست‌آوردها</Tab>
       </TabList>
 
       <TabPanels>
@@ -22,7 +45,27 @@ const ProfileTabs = (props: Props) => {
           <TripList data={props.trips} />
         </TabPanel>
         <TabPanel>
-          <GroupTripList />
+          {props.queries?.savedTripsQuery?.loading ? (
+            <ApiLoading />
+          ) : props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges
+              .length != 0 ? (
+            <SimpleGrid
+              spacing="2"
+              columns={{ base: 1, sm: 1, md: 4 }}
+              justify="center"
+            >
+              {props.queries.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
+                (item) => (
+                  <TripSmallCard
+                    key={item!.node!.trip.id!}
+                    {...item?.node?.trip}
+                  />
+                )
+              )}
+            </SimpleGrid>
+          ) : (
+            <Text>موردی یافت نشد!</Text>
+          )}
         </TabPanel>
         <TabPanel>
           <p>two!</p>

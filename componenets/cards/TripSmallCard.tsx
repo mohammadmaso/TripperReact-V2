@@ -28,6 +28,7 @@ export default function TripSmallCard(props: any) {
         rounded={'md'}
         overflow={'hidden'}
         maxW={'full'}
+        minW="250px"
         h="300px"
         position="relative"
         transition={'all .3s ease'}

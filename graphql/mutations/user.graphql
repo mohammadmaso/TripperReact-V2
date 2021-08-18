@@ -1,0 +1,7 @@
+mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
+  updateProfile(input: $updateProfileInput) {
+    profile {
+      header
+    }
+  }
+}

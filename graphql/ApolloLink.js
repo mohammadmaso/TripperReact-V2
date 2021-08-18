@@ -5,6 +5,8 @@ import Router  from "next/router";
 import { RefreshTokenDocument } from "./generated/types";
 import { onError } from 'apollo-link-error';
 import introspectionResult from './fragment-matcher';
+import { createUploadLink } from 'apollo-upload-client'
+
 
 const getNewToken = async () => {
   const refreshToken = await  localStorage.getItem('refresh-token')
@@ -51,7 +53,7 @@ const errorLink = onError(
   }
 );
 
-const httpLink = createHttpLink({
+const httpLink = createUploadLink({
   ssrMode: typeof window === "undefined",
   uri: 'https://service.mytripper.ir/api/',
 });

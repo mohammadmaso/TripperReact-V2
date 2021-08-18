@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Heading,
   Avatar,
@@ -15,6 +15,7 @@ import {
   Icon,
   Badge,
   useDisclosure,
+  Spinner,
 } from '@chakra-ui/react';
 import {
   ProfileFieldsFragment,
@@ -32,14 +33,52 @@ interface Props {
     profilemodel: ProfileFieldsFragment;
     trips: { edges: [node: TripSimpleFieldsFragment] };
   };
+  actions: any;
+  lazyQueries: any;
 }
 
-const ProfileHeader = ({ isSelf, data, ...rest }: Props) => {
+const ProfileHeader = ({
+  isSelf,
+  data,
+  actions,
+  lazyQueries,
+  ...rest
+}: Props) => {
   const modalFollowers = useDisclosure();
   const modalFollowings = useDisclosure();
 
+  const inputFileHeader = useRef<HTMLInputElement>(null);
+
+  const onChangeHeaderInput = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }: any) => {
+    if (validity.valid) {
+      actions.changeHeader({
+        updateProfileInput: {
+          profile: {
+            header: file,
+          },
+        },
+      });
+    }
+  };
+
+  const onHeaderButtonClick = () => {
+    // `current` points to the mounted file input element
+    inputFileHeader?.current?.click();
+  };
   return (
     <>
+      <input
+        type="file"
+        id="file"
+        ref={inputFileHeader}
+        style={{ display: 'none' }}
+        onChange={onChangeHeaderInput}
+      />
       <Image
         h={'200px'}
         w={'full'}
@@ -52,14 +91,20 @@ const ProfileHeader = ({ isSelf, data, ...rest }: Props) => {
         <Flex justify={'left'} m="2">
           <Button
             variant="solid"
-            w="1rem"
             bgColor="white"
             size="sm"
             rounded="full"
             mt="-12"
             opacity="0.8"
+            isLoading={lazyQueries.changeHeaderQuery.loading}
+            onClick={onHeaderButtonClick}
           >
-            <Icon as={FiCamera} color="gray.600" />
+            <Wrap align="center">
+              <Icon as={FiCamera} color="gray.600" />
+
+              {lazyQueries.changeHeaderQuery.error &&
+                'خطا! دوباره امتحان کنید.'}
+            </Wrap>
           </Button>
         </Flex>
       ) : null}
@@ -147,8 +192,16 @@ const ProfileHeader = ({ isSelf, data, ...rest }: Props) => {
           </Stack>
         </Stack>
       </Box>
-      <FollowersModal {...modalFollowers} />
-      <FollowingsModal {...modalFollowings} />
+      <FollowersModal
+        {...modalFollowers}
+        actions={actions}
+        queries={lazyQueries}
+      />
+      <FollowingsModal
+        {...modalFollowings}
+        actions={actions}
+        queries={lazyQueries}
+      />
     </>
   );
 };

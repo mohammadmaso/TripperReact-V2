@@ -8,6 +8,7 @@ import {
   ModalFooter,
   Button,
   Text,
+  Stack,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useMeFollowingsQuery } from '../../graphql/generated/types';
@@ -17,10 +18,16 @@ import UserSimpleListCard from '../cards/UserSimpleListCard';
 interface Props {
   isOpen: boolean;
   onClose: any;
+  actions: any;
+  queries: any;
 }
 
 const FollowingsModal = (props: Props) => {
-  const { data, loading, error } = useMeFollowingsQuery();
+  React.useEffect(() => {
+    if (props.isOpen == true) {
+      props.actions?.getFollowings();
+    }
+  }, [props.isOpen]);
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -29,15 +36,19 @@ const FollowingsModal = (props: Props) => {
           <ModalHeader>دنبال‌شده‌ها</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {loading ? (
+            {props.queries?.followingsQuery?.loading ? (
               <ApiLoading />
-            ) : data ? (
-              data.me?.followingUsers.edges.map((item) => (
-                <UserSimpleListCard
-                  key={item?.node?.followed.id}
-                  {...item?.node?.followed}
-                />
-              ))
+            ) : props.queries?.followingsQuery?.data ? (
+              <Stack spacing="3">
+                {props.queries?.followingsQuery?.data.me?.followingUsers.edges.map(
+                  (item: any) => (
+                    <UserSimpleListCard
+                      key={item?.node?.followed.id}
+                      {...item?.node?.followed}
+                    />
+                  )
+                )}
+              </Stack>
             ) : (
               <Text>موردی یافت نشد!</Text>
             )}

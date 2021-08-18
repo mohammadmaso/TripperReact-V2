@@ -6,13 +6,12 @@ interface Props {}
 const UserSimpleListCard = (props: any) => {
   return (
     <div>
-      <Box rounded="md">
+      <Box rounded="md" shadow="md" p="2">
         <Flex justify="space-between">
-          <Wrap>
+          <Wrap align="center">
             <Avatar src={props.avatar} />
             <Text>{props.username}</Text>
           </Wrap>
-          <Button>دنبال کردن</Button>
         </Flex>
       </Box>
     </div>

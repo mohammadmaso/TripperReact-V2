@@ -19,6 +19,8 @@ import { MeDetailQuery, UserNode } from '../../graphql/generated/types';
 interface Props {
   data: any;
   isSelf: boolean;
+  actions: any;
+  lazyQueries: any;
 }
 
 const ProfileContainer = (props: Props) => {
@@ -32,8 +34,17 @@ const ProfileContainer = (props: Props) => {
         overflow={'hidden'}
         mb="8"
       >
-        <ProfileHeader isSelf={props.isSelf} data={props.data?.me} />
-        <ProfileTabs trips={props.data?.me?.trips.edges} />
+        <ProfileHeader
+          isSelf={props.isSelf}
+          data={props.data?.me}
+          actions={props.actions}
+          lazyQueries={props.lazyQueries}
+        />
+        <ProfileTabs
+          trips={props.data?.me?.trips.edges}
+          actions={props.actions}
+          queries={props.lazyQueries}
+        />
       </Box>
     </div>
   );

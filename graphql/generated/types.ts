@@ -5137,6 +5137,22 @@ export type CreateTripMutation = (
   )> }
 );
 
+export type UpdateProfileMutationVariables = Exact<{
+  updateProfileInput: UpdateProfileInput;
+}>;
+
+
+export type UpdateProfileMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProfile?: Maybe<(
+    { __typename?: 'UpdateProfilePayload' }
+    & { profile?: Maybe<(
+      { __typename?: 'ProfileType' }
+      & Pick<ProfileType, 'header'>
+    )> }
+  )> }
+);
+
 export type AllArticleQueryVariables = Exact<{
   allArticleOffset?: Maybe<Scalars['Int']>;
   allArticleBefore?: Maybe<Scalars['String']>;
@@ -5449,7 +5465,7 @@ export type MeFollowersQuery = (
         { __typename?: 'FollowingTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'FollowingType' }
-          & { followed: (
+          & { follower: (
             { __typename?: 'UserType' }
             & Pick<UserType, 'id' | 'username' | 'avatar'>
           ) }
@@ -5496,6 +5512,29 @@ export type AllProfilesQuery = (
         )> }
       )> }
     )>> }
+  )> }
+);
+
+export type MeSavedTripsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeSavedTripsQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserType' }
+    & { savedTrips: (
+      { __typename?: 'TripCollectionsTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripCollectionsTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripCollectionsType' }
+          & { trip: (
+            { __typename?: 'TripType' }
+            & TripSimpleFieldsFragment
+          ) }
+        )> }
+      )>> }
+    ) }
   )> }
 );
 
@@ -5870,6 +5909,41 @@ export function useCreateTripMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateTripMutationHookResult = ReturnType<typeof useCreateTripMutation>;
 export type CreateTripMutationResult = Apollo.MutationResult<CreateTripMutation>;
 export type CreateTripMutationOptions = Apollo.BaseMutationOptions<CreateTripMutation, CreateTripMutationVariables>;
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
+  updateProfile(input: $updateProfileInput) {
+    profile {
+      header
+    }
+  }
+}
+    `;
+export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
+
+/**
+ * __useUpdateProfileMutation__
+ *
+ * To run a mutation, you first call `useUpdateProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProfileMutation, { data, loading, error }] = useUpdateProfileMutation({
+ *   variables: {
+ *      updateProfileInput: // value for 'updateProfileInput'
+ *   },
+ * });
+ */
+export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProfileMutation, UpdateProfileMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, options);
+      }
+export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
+export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
+export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
 export const AllArticleDocument = gql`
     query AllArticle($allArticleOffset: Int, $allArticleBefore: String, $allArticleAfter: String, $allArticleFirst: Int, $allArticleLast: Int, $allArticleCategory: ID) {
   allArticle(
@@ -6368,7 +6442,7 @@ export const MeFollowersDocument = gql`
     followerUsers {
       edges {
         node {
-          followed {
+          follower {
             id
             username
             avatar
@@ -6467,6 +6541,48 @@ export function useAllProfilesLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllProfilesQueryHookResult = ReturnType<typeof useAllProfilesQuery>;
 export type AllProfilesLazyQueryHookResult = ReturnType<typeof useAllProfilesLazyQuery>;
 export type AllProfilesQueryResult = Apollo.QueryResult<AllProfilesQuery, AllProfilesQueryVariables>;
+export const MeSavedTripsDocument = gql`
+    query MeSavedTrips {
+  me {
+    savedTrips {
+      edges {
+        node {
+          trip {
+            ...TripSimpleFields
+          }
+        }
+      }
+    }
+  }
+}
+    ${TripSimpleFieldsFragmentDoc}`;
+
+/**
+ * __useMeSavedTripsQuery__
+ *
+ * To run a query within a React component, call `useMeSavedTripsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeSavedTripsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeSavedTripsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeSavedTripsQuery(baseOptions?: Apollo.QueryHookOptions<MeSavedTripsQuery, MeSavedTripsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeSavedTripsQuery, MeSavedTripsQueryVariables>(MeSavedTripsDocument, options);
+      }
+export function useMeSavedTripsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeSavedTripsQuery, MeSavedTripsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeSavedTripsQuery, MeSavedTripsQueryVariables>(MeSavedTripsDocument, options);
+        }
+export type MeSavedTripsQueryHookResult = ReturnType<typeof useMeSavedTripsQuery>;
+export type MeSavedTripsLazyQueryHookResult = ReturnType<typeof useMeSavedTripsLazyQuery>;
+export type MeSavedTripsQueryResult = Apollo.QueryResult<MeSavedTripsQuery, MeSavedTripsQueryVariables>;
 export const namedOperations = {
   Query: {
     AllArticle: 'AllArticle',
@@ -6479,7 +6595,8 @@ export const namedOperations = {
     MeDetail: 'MeDetail',
     MeFollowings: 'MeFollowings',
     MeFollowers: 'MeFollowers',
-    AllProfiles: 'AllProfiles'
+    AllProfiles: 'AllProfiles',
+    MeSavedTrips: 'MeSavedTrips'
   },
   Mutation: {
     VerifySms: 'VerifySms',
@@ -6489,7 +6606,8 @@ export const namedOperations = {
     ForgotPasswordSms: 'ForgotPasswordSms',
     TokenAuth: 'TokenAuth',
     ResendVerificationSms: 'ResendVerificationSms',
-    CreateTrip: 'CreateTrip'
+    CreateTrip: 'CreateTrip',
+    UpdateProfile: 'UpdateProfile'
   },
   Fragment: {
     TripSimpleFields: 'TripSimpleFields',

@@ -43,7 +43,7 @@ query MeFollowers {
     followerUsers {
       edges {
         node {
-          followed {
+          follower {
             id
             username
             avatar
@@ -80,6 +80,20 @@ query AllProfiles {
                 image
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+query MeSavedTrips {
+  me {
+    savedTrips {
+      edges {
+        node {
+          trip {
+            ...TripSimpleFields
           }
         }
       }
