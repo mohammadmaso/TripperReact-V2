@@ -1,4 +1,5 @@
 import { Wrap, Divider, Flex, Stack } from '@chakra-ui/react';
+import Head from 'next/head';
 import React from 'react';
 import ApiError from '../../componenets/ApiError';
 import ApiLoading from '../../componenets/ApiLoading';
@@ -30,17 +31,16 @@ const ArticleView = (props: Props) => {
   }
 
   return (
-    <BaseLayout
-      title={data?.article?.title}
-      subNav={
-        <ArticleHeader
-          title={data?.article?.title}
-          category={data?.article?.category}
-          author={data?.article?.author}
-          timeToRead={data?.article?.timeToRead}
-        />
-      }
-    >
+    <>
+      <Head>
+        <title>{`تریپر | ${data?.article?.title} `}</title>
+      </Head>
+      <ArticleHeader
+        title={data?.article?.title}
+        category={data?.article?.category}
+        author={data?.article?.author}
+        timeToRead={data?.article?.timeToRead}
+      />
       <Wrap>
         <Divider />
         <Flex direction={{ base: 'column', md: 'row', lg: 'row' }} w="full">
@@ -78,7 +78,7 @@ const ArticleView = (props: Props) => {
           </Wrap>
         </Flex>
       </Wrap>
-    </BaseLayout>
+    </>
   );
 };
 

@@ -14,6 +14,8 @@ import {
   MenuCommand,
   MenuDivider,
   Button,
+  Icon,
+  Tooltip,
 } from '@chakra-ui/react';
 
 import { FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
@@ -25,6 +27,9 @@ import Link from 'next/link';
 import NavProfile from '../componenets/navbars/NavProfile';
 import { useMeQuery } from '../graphql/generated/types';
 import { BeatLoader } from 'react-spinners';
+import { fromPromise } from '@apollo/client';
+import { getNewToken } from '../graphql/ApolloLink';
+import { BiError } from 'react-icons/bi';
 
 interface Props {
   minimal?: boolean;
@@ -38,11 +43,33 @@ const NavBarUserView = (props: Props) => {
   const signOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');
-    router.push('/');
+
+    if (router.pathname == '/') {
+      router.push('/');
+      router.reload();
+    } else {
+      router.push('/');
+    }
   };
 
   if (loading) {
     return <BeatLoader size={8} color="#009d21" />;
+  }
+
+  if (error) {
+    return (
+      <Tooltip
+        label="خطا در دریافت پروفایل/ ورود دوباره"
+        aria-label="A tooltip"
+        placement="bottom-end"
+      >
+        <Icon
+          onClick={() => router.push('/auth/login')}
+          as={BiError}
+          color="red.300"
+        />
+      </Tooltip>
+    );
   }
 
   return (

@@ -34,7 +34,9 @@ export function TravelogueMap(props: any) {
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
             width="100%"
             height="500px"
-            onViewportChange={(viewport: any) => setViewport(viewport)}
+            scrollZoom={false}
+            dragPan={false}
+            // onViewportChange={(viewport: any) => setViewport(viewport)}
           />
         </Box>
       </Box>

@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   Flex,
   Button,
+  Tooltip,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FiBookmark, FiHeart } from 'react-icons/fi';
@@ -137,8 +138,19 @@ export function TravelogueHeader(props: Props) {
           </Wrap>
         </Wrap>
       ) : (
-        <Stack alignItems="flex-end">
-          <Wrap spacing="2" style={{ filter: 'blur(1px)' }}>
+        <Tooltip
+          onClick={() => goToSignUp()}
+          hasArrow
+          label="برای لایک و ذخیره کردن ابتدا وارد شوید"
+          bg="gray.300"
+          color="black"
+        >
+          <Wrap
+            direction={{ base: 'column', sm: 'column', md: 'row' }}
+            alignConten="left"
+            spacing="2"
+            style={{ filter: 'blur(1px)' }}
+          >
             <Wrap spacing="1" align="center">
               <Wrap style={{ filter: 'blur(0px)' }} fontSize="xs" spacing="1">
                 <Text>{`(${props.likes})`}</Text>
@@ -150,15 +162,7 @@ export function TravelogueHeader(props: Props) {
             <Divider orientation="vertical" />
             <FiBookmark size="20" />
           </Wrap>
-          <Button
-            variant="ghost"
-            colorScheme="gray"
-            size="xs"
-            onClick={() => goToSignUp()}
-          >
-            برای لایک و ذخیره کرد ن ابتدا وارد شوید
-          </Button>
-        </Stack>
+        </Tooltip>
       )}
     </Flex>
   );

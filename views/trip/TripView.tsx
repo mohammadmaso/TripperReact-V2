@@ -1,4 +1,5 @@
 import { Wrap, Divider, Flex, Stack } from '@chakra-ui/react';
+import Head from 'next/head';
 import React from 'react';
 import ApiError from '../../componenets/ApiError';
 import ApiLoading from '../../componenets/ApiLoading';
@@ -57,6 +58,9 @@ const TripView = (props: Props) => {
 
   return (
     <>
+      <Head>
+        <title>{`تریپر | ${data?.trip?.title} `}</title>
+      </Head>
       <TravelogueHeader
         title={data?.trip?.title}
         categories={data?.trip?.categories.edges}

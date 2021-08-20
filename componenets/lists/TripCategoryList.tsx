@@ -12,7 +12,7 @@ const TripCategoryList = (props: Props) => {
     <div>
       <SimpleGrid
         spacing="5"
-        columns={{ base: 2, sm: 2, md: 4 }}
+        columns={{ base: 1, sm: 2, md: 4 }}
         justify="center"
       >
         {props.categories.map((item: any) => (

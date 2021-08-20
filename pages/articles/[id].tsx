@@ -26,5 +26,9 @@ import { useRouter } from 'next/router';
 
 export default function Travelogue() {
   const router = useRouter();
-  return <ArticleView id={router.query.id! as string} />;
+  return (
+    <BaseLayout>
+      <ArticleView id={router.query.id! as string} />
+    </BaseLayout>
+  );
 }

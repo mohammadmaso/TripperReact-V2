@@ -31,14 +31,14 @@ export function ArticleHeader(props: any) {
 
   return (
     <Stack
-      px={[4, 4, 120]}
-      position={stickyHeader ? 'fixed' : undefined}
-      pt={stickyHeader ? '4' : '2'}
-      pb={stickyHeader ? '2' : '2'}
-      boxShadow={stickyHeader ? 'md' : '0'}
-      bgColor={useColorModeValue('white', 'gray.700')}
+      // px={[4, 4, 120]}
+      // position={stickyHeader ? 'fixed' : undefined}
+      pt={'2'}
+      pb={'2'}
+      // boxShadow={stickyHeader ? 'md' : '0'}
+      // bgColor={useColorModeValue('white', 'gray.700')}
       zIndex="90"
-      top={stickyHeader ? '60px' : undefined}
+      // top={stickyHeader ? '60px' : undefined}
       w="full"
       transitionDuration="2"
     >
