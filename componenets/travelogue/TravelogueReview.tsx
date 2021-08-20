@@ -27,7 +27,7 @@ const TravelogueReview = (props: Props) => {
         p="3"
       >
         <Stack>
-          <Link href={`/profile/${props.id}`} passHref>
+          <Link href={`/profile/${props.author?.id}`} passHref>
             <Wrap align="center" cursor="pointer">
               <Avatar src={props.author?.avatar} />
               <Text>{props.author?.username}</Text>
