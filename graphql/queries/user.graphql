@@ -22,6 +22,59 @@ query MeDetail {
   }
 }
 
+query UserDetail($userId: ID!, $followedUserId: ID!) {
+  user(id: $userId) {
+    ...UserFields
+    profilemodel {
+      ...ProfileFields
+    }
+    trips {
+      edges {
+        node {
+          ...TripSimpleFields
+        }
+      }
+    }
+  }
+  followedUser(id: $followedUserId)
+}
+
+query isFollowed($followedUserId: ID!) {
+  followedUser(id: $followedUserId)
+}
+
+query userFollowings($userId: ID!) {
+  user(id: $userId) {
+    followingUsers {
+      edges {
+        node {
+          followed {
+            username
+            avatar
+            id
+          }
+        }
+      }
+    }
+  }
+}
+
+query UserFollowers($userId: ID!) {
+  user(id: $userId) {
+    followerUsers {
+      edges {
+        node {
+          follower {
+            id
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+
 query MeFollowings {
   me {
     followingUsers {
@@ -55,7 +108,7 @@ query MeFollowers {
 }
 
 query AllProfiles {
-  users {
+  allUsers {
     edges {
       node {
         id

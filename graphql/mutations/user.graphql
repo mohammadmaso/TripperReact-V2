@@ -5,3 +5,9 @@ mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
     }
   }
 }
+
+mutation FollowOrUnfollow($followOrUnfollowInput: FollowOrUnfollowInput!) {
+  followOrUnfollow(input: $followOrUnfollowInput) {
+    followStatus
+  }
+}

@@ -1,4 +1,4 @@
-import { Stack, Wrap, Text } from '@chakra-ui/react';
+import { Stack, Wrap, Text, Box, Center } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import ReactMapGL from 'react-map-gl';
 import { FiMap } from 'react-icons/fi';
@@ -15,14 +15,29 @@ export function TravelogueMap(props: any) {
         <FiMap />
         <Text>نقشه سفر</Text>
       </Wrap>
-      <ReactMapGL
-        mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
-        {...viewport}
-        mapStyle="mapbox://styles/mapbox/outdoors-v11"
-        width="100%"
-        height="500px"
-        onViewportChange={(viewport: any) => setViewport(viewport)}
-      />
+      <Box position="relative">
+        <Center
+          position="absolute"
+          left={'calc(50% - 50px)'}
+          top={'calc(50% - 10px)'}
+          bgColor="whiteAlpha.900"
+          p="2"
+          rounded="full"
+          zIndex="10"
+        >
+          <Text fontSize="sm">درحال توسعه</Text>
+        </Center>
+        <Box style={{ filter: 'blur(5px)' }}>
+          <ReactMapGL
+            mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+            {...viewport}
+            mapStyle="mapbox://styles/mapbox/outdoors-v11"
+            width="100%"
+            height="500px"
+            onViewportChange={(viewport: any) => setViewport(viewport)}
+          />
+        </Box>
+      </Box>
     </Stack>
   );
 }

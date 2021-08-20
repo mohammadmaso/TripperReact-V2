@@ -32,7 +32,7 @@ import WizardNavIcons from './WizardNavIcons';
 const MinimalNavBar = (props: any) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const [stickyNav, setStickyNav] = useState(false);
-  const isSignedIn = useIsSignedIn();
+  const { isSignedIn } = useIsSignedIn();
 
   const handleScroll = () => {
     if (window.pageYOffset > 200) {

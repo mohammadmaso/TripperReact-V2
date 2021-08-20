@@ -13,6 +13,7 @@ import {
   Wrap,
   Tooltip,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import React from 'react';
 import { UserType } from '../../graphql/generated/types';
 
@@ -89,18 +90,19 @@ export default function TravelerCard(props: UserType) {
               </Text>
             </Stack>
           </Stack>
-
-          <Button
-            w={'full'}
-            mt={8}
-            fontWeight="medium"
-            rounded={'md'}
-            _hover={{
-              transform: 'translateY(-2px)',
-            }}
-          >
-            جزییات بیشتر
-          </Button>
+          <Link href={`/profile/${props.id}`} passHref>
+            <Button
+              w={'full'}
+              mt={8}
+              fontWeight="medium"
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+              }}
+            >
+              جزییات بیشتر
+            </Button>
+          </Link>
         </Box>
       </Stack>
     </Center>

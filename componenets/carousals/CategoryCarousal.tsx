@@ -1,6 +1,6 @@
 import { Box, Grid, Heading, HStack, Stack } from '@chakra-ui/react';
 import React, { ReactElement } from 'react';
-import Slider from 'react-slick';
+import Slider, { Settings } from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import CategoryCard from '../cards/CategoryCard';
 
@@ -10,13 +10,15 @@ interface Props {
 }
 
 export default function CategoryCarousal(props: Props): ReactElement {
-  const settings = {
+  const settings: Settings = {
     dots: true,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
     arrows: false,
+    autoplay: true,
+    autoplaySpeed: 6000,
     responsive: [
       {
         breakpoint: 1024,

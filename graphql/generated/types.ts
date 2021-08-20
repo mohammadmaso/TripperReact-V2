@@ -467,6 +467,7 @@ export type AchivmentTypeProfilemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  about?: Maybe<Scalars['String']>;
 };
 
 export type AchivmentTypeConnection = {
@@ -2287,23 +2288,6 @@ export type PlaceVideoTypeEdge = {
   cursor: Scalars['String'];
 };
 
-export type ProfileConnection = {
-  __typename?: 'ProfileConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<ProfileEdge>>;
-};
-
-/** A Relay edge containing a `Profile` and its cursor. */
-export type ProfileEdge = {
-  __typename?: 'ProfileEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<ProfileType>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
 export type ProfileInputType = {
   about?: Maybe<Scalars['String']>;
   header?: Maybe<Scalars['Upload']>;
@@ -2371,11 +2355,11 @@ export type Query = {
   allMyTripPlans?: Maybe<TripPlanTypeConnection>;
   me?: Maybe<UserType>;
   /** The ID of the object */
-  user?: Maybe<UserNode>;
-  users?: Maybe<UserNodeConnection>;
+  user?: Maybe<UserType>;
+  allUsers?: Maybe<UserTypeConnection>;
   /** The ID of the object */
   profile?: Maybe<ProfileType>;
-  allProfile?: Maybe<ProfileConnection>;
+  allProfile?: Maybe<ProfileTypeConnection>;
   followedUser?: Maybe<Scalars['Boolean']>;
   /** The ID of the object */
   placeCollection?: Maybe<PlaceCollectionsType>;
@@ -2481,20 +2465,13 @@ export type QueryUserArgs = {
 };
 
 
-export type QueryUsersArgs = {
+export type QueryAllUsersArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  email?: Maybe<Scalars['String']>;
   username?: Maybe<Scalars['String']>;
-  username_Icontains?: Maybe<Scalars['String']>;
-  username_Istartswith?: Maybe<Scalars['String']>;
-  isActive?: Maybe<Scalars['Boolean']>;
-  status_Archived?: Maybe<Scalars['Boolean']>;
-  status_Verified?: Maybe<Scalars['Boolean']>;
-  status_SecondaryEmail?: Maybe<Scalars['String']>;
 };
 
 
@@ -2504,10 +2481,12 @@ export type QueryProfileArgs = {
 
 
 export type QueryAllProfileArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  about?: Maybe<Scalars['String']>;
 };
 
 
@@ -3666,6 +3645,7 @@ export type TripPlanTypeCompanionsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 
@@ -3887,6 +3867,7 @@ export type TripTypeCompanionsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 
@@ -4524,23 +4505,6 @@ export type UserNodeExperiencesOfUserArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type UserNodeConnection = {
-  __typename?: 'UserNodeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<UserNodeEdge>>;
-};
-
-/** A Relay edge containing a `UserNode` and its cursor. */
-export type UserNodeEdge = {
-  __typename?: 'UserNodeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<UserNode>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
 export type UserRegisteredTourType = Node & {
   __typename?: 'UserRegisteredTourType';
   /** The ID of the object. */
@@ -5137,6 +5101,32 @@ export type CreateTripMutation = (
   )> }
 );
 
+export type LikeTripMutationVariables = Exact<{
+  createTripLikeTripId: Scalars['ID'];
+}>;
+
+
+export type LikeTripMutation = (
+  { __typename?: 'Mutation' }
+  & { createTripLike?: Maybe<(
+    { __typename?: 'CreateTripLike' }
+    & Pick<CreateTripLike, 'success' | 'like'>
+  )> }
+);
+
+export type CreateTripReviewMutationVariables = Exact<{
+  createTripReviewInput: CreateTripReviewInput;
+}>;
+
+
+export type CreateTripReviewMutation = (
+  { __typename?: 'Mutation' }
+  & { createTripReview?: Maybe<(
+    { __typename?: 'CreateTripReviewPayload' }
+    & Pick<CreateTripReviewPayload, 'success'>
+  )> }
+);
+
 export type UpdateProfileMutationVariables = Exact<{
   updateProfileInput: UpdateProfileInput;
 }>;
@@ -5150,6 +5140,19 @@ export type UpdateProfileMutation = (
       { __typename?: 'ProfileType' }
       & Pick<ProfileType, 'header'>
     )> }
+  )> }
+);
+
+export type FollowOrUnfollowMutationVariables = Exact<{
+  followOrUnfollowInput: FollowOrUnfollowInput;
+}>;
+
+
+export type FollowOrUnfollowMutation = (
+  { __typename?: 'Mutation' }
+  & { followOrUnfollow?: Maybe<(
+    { __typename?: 'FollowOrUnfollowPayload' }
+    & Pick<FollowOrUnfollowPayload, 'followStatus'>
   )> }
 );
 
@@ -5343,7 +5346,7 @@ export type AllTripCategoriesQuery = (
 
 export type TripSimpleFieldsFragment = (
   { __typename?: 'TripType' }
-  & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'likes'>
+  & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'viewsCount' | 'likes'>
   & { author: (
     { __typename?: 'UserType' }
     & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -5394,6 +5397,141 @@ export type AllActivitiesQuery = (
   )> }
 );
 
+export type TripDetailQueryVariables = Exact<{
+  tripId: Scalars['ID'];
+}>;
+
+
+export type TripDetailQuery = (
+  { __typename?: 'Query' }
+  & { trip?: Maybe<(
+    { __typename?: 'TripType' }
+    & Pick<TripType, 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
+    & { activities: (
+      { __typename?: 'TripActivitieTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripActivitieTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripActivitieType' }
+          & Pick<TripActivitieType, 'svg' | 'title' | 'id'>
+        )> }
+      )>> }
+    ), accessories: (
+      { __typename?: 'AccessoryTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'AccessoryTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'AccessoryType' }
+          & Pick<AccessoryType, 'id' | 'likesCount' | 'image' | 'name'>
+          & { brand?: Maybe<(
+            { __typename?: 'AccessoryBrandType' }
+            & Pick<AccessoryBrandType, 'logo' | 'name'>
+          )> }
+        )> }
+      )>> }
+    ), companions: (
+      { __typename?: 'UserTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'UserTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'UserType' }
+          & Pick<UserType, 'id' | 'username' | 'avatar'>
+        )> }
+      )>> }
+    ), images: (
+      { __typename?: 'TripImageTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripImageTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripImageType' }
+          & Pick<TripImageType, 'image' | 'description' | 'copyrightName'>
+        )> }
+      )>> }
+    ), videos: (
+      { __typename?: 'TripVideoTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripVideoTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripVideoType' }
+          & Pick<TripVideoType, 'video' | 'description' | 'copyrightName'>
+        )> }
+      )>> }
+    ), author: (
+      { __typename?: 'UserType' }
+      & Pick<UserType, 'id' | 'username' | 'avatar'>
+    ), experiences: (
+      { __typename?: 'ExperienceImageTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'ExperienceImageTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'ExperienceImageType' }
+          & Pick<ExperienceImageType, 'id' | 'title' | 'defaultImage' | 'description'>
+          & { place: (
+            { __typename?: 'PlaceType' }
+            & Pick<PlaceType, 'name'>
+          ), activities: (
+            { __typename?: 'TripActivitieTypeConnection' }
+            & { edges: Array<Maybe<(
+              { __typename?: 'TripActivitieTypeEdge' }
+              & { node?: Maybe<(
+                { __typename?: 'TripActivitieType' }
+                & Pick<TripActivitieType, 'id' | 'title' | 'svg'>
+              )> }
+            )>> }
+          ) }
+        )> }
+      )>> }
+    ), places: (
+      { __typename?: 'PlaceTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'PlaceTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'PlaceType' }
+          & Pick<PlaceType, 'id' | 'name' | 'longitude' | 'latitude'>
+        )> }
+      )>> }
+    ), country: (
+      { __typename?: 'CountryType' }
+      & Pick<CountryType, 'name'>
+    ), categories: (
+      { __typename?: 'TripCategoryTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripCategoryTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripCategoryType' }
+          & Pick<TripCategoryType, 'id' | 'title'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type TripReviewsQueryVariables = Exact<{
+  tripId: Scalars['ID'];
+}>;
+
+
+export type TripReviewsQuery = (
+  { __typename?: 'Query' }
+  & { trip?: Maybe<(
+    { __typename?: 'TripType' }
+    & { reviewsOfTrip: (
+      { __typename?: 'TripReviewTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripReviewTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripReviewType' }
+          & Pick<TripReviewType, 'likesCount' | 'dislikesCount' | 'description' | 'createdAt' | 'id'>
+          & { author: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'id' | 'username' | 'avatar'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5426,6 +5564,94 @@ export type MeDetailQuery = (
       )>> }
     ) }
     & UserFieldsFragment
+  )> }
+);
+
+export type UserDetailQueryVariables = Exact<{
+  userId: Scalars['ID'];
+  followedUserId: Scalars['ID'];
+}>;
+
+
+export type UserDetailQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'followedUser'>
+  & { user?: Maybe<(
+    { __typename?: 'UserType' }
+    & { profilemodel?: Maybe<(
+      { __typename?: 'ProfileType' }
+      & ProfileFieldsFragment
+    )>, trips: (
+      { __typename?: 'TripTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripType' }
+          & TripSimpleFieldsFragment
+        )> }
+      )>> }
+    ) }
+    & UserFieldsFragment
+  )> }
+);
+
+export type IsFollowedQueryVariables = Exact<{
+  followedUserId: Scalars['ID'];
+}>;
+
+
+export type IsFollowedQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'followedUser'>
+);
+
+export type UserFollowingsQueryVariables = Exact<{
+  userId: Scalars['ID'];
+}>;
+
+
+export type UserFollowingsQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'UserType' }
+    & { followingUsers: (
+      { __typename?: 'FollowingTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'FollowingTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'FollowingType' }
+          & { followed: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'username' | 'avatar' | 'id'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type UserFollowersQueryVariables = Exact<{
+  userId: Scalars['ID'];
+}>;
+
+
+export type UserFollowersQuery = (
+  { __typename?: 'Query' }
+  & { user?: Maybe<(
+    { __typename?: 'UserType' }
+    & { followerUsers: (
+      { __typename?: 'FollowingTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'FollowingTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'FollowingType' }
+          & { follower: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'id' | 'username' | 'avatar'>
+          ) }
+        )> }
+      )>> }
+    ) }
   )> }
 );
 
@@ -5480,13 +5706,13 @@ export type AllProfilesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllProfilesQuery = (
   { __typename?: 'Query' }
-  & { users?: Maybe<(
-    { __typename?: 'UserNodeConnection' }
+  & { allUsers?: Maybe<(
+    { __typename?: 'UserTypeConnection' }
     & { edges: Array<Maybe<(
-      { __typename?: 'UserNodeEdge' }
+      { __typename?: 'UserTypeEdge' }
       & { node?: Maybe<(
-        { __typename?: 'UserNode' }
-        & Pick<UserNode, 'id' | 'username' | 'avatar'>
+        { __typename?: 'UserType' }
+        & Pick<UserType, 'id' | 'username' | 'avatar'>
         & { trips: (
           { __typename?: 'TripTypeConnection' }
           & { edges: Array<Maybe<(
@@ -5557,6 +5783,7 @@ export const TripSimpleFieldsFragmentDoc = gql`
   startDate
   endDate
   defaultImage
+  viewsCount
   author {
     id
     username
@@ -5909,6 +6136,73 @@ export function useCreateTripMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateTripMutationHookResult = ReturnType<typeof useCreateTripMutation>;
 export type CreateTripMutationResult = Apollo.MutationResult<CreateTripMutation>;
 export type CreateTripMutationOptions = Apollo.BaseMutationOptions<CreateTripMutation, CreateTripMutationVariables>;
+export const LikeTripDocument = gql`
+    mutation LikeTrip($createTripLikeTripId: ID!) {
+  createTripLike(tripId: $createTripLikeTripId) {
+    success
+    like
+  }
+}
+    `;
+export type LikeTripMutationFn = Apollo.MutationFunction<LikeTripMutation, LikeTripMutationVariables>;
+
+/**
+ * __useLikeTripMutation__
+ *
+ * To run a mutation, you first call `useLikeTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLikeTripMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [likeTripMutation, { data, loading, error }] = useLikeTripMutation({
+ *   variables: {
+ *      createTripLikeTripId: // value for 'createTripLikeTripId'
+ *   },
+ * });
+ */
+export function useLikeTripMutation(baseOptions?: Apollo.MutationHookOptions<LikeTripMutation, LikeTripMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LikeTripMutation, LikeTripMutationVariables>(LikeTripDocument, options);
+      }
+export type LikeTripMutationHookResult = ReturnType<typeof useLikeTripMutation>;
+export type LikeTripMutationResult = Apollo.MutationResult<LikeTripMutation>;
+export type LikeTripMutationOptions = Apollo.BaseMutationOptions<LikeTripMutation, LikeTripMutationVariables>;
+export const CreateTripReviewDocument = gql`
+    mutation CreateTripReview($createTripReviewInput: CreateTripReviewInput!) {
+  createTripReview(input: $createTripReviewInput) {
+    success
+  }
+}
+    `;
+export type CreateTripReviewMutationFn = Apollo.MutationFunction<CreateTripReviewMutation, CreateTripReviewMutationVariables>;
+
+/**
+ * __useCreateTripReviewMutation__
+ *
+ * To run a mutation, you first call `useCreateTripReviewMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTripReviewMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTripReviewMutation, { data, loading, error }] = useCreateTripReviewMutation({
+ *   variables: {
+ *      createTripReviewInput: // value for 'createTripReviewInput'
+ *   },
+ * });
+ */
+export function useCreateTripReviewMutation(baseOptions?: Apollo.MutationHookOptions<CreateTripReviewMutation, CreateTripReviewMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTripReviewMutation, CreateTripReviewMutationVariables>(CreateTripReviewDocument, options);
+      }
+export type CreateTripReviewMutationHookResult = ReturnType<typeof useCreateTripReviewMutation>;
+export type CreateTripReviewMutationResult = Apollo.MutationResult<CreateTripReviewMutation>;
+export type CreateTripReviewMutationOptions = Apollo.BaseMutationOptions<CreateTripReviewMutation, CreateTripReviewMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
   updateProfile(input: $updateProfileInput) {
@@ -5944,6 +6238,39 @@ export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
 export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
 export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
+export const FollowOrUnfollowDocument = gql`
+    mutation FollowOrUnfollow($followOrUnfollowInput: FollowOrUnfollowInput!) {
+  followOrUnfollow(input: $followOrUnfollowInput) {
+    followStatus
+  }
+}
+    `;
+export type FollowOrUnfollowMutationFn = Apollo.MutationFunction<FollowOrUnfollowMutation, FollowOrUnfollowMutationVariables>;
+
+/**
+ * __useFollowOrUnfollowMutation__
+ *
+ * To run a mutation, you first call `useFollowOrUnfollowMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useFollowOrUnfollowMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [followOrUnfollowMutation, { data, loading, error }] = useFollowOrUnfollowMutation({
+ *   variables: {
+ *      followOrUnfollowInput: // value for 'followOrUnfollowInput'
+ *   },
+ * });
+ */
+export function useFollowOrUnfollowMutation(baseOptions?: Apollo.MutationHookOptions<FollowOrUnfollowMutation, FollowOrUnfollowMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<FollowOrUnfollowMutation, FollowOrUnfollowMutationVariables>(FollowOrUnfollowDocument, options);
+      }
+export type FollowOrUnfollowMutationHookResult = ReturnType<typeof useFollowOrUnfollowMutation>;
+export type FollowOrUnfollowMutationResult = Apollo.MutationResult<FollowOrUnfollowMutation>;
+export type FollowOrUnfollowMutationOptions = Apollo.BaseMutationOptions<FollowOrUnfollowMutation, FollowOrUnfollowMutationVariables>;
 export const AllArticleDocument = gql`
     query AllArticle($allArticleOffset: Int, $allArticleBefore: String, $allArticleAfter: String, $allArticleFirst: Int, $allArticleLast: Int, $allArticleCategory: ID) {
   allArticle(
@@ -6310,6 +6637,202 @@ export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
 export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
 export type AllActivitiesQueryResult = Apollo.QueryResult<AllActivitiesQuery, AllActivitiesQueryVariables>;
+export const TripDetailDocument = gql`
+    query TripDetail($tripId: ID!) {
+  trip(id: $tripId) {
+    id
+    tripMap
+    gpsTrack
+    costs
+    checkList
+    todoList
+    activities {
+      edges {
+        node {
+          svg
+          title
+          id
+        }
+      }
+    }
+    accessories {
+      edges {
+        node {
+          id
+          likesCount
+          brand {
+            logo
+            name
+          }
+          image
+          name
+        }
+      }
+    }
+    companions {
+      edges {
+        node {
+          id
+          username
+          avatar
+        }
+      }
+    }
+    images {
+      edges {
+        node {
+          image
+          description
+          copyrightName
+        }
+      }
+    }
+    videos {
+      edges {
+        node {
+          video
+          description
+          copyrightName
+        }
+      }
+    }
+    title
+    description
+    createdAt
+    startDate
+    endDate
+    author {
+      id
+      username
+      avatar
+    }
+    likes
+    experiences {
+      edges {
+        node {
+          id
+          title
+          defaultImage
+          description
+          place {
+            name
+          }
+          activities {
+            edges {
+              node {
+                id
+                title
+                svg
+              }
+            }
+          }
+        }
+      }
+    }
+    places {
+      edges {
+        node {
+          id
+          name
+          longitude
+          latitude
+        }
+      }
+    }
+    defaultImage
+    viewsCount
+    country {
+      name
+    }
+    categories {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTripDetailQuery__
+ *
+ * To run a query within a React component, call `useTripDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTripDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTripDetailQuery({
+ *   variables: {
+ *      tripId: // value for 'tripId'
+ *   },
+ * });
+ */
+export function useTripDetailQuery(baseOptions: Apollo.QueryHookOptions<TripDetailQuery, TripDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TripDetailQuery, TripDetailQueryVariables>(TripDetailDocument, options);
+      }
+export function useTripDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TripDetailQuery, TripDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TripDetailQuery, TripDetailQueryVariables>(TripDetailDocument, options);
+        }
+export type TripDetailQueryHookResult = ReturnType<typeof useTripDetailQuery>;
+export type TripDetailLazyQueryHookResult = ReturnType<typeof useTripDetailLazyQuery>;
+export type TripDetailQueryResult = Apollo.QueryResult<TripDetailQuery, TripDetailQueryVariables>;
+export const TripReviewsDocument = gql`
+    query TripReviews($tripId: ID!) {
+  trip(id: $tripId) {
+    reviewsOfTrip {
+      edges {
+        node {
+          author {
+            id
+            username
+            avatar
+          }
+          likesCount
+          dislikesCount
+          description
+          createdAt
+          id
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useTripReviewsQuery__
+ *
+ * To run a query within a React component, call `useTripReviewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTripReviewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTripReviewsQuery({
+ *   variables: {
+ *      tripId: // value for 'tripId'
+ *   },
+ * });
+ */
+export function useTripReviewsQuery(baseOptions: Apollo.QueryHookOptions<TripReviewsQuery, TripReviewsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TripReviewsQuery, TripReviewsQueryVariables>(TripReviewsDocument, options);
+      }
+export function useTripReviewsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TripReviewsQuery, TripReviewsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TripReviewsQuery, TripReviewsQueryVariables>(TripReviewsDocument, options);
+        }
+export type TripReviewsQueryHookResult = ReturnType<typeof useTripReviewsQuery>;
+export type TripReviewsLazyQueryHookResult = ReturnType<typeof useTripReviewsLazyQuery>;
+export type TripReviewsQueryResult = Apollo.QueryResult<TripReviewsQuery, TripReviewsQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -6392,6 +6915,178 @@ export function useMeDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<M
 export type MeDetailQueryHookResult = ReturnType<typeof useMeDetailQuery>;
 export type MeDetailLazyQueryHookResult = ReturnType<typeof useMeDetailLazyQuery>;
 export type MeDetailQueryResult = Apollo.QueryResult<MeDetailQuery, MeDetailQueryVariables>;
+export const UserDetailDocument = gql`
+    query UserDetail($userId: ID!, $followedUserId: ID!) {
+  user(id: $userId) {
+    ...UserFields
+    profilemodel {
+      ...ProfileFields
+    }
+    trips {
+      edges {
+        node {
+          ...TripSimpleFields
+        }
+      }
+    }
+  }
+  followedUser(id: $followedUserId)
+}
+    ${UserFieldsFragmentDoc}
+${ProfileFieldsFragmentDoc}
+${TripSimpleFieldsFragmentDoc}`;
+
+/**
+ * __useUserDetailQuery__
+ *
+ * To run a query within a React component, call `useUserDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserDetailQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *      followedUserId: // value for 'followedUserId'
+ *   },
+ * });
+ */
+export function useUserDetailQuery(baseOptions: Apollo.QueryHookOptions<UserDetailQuery, UserDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserDetailQuery, UserDetailQueryVariables>(UserDetailDocument, options);
+      }
+export function useUserDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserDetailQuery, UserDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserDetailQuery, UserDetailQueryVariables>(UserDetailDocument, options);
+        }
+export type UserDetailQueryHookResult = ReturnType<typeof useUserDetailQuery>;
+export type UserDetailLazyQueryHookResult = ReturnType<typeof useUserDetailLazyQuery>;
+export type UserDetailQueryResult = Apollo.QueryResult<UserDetailQuery, UserDetailQueryVariables>;
+export const IsFollowedDocument = gql`
+    query isFollowed($followedUserId: ID!) {
+  followedUser(id: $followedUserId)
+}
+    `;
+
+/**
+ * __useIsFollowedQuery__
+ *
+ * To run a query within a React component, call `useIsFollowedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsFollowedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsFollowedQuery({
+ *   variables: {
+ *      followedUserId: // value for 'followedUserId'
+ *   },
+ * });
+ */
+export function useIsFollowedQuery(baseOptions: Apollo.QueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
+      }
+export function useIsFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
+        }
+export type IsFollowedQueryHookResult = ReturnType<typeof useIsFollowedQuery>;
+export type IsFollowedLazyQueryHookResult = ReturnType<typeof useIsFollowedLazyQuery>;
+export type IsFollowedQueryResult = Apollo.QueryResult<IsFollowedQuery, IsFollowedQueryVariables>;
+export const UserFollowingsDocument = gql`
+    query userFollowings($userId: ID!) {
+  user(id: $userId) {
+    followingUsers {
+      edges {
+        node {
+          followed {
+            username
+            avatar
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useUserFollowingsQuery__
+ *
+ * To run a query within a React component, call `useUserFollowingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserFollowingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserFollowingsQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useUserFollowingsQuery(baseOptions: Apollo.QueryHookOptions<UserFollowingsQuery, UserFollowingsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserFollowingsQuery, UserFollowingsQueryVariables>(UserFollowingsDocument, options);
+      }
+export function useUserFollowingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserFollowingsQuery, UserFollowingsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserFollowingsQuery, UserFollowingsQueryVariables>(UserFollowingsDocument, options);
+        }
+export type UserFollowingsQueryHookResult = ReturnType<typeof useUserFollowingsQuery>;
+export type UserFollowingsLazyQueryHookResult = ReturnType<typeof useUserFollowingsLazyQuery>;
+export type UserFollowingsQueryResult = Apollo.QueryResult<UserFollowingsQuery, UserFollowingsQueryVariables>;
+export const UserFollowersDocument = gql`
+    query UserFollowers($userId: ID!) {
+  user(id: $userId) {
+    followerUsers {
+      edges {
+        node {
+          follower {
+            id
+            username
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useUserFollowersQuery__
+ *
+ * To run a query within a React component, call `useUserFollowersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserFollowersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserFollowersQuery({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useUserFollowersQuery(baseOptions: Apollo.QueryHookOptions<UserFollowersQuery, UserFollowersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserFollowersQuery, UserFollowersQueryVariables>(UserFollowersDocument, options);
+      }
+export function useUserFollowersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserFollowersQuery, UserFollowersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserFollowersQuery, UserFollowersQueryVariables>(UserFollowersDocument, options);
+        }
+export type UserFollowersQueryHookResult = ReturnType<typeof useUserFollowersQuery>;
+export type UserFollowersLazyQueryHookResult = ReturnType<typeof useUserFollowersLazyQuery>;
+export type UserFollowersQueryResult = Apollo.QueryResult<UserFollowersQuery, UserFollowersQueryVariables>;
 export const MeFollowingsDocument = gql`
     query MeFollowings {
   me {
@@ -6482,7 +7177,7 @@ export type MeFollowersLazyQueryHookResult = ReturnType<typeof useMeFollowersLaz
 export type MeFollowersQueryResult = Apollo.QueryResult<MeFollowersQuery, MeFollowersQueryVariables>;
 export const AllProfilesDocument = gql`
     query AllProfiles {
-  users {
+  allUsers {
     edges {
       node {
         id
@@ -6591,8 +7286,14 @@ export const namedOperations = {
     AllTrip: 'AllTrip',
     AllTripCategories: 'AllTripCategories',
     AllActivities: 'AllActivities',
+    TripDetail: 'TripDetail',
+    TripReviews: 'TripReviews',
     Me: 'Me',
     MeDetail: 'MeDetail',
+    UserDetail: 'UserDetail',
+    isFollowed: 'isFollowed',
+    userFollowings: 'userFollowings',
+    UserFollowers: 'UserFollowers',
     MeFollowings: 'MeFollowings',
     MeFollowers: 'MeFollowers',
     AllProfiles: 'AllProfiles',
@@ -6607,7 +7308,10 @@ export const namedOperations = {
     TokenAuth: 'TokenAuth',
     ResendVerificationSms: 'ResendVerificationSms',
     CreateTrip: 'CreateTrip',
-    UpdateProfile: 'UpdateProfile'
+    LikeTrip: 'LikeTrip',
+    CreateTripReview: 'CreateTripReview',
+    UpdateProfile: 'UpdateProfile',
+    FollowOrUnfollow: 'FollowOrUnfollow'
   },
   Fragment: {
     TripSimpleFields: 'TripSimpleFields',

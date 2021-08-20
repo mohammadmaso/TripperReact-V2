@@ -6,10 +6,11 @@ import CategoryCarousal from '../../componenets/carousals/CategoryCarousal';
 import TripCategoryList from '../../componenets/lists/TripCategoryList';
 import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
 import {
-  useAllArticleCategoryiesQuery, useAllProfilesQuery,
+  useAllArticleCategoryiesQuery,
+  useAllProfilesQuery,
   useAllTripCategoriesQuery,
 } from '../../graphql/generated/types';
-import TravelerList from "../../componenets/lists/TravelerList";
+import TravelerList from '../../componenets/lists/TravelerList';
 
 interface Props {
   listView?: boolean;
@@ -26,7 +27,7 @@ const TravelersView = (props: Props) => {
 
   return (
     <>
-      <TravelerList profiles={data?.users?.edges} />
+      <TravelerList profiles={data?.allUsers?.edges} />
     </>
   );
 };

@@ -20,6 +20,7 @@ interface Props {
   onClose: any;
   actions: any;
   queries: any;
+  isSelf: boolean;
 }
 
 const FollowersModal = (props: Props) => {
@@ -28,6 +29,11 @@ const FollowersModal = (props: Props) => {
       props.actions?.getFollowers();
     }
   }, [props.isOpen]);
+
+  const followersEdges = props.isSelf
+    ? props.queries?.followersQuery?.data?.me?.followerUsers?.edges
+    : props.queries?.followersQuery?.data?.user?.followerUsers?.edges;
+
   return (
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -38,16 +44,14 @@ const FollowersModal = (props: Props) => {
           <ModalBody>
             {props.queries?.followersQuery?.loading ? (
               <ApiLoading />
-            ) : props.queries?.followersQuery?.data ? (
+            ) : followersEdges?.length != 0 ? (
               <Stack spacing="3">
-                {props.queries?.followersQuery?.data.me?.followerUsers.edges.map(
-                  (item: any) => (
-                    <UserSimpleListCard
-                      key={item?.node?.follower.id}
-                      {...item?.node?.follower}
-                    />
-                  )
-                )}
+                {followersEdges?.map((item: any) => (
+                  <UserSimpleListCard
+                    key={item?.node?.follower.id}
+                    {...item?.node?.follower}
+                  />
+                ))}
               </Stack>
             ) : (
               <Text>موردی یافت نشد!</Text>

@@ -27,6 +27,7 @@ import Link from 'next/link';
 import { FiCamera, FiEdit, FiEdit2, FiSettings } from 'react-icons/fi';
 import FollowersModal from '../Modals/FollowersModal';
 import FollowingsModal from '../Modals/FollowingsModal';
+import { RiUserFollowLine } from 'react-icons/ri';
 interface Props {
   isSelf: boolean;
   data: UserFieldsFragment & {
@@ -35,6 +36,7 @@ interface Props {
   };
   actions: any;
   lazyQueries: any;
+  isFollowed: boolean;
 }
 
 const ProfileHeader = ({
@@ -42,6 +44,7 @@ const ProfileHeader = ({
   data,
   actions,
   lazyQueries,
+  isFollowed,
   ...rest
 }: Props) => {
   const modalFollowers = useDisclosure();
@@ -133,7 +136,7 @@ const ProfileHeader = ({
           </Button>
         </Flex>
       ) : null}
-      <Box p={6}>
+      <Stack p={6} align="center" spacing="2">
         <Stack spacing={2} align={'center'} mb={5}>
           <Box>
             {isSelf ? (
@@ -191,13 +194,30 @@ const ProfileHeader = ({
             </Text>
           </Stack>
         </Stack>
-      </Box>
+        {!isSelf && (
+          <Wrap>
+            <Button
+              onClick={() => actions.followOrUnfollow()}
+              isLoading={lazyQueries.followOrUnfollowMutation.loading}
+              colorScheme="primary"
+              rounded="full"
+              variant={isFollowed ? 'solid' : 'outline'}
+              leftIcon={<RiUserFollowLine />}
+              size="sm"
+            >
+              {isFollowed ? 'قطع دنبال‌کردن' : 'دنبال‌ کردن'}
+            </Button>
+          </Wrap>
+        )}
+      </Stack>
       <FollowersModal
+        isSelf={isSelf}
         {...modalFollowers}
         actions={actions}
         queries={lazyQueries}
       />
       <FollowingsModal
+        isSelf={isSelf}
         {...modalFollowings}
         actions={actions}
         queries={lazyQueries}

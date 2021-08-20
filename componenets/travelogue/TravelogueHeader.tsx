@@ -9,12 +9,30 @@ import {
   Avatar,
   HStack,
   useColorModeValue,
+  Flex,
+  Button,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { FiBookmark, FiHeart } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
+import { UserType } from '../../graphql/generated/types';
+import useIsSignedIn from '../../hooks/useIsSignedIn';
+interface Props {
+  title: string | undefined;
+  categories: any;
+  author: any;
+  days: string;
+  date: any;
+  country: string;
+  provinance: string;
+  actions: any;
+  queries: any;
+  likes: number;
+}
 
-export function TravelogueHeader() {
+export function TravelogueHeader(props: Props) {
   const [stickyHeader, setStickyHeader] = useState(false);
+  const { goToSignUp, isSignedIn } = useIsSignedIn();
 
   const handleScroll = () => {
     if (window.pageYOffset > 120) {
@@ -30,51 +48,118 @@ export function TravelogueHeader() {
   useEventListener('scroll', handleScroll);
 
   return (
-    <Stack
-      px={[4, 4, 120]}
-      position={stickyHeader ? 'fixed' : undefined}
-      pt={stickyHeader ? '4' : '2'}
-      pb={stickyHeader ? '2' : '2'}
-      boxShadow={stickyHeader ? 'md' : '0'}
-      bgColor={stickyHeader ? 'white' : 'transparent'}
+    <Flex
+      // position={stickyHeader ? 'fixed' : undefined}
+      pt={'2'}
+      pb={'2'}
+      // boxShadow={stickyHeader ? 'md' : '0'}
+      // bgColor={stickyHeader ? 'white' : 'transparent'}
       zIndex="90"
-      top={stickyHeader ? '60px' : undefined}
+      // top={stickyHeader ? '60px' : undefined}
       w="full"
       transitionDuration="2"
+      justify="space-between"
+      align="center"
     >
-      <Text as="h1" fontSize="xl" fontWeight="semibold">
-        گشت و گذار در شیراز
-      </Text>
-      <Wrap fontWeight="light" fontSize="sm">
-        <HStack align={'center'} justify="space-between">
-          <Avatar
-            src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-            alt={'Author'}
-            size="sm"
-            ml="2"
-          />
-          <Text fontWeight={300} fontSize="sm" dir="ltr">
-            @mohammadmaso
-          </Text>
-        </HStack>
-        <Tag colorScheme="primary">خانوادگی</Tag>
-        <Tag colorScheme="primary">ماجراجویی</Tag>
-        <Divider orientation="vertical" />
-        <Wrap align="center">
-          <TimeIcon ml="1" />
-          <Text>۲ روز</Text>
+      <Stack>
+        <Text as="h1" fontSize="xl" fontWeight="semibold">
+          {props.title}
+        </Text>
+        <Wrap fontWeight="light" fontSize="sm">
+          <HStack align={'center'} justify="space-between">
+            <Avatar
+              src={props.author?.avatar}
+              alt={props.author?.username}
+              size="sm"
+              ml="2"
+            />
+            <Text fontWeight={300} fontSize="sm" dir="ltr">
+              {props.author?.username}
+            </Text>
+          </HStack>
+          {props.categories?.map((item: any) => (
+            <Tag key={item.node.id} colorScheme="primary">
+              {item.node.title}
+            </Tag>
+          ))}
+
+          <Divider orientation="vertical" />
+          <Wrap align="center">
+            <TimeIcon ml="1" />
+            <Text>{props.days}</Text>
+          </Wrap>
+          <Divider orientation="vertical" />
+          <Wrap align="center">
+            <CalendarIcon ml="1" />
+            <Text>{props.date}</Text>
+          </Wrap>
+          <Divider orientation="vertical" />
+          <Wrap align="center">
+            <HiLocationMarker />
+            <Text>{`${props.country} - ${props.provinance}`}</Text>
+          </Wrap>
         </Wrap>
-        <Divider orientation="vertical" />
-        <Wrap align="center">
-          <CalendarIcon ml="1" />
-          <Text>۱۴۰۰ پاییز</Text>
+      </Stack>
+
+      {isSignedIn ? (
+        <Wrap
+          direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
+          spacing="2"
+        >
+          <Wrap
+            direction={{
+              base: 'column-reverse',
+              sm: 'column-reverse',
+              md: 'row',
+              lg: 'row',
+            }}
+            spacing="1"
+            align="center"
+          >
+            <Wrap fontSize="xs" spacing="1">
+              <Text>{`(${props.likes})`}</Text>
+            </Wrap>
+            <Wrap
+              spacing="0.5"
+              transition={'all .3s ease'}
+              _hover={{ transform: 'scale(1.3,1.3)' }}
+              onClick={() => props.actions.likeTrip()}
+            >
+              <FiHeart size="20" />
+            </Wrap>
+          </Wrap>
+          <Divider orientation="vertical" />
+          <Wrap
+            transition={'all .3s ease'}
+            _hover={{ transform: 'scale(1.3,1.3)' }}
+          >
+            <FiBookmark size="20" />
+          </Wrap>
         </Wrap>
-        <Divider orientation="vertical" />
-        <Wrap align="center">
-          <HiLocationMarker />
-          <Text>شیراز - ایران</Text>
-        </Wrap>
-      </Wrap>
-    </Stack>
+      ) : (
+        <Stack alignItems="flex-end">
+          <Wrap spacing="2" style={{ filter: 'blur(1px)' }}>
+            <Wrap spacing="1" align="center">
+              <Wrap style={{ filter: 'blur(0px)' }} fontSize="xs" spacing="1">
+                <Text>{`(${props.likes})`}</Text>
+              </Wrap>
+              <Wrap spacing="0.5">
+                <FiHeart size="20" />
+              </Wrap>
+            </Wrap>
+            <Divider orientation="vertical" />
+            <FiBookmark size="20" />
+          </Wrap>
+          <Button
+            variant="ghost"
+            colorScheme="gray"
+            size="xs"
+            onClick={() => goToSignUp()}
+          >
+            برای لایک و ذخیره کرد ن ابتدا وارد شوید
+          </Button>
+        </Stack>
+      )}
+    </Flex>
   );
 }

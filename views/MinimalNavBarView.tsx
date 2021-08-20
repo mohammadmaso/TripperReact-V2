@@ -8,7 +8,7 @@ import NavButtons from '../componenets/navbars/NavButtons';
 import MinimalNavBar from '../componenets/navbars/MinimalNavbar';
 
 const MinimalNavBarView = (props: any) => {
-  const isSignedIn = useIsSignedIn();
+  const { isSignedIn } = useIsSignedIn();
 
   return (
     <>

@@ -82,6 +82,7 @@ fragment TripSimpleFields on TripType {
   startDate
   endDate
   defaultImage
+  viewsCount
   author {
     id
     username
@@ -118,6 +119,145 @@ query AllActivities {
         svg
         title
         description
+      }
+    }
+  }
+}
+
+query TripDetail($tripId: ID!) {
+  trip(id: $tripId) {
+    id
+    tripMap
+    gpsTrack
+    costs
+    checkList
+    todoList
+    activities {
+      edges {
+        node {
+          svg
+          title
+          id
+        }
+      }
+    }
+    accessories {
+      edges {
+        node {
+          id
+          likesCount
+          brand {
+            logo
+            name
+          }
+          image
+          name
+        }
+      }
+    }
+    companions {
+      edges {
+        node {
+          id
+          username
+          avatar
+        }
+      }
+    }
+    images {
+      edges {
+        node {
+          image
+          description
+          copyrightName
+        }
+      }
+    }
+    videos {
+      edges {
+        node {
+          video
+          description
+          copyrightName
+        }
+      }
+    }
+
+    title
+    description
+    createdAt
+    startDate
+    endDate
+    author {
+      id
+      username
+      avatar
+    }
+    likes
+    experiences {
+      edges {
+        node {
+          id
+          title
+          defaultImage
+          description
+          place {
+            name
+          }
+          activities {
+            edges {
+              node {
+                id
+                title
+                svg
+              }
+            }
+          }
+        }
+      }
+    }
+    places {
+      edges {
+        node {
+          id
+          name
+          longitude
+          latitude
+        }
+      }
+    }
+    defaultImage
+    viewsCount
+    country {
+      name
+    }
+    categories {
+      edges {
+        node {
+          id
+          title
+        }
+      }
+    }
+  }
+}
+
+query TripReviews($tripId: ID!) {
+  trip(id: $tripId) {
+    reviewsOfTrip {
+      edges {
+        node {
+          author {
+            id
+            username
+            avatar
+          }
+          likesCount
+          dislikesCount
+          description
+          createdAt
+          id
+        }
       }
     }
   }

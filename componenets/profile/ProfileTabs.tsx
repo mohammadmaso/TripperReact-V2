@@ -19,14 +19,15 @@ import { LazyQueryResult } from '@apollo/client/react/types/types';
 interface Props {
   trips: any;
   actions: any;
-  queries: {
-    savedTripsQuery: LazyQueryResult<
+  queries?: {
+    savedTripsQuery?: LazyQueryResult<
       MeSavedTripsQuery,
       Exact<{
         [key: string]: never;
       }>
     >;
   };
+  isSelf: boolean;
 }
 
 const ProfileTabs = (props: Props) => {
@@ -34,9 +35,11 @@ const ProfileTabs = (props: Props) => {
     <Tabs colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
-        <Tab onClick={() => props.actions?.getSavedTrips()}>
-          سفرهای موردعلاقه{' '}
-        </Tab>
+        {props.isSelf && (
+          <Tab onClick={() => props.actions?.getSavedTrips()}>
+            سفرهای موردعلاقه{' '}
+          </Tab>
+        )}
         <Tab isDisabled>دست‌آوردها</Tab>
       </TabList>
 
@@ -44,29 +47,31 @@ const ProfileTabs = (props: Props) => {
         <TabPanel>
           <TripList data={props.trips} />
         </TabPanel>
-        <TabPanel>
-          {props.queries?.savedTripsQuery?.loading ? (
-            <ApiLoading />
-          ) : props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges
-              .length != 0 ? (
-            <SimpleGrid
-              spacing="2"
-              columns={{ base: 1, sm: 1, md: 4 }}
-              justify="center"
-            >
-              {props.queries.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
-                (item) => (
-                  <TripSmallCard
-                    key={item!.node!.trip.id!}
-                    {...item?.node?.trip}
-                  />
-                )
-              )}
-            </SimpleGrid>
-          ) : (
-            <Text>موردی یافت نشد!</Text>
-          )}
-        </TabPanel>
+        {props.isSelf && (
+          <TabPanel>
+            {props.queries?.savedTripsQuery?.loading ? (
+              <ApiLoading />
+            ) : props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges
+                .length != 0 ? (
+              <SimpleGrid
+                spacing="2"
+                columns={{ base: 1, sm: 1, md: 4 }}
+                justify="center"
+              >
+                {props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
+                  (item) => (
+                    <TripSmallCard
+                      key={item!.node!.trip.id!}
+                      {...item?.node?.trip}
+                    />
+                  )
+                )}
+              </SimpleGrid>
+            ) : (
+              <Text>موردی یافت نشد!</Text>
+            )}
+          </TabPanel>
+        )}
         <TabPanel>
           <p>two!</p>
         </TabPanel>

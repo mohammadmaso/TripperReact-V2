@@ -12,7 +12,7 @@ const EmptyResult = (props: Props) => {
     <Center>
       <Wrap align="center">
         <Icon as={FiFrown} />
-        <Text>{`${props.title}‌ای یافت نشد!`}</Text>
+        <Text>{`${props.title} یافت نشد!`}</Text>
       </Wrap>
     </Center>
   );

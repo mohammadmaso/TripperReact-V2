@@ -36,14 +36,20 @@ const ProfileContainer = (props: Props) => {
       >
         <ProfileHeader
           isSelf={props.isSelf}
-          data={props.data?.me}
+          data={props.isSelf ? props.data?.me : props.data?.user}
+          isFollowed={props.data?.followedUser}
           actions={props.actions}
           lazyQueries={props.lazyQueries}
         />
         <ProfileTabs
-          trips={props.data?.me?.trips.edges}
+          trips={
+            props.isSelf
+              ? props.data?.me?.trips.edges
+              : props.data?.user?.trips.edges
+          }
           actions={props.actions}
           queries={props.lazyQueries}
+          isSelf={props.isSelf}
         />
       </Box>
     </div>

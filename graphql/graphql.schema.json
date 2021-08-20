@@ -3054,6 +3054,18 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "about",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
@@ -15414,92 +15426,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "OBJECT",
-        "name": "ProfileConnection",
-        "description": null,
-        "fields": [
-          {
-            "name": "pageInfo",
-            "description": "Pagination data for this connection.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "PageInfo",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "edges",
-            "description": "Contains the nodes in this connection.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "ProfileEdge",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "ProfileEdge",
-        "description": "A Relay edge containing a `Profile` and its cursor.",
-        "fields": [
-          {
-            "name": "node",
-            "description": "The item at the end of the edge",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ProfileType",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cursor",
-            "description": "A cursor for use in pagination",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
         "name": "ProfileInputType",
         "description": null,
@@ -16179,14 +16105,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "UserNode",
+              "name": "UserType",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "users",
+            "name": "allUsers",
             "description": null,
             "args": [
               {
@@ -16250,91 +16176,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "email",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
                 "name": "username",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "username_Icontains",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "username_Istartswith",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "isActive",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "status_Archived",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "status_Verified",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "status_SecondaryEmail",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -16348,7 +16190,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "UserNodeConnection",
+              "name": "UserTypeConnection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16387,6 +16229,18 @@
             "name": "allProfile",
             "description": null,
             "args": [
+              {
+                "name": "offset",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
               {
                 "name": "before",
                 "description": null,
@@ -16434,11 +16288,23 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "about",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "ProfileConnection",
+              "name": "ProfileTypeConnection",
               "ofType": null
             },
             "isDeprecated": false,
@@ -26230,6 +26096,18 @@
                 "defaultValue": null,
                 "isDeprecated": false,
                 "deprecationReason": null
+              },
+              {
+                "name": "username",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
               }
             ],
             "type": {
@@ -28047,6 +27925,18 @@
                 "type": {
                   "kind": "SCALAR",
                   "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "username",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 },
                 "defaultValue": null,
@@ -33682,92 +33572,6 @@
             "ofType": null
           }
         ],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "UserNodeConnection",
-        "description": null,
-        "fields": [
-          {
-            "name": "pageInfo",
-            "description": "Pagination data for this connection.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "PageInfo",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "edges",
-            "description": "Contains the nodes in this connection.",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "UserNodeEdge",
-                  "ofType": null
-                }
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "OBJECT",
-        "name": "UserNodeEdge",
-        "description": "A Relay edge containing a `UserNode` and its cursor.",
-        "fields": [
-          {
-            "name": "node",
-            "description": "The item at the end of the edge",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "UserNode",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "cursor",
-            "description": "A cursor for use in pagination",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "inputFields": null,
-        "interfaces": [],
         "enumValues": null,
         "possibleTypes": null
       },

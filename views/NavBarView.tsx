@@ -7,7 +7,7 @@ import NavBar from '../componenets/navbars/Navbar';
 import NavButtons from '../componenets/navbars/NavButtons';
 
 const NavBarView = () => {
-  const isSignedIn = useIsSignedIn();
+  const { isSignedIn } = useIsSignedIn();
 
   return (
     <>

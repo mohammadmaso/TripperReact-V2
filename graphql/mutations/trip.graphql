@@ -9,3 +9,16 @@ mutation CreateTrip(
     success
   }
 }
+
+mutation LikeTrip($createTripLikeTripId: ID!) {
+  createTripLike(tripId: $createTripLikeTripId) {
+    success
+    like
+  }
+}
+
+mutation CreateTripReview($createTripReviewInput: CreateTripReviewInput!) {
+  createTripReview(input: $createTripReviewInput) {
+    success
+  }
+}

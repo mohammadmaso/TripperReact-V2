@@ -25,43 +25,14 @@ import { TraveloguePlaces } from '../../componenets/travelogue/TraveloguePlaces'
 import TravelogueAccessories from '../../componenets/travelogue/TravelogueAccessories';
 import { Transfers } from '../../componenets/travelogue/TravelogueTransfers';
 import TravelogueActivities from '../../componenets/travelogue/TravelogueActivities';
+import TripView from '../../views/trip/TripView';
+import { useRouter } from 'next/router';
 
 export default function Travelogue() {
+  const router = useRouter();
   return (
-    <BaseLayout title="سفر به شیراز" subNav={<TravelogueHeader />}>
-      <Wrap>
-        <Divider />
-        <Flex direction={{ base: 'column', md: 'row', lg: 'row' }} w="full">
-          <Wrap flex="1">
-            <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4">
-              <TravelogueGallery />
-              <Divider />
-              <TravelogueAccomodations />
-              <Divider />
-              <Transfers />
-              <Divider />
-              <TraveloguePlaces />
-              <Divider />
-              <TravelogueDescription />
-              <Divider />
-              <TravelogueExperiences />
-              <Divider />
-              <TravelogueCompanions />
-            </Stack>
-          </Wrap>
-
-          <Wrap flex="1" pt={{ base: '5', md: '0', lg: '0' }}>
-            <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4">
-              <TravelogueMap />
-              <Divider />
-              <TravelogueActivities />
-              <Divider />
-              <TravelogueAccessories />
-            </Stack>
-          </Wrap>
-        </Flex>
-      </Wrap>
-      <Box h="5vh" />
+    <BaseLayout>
+      <TripView id={router.query.id! as string} />
     </BaseLayout>
   );
 }

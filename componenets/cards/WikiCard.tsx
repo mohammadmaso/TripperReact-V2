@@ -19,7 +19,7 @@ import Link from 'next/link';
 export default function WikiCard(props: any) {
   return (
     <Link href={`/articles/${props.id}`} passHref>
-      <Center py={6} m={3} textAlign="right">
+      <Center py={6} m={3} textAlign="right" cursor="pointer">
         <Box
           bg={useColorModeValue('white', 'gray.900')}
           w={'full'}
@@ -27,6 +27,8 @@ export default function WikiCard(props: any) {
           rounded={'md'}
           p={6}
           overflow={'hidden'}
+          transition={'all .3s ease'}
+          _hover={{ transform: 'scale(1.1,1.1)' }}
         >
           <Box bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
             <Image alt="l" src={props?.image as string} objectFit={'cover'} />

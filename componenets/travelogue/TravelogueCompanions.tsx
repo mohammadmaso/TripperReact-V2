@@ -7,12 +7,28 @@ import {
   Flex,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FiFeather, FiUsers } from 'react-icons/fi';
+import { UserType } from '../../graphql/generated/types';
 
-interface Props {}
+interface Props {
+  companions: Maybe<
+    {
+      __typename?: 'UserTypeEdge' | undefined;
+    } & {
+      node?:
+        | Maybe<
+            {
+              __typename?: 'UserType' | undefined;
+            } & Pick<UserType, 'id' | 'username' | 'avatar'>
+          >
+        | undefined;
+    }
+  >[];
+}
 
-function CompanionCard() {
+function CompanionCard(props: any) {
   return (
     <HStack
       align={'center'}
@@ -23,14 +39,9 @@ function CompanionCard() {
       borderRadius="full"
       justify="space-between"
     >
-      <Avatar
-        src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-        alt={'Author'}
-        size="sm"
-        ml="2"
-      />
+      <Avatar src={props.avatar} alt={props.username} size="sm" ml="2" />
       <Text fontWeight={300} fontSize="sm" dir="ltr">
-        @mohammadmaso
+        {props.username}
       </Text>
     </HStack>
   );
@@ -44,8 +55,9 @@ const TravelogueCompanions = (props: Props) => {
         <Text>همراهان</Text>
       </Wrap>
       <Wrap>
-        <CompanionCard />
-        <CompanionCard />
+        {props.companions.map((item) => (
+          <CompanionCard key={item?.node?.id} {...item?.node} />
+        ))}
       </Wrap>
     </Stack>
   );

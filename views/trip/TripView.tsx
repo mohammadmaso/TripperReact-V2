@@ -8,19 +8,35 @@ import { ArticleContent } from '../../componenets/article/ArticleContent';
 import { ArticleDescription } from '../../componenets/article/ArticleDescription';
 import { ArticleHeader } from '../../componenets/article/ArticleHeader';
 import { ArticlePlaces } from '../../componenets/article/ArticlePlaces';
+import TravelogueContainer from '../../componenets/travelogue/TravelogueContainer';
+import { TravelogueHeader } from '../../componenets/travelogue/TravelogueHeader';
 import {
+  TripDetailQuery,
   useAllArticleQuery,
   useArticleQuery,
+  useLikeTripMutation,
+  useTripDetailQuery,
+  useTripReviewsLazyQuery,
 } from '../../graphql/generated/types';
 import BaseLayout from '../../layouts/BaseLayout';
+import { getDate, getDays } from '../../utils/time';
 
 interface Props {
   id: string;
 }
 
 const TripView = (props: Props) => {
-  const { data, loading, error } = useArticleQuery({
-    variables: { articleId: props.id },
+  const { data, loading, error } = useTripDetailQuery({
+    variables: { tripId: props.id },
+  });
+
+  const [getReviews, reviewsLazyQuery] = useTripReviewsLazyQuery({
+    variables: { tripId: props.id },
+  });
+
+  // must have refetch query to get like status
+  const [likeTrip, likeTripStatus] = useLikeTripMutation({
+    variables: { createTripLikeTripId: props.id },
   });
   if (loading) {
     return <ApiLoading />;
@@ -30,55 +46,29 @@ const TripView = (props: Props) => {
   }
 
   return (
-    <BaseLayout
-      title={data?.article?.title}
-      subNav={
-        <ArticleHeader
-          title={data?.article?.title}
-          category={data?.article?.category}
-          author={data?.article?.author}
-          timeToRead={data?.article?.timeToRead}
-        />
-      }
-    >
-      <Wrap>
-        <Divider />
-        <Flex direction={{ base: 'column', md: 'row', lg: 'row' }} w="full">
-          <Wrap flex="2">
-            <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4">
-              <ArticleDescription
-                shortDescription={data?.article?.shortDescription}
-              />
-
-              {data?.article?.places.edges.length != 0 ? (
-                <>
-                  <Divider /> <ArticlePlaces />
-                </>
-              ) : null}
-
-              <Divider />
-              <ArticleContent content={data?.article?.content} />
-            </Stack>
-          </Wrap>
-
-          <Wrap flex="1" pt={{ base: '5', md: '0', lg: '0' }}>
-            <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4">
-              {data?.article?.activities.edges.length != 0 ? (
-                <>
-                  <ArticleActivities data={data?.article?.activities.edges} />
-                  <Divider />
-                </>
-              ) : null}
-              {data?.article?.accessories.edges.length != 0 ? (
-                <>
-                  <ArticleAccessories data={data?.article?.accessories.edges} />
-                </>
-              ) : null}
-            </Stack>
-          </Wrap>
-        </Flex>
-      </Wrap>
-    </BaseLayout>
+    <>
+      <TravelogueHeader
+        title={data?.trip?.title}
+        categories={data?.trip?.categories.edges}
+        author={data?.trip?.author}
+        days={getDays(data?.trip?.startDate, data?.trip?.endDate)}
+        date={getDate(data?.trip?.startDate)}
+        country={data?.trip?.country.name as string}
+        provinance={'تست'}
+        likes={data?.trip?.likes as number}
+        actions={{
+          likeTrip: () => likeTrip(),
+        }}
+        queries={{ likeTripStatus }}
+      />
+      <TravelogueContainer
+        actions={{
+          getReviews: () => getReviews(),
+        }}
+        data={data as TripDetailQuery}
+        queries={{ reviewsLazyQuery }}
+      />
+    </>
   );
 };
 
