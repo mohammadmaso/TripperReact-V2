@@ -14,7 +14,7 @@ export default function useIsSignedIn(props) {
     } else {
       setIsSignedIn(false)
     }
-  });
+  },[]);
   const goToSignUp = () =>{ 
     router.replace("/auth/login?next=" + router.pathname);
   }

@@ -173,6 +173,23 @@ query TripDetail($tripId: ID!) {
         }
       }
     }
+
+    reviewsOfTrip {
+      edges {
+        node {
+          author {
+            id
+            username
+            avatar
+          }
+          likesCount
+          dislikesCount
+          description
+          createdAt
+          id
+        }
+      }
+    }
     videos {
       edges {
         node {

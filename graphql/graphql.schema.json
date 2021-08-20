@@ -6450,18 +6450,6 @@
             "deprecationReason": null
           },
           {
-            "name": "subject",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "description",
             "description": null,
             "type": {
@@ -16714,6 +16702,18 @@
                 "deprecationReason": null
               },
               {
+                "name": "place",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "activities",
                 "description": null,
                 "type": {
@@ -16724,18 +16724,6 @@
                     "name": "ID",
                     "ofType": null
                   }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "place",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -16844,6 +16832,18 @@
                 "deprecationReason": null
               },
               {
+                "name": "place",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
                 "name": "activities",
                 "description": null,
                 "type": {
@@ -16854,18 +16854,6 @@
                     "name": "ID",
                     "ofType": null
                   }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "place",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
                 },
                 "defaultValue": null,
                 "isDeprecated": false,
@@ -19606,7 +19594,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "tour",
+                "name": "trip",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -26813,7 +26801,7 @@
             "deprecationReason": null
           },
           {
-            "name": "tour",
+            "name": "trip",
             "description": null,
             "args": [],
             "type": {
@@ -28187,7 +28175,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "tour",
+                "name": "trip",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -28635,7 +28623,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "tour",
+                "name": "trip",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -31778,7 +31766,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "tour",
+                "name": "trip",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -35862,7 +35850,7 @@
                 "deprecationReason": null
               },
               {
-                "name": "tour",
+                "name": "trip",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",

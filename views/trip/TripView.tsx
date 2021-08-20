@@ -11,12 +11,15 @@ import { ArticlePlaces } from '../../componenets/article/ArticlePlaces';
 import TravelogueContainer from '../../componenets/travelogue/TravelogueContainer';
 import { TravelogueHeader } from '../../componenets/travelogue/TravelogueHeader';
 import {
+  namedOperations,
   TripDetailQuery,
   useAllArticleQuery,
   useArticleQuery,
+  useCreateTripReviewMutation,
   useLikeTripMutation,
   useTripDetailQuery,
   useTripReviewsLazyQuery,
+  useTripReviewsQuery,
 } from '../../graphql/generated/types';
 import BaseLayout from '../../layouts/BaseLayout';
 import { getDate, getDays } from '../../utils/time';
@@ -34,6 +37,13 @@ const TripView = (props: Props) => {
     variables: { tripId: props.id },
   });
 
+  // const reviewsLazyQuery = useTripReviewsQuery({
+  //   variables: { tripId: props.id },
+  // });
+
+  const [addReview, addReviewStatus] = useCreateTripReviewMutation({
+    refetchQueries: [namedOperations.Query.TripDetail],
+  });
   // must have refetch query to get like status
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
     variables: { createTripLikeTripId: props.id },
@@ -64,9 +74,21 @@ const TripView = (props: Props) => {
       <TravelogueContainer
         actions={{
           getReviews: () => getReviews(),
+          addReview: (id: string, review: string) =>
+            addReview({
+              variables: {
+                createTripReviewInput: {
+                  tripId: id,
+                  description: review,
+                },
+              },
+            }),
         }}
         data={data as TripDetailQuery}
-        queries={{ reviewsLazyQuery }}
+        queries={{
+          reviewsLazyQuery,
+          addReviewStatus,
+        }}
       />
     </>
   );

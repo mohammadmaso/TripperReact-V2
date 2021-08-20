@@ -47,16 +47,9 @@ interface Props {
 }
 
 export default function TravelogueContainer({ data, queries, actions }: Props) {
-  const isScrollReached = useIsScrollReachedId();
   const isSignedIn = useIsSignedIn();
   const toast = useToast();
   const addReviewModal = useDisclosure();
-
-  useEffect(() => {
-    if (isScrollReached) {
-      actions?.getReviews();
-    }
-  }, [isScrollReached]);
 
   function handleAddReviewClick() {
     if (!isSignedIn) {
@@ -149,6 +142,9 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
           <Wrap align="center">
             <BiComment />
             <Text fontWeight="bold">نقد و بررسی‌ها</Text>
+            <Button size="sm" onClick={actions.getReviews}>
+              مشاهده
+            </Button>
           </Wrap>
           <Center>
             <Button
@@ -180,7 +176,12 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             </Stack>
           )}
         </Stack>
-        <AddReviewModal {...addReviewModal} actions={actions} />
+        <AddReviewModal
+          {...addReviewModal}
+          actions={actions}
+          status={queries.addReviewStatus}
+          contentId={data.trip?.id!}
+        />
       </Wrap>
 
       <Box h="5vh" />

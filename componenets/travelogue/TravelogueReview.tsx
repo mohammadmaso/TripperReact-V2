@@ -7,6 +7,7 @@ import {
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import React from 'react';
 import { UserType } from '../../graphql/generated/types';
 
@@ -26,10 +27,12 @@ const TravelogueReview = (props: Props) => {
         p="3"
       >
         <Stack>
-          <Wrap align="center">
-            <Avatar src={props.author?.avatar} />
-            <Text>{props.author?.username}</Text>
-          </Wrap>
+          <Link href={`/profile/${props.id}`} passHref>
+            <Wrap align="center" cursor="pointer">
+              <Avatar src={props.author?.avatar} />
+              <Text>{props.author?.username}</Text>
+            </Wrap>
+          </Link>
           <Divider />
           <Text>{props.description}</Text>
         </Stack>

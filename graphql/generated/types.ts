@@ -913,7 +913,6 @@ export type CreateTripPlan = {
 
 export type CreateTripReviewInput = {
   tripId: Scalars['ID'];
-  subject?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -2543,8 +2542,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2559,8 +2558,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -2853,7 +2852,7 @@ export type QueryAllTripReviewArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
   author?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -3737,7 +3736,7 @@ export type TripReviewType = Node & {
   __typename?: 'TripReviewType';
   /** The ID of the object. */
   id: Scalars['ID'];
-  tour: TripType;
+  trip: TripType;
   author: UserType;
   description: Scalars['String'];
   createdAt: Scalars['DateTime'];
@@ -3899,7 +3898,7 @@ export type TripTypeReviewsArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
   author?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -3948,7 +3947,7 @@ export type TripTypeReviewsOfTripArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
   author?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -4314,7 +4313,7 @@ export type UserNodeTripReviewsOfUserArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
   author?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -4753,7 +4752,7 @@ export type UserTypeTripReviewsOfUserArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  tour?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
   author?: Maybe<Scalars['ID']>;
   description?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -5445,6 +5444,19 @@ export type TripDetailQuery = (
         & { node?: Maybe<(
           { __typename?: 'TripImageType' }
           & Pick<TripImageType, 'image' | 'description' | 'copyrightName'>
+        )> }
+      )>> }
+    ), reviewsOfTrip: (
+      { __typename?: 'TripReviewTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TripReviewTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TripReviewType' }
+          & Pick<TripReviewType, 'likesCount' | 'dislikesCount' | 'description' | 'createdAt' | 'id'>
+          & { author: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'id' | 'username' | 'avatar'>
+          ) }
         )> }
       )>> }
     ), videos: (
@@ -6684,6 +6696,22 @@ export const TripDetailDocument = gql`
           image
           description
           copyrightName
+        }
+      }
+    }
+    reviewsOfTrip {
+      edges {
+        node {
+          author {
+            id
+            username
+            avatar
+          }
+          likesCount
+          dislikesCount
+          description
+          createdAt
+          id
         }
       }
     }

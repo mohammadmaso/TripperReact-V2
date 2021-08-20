@@ -66,13 +66,15 @@ const NavProfile = (props: Props) => {
           <Link href="/travelogue/new" passHref>
             <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
           </Link>
-          <Link href="/wizard/" passHref>
+          {/* <Link href="/wizard/" passHref>
             <MenuItem icon={<BiListPlus />}>برنامه‌ریزی سفر</MenuItem>
-          </Link>
+          </Link> */}
           <Link href="/me" passHref>
             <MenuItem icon={<FiUser />}>پروفایل من</MenuItem>
           </Link>
-          <MenuItem icon={<MdCardTravel />}>سفرهای من</MenuItem>
+          <Link href="/me" passHref>
+            <MenuItem icon={<MdCardTravel />}>سفرهای من</MenuItem>
+          </Link>
           <MenuItem onClick={toggleColorMode} icon={<MoonIcon />}>
             حالت شب
           </MenuItem>

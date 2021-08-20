@@ -159,7 +159,7 @@ export default function SingUp() {
                                 textDecoration="underline"
                                 onClick={modal.onOpen}
                               >
-                                قوانین آکادمی نیمکت
+                                قوانین تریپر
                               </ChakraLink>
                             </Checkbox>
                             <Box textColor="red">
