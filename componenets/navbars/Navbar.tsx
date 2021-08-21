@@ -101,9 +101,9 @@ const NavBar = (props: any) => {
             <DesktopNav />
           </Flex>
         </Flex>
-        <Wrap justify="flex-start" w="6.5rem">
+        <Flex justify="flex-end" w="6.5rem">
           {props.children}
-        </Wrap>
+        </Flex>
       </Flex>
 
       <MobileNav isOpen={isOpen} onClose={onClose} />
