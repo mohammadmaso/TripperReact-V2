@@ -23,8 +23,9 @@ const BaseLayout = (props: Props): ReactElement => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavBarView />
-      <Box height="13vh" />
+
       {props.subNav}
+      <Box height="60px" />
       <Box minHeight="78vh" px={[4, 4, 120]}>
         {props.children}
       </Box>
