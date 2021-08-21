@@ -5,6 +5,7 @@ import ApiLoading from '../../componenets/ApiLoading';
 import {
   namedOperations,
   useAllArticleQuery,
+  useLikeTripMutation,
   useMeDetailQuery,
   useMeFollowersLazyQuery,
   useMeFollowingsLazyQuery,
@@ -23,6 +24,8 @@ const MeDetailView = (props: Props) => {
   const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
   const [getSavedTrips, savedTripsQuery] = useMeSavedTripsLazyQuery();
   const [changeHeader, changeHeaderQuery] = useUpdateProfileMutation();
+  const [likeTrip, likeTripStatus] = useLikeTripMutation();
+
   if (loading) {
     return <ApiLoading />;
   }
@@ -43,12 +46,18 @@ const MeDetailView = (props: Props) => {
               variables: variables,
               refetchQueries: [namedOperations.Query.MeDetail],
             }),
+          likeTrip: (id: string) =>
+            likeTrip({
+              variables: { createTripLikeTripId: id },
+              refetchQueries: [namedOperations.Query.TripDetailLikes],
+            }),
         }}
         lazyQueries={{
           followingsQuery,
           followersQuery,
           savedTripsQuery,
           changeHeaderQuery,
+          likeTripStatus,
         }}
       />
     </div>

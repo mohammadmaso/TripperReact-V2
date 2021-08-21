@@ -38,7 +38,11 @@ const ProfileTabs = (props: Props) => {
 
       <TabPanels>
         <TabPanel>
-          <TripList data={props.trips} />
+          <TripList
+            data={props.trips}
+            queries={props.queries}
+            actions={props.actions}
+          />
         </TabPanel>
         {props.isSelf && (
           <TabPanel>
@@ -54,8 +58,10 @@ const ProfileTabs = (props: Props) => {
                 {props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
                   (item: any) => (
                     <TripSmallCard
-                      key={item!.node!.trip.id!}
-                      {...item?.node?.trip}
+                      key={item!.node?.trip.id!}
+                      data={item?.node?.trip}
+                      queries={props.queries}
+                      actions={props.actions}
                     />
                   )
                 )}

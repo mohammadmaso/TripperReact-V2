@@ -89,6 +89,12 @@ fragment TripSimpleFields on TripType {
     username
     avatar
   }
+  country {
+    name
+  }
+  province {
+    name
+  }
   userLiked
   categories {
     edges {
@@ -256,6 +262,9 @@ query TripDetail($tripId: ID!) {
     defaultImage
     viewsCount
     country {
+      name
+    }
+    province {
       name
     }
     categories {

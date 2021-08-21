@@ -68,7 +68,7 @@ const TripView = (props: Props) => {
         days={getDays(data?.trip?.startDate, data?.trip?.endDate)}
         date={getDate(data?.trip?.startDate)}
         country={data?.trip?.country.name as string}
-        provinance={'تست'}
+        province={data?.trip?.provine.name as string}
         likes={data?.trip?.likes as number}
         isLiked={data?.trip?.userLiked as boolean}
         actions={{

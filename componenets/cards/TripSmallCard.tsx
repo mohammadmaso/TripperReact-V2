@@ -65,22 +65,22 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
               size="md"
               ml="1"
               mr="1"
-              src={data.author.avatar}
-              alt={data.author.username}
+              src={data.author?.avatar}
+              alt={data.author?.username}
             />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>
-                {data.author.username}
+                {data.author?.username}
               </Text>
               <Wrap spacing="1">
-                {data.categories.edges.map((item: any) => (
+                {data.categories?.edges.map((item: any) => (
                   <Tag
                     size="sm"
                     key={item.node}
                     colorScheme="primary"
                     variant="solid"
                   >
-                    {item.node.title}
+                    {item.node?.title}
                   </Tag>
                 ))}
               </Wrap>
@@ -95,7 +95,7 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
                 onClick={() => actions.likeTrip(data.id)}
                 cursor="pointer"
               >
-                {!queries.likeTripStatus.loading ? (
+                {!queries.likeTripStatus?.loading ? (
                   data.userLiked ||
                   queries.likeTripStatus?.data?.createTripLike?.like ? (
                     <AiFillHeart size="20" color="red" />
@@ -109,7 +109,7 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
               <Text fontSize="sm">
                 {queries?.likeTripStatus?.data == null
                   ? `(${data.likes})`
-                  : `(${queries?.likeTripStatus?.data.createTripLike.trip.likes})`}
+                  : `(${queries?.likeTripStatus?.data?.createTripLike?.trip?.likes})`}
               </Text>
             </Stack>
           </Box>
@@ -138,13 +138,12 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
             <Text fontWeight={500}>{data.title}</Text>
             <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
               <Wrap align="center" spacing="1">
-                <Text>{getDays(data.startDate, data.endDate)}</Text>
-
                 <TimeIcon h="3.5" w="3.5" />
+                <Text>{getDays(data.startDate, data.endDate)}</Text>
               </Wrap>
               <Wrap align="center" spacing="1">
-                <Text>{data.city}</Text>
                 <FiMapPin />
+                <Text>{`${data.country?.name} - ${data.province?.name}`}</Text>
               </Wrap>
             </Wrap>
           </Flex>

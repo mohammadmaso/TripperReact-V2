@@ -6,6 +6,8 @@ import EmptyResult from '../EmptyResult';
 
 interface Props {
   data: any;
+  queries: any;
+  actions: any;
 }
 
 const TripList = (props: Props) => {
@@ -17,7 +19,12 @@ const TripList = (props: Props) => {
       justify="center"
     >
       {props.data?.map((item: any) => (
-        <TripSmallCard key={item!.node!.id!} {...item?.node!} />
+        <TripSmallCard
+          key={item!.node!.id!}
+          data={item?.node!}
+          queries={props.queries}
+          actions={props.actions}
+        />
       ))}
     </SimpleGrid>
   );

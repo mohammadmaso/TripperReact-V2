@@ -5651,6 +5651,12 @@ export type TripSimpleFieldsFragment = (
   & { author: (
     { __typename?: 'UserType' }
     & Pick<UserType, 'id' | 'username' | 'avatar'>
+  ), country: (
+    { __typename?: 'CountryType' }
+    & Pick<CountryType, 'name'>
+  ), province: (
+    { __typename?: 'ProvinceType' }
+    & Pick<ProvinceType, 'name'>
   ), categories: (
     { __typename?: 'TripCategoryTypeConnection' }
     & { edges: Array<Maybe<(
@@ -5820,6 +5826,9 @@ export type TripDetailQuery = (
     ), country: (
       { __typename?: 'CountryType' }
       & Pick<CountryType, 'name'>
+    ), province: (
+      { __typename?: 'ProvinceType' }
+      & Pick<ProvinceType, 'name'>
     ), categories: (
       { __typename?: 'TripCategoryTypeConnection' }
       & { edges: Array<Maybe<(
@@ -6115,6 +6124,12 @@ export const TripSimpleFieldsFragmentDoc = gql`
     id
     username
     avatar
+  }
+  country {
+    name
+  }
+  province {
+    name
   }
   userLiked
   categories {
@@ -7128,6 +7143,9 @@ export const TripDetailDocument = gql`
     defaultImage
     viewsCount
     country {
+      name
+    }
+    province {
       name
     }
     categories {

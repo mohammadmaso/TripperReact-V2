@@ -28,7 +28,7 @@ interface Props {
   days: string;
   date: any;
   country: string;
-  provinance: string;
+  province: string;
   actions: any;
   queries: any;
   likes: number;
@@ -101,7 +101,7 @@ export function TravelogueHeader(props: Props) {
           <Divider orientation="vertical" />
           <Wrap align="center">
             <HiLocationMarker />
-            <Text>{`${props.country} - ${props.provinance}`}</Text>
+            <Text>{`${props.country} - ${props.province}`}</Text>
           </Wrap>
         </Wrap>
       </Stack>
