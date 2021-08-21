@@ -31,6 +31,7 @@ export default function CategoryCard(props: any) {
           src={props.image}
           objectFit={'cover'}
           objectPosition="top"
+          fallbackSrc="images/placeholder.png"
         />
         <Flex
           position="absolute"
