@@ -45,7 +45,15 @@ export default function LargeWithNewsletter() {
           alignItems="end"
         >
           <Box>
-            <Stack>
+            <Stack
+              spacing="5"
+              alignItems={{
+                base: 'center',
+                sm: 'center',
+                md: 'flex-end',
+                lg: 'flex-end',
+              }}
+            >
               <TextLogo width="140" height="50" />
               <Text fontSize="sm" textColor="primary">
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با
