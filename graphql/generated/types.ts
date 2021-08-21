@@ -903,6 +903,7 @@ export type CreateTripLike = {
   __typename?: 'CreateTripLike';
   success?: Maybe<Scalars['Boolean']>;
   like?: Maybe<Scalars['Boolean']>;
+  trip?: Maybe<TripType>;
 };
 
 export type CreateTripPlan = {
@@ -1457,6 +1458,7 @@ export type Mutation = {
    */
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   updateProfile?: Maybe<UpdateProfilePayload>;
+  updateUser?: Maybe<UpdateUserPayload>;
   followOrUnfollow?: Maybe<FollowOrUnfollowPayload>;
   /** Social Auth Mutation for Relay */
   socialAuth?: Maybe<SocialAuthPayload>;
@@ -1600,6 +1602,11 @@ export type MutationTokenAuthArgs = {
 
 export type MutationUpdateProfileArgs = {
   input: UpdateProfileInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  input: UpdateUserInput;
 };
 
 
@@ -1884,48 +1891,6 @@ export type PasswordSet = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
-export type PlaceCategoryType = Node & {
-  __typename?: 'PlaceCategoryType';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  title: Scalars['String'];
-  titleEn?: Maybe<Scalars['String']>;
-  titleFa?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  descriptionEn?: Maybe<Scalars['String']>;
-  descriptionFa?: Maybe<Scalars['String']>;
-  image: Scalars['String'];
-  svg: Scalars['String'];
-  placemodelSet: PlaceTypeConnection;
-};
-
-
-export type PlaceCategoryTypePlacemodelSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-export type PlaceCategoryTypeConnection = {
-  __typename?: 'PlaceCategoryTypeConnection';
-  /** Pagination data for this connection. */
-  pageInfo: PageInfo;
-  /** Contains the nodes in this connection. */
-  edges: Array<Maybe<PlaceCategoryTypeEdge>>;
-};
-
-/** A Relay edge containing a `PlaceCategoryType` and its cursor. */
-export type PlaceCategoryTypeEdge = {
-  __typename?: 'PlaceCategoryTypeEdge';
-  /** The item at the end of the edge */
-  node?: Maybe<PlaceCategoryType>;
-  /** A cursor for use in pagination */
-  cursor: Scalars['String'];
-};
-
 export type PlaceCollectionsType = Node & {
   __typename?: 'PlaceCollectionsType';
   /** The ID of the object. */
@@ -2071,7 +2036,7 @@ export type PlaceType = Node & {
   feelAverage: Scalars['Int'];
   country: CountryType;
   images: PlaceImageTypeConnection;
-  categories: PlaceCategoryTypeConnection;
+  type?: Maybe<PlaceTypeType>;
   activities: TripActivitieTypeConnection;
   videos: PlaceVideoTypeConnection;
   toursPlaces: TourTypeConnection;
@@ -2090,16 +2055,6 @@ export type PlaceTypeImagesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-};
-
-
-export type PlaceTypeCategoriesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
 };
 
 
@@ -2243,6 +2198,48 @@ export type PlaceTypeEdge = {
   __typename?: 'PlaceTypeEdge';
   /** The item at the end of the edge */
   node?: Maybe<PlaceType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type PlaceTypeType = Node & {
+  __typename?: 'PlaceTypeType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  titleEn?: Maybe<Scalars['String']>;
+  titleFa?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  descriptionEn?: Maybe<Scalars['String']>;
+  descriptionFa?: Maybe<Scalars['String']>;
+  image: Scalars['String'];
+  svg: Scalars['String'];
+  placesOfType: PlaceTypeConnection;
+};
+
+
+export type PlaceTypeTypePlacesOfTypeArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type PlaceTypeTypeConnection = {
+  __typename?: 'PlaceTypeTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<PlaceTypeTypeEdge>>;
+};
+
+/** A Relay edge containing a `PlaceTypeType` and its cursor. */
+export type PlaceTypeTypeEdge = {
+  __typename?: 'PlaceTypeTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<PlaceTypeType>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
@@ -2396,8 +2393,8 @@ export type Query = {
   place?: Maybe<PlaceType>;
   allPlace?: Maybe<PlaceTypeConnection>;
   /** The ID of the object */
-  placeCategory?: Maybe<PlaceCategoryType>;
-  allPlaceCategory?: Maybe<PlaceCategoryTypeConnection>;
+  placeCategory?: Maybe<PlaceTypeType>;
+  allPlaceCategory?: Maybe<PlaceTypeTypeConnection>;
   /** The ID of the object */
   tour?: Maybe<TourType>;
   allTour?: Maybe<TourTypeConnection>;
@@ -2542,8 +2539,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2558,8 +2555,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -2776,8 +2773,8 @@ export type QueryAllTripLikesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  trip?: Maybe<Scalars['ID']>;
   user?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3744,6 +3741,7 @@ export type TripReviewType = Node & {
   dislikesCount: Scalars['Int'];
   tripmodelSet: TripTypeConnection;
   likesOfTripReview: TripReviewLikeTypeConnection;
+  userLiked?: Maybe<Scalars['String']>;
 };
 
 
@@ -3834,6 +3832,7 @@ export type TripType = Node & {
   tripLikes?: Maybe<TripLikeType>;
   reviewsOfTrip: TripReviewTypeConnection;
   usersSavedTrip: TripCollectionsTypeConnection;
+  userLiked?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4094,6 +4093,22 @@ export type UpdateTripReview = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+export type UpdateUserInput = {
+  userInputs?: Maybe<UserInputType>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateUserPayload = {
+  __typename?: 'UpdateUserPayload';
+  user?: Maybe<UserType>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+
+export type UserInputType = {
+  username?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['Upload']>;
+};
 
 export type UserNode = Node & {
   __typename?: 'UserNode';
@@ -4302,8 +4317,8 @@ export type UserNodeRequirementTripLikesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  trip?: Maybe<Scalars['ID']>;
   user?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
 };
 
 
@@ -4741,8 +4756,8 @@ export type UserTypeRequirementTripLikesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  trip?: Maybe<Scalars['ID']>;
   user?: Maybe<Scalars['ID']>;
+  trip?: Maybe<Scalars['ID']>;
 };
 
 
@@ -5110,6 +5125,10 @@ export type LikeTripMutation = (
   & { createTripLike?: Maybe<(
     { __typename?: 'CreateTripLike' }
     & Pick<CreateTripLike, 'success' | 'like'>
+    & { trip?: Maybe<(
+      { __typename?: 'TripType' }
+      & Pick<TripType, 'id' | 'likes' | 'userLiked'>
+    )> }
   )> }
 );
 
@@ -5180,7 +5199,7 @@ export type AllArticleQuery = (
         & Pick<ArticleType, 'id' | 'title' | 'shortDescription' | 'likes' | 'timeToRead' | 'image'>
         & { author: (
           { __typename?: 'UserType' }
-          & Pick<UserType, 'firstName' | 'lastName' | 'avatar'>
+          & Pick<UserType, 'username' | 'avatar'>
         ), category?: Maybe<(
           { __typename?: 'ArticleCategoryType' }
           & Pick<ArticleCategoryType, 'title'>
@@ -5289,7 +5308,7 @@ export type AllTripQuery = (
       & Pick<TripTypeEdge, 'cursor'>
       & { node?: Maybe<(
         { __typename?: 'TripType' }
-        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'likes'>
+        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'likes' | 'userLiked'>
         & { author: (
           { __typename?: 'UserType' }
           & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -5396,6 +5415,19 @@ export type AllActivitiesQuery = (
   )> }
 );
 
+export type TripDetailLikesQueryVariables = Exact<{
+  tripId: Scalars['ID'];
+}>;
+
+
+export type TripDetailLikesQuery = (
+  { __typename?: 'Query' }
+  & { trip?: Maybe<(
+    { __typename?: 'TripType' }
+    & Pick<TripType, 'likes' | 'userLiked'>
+  )> }
+);
+
 export type TripDetailQueryVariables = Exact<{
   tripId: Scalars['ID'];
 }>;
@@ -5405,7 +5437,7 @@ export type TripDetailQuery = (
   { __typename?: 'Query' }
   & { trip?: Maybe<(
     { __typename?: 'TripType' }
-    & Pick<TripType, 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
+    & Pick<TripType, 'userLiked' | 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
     & { activities: (
       { __typename?: 'TripActivitieTypeConnection' }
       & { edges: Array<Maybe<(
@@ -6153,6 +6185,11 @@ export const LikeTripDocument = gql`
   createTripLike(tripId: $createTripLikeTripId) {
     success
     like
+    trip {
+      id
+      likes
+      userLiked
+    }
   }
 }
     `;
@@ -6309,8 +6346,7 @@ export const AllArticleDocument = gql`
         timeToRead
         image
         author {
-          firstName
-          lastName
+          username
           avatar
         }
         category {
@@ -6517,6 +6553,7 @@ export const AllTripDocument = gql`
           }
         }
         likes
+        userLiked
         places {
           edges {
             node {
@@ -6649,9 +6686,46 @@ export function useAllActivitiesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type AllActivitiesQueryHookResult = ReturnType<typeof useAllActivitiesQuery>;
 export type AllActivitiesLazyQueryHookResult = ReturnType<typeof useAllActivitiesLazyQuery>;
 export type AllActivitiesQueryResult = Apollo.QueryResult<AllActivitiesQuery, AllActivitiesQueryVariables>;
+export const TripDetailLikesDocument = gql`
+    query TripDetailLikes($tripId: ID!) {
+  trip(id: $tripId) {
+    likes
+    userLiked
+  }
+}
+    `;
+
+/**
+ * __useTripDetailLikesQuery__
+ *
+ * To run a query within a React component, call `useTripDetailLikesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTripDetailLikesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTripDetailLikesQuery({
+ *   variables: {
+ *      tripId: // value for 'tripId'
+ *   },
+ * });
+ */
+export function useTripDetailLikesQuery(baseOptions: Apollo.QueryHookOptions<TripDetailLikesQuery, TripDetailLikesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TripDetailLikesQuery, TripDetailLikesQueryVariables>(TripDetailLikesDocument, options);
+      }
+export function useTripDetailLikesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TripDetailLikesQuery, TripDetailLikesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TripDetailLikesQuery, TripDetailLikesQueryVariables>(TripDetailLikesDocument, options);
+        }
+export type TripDetailLikesQueryHookResult = ReturnType<typeof useTripDetailLikesQuery>;
+export type TripDetailLikesLazyQueryHookResult = ReturnType<typeof useTripDetailLikesLazyQuery>;
+export type TripDetailLikesQueryResult = Apollo.QueryResult<TripDetailLikesQuery, TripDetailLikesQueryVariables>;
 export const TripDetailDocument = gql`
     query TripDetail($tripId: ID!) {
   trip(id: $tripId) {
+    userLiked
     id
     tripMap
     gpsTrack
@@ -7314,6 +7388,7 @@ export const namedOperations = {
     AllTrip: 'AllTrip',
     AllTripCategories: 'AllTripCategories',
     AllActivities: 'AllActivities',
+    TripDetailLikes: 'TripDetailLikes',
     TripDetail: 'TripDetail',
     TripReviews: 'TripReviews',
     Me: 'Me',

@@ -30,8 +30,7 @@ query AllArticle(
         timeToRead
         image
         author {
-          firstName
-          lastName
+          username
           avatar
         }
         category {

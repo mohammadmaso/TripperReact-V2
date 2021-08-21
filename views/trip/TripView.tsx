@@ -18,6 +18,7 @@ import {
   useArticleQuery,
   useCreateTripReviewMutation,
   useLikeTripMutation,
+  useTripDetailLikesQuery,
   useTripDetailQuery,
   useTripReviewsLazyQuery,
   useTripReviewsQuery,
@@ -42,12 +43,11 @@ const TripView = (props: Props) => {
   //   variables: { tripId: props.id },
   // });
 
-  const [addReview, addReviewStatus] = useCreateTripReviewMutation({
-    refetchQueries: [namedOperations.Query.TripDetail],
-  });
+  const [addReview, addReviewStatus] = useCreateTripReviewMutation();
   // must have refetch query to get like status
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
     variables: { createTripLikeTripId: props.id },
+    refetchQueries: [namedOperations.Query.TripDetailLikes],
   });
   if (loading) {
     return <ApiLoading />;
@@ -70,6 +70,7 @@ const TripView = (props: Props) => {
         country={data?.trip?.country.name as string}
         provinance={'تست'}
         likes={data?.trip?.likes as number}
+        isLiked={data?.trip?.userLiked as boolean}
         actions={{
           likeTrip: () => likeTrip(),
         }}

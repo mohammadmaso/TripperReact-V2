@@ -12,10 +12,13 @@ import {
   Flex,
   Button,
   Tooltip,
+  Spinner,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FiBookmark, FiHeart } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
+import { BounceLoader } from 'react-spinners';
 import { UserType } from '../../graphql/generated/types';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
 interface Props {
@@ -29,6 +32,7 @@ interface Props {
   actions: any;
   queries: any;
   likes: number;
+  isLiked: boolean;
 }
 
 export function TravelogueHeader(props: Props) {
@@ -118,15 +122,29 @@ export function TravelogueHeader(props: Props) {
             align="center"
           >
             <Wrap fontSize="xs" spacing="1">
-              <Text>{`(${props.likes})`}</Text>
+              <Text>
+                {props.queries?.likeTripStatus?.data == null
+                  ? `(${props.likes})`
+                  : `(${props.queries?.likeTripStatus?.data.createTripLike.trip.likes})`}
+              </Text>
             </Wrap>
             <Wrap
               spacing="0.5"
               transition={'all .3s ease'}
               _hover={{ transform: 'scale(1.3,1.3)' }}
               onClick={() => props.actions.likeTrip()}
+              cursor="pointer"
             >
-              <FiHeart size="20" />
+              {!props.queries.likeTripStatus.loading ? (
+                props.isLiked ||
+                props.queries.likeTripStatus?.data?.createTripLike?.like ? (
+                  <AiFillHeart size="20" color="red" />
+                ) : (
+                  <AiOutlineHeart size="20" />
+                )
+              ) : (
+                <Spinner size="xs" />
+              )}
             </Wrap>
           </Wrap>
           <Divider orientation="vertical" />

@@ -8,6 +8,8 @@ import { AllTripQuery } from '../../graphql/generated/types';
 interface Props {
   slideToShow?: number;
   data: AllTripQuery | undefined;
+  actions: any;
+  queries: any;
 }
 
 export default function TripCarousal(props: Props): ReactElement {
@@ -55,7 +57,12 @@ export default function TripCarousal(props: Props): ReactElement {
       </Heading>
       <Slider {...settings}>
         {props.data?.allTrip?.edges.map((item) => (
-          <TripSmallCard key={item!.node!.id!} {...item?.node!} />
+          <TripSmallCard
+            key={item!.node!.id!}
+            data={item?.node!}
+            queries={props.queries}
+            actions={props.actions}
+          />
         ))}
       </Slider>
     </Box>

@@ -36,6 +36,9 @@ export function TravelogueMap(props: any) {
             height="500px"
             scrollZoom={false}
             dragPan={false}
+            touchZoom={false}
+            touchRotate={false}
+
             // onViewportChange={(viewport: any) => setViewport(viewport)}
           />
         </Box>

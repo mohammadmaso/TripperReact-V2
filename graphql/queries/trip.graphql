@@ -43,6 +43,7 @@ query AllTrip(
           }
         }
         likes
+        userLiked
         places {
           edges {
             node {
@@ -124,8 +125,16 @@ query AllActivities {
   }
 }
 
+query TripDetailLikes($tripId: ID!) {
+  trip(id: $tripId) {
+    likes
+    userLiked
+  }
+}
+
 query TripDetail($tripId: ID!) {
   trip(id: $tripId) {
+    userLiked
     id
     tripMap
     gpsTrack

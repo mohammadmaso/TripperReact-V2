@@ -38,6 +38,7 @@ const NavProfile = (props: Props) => {
           as={Button}
           bgColor="transparent"
           rightIcon={<ChevronDownIcon />}
+          size="sm"
         >
           {props.minimal ? (
             <FiUser />
@@ -45,6 +46,9 @@ const NavProfile = (props: Props) => {
             <Flex direction="row-reverse" alignItems="center">
               <Avatar
                 shadow="lg"
+                size="md"
+                h="10"
+                w="10"
                 // name={data.me.firstName + data.me.lastName}
                 src={props.user?.avatar}
               />

@@ -31,7 +31,7 @@ const NavBar = (props: any) => {
   const { isSignedIn } = useIsSignedIn();
 
   const handleScroll = () => {
-    if (window.pageYOffset > 200) {
+    if (window.pageYOffset > 40) {
       if (!stickyNav) {
         setStickyNav(true);
       }
@@ -48,7 +48,7 @@ const NavBar = (props: any) => {
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
-        minH={'2rem'}
+        minH={'1rem'}
         py={{ base: 2 }}
         px={[4, 4, 120]}
         borderBottom={1}
@@ -73,6 +73,7 @@ const NavBar = (props: any) => {
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
             variant={'ghost'}
+            size="sm"
             aria-label={'Toggle Navigation'}
           />
         </Flex>
@@ -84,8 +85,8 @@ const NavBar = (props: any) => {
               color={useColorModeValue('gray.800', 'white')}
             >
               <Logo
-                height={stickyNav ? 50 : 50}
-                width={stickyNav ? 120 : 120}
+                height={stickyNav ? 30 : 50}
+                width={stickyNav ? 100 : 120}
               />
             </Box>
           </Link>
