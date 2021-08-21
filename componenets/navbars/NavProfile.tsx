@@ -37,7 +37,7 @@ const NavProfile = (props: Props) => {
         <MenuButton
           as={Button}
           bgColor="transparent"
-          rightIcon={<ChevronDownIcon />}
+          leftIcon={<ChevronDownIcon />}
           size="sm"
         >
           {props.minimal ? (
