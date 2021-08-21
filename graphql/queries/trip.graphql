@@ -89,6 +89,7 @@ fragment TripSimpleFields on TripType {
     username
     avatar
   }
+  userLiked
   categories {
     edges {
       node {

@@ -19,14 +19,7 @@ import { LazyQueryResult } from '@apollo/client/react/types/types';
 interface Props {
   trips: any;
   actions: any;
-  queries?: {
-    savedTripsQuery?: LazyQueryResult<
-      MeSavedTripsQuery,
-      Exact<{
-        [key: string]: never;
-      }>
-    >;
-  };
+  queries?: any;
   isSelf: boolean;
 }
 
@@ -59,7 +52,7 @@ const ProfileTabs = (props: Props) => {
                 justify="center"
               >
                 {props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
-                  (item) => (
+                  (item: any) => (
                     <TripSmallCard
                       key={item!.node!.trip.id!}
                       {...item?.node?.trip}
