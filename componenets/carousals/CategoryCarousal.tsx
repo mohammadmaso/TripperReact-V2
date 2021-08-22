@@ -16,7 +16,7 @@ export default function CategoryCarousal(props: Props): ReactElement {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    arrows: false,
+    arrows: true,
     autoplay: true,
     autoplaySpeed: 6000,
     responsive: [
