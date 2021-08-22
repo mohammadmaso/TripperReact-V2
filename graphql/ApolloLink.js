@@ -12,7 +12,7 @@ export const getNewToken = async () => {
   const refreshToken = await  localStorage.getItem('refresh-token')
   return client.mutate({ mutation: RefreshTokenDocument, variables:{refreshTokenRefreshToken : refreshToken} }).then((response) => {
     // extract your accessToken from your response data and return it
-    return response.data;
+    return response.data.refreshToken;
   });
 };
 
@@ -32,7 +32,8 @@ const errorLink = onError(
               })
             )
               .filter((value) => Boolean(value))
-              .flatMap(({token, refreshToken}) => {
+              .flatMap(({token, payload, refreshToken}) => {
+                console.log(refreshToken)
                 localStorage.setItem('token', token );
                 localStorage.setItem('refresh-token',refreshToken);
                 const oldHeaders = operation.getContext().headers;
