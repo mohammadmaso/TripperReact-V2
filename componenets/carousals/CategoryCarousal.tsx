@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import Slider, { Settings } from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import CategoryCard from '../cards/CategoryCard';
+import { CarousalNextArrow, CarousalPrevArrow } from './CarousalArrow';
 
 interface Props {
   slideToShow?: number;
@@ -16,7 +17,8 @@ export default function CategoryCarousal(props: Props): ReactElement {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    arrows: true,
+    nextArrow: <CarousalNextArrow />,
+    prevArrow: <CarousalPrevArrow />,
     autoplay: true,
     autoplaySpeed: 6000,
     responsive: [
