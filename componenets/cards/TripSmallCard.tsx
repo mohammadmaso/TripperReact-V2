@@ -21,6 +21,7 @@ import { TimeIcon } from '@chakra-ui/icons';
 import { getDays } from '../../utils/time';
 import Link from 'next/link';
 import {
+  namedOperations,
   TripSimpleFieldsFragment,
   TripType,
   useLikeTripMutation,
@@ -33,7 +34,9 @@ interface Props {
   queries: any;
 }
 export default function TripSmallCard({ data, actions, queries }: Props) {
-  const [likeTrip, likeTripStatus] = useLikeTripMutation();
+  const [likeTrip, likeTripStatus] = useLikeTripMutation({
+    refetchQueries: [namedOperations.Query.TripDetailLikes],
+  });
 
   return (
     // <Link href={`/travelogues/${data.id}`} passHref>
