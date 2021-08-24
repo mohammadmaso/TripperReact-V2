@@ -374,8 +374,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           <ErrorMessage name="image" component="div" />
                         </Box>
                       </FormControl>
-                      <Image
-                        rounded="lg"
+                      <Box
                         w={{
                           base: '100%',
                           sm: '100%',
@@ -383,9 +382,13 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           lg: '48%',
                           xl: '48%',
                         }}
-                        src={imagePreview}
-                        alt="تصویر سفر"
-                      />
+                      >
+                        <Image
+                          rounded="lg"
+                          src={imagePreview}
+                          alt="تصویر سفر"
+                        />
+                      </Box>
                     </Flex>
                   </Box>
                 </ModalBody>
