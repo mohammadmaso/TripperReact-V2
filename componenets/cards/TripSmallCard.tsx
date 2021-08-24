@@ -33,9 +33,10 @@ interface Props {
   actions: any;
   queries: any;
 }
-export default function TripSmallCard({ data, actions, queries }: Props) {
+export default function TripSmallCard({ data }: Props) {
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
     refetchQueries: [namedOperations.Query.TripDetailLikes],
+    variables: { createTripLikeTripId: data.id },
   });
 
   return (
@@ -98,9 +99,7 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
                 spacing="0.5"
                 transition={'all .3s ease'}
                 _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={() =>
-                  likeTrip({ variables: { createTripLikeTripId: data.id } })
-                }
+                onClick={() => likeTrip()}
                 cursor="pointer"
               >
                 {!likeTripStatus?.loading ? (
