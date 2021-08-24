@@ -129,7 +129,6 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
         size="3xl"
         closeOnEsc={false}
         motionPreset="slideInBottom"
-        scrollBehavior="inside"
       >
         <ModalOverlay />
         <ModalContent rounded="none">
