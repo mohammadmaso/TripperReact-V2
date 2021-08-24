@@ -23,6 +23,7 @@ import Link from 'next/link';
 import {
   TripSimpleFieldsFragment,
   TripType,
+  useLikeTripMutation,
 } from '../../graphql/generated/types';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
@@ -32,6 +33,8 @@ interface Props {
   queries: any;
 }
 export default function TripSmallCard({ data, actions, queries }: Props) {
+  const [likeTrip, likeTripStatus] = useLikeTripMutation();
+
   return (
     // <Link href={`/travelogues/${data.id}`} passHref>
     <Center py={6} m={2} textColor="white" cursor="pointer">
@@ -92,12 +95,12 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
                 spacing="0.5"
                 transition={'all .3s ease'}
                 _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={() => actions.likeTrip(data.id)}
+                onClick={() => likeTrip(data.id)}
                 cursor="pointer"
               >
-                {!queries.likeTripStatus?.loading ? (
+                {!likeTripStatus?.loading ? (
                   data.userLiked ||
-                  queries.likeTripStatus?.data?.createTripLike?.like ? (
+                  likeTripStatus?.data?.createTripLike?.like ? (
                     <AiFillHeart size="20" color="red" />
                   ) : (
                     <AiOutlineHeart size="20" />
@@ -107,9 +110,9 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
                 )}
               </Wrap>
               <Text fontSize="sm">
-                {queries?.likeTripStatus?.data == null
+                {likeTripStatus?.data == null
                   ? `(${data.likes})`
-                  : `(${queries?.likeTripStatus?.data?.createTripLike?.trip?.likes})`}
+                  : `(${likeTripStatus?.data?.createTripLike?.trip?.likes})`}
               </Text>
             </Stack>
           </Box>
