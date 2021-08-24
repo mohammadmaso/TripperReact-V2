@@ -98,7 +98,9 @@ export default function TripSmallCard({ data, actions, queries }: Props) {
                 spacing="0.5"
                 transition={'all .3s ease'}
                 _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={() => likeTrip(data.id)}
+                onClick={() =>
+                  likeTrip({ variables: { createTripLikeTripId: data.id } })
+                }
                 cursor="pointer"
               >
                 {!likeTripStatus?.loading ? (
