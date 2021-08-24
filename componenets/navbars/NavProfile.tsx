@@ -67,7 +67,7 @@ const NavProfile = (props: Props) => {
             {props.user?.username}
           </MenuItem>
           <Divider />
-          <Link href="/travelogue/new" passHref>
+          <Link href="/travelogues/new/init" passHref>
             <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
           </Link>
           {/* <Link href="/wizard/" passHref>

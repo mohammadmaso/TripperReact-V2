@@ -50,7 +50,7 @@ const NavBar = (props: any) => {
         color={useColorModeValue('gray.600', 'white')}
         minH={'1rem'}
         py={{ base: 2 }}
-        px={[4, 4, 120]}
+        px={[4, 4, 120, 300]}
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}

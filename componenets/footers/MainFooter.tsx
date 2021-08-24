@@ -38,7 +38,7 @@ export default function LargeWithNewsletter() {
       bgColor={useColorModeValue('#f2f2f2', 'gray.900')}
       fontWeight="light"
     >
-      <Container maxW={'full'} py="10" px={[4, 4, 120]}>
+      <Container maxW={'full'} py="10" px={[4, 4, 120, 300]}>
         <SimpleGrid
           columns={{ base: 1, sm: 1, md: 3 }}
           spacing={8}

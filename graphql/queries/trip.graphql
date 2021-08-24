@@ -42,6 +42,12 @@ query AllTrip(
             }
           }
         }
+        country {
+          name
+        }
+        province {
+          name
+        }
         likes
         userLiked
         places {
@@ -294,6 +300,39 @@ query TripReviews($tripId: ID!) {
           createdAt
           id
         }
+      }
+    }
+  }
+}
+
+query AllCountries {
+  allCountries {
+    edges {
+      node {
+        name
+        id
+      }
+    }
+  }
+}
+
+query AllProvincesOfCountry($allProvincesCountry: ID) {
+  allProvinces(country: $allProvincesCountry) {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}
+
+query AllCitiesOfCountry($allCitiesProvince: ID) {
+  allCities(province: $allCitiesProvince) {
+    edges {
+      node {
+        id
+        name
       }
     }
   }

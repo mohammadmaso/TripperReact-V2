@@ -27,3 +27,22 @@ mutation CreateTripReview($createTripReviewInput: CreateTripReviewInput!) {
     success
   }
 }
+
+mutation CreateInitialTrip(
+  $createTripTripInput: TripInput!
+  $createTripTripRelatedInput: TripRelatedInput
+  $createTripProvince: ID
+  $createTripCountry: ID
+) {
+  createTrip(
+    tripInput: $createTripTripInput
+    tripRelatedInput: $createTripTripRelatedInput
+    province: $createTripProvince
+    country: $createTripCountry
+  ) {
+    trip {
+      id
+    }
+    success
+  }
+}
