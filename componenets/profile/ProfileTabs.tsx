@@ -44,14 +44,14 @@ const ProfileTabs = (props: Props) => {
           <TabPanel>
             {props.queries?.savedTripsQuery?.loading ? (
               <ApiLoading />
-            ) : props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges
+            ) : props.queries?.savedTripsQuery?.data?.myTripCollection?.edges
                 .length != 0 ? (
               <SimpleGrid
                 spacing="2"
                 columns={{ base: 1, sm: 1, md: 4 }}
                 justify="center"
               >
-                {props.queries?.savedTripsQuery?.data?.me?.savedTrips.edges?.map(
+                {props.queries?.savedTripsQuery?.data?.myTripCollection?.edges?.map(
                   (item: any) => (
                     <TripSmallCard
                       key={item!.node?.trip.id!}
