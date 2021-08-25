@@ -30,7 +30,6 @@ const MeDetailView = (props: Props) => {
   const [changeUser, changeUserQuery] = useUpdateUserMutation();
 
   const [likeTrip, likeTripStatus] = useLikeTripMutation();
-
   if (loading) {
     return <ApiLoading />;
   }
