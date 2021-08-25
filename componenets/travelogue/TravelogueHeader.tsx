@@ -15,9 +15,19 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiFillBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FiBookmark, FiHeart } from 'react-icons/fi';
-import { HiLocationMarker } from 'react-icons/hi';
+import {
+  HiBookmark,
+  HiBookmarkAlt,
+  HiLocationMarker,
+  HiOutlineBookmark,
+} from 'react-icons/hi';
+import {
+  RiBookmark2Fill,
+  RiBookMarkFill,
+  RiBookMarkLine,
+} from 'react-icons/ri';
 import { BounceLoader } from 'react-spinners';
 import { UserType } from '../../graphql/generated/types';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
@@ -33,6 +43,7 @@ interface Props {
   queries: any;
   likes: number;
   isLiked: boolean;
+  isSaved: boolean;
 }
 
 export function TravelogueHeader(props: Props) {
@@ -151,8 +162,19 @@ export function TravelogueHeader(props: Props) {
           <Wrap
             transition={'all .3s ease'}
             _hover={{ transform: 'scale(1.3,1.3)' }}
+            onClick={() => props.actions.saveTrip()}
           >
-            <FiBookmark size="20" />
+            {!props.queries.saveTripStatus.loading ? (
+              props.isSaved ||
+              props.queries.saveTripStatus.data?.saveTrip?.tripCollection?.trip
+                .userSaved ? (
+                <HiBookmark size="20" />
+              ) : (
+                <HiOutlineBookmark size="20" />
+              )
+            ) : (
+              <Spinner size="xs" />
+            )}
           </Wrap>
         </Wrap>
       ) : (

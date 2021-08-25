@@ -65,24 +65,24 @@ const AddReviewModal = (props: Props) => {
             review: Yup.string().required('نظر نمی‌تواند خالی باشد!'),
           })}
           onSubmit={(values, { setSubmitting, setFieldError }) => {
-            props.actions.addReview(values.id, values.review);
-
-            if (
-              props.status.data &&
-              props.status.data.createTripReview?.success
-            ) {
-              setSubmitting(false);
-              props.onClose();
-              toast({
-                title: 'نظر شما با موفقیت اضافه شد.',
-                // description:
-                //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
-                status: 'success',
-                duration: 4000,
-                isClosable: true,
-                position: 'top-right',
-              });
-            }
+            props.actions.addReview(values.id, values.review).finally(() => {
+              if (
+                props.status.data &&
+                props.status.data.createTripReview?.success
+              ) {
+                setSubmitting(false);
+                props.onClose();
+                toast({
+                  title: 'نظر شما با موفقیت اضافه شد.',
+                  // description:
+                  //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
+                  status: 'success',
+                  duration: 4000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+              }
+            });
           }}
         >
           {(formProps) => (

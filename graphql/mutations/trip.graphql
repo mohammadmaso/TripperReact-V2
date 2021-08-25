@@ -1,15 +1,3 @@
-mutation CreateTrip(
-  $createTripTripInput: TripInput!
-  $createTripTripRelatedInput: TripRelatedInput!
-) {
-  createTrip(
-    tripInput: $createTripTripInput
-    tripRelatedInput: $createTripTripRelatedInput
-  ) {
-    success
-  }
-}
-
 mutation LikeTrip($createTripLikeTripId: ID!) {
   createTripLike(tripId: $createTripLikeTripId) {
     success
@@ -30,9 +18,9 @@ mutation CreateTripReview($createTripReviewInput: CreateTripReviewInput!) {
 
 mutation CreateInitialTrip(
   $createTripTripInput: TripInput!
-  $createTripTripRelatedInput: TripRelatedInput
-  $createTripProvince: ID
-  $createTripCountry: ID
+  $createTripTripRelatedInput: TripRelatedInput!
+  $createTripProvince: ID!
+  $createTripCountry: ID!
 ) {
   createTrip(
     tripInput: $createTripTripInput
@@ -42,6 +30,41 @@ mutation CreateInitialTrip(
   ) {
     trip {
       id
+    }
+    success
+  }
+}
+
+mutation LikeTripReviewMutation($likeTripReviewReview: ID!) {
+  likeTripReview(review: $likeTripReviewReview) {
+    tripReviewLike {
+      value
+      review {
+        likesCount
+        dislikesCount
+      }
+    }
+  }
+}
+
+mutation DislikeTripReviewMutation($dislikeTripReviewReview: ID!) {
+  dislikeTripReview(review: $dislikeTripReviewReview) {
+    tripReviewLike {
+      value
+      review {
+        dislikesCount
+        likesCount
+      }
+    }
+  }
+}
+
+mutation SaveTripMutation($saveTripTrip: ID) {
+  saveTrip(trip: $saveTripTrip) {
+    tripCollection {
+      trip {
+        userSaved
+      }
     }
     success
   }

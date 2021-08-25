@@ -15,8 +15,9 @@ import {
   Wrap,
   WrapItem,
   Spinner,
+  Icon,
 } from '@chakra-ui/react';
-import { FiHeart, FiMapPin } from 'react-icons/fi';
+import { FiEye, FiHeart, FiMapPin } from 'react-icons/fi';
 import { TimeIcon } from '@chakra-ui/icons';
 import { getDays } from '../../utils/time';
 import Link from 'next/link';
@@ -93,8 +94,13 @@ export default function TripSmallCard({ data }: Props) {
               </Wrap>
             </Stack>
           </Flex>
-          <Box>
-            <Stack spacing="1" justifyItems="center" alignItems="flex-end">
+          <Stack justify="flex-start" alignItems="flex-end">
+            <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
+              <Text fontSize="sm">
+                {likeTripStatus?.data == null
+                  ? `${data.likes}`
+                  : `${likeTripStatus?.data?.createTripLike?.trip?.likes}`}
+              </Text>
               <Wrap
                 spacing="0.5"
                 transition={'all .3s ease'}
@@ -113,13 +119,12 @@ export default function TripSmallCard({ data }: Props) {
                   <Spinner size="xs" />
                 )}
               </Wrap>
-              <Text fontSize="sm">
-                {likeTripStatus?.data == null
-                  ? `(${data.likes})`
-                  : `(${likeTripStatus?.data?.createTripLike?.trip?.likes})`}
-              </Text>
-            </Stack>
-          </Box>
+            </Wrap>
+            <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
+              <Text fontSize="sm">{data.viewsCount}</Text>
+              <Icon as={FiEye} />
+            </Wrap>
+          </Stack>
         </Flex>
 
         <Image

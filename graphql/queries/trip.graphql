@@ -29,6 +29,7 @@ query AllTrip(
         createdAt
         startDate
         endDate
+        viewsCount
         defaultImage
         author {
           id
@@ -148,6 +149,7 @@ query TripDetailLikes($tripId: ID!) {
 query TripDetail($tripId: ID!) {
   trip(id: $tripId) {
     userLiked
+    userSaved
     id
     tripMap
     gpsTrack
@@ -299,6 +301,7 @@ query TripReviews($tripId: ID!) {
           description
           createdAt
           id
+          userLiked
         }
       }
     }
@@ -335,5 +338,11 @@ query AllCitiesOfCountry($allCitiesProvince: ID) {
         name
       }
     }
+  }
+}
+
+query TripReviewLikeStatus($tripReviewId: ID!) {
+  tripReview(id: $tripReviewId) {
+    userLiked
   }
 }

@@ -4,6 +4,7 @@ import WikiCarusal from '../../componenets/carousals/WikiCarousal';
 import ApiLoading from '../../componenets/ApiLoading';
 import {
   namedOperations,
+  UpdateUserInput,
   useAllArticleQuery,
   useLikeTripMutation,
   useMeDetailQuery,
@@ -11,6 +12,7 @@ import {
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
   useUpdateProfileMutation,
+  useUpdateUserMutation,
 } from '../../graphql/generated/types';
 import ApiError from '../../componenets/ApiError';
 import ProfileContainer from '../../componenets/profile/ProfileContainer';
@@ -24,6 +26,8 @@ const MeDetailView = (props: Props) => {
   const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
   const [getSavedTrips, savedTripsQuery] = useMeSavedTripsLazyQuery();
   const [changeHeader, changeHeaderQuery] = useUpdateProfileMutation();
+  const [changeUser, changeUserQuery] = useUpdateUserMutation();
+
   const [likeTrip, likeTripStatus] = useLikeTripMutation();
 
   if (loading) {
@@ -46,6 +50,11 @@ const MeDetailView = (props: Props) => {
               variables: variables,
               refetchQueries: [namedOperations.Query.MeDetail],
             }),
+          changeUser: (updateUserInput: UpdateUserInput) =>
+            changeUser({
+              variables: { updateUserInput },
+              refetchQueries: [namedOperations.Query.MeDetail],
+            }),
           likeTrip: (id: string) =>
             likeTrip({
               variables: { createTripLikeTripId: id },
@@ -58,6 +67,7 @@ const MeDetailView = (props: Props) => {
           savedTripsQuery,
           changeHeaderQuery,
           likeTripStatus,
+          changeUserQuery,
         }}
       />
     </div>

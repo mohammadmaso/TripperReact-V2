@@ -18,6 +18,7 @@ import {
   useArticleQuery,
   useCreateTripReviewMutation,
   useLikeTripMutation,
+  useSaveTripMutationMutation,
   useTripDetailLikesQuery,
   useTripDetailQuery,
   useTripReviewsLazyQuery,
@@ -43,11 +44,19 @@ const TripView = (props: Props) => {
   //   variables: { tripId: props.id },
   // });
 
-  const [addReview, addReviewStatus] = useCreateTripReviewMutation();
+  const [addReview, addReviewStatus] = useCreateTripReviewMutation({
+    refetchQueries: [namedOperations.Query.TripReviews],
+  });
   // must have refetch query to get like status
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
     variables: { createTripLikeTripId: props.id },
     refetchQueries: [namedOperations.Query.TripDetailLikes],
+  });
+
+  const [saveTrip, saveTripStatus] = useSaveTripMutationMutation({
+    variables: { saveTripTrip: props.id },
+    // awaitRefetchQueries: true,
+    refetchQueries: [namedOperations.Query.MeSavedTrips],
   });
   if (loading) {
     return <ApiLoading />;
@@ -71,14 +80,17 @@ const TripView = (props: Props) => {
         province={data?.trip?.province.name as string}
         likes={data?.trip?.likes as number}
         isLiked={data?.trip?.userLiked as boolean}
+        isSaved={data?.trip?.userSaved as boolean}
         actions={{
           likeTrip: () => likeTrip(),
+          saveTrip: () => saveTrip(),
         }}
-        queries={{ likeTripStatus }}
+        queries={{ likeTripStatus, saveTripStatus }}
       />
       <TravelogueContainer
         actions={{
           getReviews: () => getReviews(),
+
           addReview: (id: string, review: string) =>
             addReview({
               variables: {

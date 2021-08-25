@@ -70,9 +70,9 @@ interface Props {
     createInitialTrip: (
       inputs: Exact<{
         createTripTripInput: TripInput;
-        createTripTripRelatedInput?: Maybe<TripRelatedInput> | undefined;
-        createTripProvince?: Maybe<string> | undefined;
-        createTripCountry?: Maybe<string> | undefined;
+        createTripTripRelatedInput: TripRelatedInput;
+        createTripProvince: string;
+        createTripCountry: string;
       }>
     ) => any;
     getProvincesOfCountry: (countryId: string) => void;
@@ -90,7 +90,7 @@ interface Props {
     provincesOfCountryQuery: LazyQueryResult<
       AllProvincesOfCountryQuery,
       Exact<{
-        allProvincesCountry?: Maybe<string> | undefined;
+        allProvincesCountry?: Maybe<string>;
       }>
     >;
     categoriesQuery: QueryResult<

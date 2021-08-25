@@ -2102,10 +2102,10 @@ export type MutationDeletePlaceArgs = {
 
 
 export type MutationCreateTripArgs = {
-  country?: Maybe<Scalars['ID']>;
-  province?: Maybe<Scalars['ID']>;
+  country: Scalars['ID'];
+  province: Scalars['ID'];
   tripInput: TripInput;
-  tripRelatedInput?: Maybe<TripRelatedInput>;
+  tripRelatedInput: TripRelatedInput;
 };
 
 
@@ -6147,20 +6147,6 @@ export type ResendVerificationSmsMutation = (
   )> }
 );
 
-export type CreateTripMutationVariables = Exact<{
-  createTripTripInput: TripInput;
-  createTripTripRelatedInput: TripRelatedInput;
-}>;
-
-
-export type CreateTripMutation = (
-  { __typename?: 'Mutation' }
-  & { createTrip?: Maybe<(
-    { __typename?: 'CreateTrip' }
-    & Pick<CreateTrip, 'success'>
-  )> }
-);
-
 export type LikeTripMutationVariables = Exact<{
   createTripLikeTripId: Scalars['ID'];
 }>;
@@ -6193,9 +6179,9 @@ export type CreateTripReviewMutation = (
 
 export type CreateInitialTripMutationVariables = Exact<{
   createTripTripInput: TripInput;
-  createTripTripRelatedInput?: Maybe<TripRelatedInput>;
-  createTripProvince?: Maybe<Scalars['ID']>;
-  createTripCountry?: Maybe<Scalars['ID']>;
+  createTripTripRelatedInput: TripRelatedInput;
+  createTripProvince: Scalars['ID'];
+  createTripCountry: Scalars['ID'];
 }>;
 
 
@@ -6211,6 +6197,66 @@ export type CreateInitialTripMutation = (
   )> }
 );
 
+export type LikeTripReviewMutationMutationVariables = Exact<{
+  likeTripReviewReview: Scalars['ID'];
+}>;
+
+
+export type LikeTripReviewMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { likeTripReview?: Maybe<(
+    { __typename?: 'LikeTripReviewMutation' }
+    & { tripReviewLike?: Maybe<(
+      { __typename?: 'TripReviewLikeType' }
+      & Pick<TripReviewLikeType, 'value'>
+      & { review: (
+        { __typename?: 'TripReviewType' }
+        & Pick<TripReviewType, 'likesCount' | 'dislikesCount'>
+      ) }
+    )> }
+  )> }
+);
+
+export type DislikeTripReviewMutationMutationVariables = Exact<{
+  dislikeTripReviewReview: Scalars['ID'];
+}>;
+
+
+export type DislikeTripReviewMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { dislikeTripReview?: Maybe<(
+    { __typename?: 'DisLikeTripReviewMutation' }
+    & { tripReviewLike?: Maybe<(
+      { __typename?: 'TripReviewLikeType' }
+      & Pick<TripReviewLikeType, 'value'>
+      & { review: (
+        { __typename?: 'TripReviewType' }
+        & Pick<TripReviewType, 'dislikesCount' | 'likesCount'>
+      ) }
+    )> }
+  )> }
+);
+
+export type SaveTripMutationMutationVariables = Exact<{
+  saveTripTrip?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type SaveTripMutationMutation = (
+  { __typename?: 'Mutation' }
+  & { saveTrip?: Maybe<(
+    { __typename?: 'SaveTripMutation' }
+    & Pick<SaveTripMutation, 'success'>
+    & { tripCollection?: Maybe<(
+      { __typename?: 'TripCollectionsType' }
+      & { trip: (
+        { __typename?: 'TripType' }
+        & Pick<TripType, 'userSaved'>
+      ) }
+    )> }
+  )> }
+);
+
 export type UpdateProfileMutationVariables = Exact<{
   updateProfileInput: UpdateProfileInput;
 }>;
@@ -6222,7 +6268,27 @@ export type UpdateProfileMutation = (
     { __typename?: 'UpdateProfilePayload' }
     & { profile?: Maybe<(
       { __typename?: 'ProfileType' }
-      & Pick<ProfileType, 'header'>
+      & Pick<ProfileType, 'about' | 'tripStatus' | 'header'>
+      & { user: (
+        { __typename?: 'UserType' }
+        & Pick<UserType, 'id'>
+      ) }
+    )> }
+  )> }
+);
+
+export type UpdateUserMutationVariables = Exact<{
+  updateUserInput: UpdateUserInput;
+}>;
+
+
+export type UpdateUserMutation = (
+  { __typename?: 'Mutation' }
+  & { updateUser?: Maybe<(
+    { __typename?: 'UpdateUserPayload' }
+    & { user?: Maybe<(
+      { __typename?: 'UserType' }
+      & Pick<UserType, 'avatar' | 'username' | 'phoneNumber' | 'id'>
     )> }
   )> }
 );
@@ -6374,7 +6440,7 @@ export type AllTripQuery = (
       & Pick<TripTypeEdge, 'cursor'>
       & { node?: Maybe<(
         { __typename?: 'TripType' }
-        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'likes' | 'userLiked'>
+        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'viewsCount' | 'defaultImage' | 'likes' | 'userLiked'>
         & { author: (
           { __typename?: 'UserType' }
           & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -6515,7 +6581,7 @@ export type TripDetailQuery = (
   { __typename?: 'Query' }
   & { trip?: Maybe<(
     { __typename?: 'TripType' }
-    & Pick<TripType, 'userLiked' | 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
+    & Pick<TripType, 'userLiked' | 'userSaved' | 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
     & { activities: (
       { __typename?: 'TripActivitieTypeConnection' }
       & { edges: Array<Maybe<(
@@ -6646,7 +6712,7 @@ export type TripReviewsQuery = (
         { __typename?: 'TripReviewTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'TripReviewType' }
-          & Pick<TripReviewType, 'likesCount' | 'dislikesCount' | 'description' | 'createdAt' | 'id'>
+          & Pick<TripReviewType, 'likesCount' | 'dislikesCount' | 'description' | 'createdAt' | 'id' | 'userLiked'>
           & { author: (
             { __typename?: 'UserType' }
             & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -6709,6 +6775,19 @@ export type AllCitiesOfCountryQuery = (
         & Pick<CityType, 'id' | 'name'>
       )> }
     )>> }
+  )> }
+);
+
+export type TripReviewLikeStatusQueryVariables = Exact<{
+  tripReviewId: Scalars['ID'];
+}>;
+
+
+export type TripReviewLikeStatusQuery = (
+  { __typename?: 'Query' }
+  & { tripReview?: Maybe<(
+    { __typename?: 'TripReviewType' }
+    & Pick<TripReviewType, 'userLiked'>
   )> }
 );
 
@@ -7286,43 +7365,6 @@ export function useResendVerificationSmsMutation(baseOptions?: Apollo.MutationHo
 export type ResendVerificationSmsMutationHookResult = ReturnType<typeof useResendVerificationSmsMutation>;
 export type ResendVerificationSmsMutationResult = Apollo.MutationResult<ResendVerificationSmsMutation>;
 export type ResendVerificationSmsMutationOptions = Apollo.BaseMutationOptions<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>;
-export const CreateTripDocument = gql`
-    mutation CreateTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput!) {
-  createTrip(
-    tripInput: $createTripTripInput
-    tripRelatedInput: $createTripTripRelatedInput
-  ) {
-    success
-  }
-}
-    `;
-export type CreateTripMutationFn = Apollo.MutationFunction<CreateTripMutation, CreateTripMutationVariables>;
-
-/**
- * __useCreateTripMutation__
- *
- * To run a mutation, you first call `useCreateTripMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateTripMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createTripMutation, { data, loading, error }] = useCreateTripMutation({
- *   variables: {
- *      createTripTripInput: // value for 'createTripTripInput'
- *      createTripTripRelatedInput: // value for 'createTripTripRelatedInput'
- *   },
- * });
- */
-export function useCreateTripMutation(baseOptions?: Apollo.MutationHookOptions<CreateTripMutation, CreateTripMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateTripMutation, CreateTripMutationVariables>(CreateTripDocument, options);
-      }
-export type CreateTripMutationHookResult = ReturnType<typeof useCreateTripMutation>;
-export type CreateTripMutationResult = Apollo.MutationResult<CreateTripMutation>;
-export type CreateTripMutationOptions = Apollo.BaseMutationOptions<CreateTripMutation, CreateTripMutationVariables>;
 export const LikeTripDocument = gql`
     mutation LikeTrip($createTripLikeTripId: ID!) {
   createTripLike(tripId: $createTripLikeTripId) {
@@ -7396,7 +7438,7 @@ export type CreateTripReviewMutationHookResult = ReturnType<typeof useCreateTrip
 export type CreateTripReviewMutationResult = Apollo.MutationResult<CreateTripReviewMutation>;
 export type CreateTripReviewMutationOptions = Apollo.BaseMutationOptions<CreateTripReviewMutation, CreateTripReviewMutationVariables>;
 export const CreateInitialTripDocument = gql`
-    mutation CreateInitialTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput, $createTripProvince: ID, $createTripCountry: ID) {
+    mutation CreateInitialTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput!, $createTripProvince: ID!, $createTripCountry: ID!) {
   createTrip(
     tripInput: $createTripTripInput
     tripRelatedInput: $createTripTripRelatedInput
@@ -7439,10 +7481,131 @@ export function useCreateInitialTripMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateInitialTripMutationHookResult = ReturnType<typeof useCreateInitialTripMutation>;
 export type CreateInitialTripMutationResult = Apollo.MutationResult<CreateInitialTripMutation>;
 export type CreateInitialTripMutationOptions = Apollo.BaseMutationOptions<CreateInitialTripMutation, CreateInitialTripMutationVariables>;
+export const LikeTripReviewMutationDocument = gql`
+    mutation LikeTripReviewMutation($likeTripReviewReview: ID!) {
+  likeTripReview(review: $likeTripReviewReview) {
+    tripReviewLike {
+      value
+      review {
+        likesCount
+        dislikesCount
+      }
+    }
+  }
+}
+    `;
+export type LikeTripReviewMutationMutationFn = Apollo.MutationFunction<LikeTripReviewMutationMutation, LikeTripReviewMutationMutationVariables>;
+
+/**
+ * __useLikeTripReviewMutationMutation__
+ *
+ * To run a mutation, you first call `useLikeTripReviewMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLikeTripReviewMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [likeTripReviewMutationMutation, { data, loading, error }] = useLikeTripReviewMutationMutation({
+ *   variables: {
+ *      likeTripReviewReview: // value for 'likeTripReviewReview'
+ *   },
+ * });
+ */
+export function useLikeTripReviewMutationMutation(baseOptions?: Apollo.MutationHookOptions<LikeTripReviewMutationMutation, LikeTripReviewMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LikeTripReviewMutationMutation, LikeTripReviewMutationMutationVariables>(LikeTripReviewMutationDocument, options);
+      }
+export type LikeTripReviewMutationMutationHookResult = ReturnType<typeof useLikeTripReviewMutationMutation>;
+export type LikeTripReviewMutationMutationResult = Apollo.MutationResult<LikeTripReviewMutationMutation>;
+export type LikeTripReviewMutationMutationOptions = Apollo.BaseMutationOptions<LikeTripReviewMutationMutation, LikeTripReviewMutationMutationVariables>;
+export const DislikeTripReviewMutationDocument = gql`
+    mutation DislikeTripReviewMutation($dislikeTripReviewReview: ID!) {
+  dislikeTripReview(review: $dislikeTripReviewReview) {
+    tripReviewLike {
+      value
+      review {
+        dislikesCount
+        likesCount
+      }
+    }
+  }
+}
+    `;
+export type DislikeTripReviewMutationMutationFn = Apollo.MutationFunction<DislikeTripReviewMutationMutation, DislikeTripReviewMutationMutationVariables>;
+
+/**
+ * __useDislikeTripReviewMutationMutation__
+ *
+ * To run a mutation, you first call `useDislikeTripReviewMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDislikeTripReviewMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dislikeTripReviewMutationMutation, { data, loading, error }] = useDislikeTripReviewMutationMutation({
+ *   variables: {
+ *      dislikeTripReviewReview: // value for 'dislikeTripReviewReview'
+ *   },
+ * });
+ */
+export function useDislikeTripReviewMutationMutation(baseOptions?: Apollo.MutationHookOptions<DislikeTripReviewMutationMutation, DislikeTripReviewMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DislikeTripReviewMutationMutation, DislikeTripReviewMutationMutationVariables>(DislikeTripReviewMutationDocument, options);
+      }
+export type DislikeTripReviewMutationMutationHookResult = ReturnType<typeof useDislikeTripReviewMutationMutation>;
+export type DislikeTripReviewMutationMutationResult = Apollo.MutationResult<DislikeTripReviewMutationMutation>;
+export type DislikeTripReviewMutationMutationOptions = Apollo.BaseMutationOptions<DislikeTripReviewMutationMutation, DislikeTripReviewMutationMutationVariables>;
+export const SaveTripMutationDocument = gql`
+    mutation SaveTripMutation($saveTripTrip: ID) {
+  saveTrip(trip: $saveTripTrip) {
+    tripCollection {
+      trip {
+        userSaved
+      }
+    }
+    success
+  }
+}
+    `;
+export type SaveTripMutationMutationFn = Apollo.MutationFunction<SaveTripMutationMutation, SaveTripMutationMutationVariables>;
+
+/**
+ * __useSaveTripMutationMutation__
+ *
+ * To run a mutation, you first call `useSaveTripMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSaveTripMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [saveTripMutationMutation, { data, loading, error }] = useSaveTripMutationMutation({
+ *   variables: {
+ *      saveTripTrip: // value for 'saveTripTrip'
+ *   },
+ * });
+ */
+export function useSaveTripMutationMutation(baseOptions?: Apollo.MutationHookOptions<SaveTripMutationMutation, SaveTripMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SaveTripMutationMutation, SaveTripMutationMutationVariables>(SaveTripMutationDocument, options);
+      }
+export type SaveTripMutationMutationHookResult = ReturnType<typeof useSaveTripMutationMutation>;
+export type SaveTripMutationMutationResult = Apollo.MutationResult<SaveTripMutationMutation>;
+export type SaveTripMutationMutationOptions = Apollo.BaseMutationOptions<SaveTripMutationMutation, SaveTripMutationMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
   updateProfile(input: $updateProfileInput) {
     profile {
+      user {
+        id
+      }
+      about
+      tripStatus
       header
     }
   }
@@ -7474,6 +7637,44 @@ export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
 export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
 export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($updateUserInput: UpdateUserInput!) {
+  updateUser(input: $updateUserInput) {
+    user {
+      avatar
+      username
+      phoneNumber
+      id
+    }
+  }
+}
+    `;
+export type UpdateUserMutationFn = Apollo.MutationFunction<UpdateUserMutation, UpdateUserMutationVariables>;
+
+/**
+ * __useUpdateUserMutation__
+ *
+ * To run a mutation, you first call `useUpdateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUserMutation, { data, loading, error }] = useUpdateUserMutation({
+ *   variables: {
+ *      updateUserInput: // value for 'updateUserInput'
+ *   },
+ * });
+ */
+export function useUpdateUserMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUserMutation, UpdateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument, options);
+      }
+export type UpdateUserMutationHookResult = ReturnType<typeof useUpdateUserMutation>;
+export type UpdateUserMutationResult = Apollo.MutationResult<UpdateUserMutation>;
+export type UpdateUserMutationOptions = Apollo.BaseMutationOptions<UpdateUserMutation, UpdateUserMutationVariables>;
 export const FollowOrUnfollowDocument = gql`
     mutation FollowOrUnfollow($followOrUnfollowInput: FollowOrUnfollowInput!) {
   followOrUnfollow(input: $followOrUnfollowInput) {
@@ -7726,6 +7927,7 @@ export const AllTripDocument = gql`
         createdAt
         startDate
         endDate
+        viewsCount
         defaultImage
         author {
           id
@@ -7919,6 +8121,7 @@ export const TripDetailDocument = gql`
     query TripDetail($tripId: ID!) {
   trip(id: $tripId) {
     userLiked
+    userSaved
     id
     tripMap
     gpsTrack
@@ -8097,6 +8300,7 @@ export const TripReviewsDocument = gql`
           description
           createdAt
           id
+          userLiked
         }
       }
     }
@@ -8250,6 +8454,41 @@ export function useAllCitiesOfCountryLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type AllCitiesOfCountryQueryHookResult = ReturnType<typeof useAllCitiesOfCountryQuery>;
 export type AllCitiesOfCountryLazyQueryHookResult = ReturnType<typeof useAllCitiesOfCountryLazyQuery>;
 export type AllCitiesOfCountryQueryResult = Apollo.QueryResult<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>;
+export const TripReviewLikeStatusDocument = gql`
+    query TripReviewLikeStatus($tripReviewId: ID!) {
+  tripReview(id: $tripReviewId) {
+    userLiked
+  }
+}
+    `;
+
+/**
+ * __useTripReviewLikeStatusQuery__
+ *
+ * To run a query within a React component, call `useTripReviewLikeStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTripReviewLikeStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTripReviewLikeStatusQuery({
+ *   variables: {
+ *      tripReviewId: // value for 'tripReviewId'
+ *   },
+ * });
+ */
+export function useTripReviewLikeStatusQuery(baseOptions: Apollo.QueryHookOptions<TripReviewLikeStatusQuery, TripReviewLikeStatusQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TripReviewLikeStatusQuery, TripReviewLikeStatusQueryVariables>(TripReviewLikeStatusDocument, options);
+      }
+export function useTripReviewLikeStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TripReviewLikeStatusQuery, TripReviewLikeStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TripReviewLikeStatusQuery, TripReviewLikeStatusQueryVariables>(TripReviewLikeStatusDocument, options);
+        }
+export type TripReviewLikeStatusQueryHookResult = ReturnType<typeof useTripReviewLikeStatusQuery>;
+export type TripReviewLikeStatusLazyQueryHookResult = ReturnType<typeof useTripReviewLikeStatusLazyQuery>;
+export type TripReviewLikeStatusQueryResult = Apollo.QueryResult<TripReviewLikeStatusQuery, TripReviewLikeStatusQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -8709,6 +8948,7 @@ export const namedOperations = {
     AllCountries: 'AllCountries',
     AllProvincesOfCountry: 'AllProvincesOfCountry',
     AllCitiesOfCountry: 'AllCitiesOfCountry',
+    TripReviewLikeStatus: 'TripReviewLikeStatus',
     Me: 'Me',
     MeDetail: 'MeDetail',
     UserDetail: 'UserDetail',
@@ -8728,11 +8968,14 @@ export const namedOperations = {
     ForgotPasswordSms: 'ForgotPasswordSms',
     TokenAuth: 'TokenAuth',
     ResendVerificationSms: 'ResendVerificationSms',
-    CreateTrip: 'CreateTrip',
     LikeTrip: 'LikeTrip',
     CreateTripReview: 'CreateTripReview',
     CreateInitialTrip: 'CreateInitialTrip',
+    LikeTripReviewMutation: 'LikeTripReviewMutation',
+    DislikeTripReviewMutation: 'DislikeTripReviewMutation',
+    SaveTripMutation: 'SaveTripMutation',
     UpdateProfile: 'UpdateProfile',
+    UpdateUser: 'UpdateUser',
     FollowOrUnfollow: 'FollowOrUnfollow'
   },
   Fragment: {

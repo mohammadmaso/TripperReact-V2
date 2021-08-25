@@ -18,8 +18,12 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import {
+  FollowOrUnfollowMutation,
   ProfileFieldsFragment,
   TripSimpleFieldsFragment,
+  UpdateProfileMutation,
+  UpdateUserInput,
+  UpdateUserMutation,
   UserFieldsFragment,
   UserType,
 } from '../../graphql/generated/types';
@@ -28,6 +32,7 @@ import { FiCamera, FiEdit, FiEdit2, FiSettings } from 'react-icons/fi';
 import FollowersModal from '../Modals/FollowersModal';
 import FollowingsModal from '../Modals/FollowingsModal';
 import { RiUserFollowLine } from 'react-icons/ri';
+import { FetchResult } from '@apollo/client/link/core/types';
 interface Props {
   isSelf: boolean;
   data: UserFieldsFragment & {
@@ -35,6 +40,30 @@ interface Props {
     trips: { edges: [node: TripSimpleFieldsFragment] };
   };
   actions: any;
+  // {
+  //   changeUser: (
+  //     updateUserInput: UpdateUserInput
+  //   ) => Promise<
+  //     FetchResult<UpdateUserMutation, Record<string, any>, Record<string, any>>
+  //   >;
+  //   changeHeader: (
+  //     variables: any
+  //   ) => Promise<
+  //     FetchResult<
+  //       UpdateProfileMutation,
+  //       Record<string, any>,
+  //       Record<string, any>
+  //     >
+  //   >;
+  //   followOrUnfollow?: () => Promise<
+  //     FetchResult<
+  //       FollowOrUnfollowMutation,
+  //       Record<string, any>,
+  //       Record<string, any>
+  //     >
+  //   >;
+  // };
+
   lazyQueries: any;
   isFollowed: boolean;
 }
@@ -51,6 +80,7 @@ const ProfileHeader = ({
   const modalFollowings = useDisclosure();
 
   const inputFileHeader = useRef<HTMLInputElement>(null);
+  const inputFileAvatar = useRef<HTMLInputElement>(null);
 
   const onChangeHeaderInput = ({
     target: {
@@ -60,7 +90,7 @@ const ProfileHeader = ({
   }: any) => {
     if (validity.valid) {
       actions.changeHeader({
-        updateProfileInput: {
+        updateUserInput: {
           profile: {
             header: file,
           },
@@ -69,18 +99,43 @@ const ProfileHeader = ({
     }
   };
 
+  const onChangeAvatarInput = ({
+    target: {
+      validity,
+      files: [file],
+    },
+  }: any) => {
+    if (validity.valid) {
+      actions.changeUser({ userInputs: { avatar: file } });
+    }
+  };
+
   const onHeaderButtonClick = () => {
     // `current` points to the mounted file input element
     inputFileHeader?.current?.click();
   };
+
+  const onAvatarButtonClick = () => {
+    // `current` points to the mounted file input element
+    inputFileAvatar?.current?.click();
+  };
   return (
     <>
       <input
+        accept="image/*"
         type="file"
         id="file"
         ref={inputFileHeader}
         style={{ display: 'none' }}
         onChange={onChangeHeaderInput}
+      />
+      <input
+        accept="image/*"
+        type="file"
+        id="file2"
+        ref={inputFileAvatar}
+        style={{ display: 'none' }}
+        onChange={onChangeAvatarInput}
       />
       <Image
         h={'200px'}
@@ -131,6 +186,8 @@ const ProfileHeader = ({
             rounded="full"
             mt="-4"
             opacity="0.8"
+            isLoading={lazyQueries.changeUserQuery.loading}
+            onClick={onAvatarButtonClick}
           >
             <Icon as={FiCamera} color="gray.600" />
           </Button>
