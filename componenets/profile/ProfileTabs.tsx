@@ -28,11 +28,7 @@ const ProfileTabs = (props: Props) => {
     <Tabs colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
-        {props.isSelf && (
-          <Tab onClick={() => props.actions?.getSavedTrips()}>
-            سفرهای موردعلاقه{' '}
-          </Tab>
-        )}
+        {props.isSelf && <Tab>سفرهای موردعلاقه </Tab>}
         <Tab isDisabled>دست‌آوردها</Tab>
       </TabList>
 

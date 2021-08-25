@@ -56,7 +56,7 @@ const TripView = (props: Props) => {
   const [saveTrip, saveTripStatus] = useSaveTripMutationMutation({
     variables: { saveTripTrip: props.id },
     // awaitRefetchQueries: true,
-    refetchQueries: [namedOperations.Query.MeSavedTrips],
+    // refetchQueries: [namedOperations.Query.MeSavedTrips],
   });
   if (loading) {
     return <ApiLoading />;

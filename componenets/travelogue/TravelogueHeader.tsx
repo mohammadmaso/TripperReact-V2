@@ -48,6 +48,9 @@ interface Props {
 
 export function TravelogueHeader(props: Props) {
   const [stickyHeader, setStickyHeader] = useState(false);
+
+  const [isSaved, setIsSaved] = useState(props.isSaved);
+
   const { goToSignUp, isSignedIn } = useIsSignedIn();
 
   const handleScroll = () => {
@@ -162,12 +165,13 @@ export function TravelogueHeader(props: Props) {
           <Wrap
             transition={'all .3s ease'}
             _hover={{ transform: 'scale(1.3,1.3)' }}
-            onClick={() => props.actions.saveTrip()}
+            onClick={() => {
+              props.actions.saveTrip();
+              setIsSaved(!isSaved);
+            }}
           >
             {!props.queries.saveTripStatus.loading ? (
-              props.isSaved ||
-              props.queries.saveTripStatus.data?.saveTrip?.tripCollection?.trip
-                .userSaved ? (
+              isSaved ? (
                 <HiBookmark size="20" />
               ) : (
                 <HiOutlineBookmark size="20" />

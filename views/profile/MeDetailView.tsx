@@ -11,6 +11,7 @@ import {
   useMeFollowersLazyQuery,
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
+  useMeSavedTripsQuery,
   useUpdateProfileMutation,
   useUpdateUserMutation,
 } from '../../graphql/generated/types';
@@ -24,7 +25,7 @@ const MeDetailView = (props: Props) => {
   const { data, loading, error } = useMeDetailQuery();
   const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery();
   const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
-  const [getSavedTrips, savedTripsQuery] = useMeSavedTripsLazyQuery();
+  const savedTripsQuery = useMeSavedTripsQuery();
   const [changeHeader, changeHeaderQuery] = useUpdateProfileMutation();
   const [changeUser, changeUserQuery] = useUpdateUserMutation();
 
@@ -44,7 +45,7 @@ const MeDetailView = (props: Props) => {
         actions={{
           getFollowings: () => getFollowings(),
           getFollowers: () => getFollowers(),
-          getSavedTrips: () => getSavedTrips(),
+          // getSavedTrips: () => getSavedTrips(),
           changeHeader: (variables: any) =>
             changeHeader({
               variables: variables,
