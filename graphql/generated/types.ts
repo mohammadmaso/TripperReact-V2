@@ -7005,21 +7005,18 @@ export type MeSavedTripsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type MeSavedTripsQuery = (
   { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'UserType' }
-    & { savedTrips: (
-      { __typename?: 'TripCollectionsTypeConnection' }
-      & { edges: Array<Maybe<(
-        { __typename?: 'TripCollectionsTypeEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'TripCollectionsType' }
-          & { trip: (
-            { __typename?: 'TripType' }
-            & TripSimpleFieldsFragment
-          ) }
-        )> }
-      )>> }
-    ) }
+  & { myTripCollection?: Maybe<(
+    { __typename?: 'TripCollectionsTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripCollectionsTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripCollectionsType' }
+        & { trip: (
+          { __typename?: 'TripType' }
+          & TripSimpleFieldsFragment
+        ) }
+      )> }
+    )>> }
   )> }
 );
 
@@ -8894,13 +8891,11 @@ export type AllProfilesLazyQueryHookResult = ReturnType<typeof useAllProfilesLaz
 export type AllProfilesQueryResult = Apollo.QueryResult<AllProfilesQuery, AllProfilesQueryVariables>;
 export const MeSavedTripsDocument = gql`
     query MeSavedTrips {
-  me {
-    savedTrips {
-      edges {
-        node {
-          trip {
-            ...TripSimpleFields
-          }
+  myTripCollection {
+    edges {
+      node {
+        trip {
+          ...TripSimpleFields
         }
       }
     }
