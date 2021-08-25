@@ -141,13 +141,11 @@ query AllProfiles {
 }
 
 query MeSavedTrips {
-  me {
-    savedTrips {
-      edges {
-        node {
-          trip {
-            ...TripSimpleFields
-          }
+  myTripCollection {
+    edges {
+      node {
+        trip {
+          ...TripSimpleFields
         }
       }
     }
