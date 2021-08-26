@@ -1,5 +1,6 @@
-import { Wrap, Divider, Flex, Stack } from '@chakra-ui/react';
+import { Wrap, Divider, Flex, Stack, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react';
 import ApiError from '../../componenets/ApiError';
 import ApiLoading from '../../componenets/ApiLoading';
@@ -17,6 +18,7 @@ import {
   useAllArticleQuery,
   useArticleQuery,
   useCreateTripReviewMutation,
+  useDeleteTripMutation,
   useLikeTripMutation,
   useSaveTripMutationMutation,
   useTripDetailLikesQuery,
@@ -32,6 +34,9 @@ interface Props {
 }
 
 const TripView = (props: Props) => {
+  const router = useRouter();
+  const toast = useToast();
+
   const { data, loading, error } = useTripDetailQuery({
     variables: { tripId: props.id },
   });
@@ -55,9 +60,35 @@ const TripView = (props: Props) => {
 
   const [saveTrip, saveTripStatus] = useSaveTripMutationMutation({
     variables: { saveTripTrip: props.id },
-    // awaitRefetchQueries: true,
-    // refetchQueries: [namedOperations.Query.MeSavedTrips],
+    awaitRefetchQueries: true,
+    refetchQueries: [namedOperations.Query.MeSavedTrips],
   });
+
+  const [deleteTrip, deleteTripStatus] = useDeleteTripMutation({
+    variables: { deleteTripTripId: props.id },
+    refetchQueries: [namedOperations.Query.MeDetail],
+    onCompleted: (data) => {
+      toast({
+        title: 'سفر با موفقیت حذف شد',
+        status: 'success',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      router.push('/me');
+    },
+    onError: () => {
+      toast({
+        title: 'حذف سفر با خطا مواجه شد.',
+        description: 'دوباره امتحان کنید',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+  });
+
   if (loading) {
     return <ApiLoading />;
   }
@@ -81,11 +112,13 @@ const TripView = (props: Props) => {
         likes={data?.trip?.likes as number}
         isLiked={data?.trip?.userLiked as boolean}
         isSaved={data?.trip?.userSaved as boolean}
+        published={data?.trip?.published as boolean}
         actions={{
           likeTrip: () => likeTrip(),
           saveTrip: () => saveTrip(),
+          deleteTrip: () => deleteTrip(),
         }}
-        queries={{ likeTripStatus, saveTripStatus }}
+        queries={{ likeTripStatus, saveTripStatus, deleteTripStatus }}
       />
       <TravelogueContainer
         actions={{

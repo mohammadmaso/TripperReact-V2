@@ -48,7 +48,7 @@ export function PlaceHeader() {
       top={stickyHeader ? '60px' : undefined}
       w="full"
       transitionDuration="2"
-      px={[4, 4, 120]}
+      px={[4, 4, 120, 120, 300]}
       align="center"
     >
       <Stack>

@@ -99,11 +99,11 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
                 </>
               )}
 
-              {data.trip?.experiences.edges.length != 0 && (
+              {data?.trip?.experiences?.edges.length != 0 && (
                 <>
                   <Divider />
                   <TravelogueExperiences
-                    experiences={data.trip?.experiences.edges!}
+                    experiences={data?.trip?.experiences?.edges!}
                   />
                 </>
               )}

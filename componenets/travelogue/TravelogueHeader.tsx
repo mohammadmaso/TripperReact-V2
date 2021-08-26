@@ -15,10 +15,24 @@ import {
   Spinner,
   useDisclosure,
   Icon,
+  MenuButton,
+  Menu,
+  MenuList,
+  MenuItem,
+  IconButton,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { AiFillBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { FiBookmark, FiHeart, FiShare, FiShare2 } from 'react-icons/fi';
+import {
+  FiBookmark,
+  FiEdit,
+  FiEye,
+  FiHeart,
+  FiMoreVertical,
+  FiShare,
+  FiShare2,
+  FiTrash,
+} from 'react-icons/fi';
 import {
   HiBookmark,
   HiBookmarkAlt,
@@ -32,7 +46,9 @@ import {
 } from 'react-icons/ri';
 import { BounceLoader } from 'react-spinners';
 import { UserType } from '../../graphql/generated/types';
+import { useIsMineTrip } from '../../hooks/useIsMineTrip';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
+import DeleteConfirmModal from '../Modals/DeleteConfirmModal';
 import ShareModal from '../Modals/ShareModal';
 interface Props {
   title: string | undefined;
@@ -47,6 +63,7 @@ interface Props {
   likes: number;
   isLiked: boolean;
   isSaved: boolean;
+  published: boolean;
 }
 
 export function TravelogueHeader(props: Props) {
@@ -54,7 +71,10 @@ export function TravelogueHeader(props: Props) {
 
   const [isSaved, setIsSaved] = useState(props.isSaved);
 
+  const isMineTrip = useIsMineTrip(props.author?.username as string);
+
   const shareModal = useDisclosure();
+  const deleteModal = useDisclosure();
 
   const { goToSignUp, isSignedIn } = useIsSignedIn();
 
@@ -130,6 +150,9 @@ export function TravelogueHeader(props: Props) {
           <Wrap
             direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
             spacing="2"
+            alignItems="center"
+            justify="center"
+            align="center"
           >
             <Wrap
               direction={{
@@ -140,12 +163,14 @@ export function TravelogueHeader(props: Props) {
               }}
               spacing="1"
               align="center"
+              justify="center"
+              alignItems="center"
             >
               <Wrap fontSize="xs" spacing="1">
                 <Text>
                   {props.queries?.likeTripStatus?.data == null
-                    ? `(${props.likes})`
-                    : `(${props.queries?.likeTripStatus?.data.createTripLike.trip.likes})`}
+                    ? `${props.likes}`
+                    : `${props.queries?.likeTripStatus?.data.createTripLike.trip.likes}`}
                 </Text>
               </Wrap>
 
@@ -197,6 +222,26 @@ export function TravelogueHeader(props: Props) {
             >
               <Icon as={FiShare2} size="20" />
             </Wrap>
+
+            {isMineTrip && (
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<FiMoreVertical size="20" />}
+                  variant="ghost"
+                />
+                <MenuList fontSize="sm">
+                  <MenuItem icon={<FiEdit />}>ویرایش</MenuItem>
+                  <MenuItem icon={<FiEye />}>
+                    {props.published ? 'عدم انتشار' : 'انتشار'}
+                  </MenuItem>
+                  <MenuItem onClick={deleteModal.onOpen} icon={<FiTrash />}>
+                    حذف سفرنامه
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            )}
           </Wrap>
         ) : (
           <Tooltip
@@ -208,13 +253,13 @@ export function TravelogueHeader(props: Props) {
           >
             <Wrap
               direction={{ base: 'column', sm: 'column', md: 'row' }}
-              alignConten="left"
+              alignContent="left"
               spacing="2"
-              style={{ filter: 'blur(1px)' }}
+              // style={{ filter: 'blur(1px)' }}
             >
               <Wrap spacing="1" align="center">
                 <Wrap style={{ filter: 'blur(0px)' }} fontSize="xs" spacing="1">
-                  <Text>{`(${props.likes})`}</Text>
+                  <Text>{`${props.likes}`}</Text>
                 </Wrap>
                 <Wrap spacing="0.5">
                   <FiHeart size="20" />
@@ -222,11 +267,27 @@ export function TravelogueHeader(props: Props) {
               </Wrap>
               <Divider orientation="vertical" />
               <FiBookmark size="20" />
+              <Divider orientation="vertical" />
+
+              <Wrap
+                transition={'all .3s ease'}
+                _hover={{ transform: 'scale(1.3,1.3)' }}
+                onClick={shareModal.onOpen}
+                cursor="pointer"
+              >
+                <Icon as={FiShare2} size="20" />
+              </Wrap>
             </Wrap>
           </Tooltip>
         )}
       </Flex>
       <ShareModal {...shareModal} />
+      <DeleteConfirmModal
+        {...deleteModal}
+        title={props.title}
+        status={props.queries.deleteTripStatus}
+        deleteAction={props.actions.deleteTrip}
+      />
     </>
   );
 }

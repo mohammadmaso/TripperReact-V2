@@ -58,6 +58,7 @@ query AllTrip(
             }
           }
         }
+        published
         experiences {
           edges {
             node {
@@ -99,6 +100,7 @@ fragment TripSimpleFields on TripType {
   country {
     name
   }
+  published
   province {
     name
   }
@@ -156,6 +158,7 @@ query TripDetail($tripId: ID!) {
     costs
     checkList
     todoList
+    published
     activities {
       edges {
         node {

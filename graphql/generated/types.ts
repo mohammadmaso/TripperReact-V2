@@ -3178,8 +3178,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3194,8 +3194,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -4767,7 +4767,7 @@ export type TripType = Node & {
   reviews: TripReviewTypeConnection;
   places: PlaceTypeConnection;
   accessories: AccessoryTypeConnection;
-  experiences: ExperienceImageTypeConnection;
+  experiences?: Maybe<ExperienceTypeConnection>;
   transfers: TransferTypeConnection;
   cities: CityTypeConnection;
   likes: Scalars['Int'];
@@ -4896,6 +4896,8 @@ export type TripTypeExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -6440,7 +6442,7 @@ export type AllTripQuery = (
       & Pick<TripTypeEdge, 'cursor'>
       & { node?: Maybe<(
         { __typename?: 'TripType' }
-        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'viewsCount' | 'defaultImage' | 'likes' | 'userLiked'>
+        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'viewsCount' | 'defaultImage' | 'likes' | 'userLiked' | 'published'>
         & { author: (
           { __typename?: 'UserType' }
           & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -6468,16 +6470,16 @@ export type AllTripQuery = (
               & Pick<PlaceType, 'id'>
             )> }
           )>> }
-        ), experiences: (
-          { __typename?: 'ExperienceImageTypeConnection' }
+        ), experiences?: Maybe<(
+          { __typename?: 'ExperienceTypeConnection' }
           & { edges: Array<Maybe<(
-            { __typename?: 'ExperienceImageTypeEdge' }
+            { __typename?: 'ExperienceTypeEdge' }
             & { node?: Maybe<(
-              { __typename?: 'ExperienceImageType' }
-              & Pick<ExperienceImageType, 'id'>
+              { __typename?: 'ExperienceType' }
+              & Pick<ExperienceType, 'id'>
             )> }
           )>> }
-        ) }
+        )> }
       )> }
     )>> }
   )> }
@@ -6502,7 +6504,7 @@ export type AllTripCategoriesQuery = (
 
 export type TripSimpleFieldsFragment = (
   { __typename?: 'TripType' }
-  & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'viewsCount' | 'userLiked' | 'likes'>
+  & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'defaultImage' | 'viewsCount' | 'published' | 'userLiked' | 'likes'>
   & { author: (
     { __typename?: 'UserType' }
     & Pick<UserType, 'id' | 'username' | 'avatar'>
@@ -6530,16 +6532,16 @@ export type TripSimpleFieldsFragment = (
         & Pick<PlaceType, 'id'>
       )> }
     )>> }
-  ), experiences: (
-    { __typename?: 'ExperienceImageTypeConnection' }
+  ), experiences?: Maybe<(
+    { __typename?: 'ExperienceTypeConnection' }
     & { edges: Array<Maybe<(
-      { __typename?: 'ExperienceImageTypeEdge' }
+      { __typename?: 'ExperienceTypeEdge' }
       & { node?: Maybe<(
-        { __typename?: 'ExperienceImageType' }
-        & Pick<ExperienceImageType, 'id'>
+        { __typename?: 'ExperienceType' }
+        & Pick<ExperienceType, 'id'>
       )> }
     )>> }
-  ) }
+  )> }
 );
 
 export type AllActivitiesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -6581,7 +6583,7 @@ export type TripDetailQuery = (
   { __typename?: 'Query' }
   & { trip?: Maybe<(
     { __typename?: 'TripType' }
-    & Pick<TripType, 'userLiked' | 'userSaved' | 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
+    & Pick<TripType, 'userLiked' | 'userSaved' | 'id' | 'tripMap' | 'gpsTrack' | 'costs' | 'checkList' | 'todoList' | 'published' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'likes' | 'defaultImage' | 'viewsCount'>
     & { activities: (
       { __typename?: 'TripActivitieTypeConnection' }
       & { edges: Array<Maybe<(
@@ -6647,13 +6649,13 @@ export type TripDetailQuery = (
     ), author: (
       { __typename?: 'UserType' }
       & Pick<UserType, 'id' | 'username' | 'avatar'>
-    ), experiences: (
-      { __typename?: 'ExperienceImageTypeConnection' }
+    ), experiences?: Maybe<(
+      { __typename?: 'ExperienceTypeConnection' }
       & { edges: Array<Maybe<(
-        { __typename?: 'ExperienceImageTypeEdge' }
+        { __typename?: 'ExperienceTypeEdge' }
         & { node?: Maybe<(
-          { __typename?: 'ExperienceImageType' }
-          & Pick<ExperienceImageType, 'id' | 'title' | 'defaultImage' | 'description'>
+          { __typename?: 'ExperienceType' }
+          & Pick<ExperienceType, 'id' | 'title' | 'defaultImage' | 'description'>
           & { place: (
             { __typename?: 'PlaceType' }
             & Pick<PlaceType, 'name'>
@@ -6669,7 +6671,7 @@ export type TripDetailQuery = (
           ) }
         )> }
       )>> }
-    ), places: (
+    )>, places: (
       { __typename?: 'PlaceTypeConnection' }
       & { edges: Array<Maybe<(
         { __typename?: 'PlaceTypeEdge' }
@@ -7030,6 +7032,34 @@ export type ProfileFieldsFragment = (
   & Pick<ProfileType, 'about' | 'tripStatus' | 'header' | 'gender' | 'followersCount' | 'followingsCount'>
 );
 
+export type DeleteTripMutationVariables = Exact<{
+  deleteTripTripId: Scalars['ID'];
+}>;
+
+
+export type DeleteTripMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTrip?: Maybe<(
+    { __typename?: 'DeleteTrip' }
+    & Pick<DeleteTrip, 'deleted'>
+  )> }
+);
+
+export type PasswordChangeMutationVariables = Exact<{
+  passwordChangeOldPassword: Scalars['String'];
+  passwordChangeNewPassword1: Scalars['String'];
+  passwordChangeNewPassword2: Scalars['String'];
+}>;
+
+
+export type PasswordChangeMutation = (
+  { __typename?: 'Mutation' }
+  & { passwordChange?: Maybe<(
+    { __typename?: 'PasswordChange' }
+    & Pick<PasswordChange, 'success' | 'errors'>
+  )> }
+);
+
 export const TripSimpleFieldsFragmentDoc = gql`
     fragment TripSimpleFields on TripType {
   id
@@ -7048,6 +7078,7 @@ export const TripSimpleFieldsFragmentDoc = gql`
   country {
     name
   }
+  published
   province {
     name
   }
@@ -7953,6 +7984,7 @@ export const AllTripDocument = gql`
             }
           }
         }
+        published
         experiences {
           edges {
             node {
@@ -8125,6 +8157,7 @@ export const TripDetailDocument = gql`
     costs
     checkList
     todoList
+    published
     activities {
       edges {
         node {
@@ -8929,6 +8962,79 @@ export function useMeSavedTripsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MeSavedTripsQueryHookResult = ReturnType<typeof useMeSavedTripsQuery>;
 export type MeSavedTripsLazyQueryHookResult = ReturnType<typeof useMeSavedTripsLazyQuery>;
 export type MeSavedTripsQueryResult = Apollo.QueryResult<MeSavedTripsQuery, MeSavedTripsQueryVariables>;
+export const DeleteTripDocument = gql`
+    mutation DeleteTrip($deleteTripTripId: ID!) {
+  deleteTrip(tripId: $deleteTripTripId) {
+    deleted
+  }
+}
+    `;
+export type DeleteTripMutationFn = Apollo.MutationFunction<DeleteTripMutation, DeleteTripMutationVariables>;
+
+/**
+ * __useDeleteTripMutation__
+ *
+ * To run a mutation, you first call `useDeleteTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTripMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTripMutation, { data, loading, error }] = useDeleteTripMutation({
+ *   variables: {
+ *      deleteTripTripId: // value for 'deleteTripTripId'
+ *   },
+ * });
+ */
+export function useDeleteTripMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTripMutation, DeleteTripMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTripMutation, DeleteTripMutationVariables>(DeleteTripDocument, options);
+      }
+export type DeleteTripMutationHookResult = ReturnType<typeof useDeleteTripMutation>;
+export type DeleteTripMutationResult = Apollo.MutationResult<DeleteTripMutation>;
+export type DeleteTripMutationOptions = Apollo.BaseMutationOptions<DeleteTripMutation, DeleteTripMutationVariables>;
+export const PasswordChangeDocument = gql`
+    mutation PasswordChange($passwordChangeOldPassword: String!, $passwordChangeNewPassword1: String!, $passwordChangeNewPassword2: String!) {
+  passwordChange(
+    oldPassword: $passwordChangeOldPassword
+    newPassword1: $passwordChangeNewPassword1
+    newPassword2: $passwordChangeNewPassword2
+  ) {
+    success
+    errors
+  }
+}
+    `;
+export type PasswordChangeMutationFn = Apollo.MutationFunction<PasswordChangeMutation, PasswordChangeMutationVariables>;
+
+/**
+ * __usePasswordChangeMutation__
+ *
+ * To run a mutation, you first call `usePasswordChangeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePasswordChangeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [passwordChangeMutation, { data, loading, error }] = usePasswordChangeMutation({
+ *   variables: {
+ *      passwordChangeOldPassword: // value for 'passwordChangeOldPassword'
+ *      passwordChangeNewPassword1: // value for 'passwordChangeNewPassword1'
+ *      passwordChangeNewPassword2: // value for 'passwordChangeNewPassword2'
+ *   },
+ * });
+ */
+export function usePasswordChangeMutation(baseOptions?: Apollo.MutationHookOptions<PasswordChangeMutation, PasswordChangeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PasswordChangeMutation, PasswordChangeMutationVariables>(PasswordChangeDocument, options);
+      }
+export type PasswordChangeMutationHookResult = ReturnType<typeof usePasswordChangeMutation>;
+export type PasswordChangeMutationResult = Apollo.MutationResult<PasswordChangeMutation>;
+export type PasswordChangeMutationOptions = Apollo.BaseMutationOptions<PasswordChangeMutation, PasswordChangeMutationVariables>;
 export const namedOperations = {
   Query: {
     AllArticle: 'AllArticle',
@@ -8971,7 +9077,9 @@ export const namedOperations = {
     SaveTripMutation: 'SaveTripMutation',
     UpdateProfile: 'UpdateProfile',
     UpdateUser: 'UpdateUser',
-    FollowOrUnfollow: 'FollowOrUnfollow'
+    FollowOrUnfollow: 'FollowOrUnfollow',
+    DeleteTrip: 'DeleteTrip',
+    PasswordChange: 'PasswordChange'
   },
   Fragment: {
     TripSimpleFields: 'TripSimpleFields',

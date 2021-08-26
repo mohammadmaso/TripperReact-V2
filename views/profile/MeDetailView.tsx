@@ -4,6 +4,7 @@ import WikiCarusal from '../../componenets/carousals/WikiCarousal';
 import ApiLoading from '../../componenets/ApiLoading';
 import {
   namedOperations,
+  UpdateProfileInput,
   UpdateUserInput,
   useAllArticleQuery,
   useLikeTripMutation,
@@ -12,6 +13,7 @@ import {
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
   useMeSavedTripsQuery,
+  usePasswordChangeMutation,
   useUpdateProfileMutation,
   useUpdateUserMutation,
 } from '../../graphql/generated/types';
@@ -26,8 +28,9 @@ const MeDetailView = (props: Props) => {
   const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery();
   const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
   const savedTripsQuery = useMeSavedTripsQuery();
-  const [changeHeader, changeHeaderQuery] = useUpdateProfileMutation();
+  const [changeProfile, changeProfileQuery] = useUpdateProfileMutation();
   const [changeUser, changeUserQuery] = useUpdateUserMutation();
+  const [changePassword, changePasswordQuery] = usePasswordChangeMutation();
 
   const [likeTrip, likeTripStatus] = useLikeTripMutation();
   if (loading) {
@@ -45,15 +48,27 @@ const MeDetailView = (props: Props) => {
           getFollowings: () => getFollowings(),
           getFollowers: () => getFollowers(),
           // getSavedTrips: () => getSavedTrips(),
-          changeHeader: (variables: any) =>
-            changeHeader({
-              variables: variables,
+          changeProfile: (updateProfileInput: UpdateProfileInput) =>
+            changeProfile({
+              variables: { updateProfileInput },
               refetchQueries: [namedOperations.Query.MeDetail],
             }),
           changeUser: (updateUserInput: UpdateUserInput) =>
             changeUser({
               variables: { updateUserInput },
               refetchQueries: [namedOperations.Query.MeDetail],
+            }),
+          changePassword: (
+            oldPassword: string,
+            pnewPassword1: string,
+            newPassword2: string
+          ) =>
+            changePassword({
+              variables: {
+                passwordChangeOldPassword: oldPassword,
+                passwordChangeNewPassword1: pnewPassword1,
+                passwordChangeNewPassword2: newPassword2,
+              },
             }),
           likeTrip: (id: string) =>
             likeTrip({
@@ -65,9 +80,10 @@ const MeDetailView = (props: Props) => {
           followingsQuery,
           followersQuery,
           savedTripsQuery,
-          changeHeaderQuery,
+          changeProfileQuery,
           likeTripStatus,
           changeUserQuery,
+          changePasswordQuery,
         }}
       />
     </div>

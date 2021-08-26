@@ -33,6 +33,7 @@ import FollowersModal from '../Modals/FollowersModal';
 import FollowingsModal from '../Modals/FollowingsModal';
 import { RiUserFollowLine } from 'react-icons/ri';
 import { FetchResult } from '@apollo/client/link/core/types';
+import ProfileEditModal from '../Modals/ProfileEditModal';
 interface Props {
   isSelf: boolean;
   data: UserFieldsFragment & {
@@ -78,6 +79,7 @@ const ProfileHeader = ({
 }: Props) => {
   const modalFollowers = useDisclosure();
   const modalFollowings = useDisclosure();
+  const editProfileModal = useDisclosure();
 
   const inputFileHeader = useRef<HTMLInputElement>(null);
   const inputFileAvatar = useRef<HTMLInputElement>(null);
@@ -89,11 +91,9 @@ const ProfileHeader = ({
     },
   }: any) => {
     if (validity.valid) {
-      actions.changeHeader({
-        updateUserInput: {
-          profile: {
-            header: file,
-          },
+      actions.changeProfile({
+        profile: {
+          header: file,
         },
       });
     }
@@ -154,13 +154,13 @@ const ProfileHeader = ({
             rounded="full"
             mt="-12"
             opacity="0.8"
-            isLoading={lazyQueries.changeHeaderQuery.loading}
+            isLoading={lazyQueries.changeProfileQuery.loading}
             onClick={onHeaderButtonClick}
           >
             <Wrap align="center">
               <Icon as={FiCamera} color="gray.600" />
 
-              {lazyQueries.changeHeaderQuery.error &&
+              {lazyQueries.changeProfileQuery.error &&
                 'خطا! دوباره امتحان کنید.'}
             </Wrap>
           </Button>
@@ -198,17 +198,18 @@ const ProfileHeader = ({
           <Box>
             {isSelf ? (
               <Wrap>
-                <Link href="/me/setting" passHref>
-                  <Button variant="ghost">
-                    <Icon as={FiEdit2} />
-                  </Button>
-                </Link>
+                <Button variant="ghost" onClick={editProfileModal.onOpen}>
+                  <Icon as={FiEdit2} />
+                </Button>
               </Wrap>
             ) : null}
           </Box>
           <Heading fontSize={'2xl'} fontWeight={300} fontFamily={'body'}>
             {data.username}
           </Heading>
+          <Text fontWeight="light" textAlign="center">
+            {data.profilemodel.about}
+          </Text>
           <Wrap>
             {data.profilemodel.tripStatus == true ? (
               <Tag size="sm" colorScheme="primary" variant="solid">
@@ -276,6 +277,14 @@ const ProfileHeader = ({
       <FollowingsModal
         isSelf={isSelf}
         {...modalFollowings}
+        actions={actions}
+        queries={lazyQueries}
+      />
+      <ProfileEditModal
+        username={data.username}
+        about={data.profilemodel.about as string}
+        tripStatus={data.profilemodel.tripStatus as boolean}
+        {...editProfileModal}
         actions={actions}
         queries={lazyQueries}
       />
