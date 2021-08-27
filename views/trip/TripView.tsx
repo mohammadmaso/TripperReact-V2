@@ -20,11 +20,13 @@ import {
   useCreateTripReviewMutation,
   useDeleteTripMutation,
   useLikeTripMutation,
+  usePublisTripMutation,
   useSaveTripMutationMutation,
   useTripDetailLikesQuery,
   useTripDetailQuery,
   useTripReviewsLazyQuery,
   useTripReviewsQuery,
+  useUnPublisTripMutation,
 } from '../../graphql/generated/types';
 import BaseLayout from '../../layouts/BaseLayout';
 import { getDate, getDays } from '../../utils/time';
@@ -48,6 +50,54 @@ const TripView = (props: Props) => {
   // const reviewsLazyQuery = useTripReviewsQuery({
   //   variables: { tripId: props.id },
   // });
+
+  const [publishTrip, publishTripStatus] = usePublisTripMutation({
+    variables: { tripId: props.id },
+    // refetchQueries: [namedOperations.Query.MeDetail],
+    onCompleted: (data) => {
+      toast({
+        title: 'سفر با موفقیت منتشر شد.',
+        status: 'success',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'انتشار سفر با خطا مواجه شد',
+        description: 'دوباره امتحان کنید',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+  });
+
+  const [unPublishTrip, unPublishTripStatus] = useUnPublisTripMutation({
+    variables: { tripId: props.id },
+    // refetchQueries: [namedOperations.Query.MeDetail],
+    onCompleted: (data) => {
+      toast({
+        title: 'سفر با موفقیت از حالت انتشار خارج شد.',
+        status: 'success',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'عملیات لغو انتشار سفر با خطا مواجه شد.',
+        description: 'دوباره امتحان کنید',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+  });
 
   const [addReview, addReviewStatus] = useCreateTripReviewMutation({
     refetchQueries: [namedOperations.Query.TripReviews],
@@ -117,8 +167,16 @@ const TripView = (props: Props) => {
           likeTrip: () => likeTrip(),
           saveTrip: () => saveTrip(),
           deleteTrip: () => deleteTrip(),
+          publishTrip: () => publishTrip(),
+          unPublishTrip: () => unPublishTrip(),
         }}
-        queries={{ likeTripStatus, saveTripStatus, deleteTripStatus }}
+        queries={{
+          likeTripStatus,
+          saveTripStatus,
+          deleteTripStatus,
+          unPublishTripStatus,
+          publishTripStatus,
+        }}
       />
       <TravelogueContainer
         actions={{

@@ -13,7 +13,12 @@ import TripList from '../lists/TripList';
 import GroupTripList from '../lists/GroupTripList';
 import ApiLoading from '../ApiLoading';
 import TripSmallCard from '../cards/TripSmallCard';
-import { Exact, MeSavedTripsQuery } from '../../graphql/generated/types';
+import {
+  Exact,
+  Maybe,
+  MeSavedTripsQuery,
+  MyTripsQuery,
+} from '../../graphql/generated/types';
 import { LazyQueryResult } from '@apollo/client/react/types/types';
 
 interface Props {
@@ -28,7 +33,12 @@ const ProfileTabs = (props: Props) => {
     <Tabs colorScheme="primary" size="sm" align="center">
       <TabList>
         <Tab>سفرنامه‌ها</Tab>
-        {props.isSelf && <Tab>سفرهای موردعلاقه </Tab>}
+        {props.isSelf && (
+          <Tab onClick={() => props.actions.getUnpublishedTrips()}>
+            سفر‌نامه‌های منتشر نشده
+          </Tab>
+        )}
+        {props.isSelf && <Tab>سفرنامه‌های موردعلاقه </Tab>}
         <Tab isDisabled>دست‌آوردها</Tab>
       </TabList>
 
@@ -40,6 +50,33 @@ const ProfileTabs = (props: Props) => {
             actions={props.actions}
           />
         </TabPanel>
+        {props.isSelf && (
+          <TabPanel>
+            {props.queries?.unpublishedTripsQuery?.loading ? (
+              <ApiLoading />
+            ) : props.queries?.unpublishedTripsQuery?.data?.allMyTrip?.edges
+                .length != 0 ? (
+              <SimpleGrid
+                spacing="2"
+                columns={{ base: 1, sm: 1, md: 4 }}
+                justify="center"
+              >
+                {props.queries?.unpublishedTripsQuery?.data?.allMyTrip?.edges?.map(
+                  (item: any) => (
+                    <TripSmallCard
+                      key={item!.node?.id!}
+                      data={item?.node}
+                      queries={props.queries}
+                      actions={props.actions}
+                    />
+                  )
+                )}
+              </SimpleGrid>
+            ) : (
+              <Text>موردی یافت نشد!</Text>
+            )}
+          </TabPanel>
+        )}
         {props.isSelf && (
           <TabPanel>
             {props.queries?.savedTripsQuery?.loading ? (

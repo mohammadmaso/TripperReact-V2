@@ -152,6 +152,16 @@ query MeSavedTrips {
   }
 }
 
+query MyTrips($published: Boolean) {
+  allMyTrip(published: $published) {
+    edges {
+      node {
+        ...TripSimpleFields
+      }
+    }
+  }
+}
+
 fragment UserFields on UserType {
   username
   avatar
@@ -178,17 +188,22 @@ mutation DeleteTrip($deleteTripTripId: ID!) {
   }
 }
 
-mutation PasswordChange(
-  $passwordChangeOldPassword: String!
-  $passwordChangeNewPassword1: String!
-  $passwordChangeNewPassword2: String!
-) {
-  passwordChange(
-    oldPassword: $passwordChangeOldPassword
-    newPassword1: $passwordChangeNewPassword1
-    newPassword2: $passwordChangeNewPassword2
-  ) {
+mutation PublisTrip($tripId: ID!) {
+  publishTrip(tripId: $tripId) {
     success
     errors
+    trip {
+      published
+    }
+  }
+}
+
+mutation UnPublisTrip($tripId: ID!) {
+  undoPublishTrip(tripId: $tripId) {
+    success
+    errors
+    trip {
+      published
+    }
   }
 }

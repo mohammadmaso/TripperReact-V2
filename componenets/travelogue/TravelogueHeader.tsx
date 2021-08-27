@@ -1,3 +1,4 @@
+import { MutationResult } from '@apollo/client/react/types/types';
 import { CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import {
   Stack,
@@ -25,6 +26,7 @@ import React, { useState } from 'react';
 import { AiFillBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import {
   FiBookmark,
+  FiCheck,
   FiEdit,
   FiEye,
   FiHeart,
@@ -32,6 +34,7 @@ import {
   FiShare,
   FiShare2,
   FiTrash,
+  FiX,
 } from 'react-icons/fi';
 import {
   HiBookmark,
@@ -45,7 +48,11 @@ import {
   RiBookMarkLine,
 } from 'react-icons/ri';
 import { BounceLoader } from 'react-spinners';
-import { UserType } from '../../graphql/generated/types';
+import {
+  PublisTripMutation,
+  UnPublisTripMutation,
+  UserType,
+} from '../../graphql/generated/types';
 import { useIsMineTrip } from '../../hooks/useIsMineTrip';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
 import DeleteConfirmModal from '../Modals/DeleteConfirmModal';
@@ -70,13 +77,22 @@ export function TravelogueHeader(props: Props) {
   const [stickyHeader, setStickyHeader] = useState(false);
 
   const [isSaved, setIsSaved] = useState(props.isSaved);
-
   const isMineTrip = useIsMineTrip(props.author?.username as string);
+
+  const [isPublished, seIsPublished] = useState(props.published);
 
   const shareModal = useDisclosure();
   const deleteModal = useDisclosure();
 
   const { goToSignUp, isSignedIn } = useIsSignedIn();
+
+  const handlePublishClick = () => {
+    if (!isPublished) {
+      props.actions.publishTrip().then(() => seIsPublished(true));
+    } else {
+      props.actions.unPublishTrip().then(() => seIsPublished(false));
+    }
+  };
 
   const handleScroll = () => {
     if (window.pageYOffset > 120) {
@@ -107,9 +123,22 @@ export function TravelogueHeader(props: Props) {
         align="center"
       >
         <Stack>
-          <Text as="h1" fontSize="xl" fontWeight="semibold">
-            {props.title}
-          </Text>
+          <Wrap>
+            {isMineTrip && isPublished ? (
+              <Tag colorScheme="green">
+                <Icon ml="1" as={FiCheck} />
+                منتشر شده
+              </Tag>
+            ) : (
+              <Tag colorScheme="red">
+                <Icon ml="1" as={FiX} />
+                منتشر نشده
+              </Tag>
+            )}
+            <Text as="h1" fontSize="xl" fontWeight="semibold">
+              {props.title}
+            </Text>
+          </Wrap>
           <Wrap fontWeight="light" fontSize="sm">
             <HStack align={'center'} justify="space-between">
               <Avatar
@@ -233,8 +262,15 @@ export function TravelogueHeader(props: Props) {
                 />
                 <MenuList fontSize="sm">
                   <MenuItem icon={<FiEdit />}>ویرایش</MenuItem>
-                  <MenuItem icon={<FiEye />}>
-                    {props.published ? 'عدم انتشار' : 'انتشار'}
+                  <MenuItem
+                    isDisabled={
+                      props.queries.publishTripStatus.loading ||
+                      props.queries.unPublishTripStatus.loading
+                    }
+                    icon={<FiEye />}
+                    onClick={handlePublishClick}
+                  >
+                    {isPublished ? 'عدم انتشار' : 'انتشار'}
                   </MenuItem>
                   <MenuItem onClick={deleteModal.onOpen} icon={<FiTrash />}>
                     حذف سفرنامه

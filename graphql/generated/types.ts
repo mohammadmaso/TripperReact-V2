@@ -388,6 +388,7 @@ export type AccessoryTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -746,6 +747,18 @@ export type ArticleTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type ChangePasswordMutation = {
+  __typename?: 'ChangePasswordMutation';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type ChangeUsernameMutation = {
+  __typename?: 'ChangeUsernameMutation';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
 export type CityType = Node & {
   __typename?: 'CityType';
   /** The ID of the object. */
@@ -815,6 +828,7 @@ export type CityTypeTripsOfCityArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -958,6 +972,7 @@ export type CountryTypeTripsOfCountryArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1410,6 +1425,7 @@ export type ExperienceImageTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1514,6 +1530,7 @@ export type ExperienceTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1723,12 +1740,6 @@ export type Mutation = {
    */
   passwordSet?: Maybe<PasswordSet>;
   /**
-   * Change account password when user knows the old password.
-   *
-   * A new token and refresh token are sent. User must be verified.
-   */
-  passwordChange?: Maybe<PasswordChange>;
-  /**
    * Update user model fields, defined on settings.
    *
    * User must be verified.
@@ -1782,6 +1793,8 @@ export type Mutation = {
   resetPasswordSms?: Maybe<ResetPasswordSms>;
   /** send forgotten passworld sms verification */
   forgotPasswordSms?: Maybe<ForgotPasswordSms>;
+  passwordChange?: Maybe<ChangePasswordMutation>;
+  changeUsername?: Maybe<ChangeUsernameMutation>;
   createTripPlan?: Maybe<CreateTripPlan>;
   /** delete trip plan mutation. */
   deleteTripPlan?: Maybe<DeleteTripPlan>;
@@ -1818,6 +1831,8 @@ export type Mutation = {
   createTripImages?: Maybe<CreateTripImages>;
   likeTripReview?: Maybe<LikeTripReviewMutation>;
   dislikeTripReview?: Maybe<DisLikeTripReviewMutation>;
+  publishTrip?: Maybe<PublishTripMutation>;
+  undoPublishTrip?: Maybe<UnPublishTripMutation>;
   /** update trip review mutation. */
   updateTrip?: Maybe<UpdateTrip>;
   /** update trip review mutation. */
@@ -1904,13 +1919,6 @@ export type MutationPasswordResetArgs = {
 
 export type MutationPasswordSetArgs = {
   token: Scalars['String'];
-  newPassword1: Scalars['String'];
-  newPassword2: Scalars['String'];
-};
-
-
-export type MutationPasswordChangeArgs = {
-  oldPassword: Scalars['String'];
   newPassword1: Scalars['String'];
   newPassword2: Scalars['String'];
 };
@@ -2004,6 +2012,18 @@ export type MutationResetPasswordSmsArgs = {
 
 export type MutationForgotPasswordSmsArgs = {
   phoneNumber: Scalars['String'];
+};
+
+
+export type MutationPasswordChangeArgs = {
+  newPassword1: Scalars['String'];
+  newPassword2: Scalars['String'];
+  oldPassword: Scalars['String'];
+};
+
+
+export type MutationChangeUsernameArgs = {
+  username: Scalars['String'];
 };
 
 
@@ -2148,6 +2168,16 @@ export type MutationDislikeTripReviewArgs = {
 };
 
 
+export type MutationPublishTripArgs = {
+  tripId: Scalars['ID'];
+};
+
+
+export type MutationUndoPublishTripArgs = {
+  tripId: Scalars['ID'];
+};
+
+
 export type MutationUpdateTripArgs = {
   tripData: TripInput;
   tripId?: Maybe<Scalars['ID']>;
@@ -2211,19 +2241,6 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
   /** When paginating forwards, the cursor to continue. */
   endCursor?: Maybe<Scalars['String']>;
-};
-
-/**
- * Change account password when user knows the old password.
- *
- * A new token and refresh token are sent. User must be verified.
- */
-export type PasswordChange = {
-  __typename?: 'PasswordChange';
-  success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
-  refreshToken?: Maybe<Scalars['String']>;
-  token?: Maybe<Scalars['String']>;
 };
 
 /**
@@ -2517,6 +2534,7 @@ export type PlaceTypeTripsInPlaceArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2725,7 +2743,7 @@ export enum ProfileModelGender {
 
 export type ProfileType = Node & {
   __typename?: 'ProfileType';
-  user: UserType;
+  user?: Maybe<UserType>;
   about?: Maybe<Scalars['String']>;
   tripStatus?: Maybe<Scalars['Boolean']>;
   header?: Maybe<Scalars['String']>;
@@ -2830,6 +2848,7 @@ export type ProvinceTypeTripsOfProvinceArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2893,6 +2912,13 @@ export type ProvinceTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type PublishTripMutation = {
+  __typename?: 'PublishTripMutation';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  trip?: Maybe<TripType>;
+};
+
 export type Query = {
   __typename?: 'Query';
   /** The ID of the object */
@@ -2915,6 +2941,8 @@ export type Query = {
   profile?: Maybe<ProfileType>;
   allProfile?: Maybe<ProfileTypeConnection>;
   followedUser?: Maybe<Scalars['Boolean']>;
+  followers?: Maybe<FollowingTypeConnection>;
+  following?: Maybe<FollowingTypeConnection>;
   /** The ID of the object */
   tourCollection?: Maybe<TourCollectionsType>;
   /** The ID of the object */
@@ -3095,6 +3123,30 @@ export type QueryAllProfileArgs = {
 
 export type QueryFollowedUserArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryFollowersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  follower?: Maybe<Scalars['ID']>;
+  followed?: Maybe<Scalars['ID']>;
+  dateFollowed?: Maybe<Scalars['DateTime']>;
+};
+
+
+export type QueryFollowingArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  follower?: Maybe<Scalars['ID']>;
+  followed?: Maybe<Scalars['ID']>;
+  dateFollowed?: Maybe<Scalars['DateTime']>;
 };
 
 
@@ -3456,6 +3508,7 @@ export type QueryAllTripArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -3517,6 +3570,7 @@ export type QueryAllMyTripArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -3547,6 +3601,7 @@ export type QueryAllMyTimeLineArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4034,6 +4089,7 @@ export type TransferTypeTripsInTransferArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 export type TransferTypeConnection = {
@@ -4163,6 +4219,7 @@ export type TripActivitieTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4310,6 +4367,7 @@ export type TripCategoryTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4410,6 +4468,7 @@ export type TripImageTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4706,6 +4765,7 @@ export type TripReviewTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5014,6 +5074,7 @@ export type TripVideoTypeTripmodelSetArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 export type TripVideoTypeConnection = {
@@ -5033,6 +5094,13 @@ export type TripVideoTypeEdge = {
   cursor: Scalars['String'];
 };
 
+
+export type UnPublishTripMutation = {
+  __typename?: 'UnPublishTripMutation';
+  success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  trip?: Maybe<TripType>;
+};
 
 /** unregister user from tour mutation.  */
 export type UnRegisterTourMutation = {
@@ -5280,6 +5348,7 @@ export type UserNodeTripsArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5305,6 +5374,7 @@ export type UserNodeTripsInCompanionArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5743,6 +5813,7 @@ export type UserTypeTripsArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5768,6 +5839,7 @@ export type UserTypeTripsInCompanionArgs = {
   activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
   activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -6149,6 +6221,34 @@ export type ResendVerificationSmsMutation = (
   )> }
 );
 
+export type PasswordChangeMutationVariables = Exact<{
+  passwordChangeOldPassword: Scalars['String'];
+  passwordChangeNewPassword1: Scalars['String'];
+  passwordChangeNewPassword2: Scalars['String'];
+}>;
+
+
+export type PasswordChangeMutation = (
+  { __typename?: 'Mutation' }
+  & { passwordChange?: Maybe<(
+    { __typename?: 'ChangePasswordMutation' }
+    & Pick<ChangePasswordMutation, 'success' | 'errors'>
+  )> }
+);
+
+export type UsernameChangeMutationVariables = Exact<{
+  username: Scalars['String'];
+}>;
+
+
+export type UsernameChangeMutation = (
+  { __typename?: 'Mutation' }
+  & { changeUsername?: Maybe<(
+    { __typename?: 'ChangeUsernameMutation' }
+    & Pick<ChangeUsernameMutation, 'success' | 'errors'>
+  )> }
+);
+
 export type LikeTripMutationVariables = Exact<{
   createTripLikeTripId: Scalars['ID'];
 }>;
@@ -6271,10 +6371,10 @@ export type UpdateProfileMutation = (
     & { profile?: Maybe<(
       { __typename?: 'ProfileType' }
       & Pick<ProfileType, 'about' | 'tripStatus' | 'header'>
-      & { user: (
+      & { user?: Maybe<(
         { __typename?: 'UserType' }
         & Pick<UserType, 'id'>
-      ) }
+      )> }
     )> }
   )> }
 );
@@ -7022,6 +7122,25 @@ export type MeSavedTripsQuery = (
   )> }
 );
 
+export type MyTripsQueryVariables = Exact<{
+  published?: Maybe<Scalars['Boolean']>;
+}>;
+
+
+export type MyTripsQuery = (
+  { __typename?: 'Query' }
+  & { allMyTrip?: Maybe<(
+    { __typename?: 'TripTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TripTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TripType' }
+        & TripSimpleFieldsFragment
+      )> }
+    )>> }
+  )> }
+);
+
 export type UserFieldsFragment = (
   { __typename?: 'UserType' }
   & Pick<UserType, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
@@ -7045,18 +7164,37 @@ export type DeleteTripMutation = (
   )> }
 );
 
-export type PasswordChangeMutationVariables = Exact<{
-  passwordChangeOldPassword: Scalars['String'];
-  passwordChangeNewPassword1: Scalars['String'];
-  passwordChangeNewPassword2: Scalars['String'];
+export type PublisTripMutationVariables = Exact<{
+  tripId: Scalars['ID'];
 }>;
 
 
-export type PasswordChangeMutation = (
+export type PublisTripMutation = (
   { __typename?: 'Mutation' }
-  & { passwordChange?: Maybe<(
-    { __typename?: 'PasswordChange' }
-    & Pick<PasswordChange, 'success' | 'errors'>
+  & { publishTrip?: Maybe<(
+    { __typename?: 'PublishTripMutation' }
+    & Pick<PublishTripMutation, 'success' | 'errors'>
+    & { trip?: Maybe<(
+      { __typename?: 'TripType' }
+      & Pick<TripType, 'published'>
+    )> }
+  )> }
+);
+
+export type UnPublisTripMutationVariables = Exact<{
+  tripId: Scalars['ID'];
+}>;
+
+
+export type UnPublisTripMutation = (
+  { __typename?: 'Mutation' }
+  & { undoPublishTrip?: Maybe<(
+    { __typename?: 'UnPublishTripMutation' }
+    & Pick<UnPublishTripMutation, 'success' | 'errors'>
+    & { trip?: Maybe<(
+      { __typename?: 'TripType' }
+      & Pick<TripType, 'published'>
+    )> }
   )> }
 );
 
@@ -7393,6 +7531,80 @@ export function useResendVerificationSmsMutation(baseOptions?: Apollo.MutationHo
 export type ResendVerificationSmsMutationHookResult = ReturnType<typeof useResendVerificationSmsMutation>;
 export type ResendVerificationSmsMutationResult = Apollo.MutationResult<ResendVerificationSmsMutation>;
 export type ResendVerificationSmsMutationOptions = Apollo.BaseMutationOptions<ResendVerificationSmsMutation, ResendVerificationSmsMutationVariables>;
+export const PasswordChangeDocument = gql`
+    mutation PasswordChange($passwordChangeOldPassword: String!, $passwordChangeNewPassword1: String!, $passwordChangeNewPassword2: String!) {
+  passwordChange(
+    oldPassword: $passwordChangeOldPassword
+    newPassword1: $passwordChangeNewPassword1
+    newPassword2: $passwordChangeNewPassword2
+  ) {
+    success
+    errors
+  }
+}
+    `;
+export type PasswordChangeMutationFn = Apollo.MutationFunction<PasswordChangeMutation, PasswordChangeMutationVariables>;
+
+/**
+ * __usePasswordChangeMutation__
+ *
+ * To run a mutation, you first call `usePasswordChangeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePasswordChangeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [passwordChangeMutation, { data, loading, error }] = usePasswordChangeMutation({
+ *   variables: {
+ *      passwordChangeOldPassword: // value for 'passwordChangeOldPassword'
+ *      passwordChangeNewPassword1: // value for 'passwordChangeNewPassword1'
+ *      passwordChangeNewPassword2: // value for 'passwordChangeNewPassword2'
+ *   },
+ * });
+ */
+export function usePasswordChangeMutation(baseOptions?: Apollo.MutationHookOptions<PasswordChangeMutation, PasswordChangeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PasswordChangeMutation, PasswordChangeMutationVariables>(PasswordChangeDocument, options);
+      }
+export type PasswordChangeMutationHookResult = ReturnType<typeof usePasswordChangeMutation>;
+export type PasswordChangeMutationResult = Apollo.MutationResult<PasswordChangeMutation>;
+export type PasswordChangeMutationOptions = Apollo.BaseMutationOptions<PasswordChangeMutation, PasswordChangeMutationVariables>;
+export const UsernameChangeDocument = gql`
+    mutation UsernameChange($username: String!) {
+  changeUsername(username: $username) {
+    success
+    errors
+  }
+}
+    `;
+export type UsernameChangeMutationFn = Apollo.MutationFunction<UsernameChangeMutation, UsernameChangeMutationVariables>;
+
+/**
+ * __useUsernameChangeMutation__
+ *
+ * To run a mutation, you first call `useUsernameChangeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUsernameChangeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [usernameChangeMutation, { data, loading, error }] = useUsernameChangeMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useUsernameChangeMutation(baseOptions?: Apollo.MutationHookOptions<UsernameChangeMutation, UsernameChangeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UsernameChangeMutation, UsernameChangeMutationVariables>(UsernameChangeDocument, options);
+      }
+export type UsernameChangeMutationHookResult = ReturnType<typeof useUsernameChangeMutation>;
+export type UsernameChangeMutationResult = Apollo.MutationResult<UsernameChangeMutation>;
+export type UsernameChangeMutationOptions = Apollo.BaseMutationOptions<UsernameChangeMutation, UsernameChangeMutationVariables>;
 export const LikeTripDocument = gql`
     mutation LikeTrip($createTripLikeTripId: ID!) {
   createTripLike(tripId: $createTripLikeTripId) {
@@ -8962,6 +9174,45 @@ export function useMeSavedTripsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type MeSavedTripsQueryHookResult = ReturnType<typeof useMeSavedTripsQuery>;
 export type MeSavedTripsLazyQueryHookResult = ReturnType<typeof useMeSavedTripsLazyQuery>;
 export type MeSavedTripsQueryResult = Apollo.QueryResult<MeSavedTripsQuery, MeSavedTripsQueryVariables>;
+export const MyTripsDocument = gql`
+    query MyTrips($published: Boolean) {
+  allMyTrip(published: $published) {
+    edges {
+      node {
+        ...TripSimpleFields
+      }
+    }
+  }
+}
+    ${TripSimpleFieldsFragmentDoc}`;
+
+/**
+ * __useMyTripsQuery__
+ *
+ * To run a query within a React component, call `useMyTripsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyTripsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMyTripsQuery({
+ *   variables: {
+ *      published: // value for 'published'
+ *   },
+ * });
+ */
+export function useMyTripsQuery(baseOptions?: Apollo.QueryHookOptions<MyTripsQuery, MyTripsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MyTripsQuery, MyTripsQueryVariables>(MyTripsDocument, options);
+      }
+export function useMyTripsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyTripsQuery, MyTripsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MyTripsQuery, MyTripsQueryVariables>(MyTripsDocument, options);
+        }
+export type MyTripsQueryHookResult = ReturnType<typeof useMyTripsQuery>;
+export type MyTripsLazyQueryHookResult = ReturnType<typeof useMyTripsLazyQuery>;
+export type MyTripsQueryResult = Apollo.QueryResult<MyTripsQuery, MyTripsQueryVariables>;
 export const DeleteTripDocument = gql`
     mutation DeleteTrip($deleteTripTripId: ID!) {
   deleteTrip(tripId: $deleteTripTripId) {
@@ -8995,46 +9246,80 @@ export function useDeleteTripMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteTripMutationHookResult = ReturnType<typeof useDeleteTripMutation>;
 export type DeleteTripMutationResult = Apollo.MutationResult<DeleteTripMutation>;
 export type DeleteTripMutationOptions = Apollo.BaseMutationOptions<DeleteTripMutation, DeleteTripMutationVariables>;
-export const PasswordChangeDocument = gql`
-    mutation PasswordChange($passwordChangeOldPassword: String!, $passwordChangeNewPassword1: String!, $passwordChangeNewPassword2: String!) {
-  passwordChange(
-    oldPassword: $passwordChangeOldPassword
-    newPassword1: $passwordChangeNewPassword1
-    newPassword2: $passwordChangeNewPassword2
-  ) {
+export const PublisTripDocument = gql`
+    mutation PublisTrip($tripId: ID!) {
+  publishTrip(tripId: $tripId) {
     success
     errors
+    trip {
+      published
+    }
   }
 }
     `;
-export type PasswordChangeMutationFn = Apollo.MutationFunction<PasswordChangeMutation, PasswordChangeMutationVariables>;
+export type PublisTripMutationFn = Apollo.MutationFunction<PublisTripMutation, PublisTripMutationVariables>;
 
 /**
- * __usePasswordChangeMutation__
+ * __usePublisTripMutation__
  *
- * To run a mutation, you first call `usePasswordChangeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `usePasswordChangeMutation` returns a tuple that includes:
+ * To run a mutation, you first call `usePublisTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublisTripMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [passwordChangeMutation, { data, loading, error }] = usePasswordChangeMutation({
+ * const [publisTripMutation, { data, loading, error }] = usePublisTripMutation({
  *   variables: {
- *      passwordChangeOldPassword: // value for 'passwordChangeOldPassword'
- *      passwordChangeNewPassword1: // value for 'passwordChangeNewPassword1'
- *      passwordChangeNewPassword2: // value for 'passwordChangeNewPassword2'
+ *      tripId: // value for 'tripId'
  *   },
  * });
  */
-export function usePasswordChangeMutation(baseOptions?: Apollo.MutationHookOptions<PasswordChangeMutation, PasswordChangeMutationVariables>) {
+export function usePublisTripMutation(baseOptions?: Apollo.MutationHookOptions<PublisTripMutation, PublisTripMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<PasswordChangeMutation, PasswordChangeMutationVariables>(PasswordChangeDocument, options);
+        return Apollo.useMutation<PublisTripMutation, PublisTripMutationVariables>(PublisTripDocument, options);
       }
-export type PasswordChangeMutationHookResult = ReturnType<typeof usePasswordChangeMutation>;
-export type PasswordChangeMutationResult = Apollo.MutationResult<PasswordChangeMutation>;
-export type PasswordChangeMutationOptions = Apollo.BaseMutationOptions<PasswordChangeMutation, PasswordChangeMutationVariables>;
+export type PublisTripMutationHookResult = ReturnType<typeof usePublisTripMutation>;
+export type PublisTripMutationResult = Apollo.MutationResult<PublisTripMutation>;
+export type PublisTripMutationOptions = Apollo.BaseMutationOptions<PublisTripMutation, PublisTripMutationVariables>;
+export const UnPublisTripDocument = gql`
+    mutation UnPublisTrip($tripId: ID!) {
+  undoPublishTrip(tripId: $tripId) {
+    success
+    errors
+    trip {
+      published
+    }
+  }
+}
+    `;
+export type UnPublisTripMutationFn = Apollo.MutationFunction<UnPublisTripMutation, UnPublisTripMutationVariables>;
+
+/**
+ * __useUnPublisTripMutation__
+ *
+ * To run a mutation, you first call `useUnPublisTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnPublisTripMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unPublisTripMutation, { data, loading, error }] = useUnPublisTripMutation({
+ *   variables: {
+ *      tripId: // value for 'tripId'
+ *   },
+ * });
+ */
+export function useUnPublisTripMutation(baseOptions?: Apollo.MutationHookOptions<UnPublisTripMutation, UnPublisTripMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UnPublisTripMutation, UnPublisTripMutationVariables>(UnPublisTripDocument, options);
+      }
+export type UnPublisTripMutationHookResult = ReturnType<typeof useUnPublisTripMutation>;
+export type UnPublisTripMutationResult = Apollo.MutationResult<UnPublisTripMutation>;
+export type UnPublisTripMutationOptions = Apollo.BaseMutationOptions<UnPublisTripMutation, UnPublisTripMutationVariables>;
 export const namedOperations = {
   Query: {
     AllArticle: 'AllArticle',
@@ -9059,7 +9344,8 @@ export const namedOperations = {
     MeFollowings: 'MeFollowings',
     MeFollowers: 'MeFollowers',
     AllProfiles: 'AllProfiles',
-    MeSavedTrips: 'MeSavedTrips'
+    MeSavedTrips: 'MeSavedTrips',
+    MyTrips: 'MyTrips'
   },
   Mutation: {
     VerifySms: 'VerifySms',
@@ -9069,6 +9355,8 @@ export const namedOperations = {
     ForgotPasswordSms: 'ForgotPasswordSms',
     TokenAuth: 'TokenAuth',
     ResendVerificationSms: 'ResendVerificationSms',
+    PasswordChange: 'PasswordChange',
+    UsernameChange: 'UsernameChange',
     LikeTrip: 'LikeTrip',
     CreateTripReview: 'CreateTripReview',
     CreateInitialTrip: 'CreateInitialTrip',
@@ -9079,7 +9367,8 @@ export const namedOperations = {
     UpdateUser: 'UpdateUser',
     FollowOrUnfollow: 'FollowOrUnfollow',
     DeleteTrip: 'DeleteTrip',
-    PasswordChange: 'PasswordChange'
+    PublisTrip: 'PublisTrip',
+    UnPublisTrip: 'UnPublisTrip'
   },
   Fragment: {
     TripSimpleFields: 'TripSimpleFields',

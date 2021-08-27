@@ -13,9 +13,11 @@ import {
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
   useMeSavedTripsQuery,
+  useMyTripsLazyQuery,
   usePasswordChangeMutation,
   useUpdateProfileMutation,
   useUpdateUserMutation,
+  useUsernameChangeMutation,
 } from '../../graphql/generated/types';
 import ApiError from '../../componenets/ApiError';
 import ProfileContainer from '../../componenets/profile/ProfileContainer';
@@ -25,11 +27,13 @@ interface Props {}
 
 const MeDetailView = (props: Props) => {
   const { data, loading, error } = useMeDetailQuery();
+  const [getUnpublishedTrips, unpublishedTripsQuery] = useMyTripsLazyQuery();
   const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery();
   const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
   const savedTripsQuery = useMeSavedTripsQuery();
   const [changeProfile, changeProfileQuery] = useUpdateProfileMutation();
   const [changeUser, changeUserQuery] = useUpdateUserMutation();
+  const [changeUsername, changeUsernameQuery] = useUsernameChangeMutation();
   const [changePassword, changePasswordQuery] = usePasswordChangeMutation();
 
   const [likeTrip, likeTripStatus] = useLikeTripMutation();
@@ -47,6 +51,8 @@ const MeDetailView = (props: Props) => {
         actions={{
           getFollowings: () => getFollowings(),
           getFollowers: () => getFollowers(),
+          getUnpublishedTrips: () =>
+            getUnpublishedTrips({ variables: { published: false } }),
           // getSavedTrips: () => getSavedTrips(),
           changeProfile: (updateProfileInput: UpdateProfileInput) =>
             changeProfile({
@@ -56,6 +62,11 @@ const MeDetailView = (props: Props) => {
           changeUser: (updateUserInput: UpdateUserInput) =>
             changeUser({
               variables: { updateUserInput },
+              refetchQueries: [namedOperations.Query.MeDetail],
+            }),
+          changeUsername: (username: string) =>
+            changeUsername({
+              variables: { username },
               refetchQueries: [namedOperations.Query.MeDetail],
             }),
           changePassword: (
@@ -84,6 +95,8 @@ const MeDetailView = (props: Props) => {
           likeTripStatus,
           changeUserQuery,
           changePasswordQuery,
+          changeUsernameQuery,
+          unpublishedTripsQuery,
         }}
       />
     </div>

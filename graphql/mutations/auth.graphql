@@ -78,3 +78,25 @@ mutation ResendVerificationSms($resendVerificationSmsPhoneNumber: String!) {
     errors
   }
 }
+
+mutation PasswordChange(
+  $passwordChangeOldPassword: String!
+  $passwordChangeNewPassword1: String!
+  $passwordChangeNewPassword2: String!
+) {
+  passwordChange(
+    oldPassword: $passwordChangeOldPassword
+    newPassword1: $passwordChangeNewPassword1
+    newPassword2: $passwordChangeNewPassword2
+  ) {
+    success
+    errors
+  }
+}
+
+mutation UsernameChange($username: String!) {
+  changeUsername(username: $username) {
+    success
+    errors
+  }
+}
