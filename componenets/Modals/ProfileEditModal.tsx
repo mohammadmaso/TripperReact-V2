@@ -36,6 +36,7 @@ import {
   UpdateProfileMutation,
   UpdateUserInput,
   UpdateUserMutation,
+  UsernameChangeMutation,
 } from '../../graphql/generated/types';
 import {
   MutationFunctionOptions,
@@ -74,11 +75,21 @@ interface Props {
         Record<string, any>
       >
     >;
+    changeUsername: (
+      username: string
+    ) => Promise<
+      FetchResult<
+        UsernameChangeMutation,
+        Record<string, any>,
+        Record<string, any>
+      >
+    >;
   };
   queries?: {
     changeProfileQuery: MutationResult<UpdateProfileMutation>;
     changeUserQuery: MutationResult<UpdateUserMutation>;
     changePasswordQuery: MutationResult<PasswordChangeMutation>;
+    changeUsernameQuery: MutationResult<UsernameChangeMutation>;
   };
   username: string;
   about: string;
@@ -146,14 +157,10 @@ const ProfileEditModal = (props: Props) => {
                 })}
                 onSubmit={(values, { setSubmitting, setFieldError }) => {
                   props.actions
-                    ?.changeUser({
-                      userInputs: {
-                        username: values.username,
-                      },
-                    })
+                    ?.changeUsername(values.username)
                     .then((res) => {
-                      if (res.data?.updateUser?.user?.username) {
-                        setUsername(res.data?.updateUser?.user?.username);
+                      if (res.data?.changeUsername?.success == true) {
+                        setUsername(props.username);
                         toast({
                           title: 'یوزر نیم با موفقیت تغییر پیدا کرد',
                           // description:
@@ -164,12 +171,23 @@ const ProfileEditModal = (props: Props) => {
                           position: 'top',
                         });
                       }
+                      if (res.data?.changeUsername?.errors) {
+                        setFieldError(
+                          'username',
+                          props.queries?.changeUsernameQuery.data
+                            ?.changeUsername?.errors.nonFieldErrors[0]
+                        );
+                      }
                     })
                     .catch((err) => {
                       setFieldError(
                         'username',
-                        props.queries?.changeUserQuery.error?.message
-                          ? 'نام‌کاربری تکراری است.'
+                        props.queries?.changeUsernameQuery.data?.changeUsername
+                          ?.errors
+                          ? JSON.stringify(
+                              props.queries?.changeUsernameQuery.data
+                                ?.changeUsername.errors
+                            )
                           : 'خطا'
                       );
                     });

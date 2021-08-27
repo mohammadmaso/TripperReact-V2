@@ -34,6 +34,7 @@ import FollowingsModal from '../Modals/FollowingsModal';
 import { RiUserFollowLine } from 'react-icons/ri';
 import { FetchResult } from '@apollo/client/link/core/types';
 import ProfileEditModal from '../Modals/ProfileEditModal';
+import ImageUploadModal from '../Modals/ImageUploadModal';
 interface Props {
   isSelf: boolean;
   data: UserFieldsFragment & {
@@ -80,6 +81,8 @@ const ProfileHeader = ({
   const modalFollowers = useDisclosure();
   const modalFollowings = useDisclosure();
   const editProfileModal = useDisclosure();
+  const uploadAvatarModal = useDisclosure();
+  const uploadHeaderModal = useDisclosure();
 
   const inputFileHeader = useRef<HTMLInputElement>(null);
   const inputFileAvatar = useRef<HTMLInputElement>(null);
@@ -96,6 +99,7 @@ const ProfileHeader = ({
           header: file,
         },
       });
+      // console.log(file);
     }
   };
 
@@ -155,7 +159,7 @@ const ProfileHeader = ({
             mt="-12"
             opacity="0.8"
             isLoading={lazyQueries.changeProfileQuery.loading}
-            onClick={onHeaderButtonClick}
+            onClick={uploadHeaderModal.onOpen}
           >
             <Wrap align="center">
               <Icon as={FiCamera} color="gray.600" />
@@ -187,7 +191,8 @@ const ProfileHeader = ({
             mt="-4"
             opacity="0.8"
             isLoading={lazyQueries.changeUserQuery.loading}
-            onClick={onAvatarButtonClick}
+            // onClick={onAvatarButtonClick}
+            onClick={uploadAvatarModal.onOpen}
           >
             <Icon as={FiCamera} color="gray.600" />
           </Button>
@@ -287,6 +292,36 @@ const ProfileHeader = ({
         {...editProfileModal}
         actions={actions}
         queries={lazyQueries}
+      />
+      <ImageUploadModal
+        title="اپلود تصویر پروفایل"
+        {...uploadAvatarModal}
+        defaultImageSrc={data.avatar}
+        aspectRatio={1}
+        loading={lazyQueries.changeUserQuery.loading}
+        onUpload={(file) =>
+          actions
+            .changeUser({
+              userInputs: { avatar: file },
+            })
+            .then(uploadAvatarModal.onClose)
+        }
+      />
+      <ImageUploadModal
+        title="آپلود تصویر هدر"
+        {...uploadHeaderModal}
+        defaultImageSrc={data.profilemodel.header as string}
+        aspectRatio={5}
+        loading={lazyQueries.changeProfileQuery.loading}
+        onUpload={(file) =>
+          actions
+            .changeProfile({
+              profile: {
+                header: file,
+              },
+            })
+            .then(uploadHeaderModal.onClose)
+        }
       />
     </>
   );
