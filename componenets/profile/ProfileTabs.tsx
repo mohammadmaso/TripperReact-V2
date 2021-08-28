@@ -31,7 +31,10 @@ interface Props {
 const ProfileTabs = (props: Props) => {
   return (
     <Tabs colorScheme="primary" size="sm" align="center">
-      <TabList>
+      <TabList
+        overflowX={{ base: 'scroll', sm: 'scroll', md: 'hidden', lg: 'hidden' }}
+        overflowY="hidden"
+      >
         <Tab>سفرنامه‌ها</Tab>
         {props.isSelf && (
           <Tab onClick={() => props.actions.getUnpublishedTrips()}>
