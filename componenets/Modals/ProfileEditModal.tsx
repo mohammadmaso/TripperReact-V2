@@ -45,6 +45,7 @@ import {
 import { AtSignIcon } from '@chakra-ui/icons';
 import { IoCheckmark } from 'react-icons/io5';
 import { FiKey } from 'react-icons/fi';
+import { usernameRegex } from '../../utils/regex';
 
 interface Props {
   isOpen: boolean;
@@ -101,8 +102,6 @@ const ProfileEditModal = (props: Props) => {
   const [tripStatus, setTripStatus] = useState(props.tripStatus);
   const [about, setAbout] = useState(props.about);
 
-  let usernameRegex = /^[A-Za-z][A-Za-z0-9_]{7,32}$/;
-
   const toast = useToast();
 
   const handleSwithTripStatus = () => {
@@ -157,7 +156,7 @@ const ProfileEditModal = (props: Props) => {
                     .required('یوزنیم نمی‌تواند خالی باشد!')
                     .matches(
                       usernameRegex,
-                      'نام کاربری باید تنها شامل حروف انگلیسی، اعداد و ـ باشد.'
+                      'نام کاربری باید تنها شامل حروف انگلیسی، اعداد، خط تیره و نقطه باشد.'
                     ),
                 })}
                 onSubmit={(values, { setSubmitting, setFieldError }) => {

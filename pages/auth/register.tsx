@@ -25,6 +25,7 @@ import * as Yup from 'yup';
 import Head from 'next/head';
 import TermOfUseModal from '../../componenets/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
+import { usernameRegex } from '../../utils/regex';
 
 export default function SingUp() {
   const router = useRouter();
@@ -71,6 +72,10 @@ export default function SingUp() {
                 acceptTerms: Yup.bool().oneOf(
                   [true],
                   'پذیرش قوانین برای ثبت‌نام اجباری است!'
+                ),
+                username: Yup.string().matches(
+                  usernameRegex,
+                  'نام کاربری باید تنها شامل حروف انگلیسی، اعداد، خط تیره و نقطه باشد.'
                 ),
               })}
               onSubmit={(values, { setSubmitting, setFieldError }) => {
