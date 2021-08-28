@@ -23,7 +23,7 @@ const EditTravelogueView = ({ id }: Props) => {
   return (
     <>
       <Head>
-        <title>{`تریپر | ${data?.trip?.title} `}</title>
+        <title>{`ویرایش سفرنامه | ${data?.trip?.title} `}</title>
       </Head>
     </>
   );
