@@ -25,10 +25,8 @@ interface Props {
 
 const FollowingsModal = (props: Props) => {
   React.useEffect(() => {
-    if (props.isOpen == true) {
-      props.actions?.getFollowings();
-    }
-  }, [props.isOpen]);
+    props.actions?.getFollowings();
+  }, []);
 
   const followingsEdges = props.isSelf
     ? props.queries?.followingsQuery?.data?.me?.followingUsers.edges
@@ -38,7 +36,7 @@ const FollowingsModal = (props: Props) => {
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent rounded="none">
           <ModalHeader>دنبال‌شده‌ها</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
