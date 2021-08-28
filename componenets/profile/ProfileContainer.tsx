@@ -27,25 +27,6 @@ interface Props {
 const ProfileContainer = (props: Props) => {
   return (
     <div>
-      <Head>
-        <meta
-          property="og:image"
-          content={
-            props.isSelf ? props.data?.me.avatar : props.data?.user.avatar
-          }
-        />
-        <meta property="og:title" content="پلتفرم گردشگری تریپر" />
-        <meta property="og:type" content="profile:username" />{' '}
-        <meta
-          property="og:description"
-          content={
-            props.isSelf
-              ? props.data?.me.profilemodel.about
-              : props.data?.user.profilemodel.about
-          }
-        />
-        <meta property="og:locale" content="fa_IR" />
-      </Head>
       <Box
         w={'full'}
         bg={useColorModeValue('white', 'gray.900')}
