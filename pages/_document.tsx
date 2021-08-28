@@ -29,7 +29,7 @@ class Document extends NextDocument {
           <meta property="og:image" content="/images/og.png" />
           <meta property="og:title" content="پلتفرم گردشگری تریپر" />
           <meta property="og:url" content="https://mytripper.ir" />
-          {/* <meta property="og:type" content="article" /> */}
+          <meta property="og:type" content="website" />{' '}
           <meta property="og:description" content="راهکار جامع گردشگری" />
           <meta property="og:locale" content="fa_IR" />
         </Head>

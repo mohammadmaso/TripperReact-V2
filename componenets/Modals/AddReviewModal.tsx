@@ -22,16 +22,31 @@ import {
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import React from 'react';
 import { BiCommentAdd } from 'react-icons/bi';
-import { useMeFollowingsQuery } from '../../graphql/generated/types';
+import {
+  CreateTripReviewMutation,
+  useMeFollowingsQuery,
+} from '../../graphql/generated/types';
 import ApiLoading from '../ApiLoading';
 import UserSimpleListCard from '../cards/UserSimpleListCard';
 
 import * as Yup from 'yup';
+import { FetchResult } from '@apollo/client/link/core/types';
 
 interface Props {
   isOpen: boolean;
   onClose: any;
-  actions: any;
+  actions: {
+    addReview: (
+      id: string,
+      review: string
+    ) => Promise<
+      FetchResult<
+        CreateTripReviewMutation,
+        Record<string, any>,
+        Record<string, any>
+      >
+    >;
+  };
   contentId: string;
   status: any;
 }
@@ -65,11 +80,8 @@ const AddReviewModal = (props: Props) => {
             review: Yup.string().required('نظر نمی‌تواند خالی باشد!'),
           })}
           onSubmit={(values, { setSubmitting, setFieldError }) => {
-            props.actions.addReview(values.id, values.review).finally(() => {
-              if (
-                props.status.data &&
-                props.status.data.createTripReview?.success
-              ) {
+            props.actions.addReview(values.id, values.review).then((res) => {
+              if (res.data && res.data.createTripReview?.success) {
                 setSubmitting(false);
                 props.onClose();
                 toast({

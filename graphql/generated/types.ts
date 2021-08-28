@@ -6900,7 +6900,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'UserType' }
-    & Pick<UserType, 'username' | 'avatar' | 'verified'>
+    & Pick<UserType, 'id' | 'username' | 'avatar' | 'verified'>
   )> }
 );
 
@@ -7143,7 +7143,7 @@ export type MyTripsQuery = (
 
 export type UserFieldsFragment = (
   { __typename?: 'UserType' }
-  & Pick<UserType, 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
+  & Pick<UserType, 'id' | 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
 );
 
 export type ProfileFieldsFragment = (
@@ -7247,6 +7247,7 @@ export const TripSimpleFieldsFragmentDoc = gql`
     `;
 export const UserFieldsFragmentDoc = gql`
     fragment UserFields on UserType {
+  id
   username
   avatar
   verified
@@ -8734,6 +8735,7 @@ export type TripReviewLikeStatusQueryResult = Apollo.QueryResult<TripReviewLikeS
 export const MeDocument = gql`
     query Me {
   me {
+    id
     username
     avatar
     verified

@@ -101,6 +101,8 @@ const ProfileEditModal = (props: Props) => {
   const [tripStatus, setTripStatus] = useState(props.tripStatus);
   const [about, setAbout] = useState(props.about);
 
+  let usernameRegex = /^[A-Za-z][A-Za-z0-9_]{7,32}$/;
+
   const toast = useToast();
 
   const handleSwithTripStatus = () => {
@@ -151,9 +153,12 @@ const ProfileEditModal = (props: Props) => {
                   username: username,
                 }}
                 validationSchema={Yup.object().shape({
-                  username: Yup.string().required(
-                    'یوزنیم نمی‌تواند خالی باشد!'
-                  ),
+                  username: Yup.string()
+                    .required('یوزنیم نمی‌تواند خالی باشد!')
+                    .matches(
+                      usernameRegex,
+                      'نام کاربری باید تنها شامل حروف انگلیسی، اعداد و ـ باشد.'
+                    ),
                 })}
                 onSubmit={(values, { setSubmitting, setFieldError }) => {
                   props.actions
@@ -174,7 +179,7 @@ const ProfileEditModal = (props: Props) => {
                       if (res.data?.changeUsername?.errors) {
                         setFieldError(
                           'username',
-                          props.queries?.changeUsernameQuery.data
+                          props.queries?.changeUsernameQuery?.data
                             ?.changeUsername?.errors.nonFieldErrors[0]
                         );
                       }
@@ -182,10 +187,10 @@ const ProfileEditModal = (props: Props) => {
                     .catch((err) => {
                       setFieldError(
                         'username',
-                        props.queries?.changeUsernameQuery.data?.changeUsername
+                        props.queries?.changeUsernameQuery?.data?.changeUsername
                           ?.errors
                           ? JSON.stringify(
-                              props.queries?.changeUsernameQuery.data
+                              props.queries?.changeUsernameQuery?.data
                                 ?.changeUsername.errors
                             )
                           : 'خطا'
@@ -214,13 +219,13 @@ const ProfileEditModal = (props: Props) => {
                             <InputRightAddon>
                               <Button
                                 isLoading={
-                                  props.queries?.changeUserQuery.loading
+                                  props.queries?.changeUserQuery?.loading
                                 }
                                 size="sm"
                                 type="submit"
                                 variant="ghost"
                                 colorScheme={
-                                  props.queries?.changeUserQuery.data
+                                  props.queries?.changeUserQuery?.data
                                     ?.updateUser
                                     ? 'primary'
                                     : 'gray'
@@ -266,7 +271,7 @@ const ProfileEditModal = (props: Props) => {
                   id="tripStatus"
                   isChecked={tripStatus}
                   onChange={handleSwithTripStatus}
-                  isDisabled={props.queries?.changeProfileQuery.loading}
+                  isDisabled={props.queries?.changeProfileQuery?.loading}
                 />
                 <Text fontWeight="light"></Text>
               </FormControl>
@@ -307,7 +312,7 @@ const ProfileEditModal = (props: Props) => {
                     .catch((err) => {
                       setFieldError(
                         'about',
-                        props.queries?.changeProfileQuery.error &&
+                        props.queries?.changeProfileQuery?.error &&
                           'خطا در تغییر اطلاعات'
                       );
                     });
@@ -327,7 +332,9 @@ const ProfileEditModal = (props: Props) => {
                               {...field}
                             />
                             <Button
-                              isLoading={props.queries?.changeUserQuery.loading}
+                              isLoading={
+                                props.queries?.changeUserQuery?.loading
+                              }
                               size="sm"
                               type="submit"
                               variant="ghost"
@@ -398,7 +405,7 @@ const ProfileEditModal = (props: Props) => {
                       }
                       setFieldError(
                         'oldPassword',
-                        res.data?.passwordChange?.errors.nonFieldErrors[0]
+                        res.data?.passwordChange?.errors?.nonFieldErrors[0]
                           .message
                       );
                     })
@@ -475,13 +482,13 @@ const ProfileEditModal = (props: Props) => {
                             <InputRightAddon>
                               <Button
                                 isLoading={
-                                  props.queries?.changePasswordQuery.loading
+                                  props.queries?.changePasswordQuery?.loading
                                 }
                                 size="sm"
                                 type="submit"
                                 variant="ghost"
                                 colorScheme={
-                                  props.queries?.changePasswordQuery.data
+                                  props.queries?.changePasswordQuery?.data
                                     ?.passwordChange
                                     ? 'primary'
                                     : 'gray'

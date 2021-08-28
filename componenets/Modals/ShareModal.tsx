@@ -66,17 +66,24 @@ import { CopyIcon } from '@chakra-ui/icons';
 interface Props {
   isOpen: boolean;
   onClose: any;
-  // shareUrl: string;
+  url?: string | null;
   media?: any;
   description?: string;
   title?: string;
 }
 
-const ShareModal = ({ isOpen, description, title, media, onClose }: Props) => {
+const ShareModal = ({
+  isOpen,
+  description,
+  url,
+  title,
+  media,
+  onClose,
+}: Props) => {
   const router = useRouter();
 
   const [shareUrl, setShareUrl] = useState(
-    `https://mytripper.ir${router.asPath}`
+    `https://mytripper.ir${url || router.asPath}`
   );
 
   const { hasCopied, onCopy } = useClipboard(shareUrl);

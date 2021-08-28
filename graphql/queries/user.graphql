@@ -1,5 +1,6 @@
 query Me {
   me {
+    id
     username
     avatar
     verified
@@ -163,6 +164,7 @@ query MyTrips($published: Boolean) {
 }
 
 fragment UserFields on UserType {
+  id
   username
   avatar
   verified

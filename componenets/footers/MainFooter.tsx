@@ -73,10 +73,9 @@ export default function LargeWithNewsletter() {
             </Stack>
             <Stack fontSize="sm" textColor="primary">
               <Link>درباره تریپر</Link>
-              <Link>سیاست حفظ حریم خصوصی</Link>
               <Link>قوانین و مقررات</Link>
               <Link>فرصت شغلی</Link>
-              <Link>پشتبانی</Link>
+              <Link>پشتیبانی</Link>
             </Stack>
           </Flex>
           <Stack

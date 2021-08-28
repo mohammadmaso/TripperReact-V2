@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Heading,
   Avatar,
@@ -28,13 +28,20 @@ import {
   UserType,
 } from '../../graphql/generated/types';
 import Link from 'next/link';
-import { FiCamera, FiEdit, FiEdit2, FiSettings } from 'react-icons/fi';
+import {
+  FiCamera,
+  FiEdit,
+  FiEdit2,
+  FiSettings,
+  FiShare2,
+} from 'react-icons/fi';
 import FollowersModal from '../Modals/FollowersModal';
 import FollowingsModal from '../Modals/FollowingsModal';
 import { RiUserFollowLine } from 'react-icons/ri';
 import { FetchResult } from '@apollo/client/link/core/types';
 import ProfileEditModal from '../Modals/ProfileEditModal';
 import ImageUploadModal from '../Modals/ImageUploadModal';
+import ShareModal from '../Modals/ShareModal';
 interface Props {
   isSelf: boolean;
   data: UserFieldsFragment & {
@@ -42,7 +49,7 @@ interface Props {
     trips: { edges: [node: TripSimpleFieldsFragment] };
   };
   actions: any;
-  // {
+  // actions: {
   //   changeUser: (
   //     updateUserInput: UpdateUserInput
   //   ) => Promise<
@@ -57,7 +64,7 @@ interface Props {
   //       Record<string, any>
   //     >
   //   >;
-  //   followOrUnfollow?: () => Promise<
+  //   followOrUnfollow: () => Promise<
   //     FetchResult<
   //       FollowOrUnfollowMutation,
   //       Record<string, any>,
@@ -75,72 +82,26 @@ const ProfileHeader = ({
   data,
   actions,
   lazyQueries,
-  isFollowed,
   ...rest
 }: Props) => {
   const modalFollowers = useDisclosure();
   const modalFollowings = useDisclosure();
   const editProfileModal = useDisclosure();
+  const shareModal = useDisclosure();
   const uploadAvatarModal = useDisclosure();
   const uploadHeaderModal = useDisclosure();
 
-  const inputFileHeader = useRef<HTMLInputElement>(null);
-  const inputFileAvatar = useRef<HTMLInputElement>(null);
+  const [followersCount, setFollowersCount] = useState(
+    data.profilemodel.followersCount
+  );
+  const [followingsCount, setFollowingsCount] = useState(
+    data.profilemodel.followingsCount
+  );
 
-  const onChangeHeaderInput = ({
-    target: {
-      validity,
-      files: [file],
-    },
-  }: any) => {
-    if (validity.valid) {
-      actions.changeProfile({
-        profile: {
-          header: file,
-        },
-      });
-      // console.log(file);
-    }
-  };
+  const [isFollowed, setIsFollowed] = useState(rest.isFollowed);
 
-  const onChangeAvatarInput = ({
-    target: {
-      validity,
-      files: [file],
-    },
-  }: any) => {
-    if (validity.valid) {
-      actions.changeUser({ userInputs: { avatar: file } });
-    }
-  };
-
-  const onHeaderButtonClick = () => {
-    // `current` points to the mounted file input element
-    inputFileHeader?.current?.click();
-  };
-
-  const onAvatarButtonClick = () => {
-    // `current` points to the mounted file input element
-    inputFileAvatar?.current?.click();
-  };
   return (
     <>
-      <input
-        accept="image/*"
-        type="file"
-        id="file"
-        ref={inputFileHeader}
-        style={{ display: 'none' }}
-        onChange={onChangeHeaderInput}
-      />
-      <input
-        accept="image/*"
-        type="file"
-        id="file2"
-        ref={inputFileAvatar}
-        style={{ display: 'none' }}
-        onChange={onChangeAvatarInput}
-      />
       <Image
         h={'200px'}
         w={'full'}
@@ -158,13 +119,13 @@ const ProfileHeader = ({
             rounded="full"
             mt="-12"
             opacity="0.8"
-            isLoading={lazyQueries.changeProfileQuery.loading}
+            isLoading={lazyQueries.changeProfileQuery?.loading}
             onClick={uploadHeaderModal.onOpen}
           >
             <Wrap align="center">
               <Icon as={FiCamera} color="gray.600" />
 
-              {lazyQueries.changeProfileQuery.error &&
+              {lazyQueries.changeProfileQuery?.error &&
                 'خطا! دوباره امتحان کنید.'}
             </Wrap>
           </Button>
@@ -190,7 +151,7 @@ const ProfileHeader = ({
             rounded="full"
             mt="-4"
             opacity="0.8"
-            isLoading={lazyQueries.changeUserQuery.loading}
+            isLoading={lazyQueries.changeUserQuery?.loading}
             // onClick={onAvatarButtonClick}
             onClick={uploadAvatarModal.onOpen}
           >
@@ -201,18 +162,26 @@ const ProfileHeader = ({
       <Stack p={6} align="center" spacing="2">
         <Stack spacing={2} align={'center'} mb={5}>
           <Box>
-            {isSelf ? (
-              <Wrap>
+            <Wrap>
+              {isSelf && (
                 <Button variant="ghost" onClick={editProfileModal.onOpen}>
                   <Icon as={FiEdit2} />
                 </Button>
-              </Wrap>
-            ) : null}
+              )}
+              <Button variant="ghost" onClick={shareModal.onOpen}>
+                <Icon as={FiShare2} />
+              </Button>
+            </Wrap>
           </Box>
           <Heading fontSize={'2xl'} fontWeight={300} fontFamily={'body'}>
             {data.username}
           </Heading>
-          <Text fontWeight="light" textAlign="center">
+          <Text
+            fontWeight="light"
+            textAlign="center"
+            whiteSpace="pre-line"
+            lineHeight="10"
+          >
             {data.profilemodel.about}
           </Text>
           <Wrap>
@@ -228,7 +197,7 @@ const ProfileHeader = ({
 
         <Stack direction={'row'} justify={'center'} spacing={6}>
           <Stack spacing={0} align={'center'}>
-            <Text fontWeight={600}>{data.trips.edges.length}</Text>
+            <Text fontWeight={600}>{data.trips?.edges?.length}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>
               سفرنامه
             </Text>
@@ -239,7 +208,7 @@ const ProfileHeader = ({
             spacing={0}
             align={'center'}
           >
-            <Text fontWeight={600}>{data.profilemodel.followersCount}</Text>
+            <Text fontWeight={600}>{followersCount}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>
               دنبال‌کننده
             </Text>
@@ -251,7 +220,7 @@ const ProfileHeader = ({
             spacing={0}
             align={'center'}
           >
-            <Text fontWeight={600}>{data.profilemodel.followingsCount}</Text>
+            <Text fontWeight={600}>{followingsCount}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>
               دنبال‌شده
             </Text>
@@ -260,8 +229,23 @@ const ProfileHeader = ({
         {!isSelf && (
           <Wrap>
             <Button
-              onClick={() => actions.followOrUnfollow()}
-              isLoading={lazyQueries.followOrUnfollowMutation.loading}
+              onClick={() =>
+                actions.followOrUnfollow().then((res: any) => {
+                  if (res.data?.followOrUnfollow?.followStatus == true) {
+                    setIsFollowed(true);
+                    if (res.errors == null) {
+                      setFollowersCount((prev) => prev + 1);
+                    }
+                  }
+                  if (res.data?.followOrUnfollow?.followStatus == false) {
+                    setIsFollowed(false);
+                    if (res.errors == null) {
+                      setFollowersCount((prev) => prev - 1);
+                    }
+                  }
+                })
+              }
+              isLoading={lazyQueries.followOrUnfollowMutation?.loading}
               colorScheme="primary"
               rounded="full"
               variant={isFollowed ? 'solid' : 'outline'}
@@ -288,7 +272,7 @@ const ProfileHeader = ({
       <ProfileEditModal
         username={data.username}
         about={data.profilemodel.about as string}
-        tripStatus={data.profilemodel.tripStatus as boolean}
+        tripStatus={data.profilemodel?.tripStatus as boolean}
         {...editProfileModal}
         actions={actions}
         queries={lazyQueries}
@@ -298,7 +282,7 @@ const ProfileHeader = ({
         {...uploadAvatarModal}
         defaultImageSrc={data.avatar}
         aspectRatio={1}
-        loading={lazyQueries.changeUserQuery.loading}
+        loading={lazyQueries.changeUserQuery?.loading}
         onUpload={(file) =>
           actions
             .changeUser({
@@ -310,9 +294,9 @@ const ProfileHeader = ({
       <ImageUploadModal
         title="آپلود تصویر هدر"
         {...uploadHeaderModal}
-        defaultImageSrc={data.profilemodel.header as string}
+        defaultImageSrc={data.profilemodel?.header as string}
         aspectRatio={5}
-        loading={lazyQueries.changeProfileQuery.loading}
+        loading={lazyQueries.changeProfileQuery?.loading}
         onUpload={(file) =>
           actions
             .changeProfile({
@@ -323,6 +307,7 @@ const ProfileHeader = ({
             .then(uploadHeaderModal.onClose)
         }
       />
+      <ShareModal {...shareModal} url={isSelf ? `/profile/${data.id}` : null} />
     </>
   );
 };

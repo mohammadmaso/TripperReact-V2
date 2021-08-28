@@ -42,7 +42,7 @@ const ProfileDetailView = (props: Props) => {
           followedId: props.id,
         },
       },
-      refetchQueries: [namedOperations.Query.UserDetail],
+      // refetchQueries: [namedOperations.Query.UserDetail],
     });
   // const isFollowedQuery = useIsFollowedQuery({ variables: { followedUserId: props.id } });
 
