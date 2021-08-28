@@ -36,18 +36,18 @@ import { getDate, getDays } from '../../utils/time';
 
 interface Props {
   id: string;
-  data: any;
-  loading: boolean;
-  error: ApolloError | undefined;
+  // data: any;
+  // loading: boolean;
+  // error: ApolloError | undefined;
 }
 
-const TripView = ({ data, loading, error, id }: Props) => {
+const TripView = ({ id }: Props) => {
   const router = useRouter();
   const toast = useToast();
 
-  // const { data, loading, error } = useTripDetailQuery({
-  //   variables: { tripId: props.id },
-  // });
+  const { data, loading, error } = useTripDetailQuery({
+    variables: { tripId: id },
+  });
 
   const [getReviews, reviewsLazyQuery] = useTripReviewsLazyQuery({
     variables: { tripId: id },

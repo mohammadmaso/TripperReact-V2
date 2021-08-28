@@ -31,27 +31,27 @@ import { client } from '../../graphql/ApolloLink';
 import { TripDetailDocument } from '../../graphql/generated/types';
 import { ApolloError } from '@apollo/client/core';
 
-interface Props {
-  data: any;
-  loading: boolean;
-  error: ApolloError | undefined;
-}
-export async function getServerSideProps() {
-  // Fetch data from external API
+// interface Props {
+//   data: any;
+//   loading: boolean;
+//   error: ApolloError | undefined;
+// }
+// export async function getServerSideProps(context: any) {
+//   // Fetch data from external API
 
-  const { data, loading, error } = await client.query({
-    query: TripDetailDocument,
-    variables: { variables: { tripId: router.query.id } },
-  });
-  // Pass data to the page via props
-  return { props: { data, loading, error } };
-}
+//   const { data, loading, error } = await client.query({
+//     query: TripDetailDocument,
+//     variables: { variables: { tripId: context.query.id } },
+//   });
+//   // Pass data to the page via props
+//   return { props: { data, loading, error } };
+// }
 
-export default function Travelogue(props: Props) {
+export default function Travelogue() {
   const router = useRouter();
   return (
     <BaseLayout>
-      <TripView {...props} id={router.query.id! as string} />
+      <TripView id={router.query.id! as string} />
     </BaseLayout>
   );
 }
