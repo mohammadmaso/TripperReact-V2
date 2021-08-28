@@ -103,7 +103,7 @@ const ProfileHeader = ({
   return (
     <>
       <Image
-        h={'200px'}
+        h={{ base: '150px', sm: '150', md: '200px', lg: '350x', xl: '400px' }}
         w={'full'}
         alt={data.username}
         src={data.profilemodel.header as string}
