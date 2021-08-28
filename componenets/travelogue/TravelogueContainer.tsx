@@ -74,10 +74,10 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
         <Flex direction={{ base: 'column', md: 'row', lg: 'row' }} w="full">
           <Wrap flex="1">
             <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
-              {data.trip?.images.edges.length != 0 && (
+              {data?.trip?.images.edges.length != 0 && (
                 <TravelogueGallery
-                  images={data.trip?.images.edges!}
-                  // videos={data.trip?.videos.edges}
+                  images={data?.trip?.images.edges!}
+                  // videos={data?.trip?.videos.edges}
                 />
               )}
 
@@ -86,16 +86,18 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
               <Divider />
               <Transfers />
 
-              {data.trip?.places.edges.length != 0 && (
+              {data?.trip?.places.edges.length != 0 && (
                 <>
                   <Divider />
-                  <TraveloguePlaces places={data.trip?.places.edges} />
+                  <TraveloguePlaces places={data?.trip?.places.edges} />
                 </>
               )}
-              {data.trip?.description && (
+              {data?.trip?.description && (
                 <>
                   <Divider />
-                  <TravelogueDescription description={data.trip?.description} />
+                  <TravelogueDescription
+                    description={data?.trip?.description}
+                  />
                 </>
               )}
 
@@ -108,11 +110,11 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
                 </>
               )}
 
-              {data.trip?.companions.edges.length != 0 && (
+              {data?.trip?.companions.edges.length != 0 && (
                 <>
                   <Divider />
                   <TravelogueCompanions
-                    companions={data.trip?.companions.edges!}
+                    companions={data?.trip?.companions.edges!}
                   />
                 </>
               )}
@@ -123,15 +125,15 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
               <TravelogueMap />
               <Divider />
-              {data.trip?.activities.edges.length != 0 && (
+              {data?.trip?.activities.edges.length != 0 && (
                 <TravelogueActivities
-                  activities={data.trip?.activities.edges!}
+                  activities={data?.trip?.activities.edges!}
                 />
               )}
               <Divider />
-              {data.trip?.accessories.edges.length != 0 && (
+              {data?.trip?.accessories.edges.length != 0 && (
                 <TravelogueAccessories
-                  accessories={data.trip?.accessories.edges}
+                  accessories={data?.trip?.accessories.edges}
                 />
               )}
             </Stack>
@@ -180,7 +182,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
           {...addReviewModal}
           actions={actions}
           status={queries.addReviewStatus}
-          contentId={data.trip?.id!}
+          contentId={data?.trip?.id!}
         />
       </Wrap>
 

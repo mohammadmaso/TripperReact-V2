@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client/core';
 import { Wrap, Divider, Flex, Stack, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -12,8 +13,10 @@ import { ArticleHeader } from '../../componenets/article/ArticleHeader';
 import { ArticlePlaces } from '../../componenets/article/ArticlePlaces';
 import TravelogueContainer from '../../componenets/travelogue/TravelogueContainer';
 import { TravelogueHeader } from '../../componenets/travelogue/TravelogueHeader';
+import { client } from '../../graphql/ApolloLink';
 import {
   namedOperations,
+  TripDetailDocument,
   TripDetailQuery,
   useAllArticleQuery,
   useArticleQuery,
@@ -33,18 +36,21 @@ import { getDate, getDays } from '../../utils/time';
 
 interface Props {
   id: string;
+  data: any;
+  loading: boolean;
+  error: ApolloError | undefined;
 }
 
-const TripView = (props: Props) => {
+const TripView = ({ data, loading, error, id }: Props) => {
   const router = useRouter();
   const toast = useToast();
 
-  const { data, loading, error } = useTripDetailQuery({
-    variables: { tripId: props.id },
-  });
+  // const { data, loading, error } = useTripDetailQuery({
+  //   variables: { tripId: props.id },
+  // });
 
   const [getReviews, reviewsLazyQuery] = useTripReviewsLazyQuery({
-    variables: { tripId: props.id },
+    variables: { tripId: id },
   });
 
   // const reviewsLazyQuery = useTripReviewsQuery({
@@ -52,7 +58,7 @@ const TripView = (props: Props) => {
   // });
 
   const [publishTrip, publishTripStatus] = usePublisTripMutation({
-    variables: { tripId: props.id },
+    variables: { tripId: id },
     // refetchQueries: [namedOperations.Query.MeDetail],
     onCompleted: (data) => {
       toast({
@@ -76,7 +82,7 @@ const TripView = (props: Props) => {
   });
 
   const [unPublishTrip, unPublishTripStatus] = useUnPublisTripMutation({
-    variables: { tripId: props.id },
+    variables: { tripId: id },
     // refetchQueries: [namedOperations.Query.MeDetail],
     onCompleted: (data) => {
       toast({
@@ -104,18 +110,18 @@ const TripView = (props: Props) => {
   });
   // must have refetch query to get like status
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
-    variables: { createTripLikeTripId: props.id },
+    variables: { createTripLikeTripId: id },
     refetchQueries: [namedOperations.Query.TripDetailLikes],
   });
 
   const [saveTrip, saveTripStatus] = useSaveTripMutationMutation({
-    variables: { saveTripTrip: props.id },
+    variables: { saveTripTrip: id },
     awaitRefetchQueries: true,
     refetchQueries: [namedOperations.Query.MeSavedTrips],
   });
 
   const [deleteTrip, deleteTripStatus] = useDeleteTripMutation({
-    variables: { deleteTripTripId: props.id },
+    variables: { deleteTripTripId: id },
     refetchQueries: [namedOperations.Query.MeDetail],
     onCompleted: (data) => {
       toast({

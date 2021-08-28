@@ -26,13 +26,32 @@ import TravelogueAccessories from '../../componenets/travelogue/TravelogueAccess
 import { Transfers } from '../../componenets/travelogue/TravelogueTransfers';
 import TravelogueActivities from '../../componenets/travelogue/TravelogueActivities';
 import TripView from '../../views/trip/TripView';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
+import { client } from '../../graphql/ApolloLink';
+import { TripDetailDocument } from '../../graphql/generated/types';
+import { ApolloError } from '@apollo/client/core';
 
-export default function Travelogue() {
+interface Props {
+  data: any;
+  loading: boolean;
+  error: ApolloError | undefined;
+}
+export async function getServerSideProps() {
+  // Fetch data from external API
+
+  const { data, loading, error } = await client.query({
+    query: TripDetailDocument,
+    variables: { variables: { tripId: router.query.id } },
+  });
+  // Pass data to the page via props
+  return { props: { data, loading, error } };
+}
+
+export default function Travelogue(props: Props) {
   const router = useRouter();
   return (
     <BaseLayout>
-      <TripView id={router.query.id! as string} />
+      <TripView {...props} id={router.query.id! as string} />
     </BaseLayout>
   );
 }
