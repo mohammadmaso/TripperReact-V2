@@ -92,7 +92,7 @@ const ShareModal = ({
     <div>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent rounded="none">
           <ModalHeader>اشتراک گذاری</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

@@ -16,7 +16,7 @@ const TermOfUseModal = (props: any) => {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent rounded="none">
         <ModalHeader>قوانین تریپر</ModalHeader>
         <ModalCloseButton />
         <ModalBody>

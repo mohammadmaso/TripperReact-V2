@@ -136,7 +136,7 @@ const ProfileEditModal = (props: Props) => {
   return (
     <Modal isOpen={props.isOpen} onClose={props.onClose} isCentered size="2xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent rounded="none">
         <ModalHeader fontSize="sm">ویرایش پروفایل</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
