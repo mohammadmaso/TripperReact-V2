@@ -124,17 +124,19 @@ export function TravelogueHeader(props: Props) {
       >
         <Stack>
           <Wrap>
-            {isMineTrip && isPublished ? (
-              <Tag colorScheme="green">
-                <Icon ml="1" as={FiCheck} />
-                منتشر شده
-              </Tag>
-            ) : (
-              <Tag colorScheme="red">
-                <Icon ml="1" as={FiX} />
-                منتشر نشده
-              </Tag>
-            )}
+            {isMineTrip ? (
+              isPublished ? (
+                <Tag colorScheme="green">
+                  <Icon ml="1" as={FiCheck} />
+                  منتشر شده
+                </Tag>
+              ) : (
+                <Tag colorScheme="red">
+                  <Icon ml="1" as={FiX} />
+                  منتشر نشده
+                </Tag>
+              )
+            ) : null}
             <Text as="h1" fontSize="xl" fontWeight="semibold">
               {props.title}
             </Text>
