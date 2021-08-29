@@ -22,6 +22,7 @@ import {
   MenuItem,
   IconButton,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiFillBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import {
@@ -58,6 +59,7 @@ import useIsSignedIn from '../../hooks/useIsSignedIn';
 import DeleteConfirmModal from '../Modals/DeleteConfirmModal';
 import ShareModal from '../Modals/ShareModal';
 interface Props {
+  id: string;
   title: string | undefined;
   categories: any;
   author: any;
@@ -263,7 +265,9 @@ export function TravelogueHeader(props: Props) {
                   variant="ghost"
                 />
                 <MenuList fontSize="sm">
-                  <MenuItem icon={<FiEdit />}>ویرایش</MenuItem>
+                  <Link href={`/travelogues/edit/${props.id}`} passHref>
+                    <MenuItem icon={<FiEdit />}>ویرایش</MenuItem>
+                  </Link>
                   <MenuItem
                     isDisabled={
                       props.queries.publishTripStatus.loading ||

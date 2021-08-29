@@ -39,8 +39,8 @@ import useIsSignedIn from '../../../hooks/useIsSignedIn';
 
 interface Props {
   data: TripDetailQuery;
-  actions: any;
-  queries: any;
+  actions?: any;
+  queries?: any;
 }
 
 export default function EditTravelogueContainer({

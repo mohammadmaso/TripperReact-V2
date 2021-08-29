@@ -158,6 +158,7 @@ const TripView = ({ id }: Props) => {
         <title>{`تریپر | ${data?.trip?.title} `}</title>
       </Head>
       <TravelogueHeader
+        id={data?.trip?.id as string}
         title={data?.trip?.title}
         categories={data?.trip?.categories.edges}
         author={data?.trip?.author}

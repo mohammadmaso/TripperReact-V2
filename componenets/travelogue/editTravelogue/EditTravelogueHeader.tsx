@@ -58,6 +58,7 @@ import useIsSignedIn from '../../../hooks/useIsSignedIn';
 import DeleteConfirmModal from '../../Modals/DeleteConfirmModal';
 
 interface Props {
+  id: string;
   title: string | undefined;
   categories: any;
   author: any;
@@ -212,7 +213,7 @@ export function EditTravelogueHeader(props: Props) {
                 onClick={() => props.actions.likeTrip()}
                 cursor="pointer"
               >
-                {!props.queries.likeTripStatus.loading ? (
+                {!props.queries.likeTripStatus?.loading ? (
                   props.isLiked ||
                   props.queries.likeTripStatus?.data?.createTripLike?.like ? (
                     <AiFillHeart size="20" color="red" />
@@ -233,7 +234,7 @@ export function EditTravelogueHeader(props: Props) {
                 setIsSaved(!isSaved);
               }}
             >
-              {!props.queries.saveTripStatus.loading ? (
+              {!props.queries.saveTripStatus?.loading ? (
                 isSaved ? (
                   <HiBookmark size="20" />
                 ) : (
@@ -263,11 +264,11 @@ export function EditTravelogueHeader(props: Props) {
                   variant="ghost"
                 />
                 <MenuList fontSize="sm">
-                  <MenuItem icon={<FiEdit />}>ویرایش</MenuItem>
+                  {/* <MenuItem icon={<FiEdit />}>ویرایش</MenuItem> */}
                   <MenuItem
                     isDisabled={
-                      props.queries.publishTripStatus.loading ||
-                      props.queries.unPublishTripStatus.loading
+                      props.queries?.publishTripStatus?.loading ||
+                      props.queries?.unPublishTripStatus?.loading
                     }
                     icon={<FiEye />}
                     onClick={handlePublishClick}
@@ -322,8 +323,8 @@ export function EditTravelogueHeader(props: Props) {
       <DeleteConfirmModal
         {...deleteModal}
         title={props.title}
-        status={props.queries.deleteTripStatus}
-        deleteAction={props.actions.deleteTrip}
+        status={props.queries?.deleteTripStatus}
+        deleteAction={props.actions?.deleteTrip}
       />
     </>
   );
