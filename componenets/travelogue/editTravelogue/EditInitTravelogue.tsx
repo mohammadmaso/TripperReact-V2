@@ -98,6 +98,7 @@ interface Props {
         [key: string]: never;
       }>
     >;
+    updateTripStatus: MutationResult<UpdateTripMutation>;
   };
   isOpen: boolean;
   onClose: any;
@@ -165,9 +166,8 @@ const EditInitTravelogue = ({
               province: data.trip?.province.id,
               country: data.trip?.country.id,
               description: data.trip?.description,
-              categories: data.trip?.categories.edges.map(
-                (item) => item?.node?.id
-              ),
+              categories:
+                data.trip?.categories.edges.map((item) => item?.node?.id) || [],
             }}
             validationSchema={Yup.object().shape({
               title: Yup.string().required(
@@ -180,7 +180,34 @@ const EditInitTravelogue = ({
               // ),
             })}
             onSubmit={(values, { setSubmitting, setFieldError }) => {
-              // actions.updateTrip({});
+              actions
+                .updateTrip({
+                  tripId: data.trip?.id as string,
+                  tripData: {
+                    title: values.title,
+                    // defaultImage: values.image,
+                    description: values.description,
+                  },
+                  country: values.country,
+                  tripRelatedData: {
+                    categories: values.categories as Maybe<string>[],
+                  },
+                  province: values.province,
+                })
+                .then((res) => {
+                  if (res.data?.updateTrip?.success == true) {
+                    rest.onClose();
+                  }
+                  if (res.data?.updateTrip?.success == false) {
+                    toast({
+                      title: 'خطا در بروزرسانی سفر',
+                      status: 'error',
+                      duration: 8000,
+                      isClosable: true,
+                      position: 'top-right',
+                    });
+                  }
+                });
             }}
           >
             {(formProps) => (
@@ -418,14 +445,14 @@ const EditInitTravelogue = ({
                 <ModalFooter>
                   <Wrap>
                     <Button
-                      // isLoading={status?.createInitialTripStatus?.loading}
+                      isLoading={queries?.updateTripStatus?.loading}
                       colorScheme="primary"
                       variant="ghost"
                       size="sm"
                       type="submit"
                       rightIcon={<FiArrowLeft />}
                     >
-                      ذخیره و ادامه
+                      بروزرسانی
                     </Button>
                     <Button
                       colorScheme="red"
