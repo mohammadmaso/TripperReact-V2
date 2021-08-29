@@ -117,7 +117,7 @@ const TravelogueReview = (props: Props) => {
             </Wrap>
           </Flex>
           <Divider />
-          <Text>{props.description}</Text>
+          <Text whiteSpace="pre-line">{props.description}</Text>
         </Stack>
       </Box>
     </div>
