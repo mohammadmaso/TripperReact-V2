@@ -28,6 +28,7 @@ const SelectForm = (props: Props) => {
         label={props.name}
         onChange={props.inputChange}
         isMulti={props.isMulti ? props.isMulti : false}
+        isDisabled={props.loading}
       />
     </>
   );
