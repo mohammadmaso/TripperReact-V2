@@ -21,6 +21,7 @@ import {
   MenuList,
   MenuItem,
   IconButton,
+  ButtonGroup,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { AiFillBook, AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -28,12 +29,15 @@ import {
   FiBookmark,
   FiCheck,
   FiEdit,
+  FiEdit2,
+  FiEdit3,
   FiEye,
   FiHeart,
   FiMoreVertical,
   FiShare,
   FiShare2,
   FiTrash,
+  FiTrash2,
   FiX,
 } from 'react-icons/fi';
 import {
@@ -50,12 +54,14 @@ import {
 import { BounceLoader } from 'react-spinners';
 import {
   PublisTripMutation,
+  TripDetailQuery,
   UnPublisTripMutation,
   UserType,
 } from '../../../graphql/generated/types';
 import { useIsMineTrip } from '../../../hooks/useIsMineTrip';
 import useIsSignedIn from '../../../hooks/useIsSignedIn';
 import DeleteConfirmModal from '../../Modals/DeleteConfirmModal';
+import EditInitTravelogue from './EditInitTravelogue';
 
 interface Props {
   id: string;
@@ -72,6 +78,7 @@ interface Props {
   isLiked: boolean;
   isSaved: boolean;
   published: boolean;
+  data: TripDetailQuery;
 }
 
 export function EditTravelogueHeader(props: Props) {
@@ -82,7 +89,7 @@ export function EditTravelogueHeader(props: Props) {
 
   const [isPublished, seIsPublished] = useState(props.published);
 
-  const shareModal = useDisclosure();
+  const editeInitModal = useDisclosure();
   const deleteModal = useDisclosure();
 
   const { goToSignUp, isSignedIn } = useIsSignedIn();
@@ -110,7 +117,7 @@ export function EditTravelogueHeader(props: Props) {
 
   return (
     <>
-      <Flex
+      <Wrap
         // position={stickyHeader ? 'fixed' : undefined}
         pt={'2'}
         pb={'2'}
@@ -119,9 +126,9 @@ export function EditTravelogueHeader(props: Props) {
         zIndex="90"
         // top={stickyHeader ? '60px' : undefined}
         w="full"
-        transitionDuration="2"
         justify="space-between"
         align="center"
+        direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
       >
         <Stack>
           <Wrap>
@@ -176,155 +183,56 @@ export function EditTravelogueHeader(props: Props) {
               <Text>{`${props.country} - ${props.province}`}</Text>
             </Wrap>
           </Wrap>
+          <Button
+            colorScheme="primary"
+            variant="ghost"
+            leftIcon={<FiEdit3 />}
+            fontWeight="light"
+            fontSize="sm"
+            onClick={editeInitModal.onOpen}
+            w="fit-content"
+          >
+            ویرایش اطلاعات اولیه سفر
+          </Button>
         </Stack>
-
-        {isSignedIn ? (
-          <Wrap
-            direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
-            spacing="2"
-            alignItems="center"
-            justify="center"
-            align="center"
-          >
-            <Wrap
-              direction={{
-                base: 'column-reverse',
-                sm: 'column-reverse',
-                md: 'row',
-                lg: 'row',
-              }}
-              spacing="1"
-              align="center"
-              justify="center"
-              alignItems="center"
+        <Wrap align="center">
+          <ButtonGroup>
+            <Button
+              colorScheme="primary"
+              isDisabled={
+                props.queries?.publishTripStatus?.loading ||
+                props.queries?.unPublishTripStatus?.loading
+              }
+              size="sm"
+              leftIcon={<FiEye />}
+              onClick={handlePublishClick}
             >
-              <Wrap fontSize="xs" spacing="1">
-                <Text>
-                  {props.queries?.likeTripStatus?.data == null
-                    ? `${props.likes}`
-                    : `${props.queries?.likeTripStatus?.data.createTripLike.trip.likes}`}
-                </Text>
-              </Wrap>
-
-              <Wrap
-                spacing="0.5"
-                transition={'all .3s ease'}
-                _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={() => props.actions.likeTrip()}
-                cursor="pointer"
-              >
-                {!props.queries.likeTripStatus?.loading ? (
-                  props.isLiked ||
-                  props.queries.likeTripStatus?.data?.createTripLike?.like ? (
-                    <AiFillHeart size="20" color="red" />
-                  ) : (
-                    <AiOutlineHeart size="20" />
-                  )
-                ) : (
-                  <Spinner size="xs" />
-                )}
-              </Wrap>
-            </Wrap>
-            <Divider orientation="vertical" />
-            <Wrap
-              transition={'all .3s ease'}
-              _hover={{ transform: 'scale(1.3,1.3)' }}
-              onClick={() => {
-                props.actions.saveTrip();
-                setIsSaved(!isSaved);
-              }}
-            >
-              {!props.queries.saveTripStatus?.loading ? (
-                isSaved ? (
-                  <HiBookmark size="20" />
-                ) : (
-                  <HiOutlineBookmark size="20" />
-                )
-              ) : (
-                <Spinner size="xs" />
-              )}
-            </Wrap>
-            <Divider orientation="vertical" />
-
-            <Wrap
-              transition={'all .3s ease'}
-              _hover={{ transform: 'scale(1.3,1.3)' }}
-              onClick={shareModal.onOpen}
-              cursor="pointer"
-            >
-              <Icon as={FiShare2} size="20" />
-            </Wrap>
-
-            {isMineTrip && (
-              <Menu>
-                <MenuButton
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<FiMoreVertical size="20" />}
-                  variant="ghost"
-                />
-                <MenuList fontSize="sm">
-                  {/* <MenuItem icon={<FiEdit />}>ویرایش</MenuItem> */}
-                  <MenuItem
-                    isDisabled={
-                      props.queries?.publishTripStatus?.loading ||
-                      props.queries?.unPublishTripStatus?.loading
-                    }
-                    icon={<FiEye />}
-                    onClick={handlePublishClick}
-                  >
-                    {isPublished ? 'عدم انتشار' : 'انتشار'}
-                  </MenuItem>
-                  <MenuItem onClick={deleteModal.onOpen} icon={<FiTrash />}>
-                    حذف سفرنامه
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-            )}
-          </Wrap>
-        ) : (
-          <Tooltip
-            onClick={() => goToSignUp()}
-            hasArrow
-            label="برای لایک و ذخیره کردن ابتدا وارد شوید"
-            bg="gray.300"
-            color="black"
-          >
-            <Wrap
-              direction={{ base: 'column', sm: 'column', md: 'row' }}
-              alignContent="left"
-              spacing="2"
-              // style={{ filter: 'blur(1px)' }}
-            >
-              <Wrap spacing="1" align="center">
-                <Wrap style={{ filter: 'blur(0px)' }} fontSize="xs" spacing="1">
-                  <Text>{`${props.likes}`}</Text>
-                </Wrap>
-                <Wrap spacing="0.5">
-                  <FiHeart size="20" />
-                </Wrap>
-              </Wrap>
-              <Divider orientation="vertical" />
-              <FiBookmark size="20" />
-              <Divider orientation="vertical" />
-
-              <Wrap
-                transition={'all .3s ease'}
-                _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={shareModal.onOpen}
-                cursor="pointer"
-              >
-                <Icon as={FiShare2} size="20" />
-              </Wrap>
-            </Wrap>
-          </Tooltip>
-        )}
-      </Flex>
+              {isPublished ? 'عدم انتشار' : 'انتشار'}
+            </Button>
+            <IconButton
+              size="sm"
+              colorScheme="red"
+              aria-label="حذف سفرنامه"
+              onClick={deleteModal.onOpen}
+              icon={<FiTrash2 />}
+            />
+          </ButtonGroup>
+        </Wrap>
+      </Wrap>
       <DeleteConfirmModal
         {...deleteModal}
         title={props.title}
         status={props.queries?.deleteTripStatus}
         deleteAction={props.actions?.deleteTrip}
+      />
+      <EditInitTravelogue
+        data={props.data}
+        actions={{
+          updateTrip: props.actions.updateTrip,
+          getProvincesOfCountry: props.actions.getProvincesOfCountry,
+        }}
+        queries={props.queries}
+        {...editeInitModal}
       />
     </>
   );

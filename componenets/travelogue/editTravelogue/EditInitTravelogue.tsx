@@ -30,6 +30,7 @@ import {
   FormLabel,
   Flex,
   Image,
+  useEventListener,
 } from '@chakra-ui/react';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import React from 'react';
@@ -43,7 +44,7 @@ import { FiArrowLeft, FiDelete, FiTrash, FiUpload } from 'react-icons/fi';
 import { MdCardTravel } from 'react-icons/md';
 import { RangeDatePicker } from 'jalali-react-datepicker';
 import { DatePicker } from 'jalali-react-datepicker';
-import SelectForm from './SelectForm';
+import SelectForm from '../addTravelogue/SelectForm';
 import {
   LazyQueryResult,
   MutationResult,
@@ -59,27 +60,25 @@ import {
   Exact,
   Maybe,
   Scalars,
+  TripDetailQuery,
   TripInput,
   TripRelatedInput,
+  UpdateTripMutation,
+  UpdateTripMutationVariables,
 } from '../../../graphql/generated/types';
 import { createSelectorOptions } from '../../../utils/selectOptions';
 import { FetchResult } from '@apollo/client/link/core/types';
 
 interface Props {
   actions: {
-    createInitialTrip: (
-      inputs: Exact<{
-        createTripTripInput: TripInput;
-        createTripTripRelatedInput: TripRelatedInput;
-        createTripProvince: string;
-        createTripCountry: string;
-      }>
-    ) => any;
+    updateTrip: (
+      inputs: UpdateTripMutationVariables
+    ) => Promise<
+      FetchResult<UpdateTripMutation, Record<string, any>, Record<string, any>>
+    >;
     getProvincesOfCountry: (countryId: string) => void;
   };
-  status: {
-    createInitialTripStatus: MutationResult<CreateInitialTripMutation>;
-  };
+
   queries: {
     countriesQuery: QueryResult<
       AllCountriesQuery,
@@ -100,11 +99,31 @@ interface Props {
       }>
     >;
   };
+  isOpen: boolean;
+  onClose: any;
+  data: TripDetailQuery;
 }
 
-const InitTravelogue = ({ queries, actions, status }: Props) => {
+const getChangedValues = (values: any, initialValues: any) => {
+  return Object.entries(values).reduce((acc: any, [key, value]) => {
+    const hasChanged = initialValues[key] !== value;
+
+    if (hasChanged) {
+      acc[key] = value;
+    }
+
+    return acc;
+  }, {});
+};
+
+const EditInitTravelogue = ({
+  queries,
+  actions,
+  isOpen,
+  data,
+  ...rest
+}: Props) => {
   const toast = useToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const alert = useDisclosure();
   const cancelRef = React.useRef(null);
 
@@ -113,7 +132,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
   const inputFileImage = React.useRef<HTMLInputElement>(null);
 
   const [imagePreview, setImagePreview] = React.useState(
-    '/images/placeholder.png'
+    data.trip?.defaultImage || '/images/placeholder.png'
   );
 
   const onImageButtonClick = () => {
@@ -124,28 +143,31 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
   return (
     <>
       <Modal
-        isOpen={true}
-        onClose={onClose}
+        isOpen={isOpen}
+        onClose={rest.onClose}
         size="3xl"
         closeOnEsc={false}
         motionPreset="slideInBottom"
+        closeOnOverlayClick={false}
       >
         <ModalOverlay />
-        <ModalContent rounded="none">
+        <ModalContent rounded="none" fontSize="sm">
           <ModalHeader fontWeight="light">
             <Wrap align="center">
               <Icon as={MdCardTravel} />
-              <Text>سفرنامه جدید</Text>
+              <Text>ویرایش اطلاعات اولیه</Text>
             </Wrap>
           </ModalHeader>
           <Formik
             initialValues={{
-              title: '',
-              image: null,
-              province: '',
-              country: '',
-              description: '',
-              categories: [],
+              title: data.trip?.title,
+              image: data.trip?.defaultImage,
+              province: data.trip?.province.id,
+              country: data.trip?.country.id,
+              description: data.trip?.description,
+              categories: data.trip?.categories.edges.map(
+                (item) => item?.node?.id
+              ),
             }}
             validationSchema={Yup.object().shape({
               title: Yup.string().required(
@@ -158,19 +180,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
               // ),
             })}
             onSubmit={(values, { setSubmitting, setFieldError }) => {
-              actions.createInitialTrip({
-                createTripTripInput: {
-                  title: values.title,
-                  published: false,
-                  description: values.description,
-                  defaultImage: values.image,
-                },
-                createTripTripRelatedInput: {
-                  categories: values.categories,
-                },
-                createTripCountry: values.country,
-                createTripProvince: values.province,
-              });
+              // actions.updateTrip({});
             }}
           >
             {(formProps) => (
@@ -210,7 +220,11 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                         let a = inputValue.map((item: any) => item.value);
                         formProps.setFieldValue('categories', a);
                       }}
-                      loading={queries.categoriesQuery.loading}
+                      loading={queries.categoriesQuery?.loading}
+                      default={data.trip?.categories?.edges.map((item) => ({
+                        label: item?.node?.title,
+                        value: item?.node?.id,
+                      }))}
                     />
                     <Box textColor="red" my="2">
                       <ErrorMessage name="province" component="div" />
@@ -225,6 +239,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           id="description"
                           {...field}
                           type="text"
+                          whiteSpace="pre-line"
                         />
                         <Box textColor="red" my="2">
                           <ErrorMessage name="description" component="div" />
@@ -248,7 +263,11 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           formProps.setFieldValue('country', inputValue?.value);
                           actions.getProvincesOfCountry(inputValue?.value);
                         }}
-                        loading={queries.countriesQuery.loading}
+                        loading={queries.countriesQuery?.loading}
+                        default={{
+                          label: data.trip?.country.name,
+                          value: data.trip?.country.id,
+                        }}
                       />
                       <Box textColor="red" my="2">
                         <ErrorMessage name="country" component="div" />
@@ -259,7 +278,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                         name="انتخاب استان"
                         options={
                           !queries.provincesOfCountryQuery.data
-                            ? [{ label: 'کشور را انتخاب کنید.', value: null }]
+                            ? [{ label: 'انتخاب استان', value: null }]
                             : createSelectorOptions(
                                 'name',
                                 queries.provincesOfCountryQuery.data
@@ -273,6 +292,10 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           );
                         }}
                         loading={queries.provincesOfCountryQuery.loading}
+                        default={{
+                          label: data.trip?.province.name,
+                          value: data.trip?.province.id,
+                        }}
                       />
                       <Box textColor="red" my="2">
                         <ErrorMessage name="province" component="div" />
@@ -395,7 +418,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                 <ModalFooter>
                   <Wrap>
                     <Button
-                      isLoading={status?.createInitialTripStatus?.loading}
+                      // isLoading={status?.createInitialTripStatus?.loading}
                       colorScheme="primary"
                       variant="ghost"
                       size="sm"
@@ -433,12 +456,18 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
           {/* <AlertDialogHeader>حذف تغییرات</AlertDialogHeader> */}
           <AlertDialogCloseButton />
           <AlertDialogBody mt="2">
-            آیا برای انصراف از ثبت سفر مطمعن هستید؟
+            آیا برای انصراف از تغییر سفر مطمعن هستید؟
           </AlertDialogBody>
           <AlertDialogFooter>
             <ButtonGroup size="sm">
-              <Button colorScheme="red" onClick={() => router.back()}>
-                بله،سفر رو حذف کن!
+              <Button
+                colorScheme="red"
+                onClick={() => {
+                  rest.onClose();
+                  alert.onClose();
+                }}
+              >
+                حذف تغییرات و بستن
               </Button>
               <Button ref={cancelRef} onClick={alert.onClose}>
                 انصراف
@@ -451,4 +480,4 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
   );
 };
 
-export default InitTravelogue;
+export default EditInitTravelogue;

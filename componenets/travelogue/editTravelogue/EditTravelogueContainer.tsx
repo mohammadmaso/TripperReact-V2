@@ -108,17 +108,23 @@ export default function EditTravelogueContainer({
           <Wrap flex="1" pt={{ base: '5', md: '0', lg: '0' }}>
             <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
               <EditTravelogueMap />
-              <Divider />
+
               {data?.trip?.activities.edges.length != 0 && (
-                <EditTravelogueActivities
-                  activities={data?.trip?.activities.edges!}
-                />
+                <>
+                  <Divider />
+                  <EditTravelogueActivities
+                    activities={data?.trip?.activities.edges!}
+                  />
+                </>
               )}
-              <Divider />
+
               {data?.trip?.accessories.edges.length != 0 && (
-                <EditTravelogueAccessories
-                  accessories={data?.trip?.accessories.edges}
-                />
+                <>
+                  <Divider />
+                  <EditTravelogueAccessories
+                    accessories={data?.trip?.accessories.edges}
+                  />
+                </>
               )}
             </Stack>
           </Wrap>

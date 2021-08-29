@@ -30,9 +30,11 @@ const ProfileDetailView = (props: Props) => {
   });
   const [getFollowings, followingsQuery] = useUserFollowingsLazyQuery({
     variables: { userId: props.id },
+    fetchPolicy: 'no-cache',
   });
   const [getFollowers, followersQuery] = useUserFollowersLazyQuery({
     variables: { userId: props.id },
+    fetchPolicy: 'no-cache',
   });
 
   const [followOrUnfollow, followOrUnfollowMutation] =

@@ -15,7 +15,7 @@ export function TravelogueDescription(props: Props) {
         <Text>خلاصه سفر</Text>
       </Wrap>
       <Wrap>
-        <Text fontSize="sm" lineHeight="7">
+        <Text fontSize="sm" lineHeight="7" whiteSpace="pre-line">
           {props.description}
         </Text>
       </Wrap>

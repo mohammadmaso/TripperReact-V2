@@ -273,9 +273,11 @@ query TripDetail($tripId: ID!) {
     defaultImage
     viewsCount
     country {
+      id
       name
     }
     province {
+      id
       name
     }
     categories {

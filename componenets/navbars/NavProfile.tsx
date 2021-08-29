@@ -63,9 +63,11 @@ const NavProfile = (props: Props) => {
           )}
         </MenuButton>
         <MenuList>
-          <MenuItem icon={<AtSignIcon />} fontWeight="light">
-            {props.user?.username}
-          </MenuItem>
+          <Link href="/me" passHref>
+            <MenuItem icon={<AtSignIcon />} fontWeight="light">
+              {props.user?.username}
+            </MenuItem>
+          </Link>
           <Divider />
           <Link href="/travelogues/new/init" passHref>
             <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
@@ -73,9 +75,9 @@ const NavProfile = (props: Props) => {
           {/* <Link href="/wizard/" passHref>
             <MenuItem icon={<BiListPlus />}>برنامه‌ریزی سفر</MenuItem>
           </Link> */}
-          <Link href="/me" passHref>
-            <MenuItem icon={<FiUser />}>پروفایل من</MenuItem>
-          </Link>
+
+          {/* <MenuItem icon={<FiUser />}>پروفایل من</MenuItem> */}
+
           <Link href="/me" passHref>
             <MenuItem icon={<MdCardTravel />}>سفرهای من</MenuItem>
           </Link>

@@ -203,7 +203,10 @@ const ProfileHeader = ({
             </Text>
           </Stack>
           <Stack
-            onClick={modalFollowers.onOpen}
+            onClick={() => {
+              modalFollowers.onOpen();
+              actions?.getFollowers();
+            }}
             cursor="pointer"
             spacing={0}
             align={'center'}
@@ -215,7 +218,10 @@ const ProfileHeader = ({
           </Stack>
 
           <Stack
-            onClick={modalFollowings.onOpen}
+            onClick={() => {
+              modalFollowings.onOpen();
+              actions?.getFollowings();
+            }}
             cursor="pointer"
             spacing={0}
             align={'center'}

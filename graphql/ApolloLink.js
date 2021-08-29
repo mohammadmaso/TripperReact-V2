@@ -76,10 +76,16 @@ const cache = new InMemoryCache({
     Query: {
       fields: {
         allArticle: relayStylePagination(),
+       
       },
     },
+    UserType:{ 
+       merge: true,
+    },
+        
   },
-});
+}
+);
 
 
 export const client = new ApolloClient({

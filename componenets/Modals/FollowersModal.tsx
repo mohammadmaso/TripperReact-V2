@@ -24,10 +24,6 @@ interface Props {
 }
 
 const FollowersModal = (props: Props) => {
-  React.useEffect(() => {
-    props.actions?.getFollowers();
-  }, []);
-
   const followersEdges = props.isSelf
     ? props.queries?.followersQuery?.data?.me?.followerUsers?.edges
     : props.queries?.followersQuery?.data?.user?.followerUsers?.edges;

@@ -331,7 +331,8 @@ export type AccessoryType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   name: Scalars['String'];
-  image: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
+  imageLink?: Maybe<Scalars['String']>;
   likesCount: Scalars['Int'];
   brand?: Maybe<AccessoryBrandType>;
   category: AccessoryCategoryTypeConnection;
@@ -757,6 +758,7 @@ export type ChangeUsernameMutation = {
   __typename?: 'ChangeUsernameMutation';
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type CityType = Node & {
@@ -1229,6 +1231,13 @@ export type DeleteTourReview = {
 export type DeleteTrip = {
   __typename?: 'DeleteTrip';
   deleted?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type DeleteTripImage = {
+  __typename?: 'DeleteTripImage';
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 /** delete trip plan mutation. */
@@ -1241,6 +1250,7 @@ export type DeleteTripPlan = {
 export type DeleteTripReview = {
   __typename?: 'DeleteTripReview';
   deleted?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type DisLikeTripReviewMutation = {
@@ -1841,6 +1851,7 @@ export type Mutation = {
   deleteTrip?: Maybe<DeleteTrip>;
   /** delete trip review mutation. */
   deleteTripReview?: Maybe<DeleteTripReview>;
+  deleteTripImage?: Maybe<DeleteTripImage>;
 };
 
 
@@ -2179,9 +2190,11 @@ export type MutationUndoPublishTripArgs = {
 
 
 export type MutationUpdateTripArgs = {
-  tripData: TripInput;
-  tripId?: Maybe<Scalars['ID']>;
-  tripRelatedData: TripRelatedInput;
+  country?: Maybe<Scalars['ID']>;
+  province?: Maybe<Scalars['ID']>;
+  tripData?: Maybe<UpdateTripInput>;
+  tripId: Scalars['ID'];
+  tripRelatedData?: Maybe<TripRelatedInput>;
 };
 
 
@@ -2199,6 +2212,11 @@ export type MutationDeleteTripArgs = {
 
 export type MutationDeleteTripReviewArgs = {
   tripReviewId: Scalars['ID'];
+};
+
+
+export type MutationDeleteTripImageArgs = {
+  imageId?: Maybe<Scalars['ID']>;
 };
 
 /** An object with an ID */
@@ -3230,8 +3248,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -3246,8 +3264,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -4956,8 +4974,8 @@ export type TripTypeExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -5141,6 +5159,21 @@ export type UpdateTrip = {
   __typename?: 'UpdateTrip';
   trip?: Maybe<TripType>;
   success?: Maybe<Scalars['Boolean']>;
+  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+export type UpdateTripInput = {
+  title?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
+  description?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['Date']>;
+  endDate?: Maybe<Scalars['Date']>;
+  tripMap?: Maybe<Scalars['JSONString']>;
+  gpsTrack?: Maybe<Scalars['JSONString']>;
+  costs?: Maybe<Scalars['JSONString']>;
+  checkList?: Maybe<Scalars['JSONString']>;
+  todoList?: Maybe<Scalars['JSONString']>;
+  defaultImage?: Maybe<Scalars['Upload']>;
 };
 
 export type UpdateTripPlan = {
@@ -6299,6 +6332,27 @@ export type CreateInitialTripMutation = (
   )> }
 );
 
+export type UpdateTripMutationVariables = Exact<{
+  tripData?: Maybe<UpdateTripInput>;
+  tripId: Scalars['ID'];
+  tripRelatedData?: Maybe<TripRelatedInput>;
+  province?: Maybe<Scalars['ID']>;
+  country?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type UpdateTripMutation = (
+  { __typename?: 'Mutation' }
+  & { updateTrip?: Maybe<(
+    { __typename?: 'UpdateTrip' }
+    & Pick<UpdateTrip, 'success'>
+    & { trip?: Maybe<(
+      { __typename?: 'TripType' }
+      & Pick<TripType, 'id'>
+    )> }
+  )> }
+);
+
 export type LikeTripReviewMutationMutationVariables = Exact<{
   likeTripReviewReview: Scalars['ID'];
 }>;
@@ -6782,10 +6836,10 @@ export type TripDetailQuery = (
       )>> }
     ), country: (
       { __typename?: 'CountryType' }
-      & Pick<CountryType, 'name'>
+      & Pick<CountryType, 'id' | 'name'>
     ), province: (
       { __typename?: 'ProvinceType' }
-      & Pick<ProvinceType, 'name'>
+      & Pick<ProvinceType, 'id' | 'name'>
     ), categories: (
       { __typename?: 'TripCategoryTypeConnection' }
       & { edges: Array<Maybe<(
@@ -7085,7 +7139,7 @@ export type AllProfilesQuery = (
           )>> }
         ), profilemodel?: Maybe<(
           { __typename?: 'ProfileType' }
-          & Pick<ProfileType, 'tripStatus' | 'header' | 'followersCount' | 'followingsCount'>
+          & Pick<ProfileType, 'tripStatus' | 'header' | 'about' | 'followersCount' | 'followingsCount'>
           & { achievements: (
             { __typename?: 'AchivmentTypeConnection' }
             & { edges: Array<Maybe<(
@@ -7722,6 +7776,52 @@ export function useCreateInitialTripMutation(baseOptions?: Apollo.MutationHookOp
 export type CreateInitialTripMutationHookResult = ReturnType<typeof useCreateInitialTripMutation>;
 export type CreateInitialTripMutationResult = Apollo.MutationResult<CreateInitialTripMutation>;
 export type CreateInitialTripMutationOptions = Apollo.BaseMutationOptions<CreateInitialTripMutation, CreateInitialTripMutationVariables>;
+export const UpdateTripDocument = gql`
+    mutation UpdateTrip($tripData: UpdateTripInput, $tripId: ID!, $tripRelatedData: TripRelatedInput, $province: ID, $country: ID) {
+  updateTrip(
+    tripData: $tripData
+    tripId: $tripId
+    tripRelatedData: $tripRelatedData
+    province: $province
+    country: $country
+  ) {
+    trip {
+      id
+    }
+    success
+  }
+}
+    `;
+export type UpdateTripMutationFn = Apollo.MutationFunction<UpdateTripMutation, UpdateTripMutationVariables>;
+
+/**
+ * __useUpdateTripMutation__
+ *
+ * To run a mutation, you first call `useUpdateTripMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTripMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTripMutation, { data, loading, error }] = useUpdateTripMutation({
+ *   variables: {
+ *      tripData: // value for 'tripData'
+ *      tripId: // value for 'tripId'
+ *      tripRelatedData: // value for 'tripRelatedData'
+ *      province: // value for 'province'
+ *      country: // value for 'country'
+ *   },
+ * });
+ */
+export function useUpdateTripMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTripMutation, UpdateTripMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTripMutation, UpdateTripMutationVariables>(UpdateTripDocument, options);
+      }
+export type UpdateTripMutationHookResult = ReturnType<typeof useUpdateTripMutation>;
+export type UpdateTripMutationResult = Apollo.MutationResult<UpdateTripMutation>;
+export type UpdateTripMutationOptions = Apollo.BaseMutationOptions<UpdateTripMutation, UpdateTripMutationVariables>;
 export const LikeTripReviewMutationDocument = gql`
     mutation LikeTripReviewMutation($likeTripReviewReview: ID!) {
   likeTripReview(review: $likeTripReviewReview) {
@@ -8483,9 +8583,11 @@ export const TripDetailDocument = gql`
     defaultImage
     viewsCount
     country {
+      id
       name
     }
     province {
+      id
       name
     }
     categories {
@@ -9093,6 +9195,7 @@ export const AllProfilesDocument = gql`
         profilemodel {
           tripStatus
           header
+          about
           followersCount
           followingsCount
           achievements {
@@ -9362,6 +9465,7 @@ export const namedOperations = {
     LikeTrip: 'LikeTrip',
     CreateTripReview: 'CreateTripReview',
     CreateInitialTrip: 'CreateInitialTrip',
+    UpdateTrip: 'UpdateTrip',
     LikeTripReviewMutation: 'LikeTripReviewMutation',
     DislikeTripReviewMutation: 'DislikeTripReviewMutation',
     SaveTripMutation: 'SaveTripMutation',

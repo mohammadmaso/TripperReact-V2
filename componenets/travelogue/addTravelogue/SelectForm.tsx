@@ -1,5 +1,5 @@
 import React from 'react';
-import Select from 'react-select';
+import Select from '../../ChakraReactSelect';
 
 interface Props {
   loading?: boolean;
@@ -14,7 +14,7 @@ const SelectForm = (props: Props) => {
   return (
     <>
       <Select
-        placeholder={props.name}
+        placeholder={props.name as string}
         className="basic-single"
         classNamePrefix={props.name}
         // defaultValue={props.options[0]}
@@ -29,6 +29,7 @@ const SelectForm = (props: Props) => {
         onChange={props.inputChange}
         isMulti={props.isMulti ? props.isMulti : false}
         isDisabled={props.loading}
+        defaultValue={props.default}
       />
     </>
   );

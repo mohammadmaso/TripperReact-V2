@@ -1,4 +1,4 @@
-import { useToast } from '@chakra-ui/react';
+import { useEventListener, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -9,10 +9,15 @@ import { EditTravelogueHeader } from '../../componenets/travelogue/editTravelogu
 import {
   namedOperations,
   TripDetailQuery,
+  UpdateTripMutationVariables,
+  useAllCountriesQuery,
+  useAllProvincesOfCountryLazyQuery,
+  useAllTripCategoriesQuery,
   useDeleteTripMutation,
   usePublisTripMutation,
   useTripDetailQuery,
   useUnPublisTripMutation,
+  useUpdateTripMutation,
 } from '../../graphql/generated/types';
 import { getDate, getDays } from '../../utils/time';
 
@@ -26,6 +31,22 @@ const EditTravelogueView = ({ id }: Props) => {
 
   const { data, loading, error } = useTripDetailQuery({
     variables: { tripId: id },
+  });
+
+  const [updateTrip, updateTripStatus] = useUpdateTripMutation({
+    onCompleted: (data) => {
+      if (data.updateTrip?.success) {
+        toast({
+          title: 'سفر شما با موفقیت به‌روز شد.',
+          // description: 'برای ثبت نهایی و انتشار سفر، سفر خود را تکمیل کنید',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        // router.push('/travelogues/new/detail');
+      }
+    },
   });
 
   const [publishTrip, publishTripStatus] = usePublisTripMutation({
@@ -101,6 +122,12 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
+  const countriesQuery = useAllCountriesQuery();
+  const [getProvincesOfCountry, provincesOfCountryQuery] =
+    useAllProvincesOfCountryLazyQuery();
+
+  const categoriesQuery = useAllTripCategoriesQuery();
+
   if (loading) {
     return <ApiLoading />;
   }
@@ -114,6 +141,7 @@ const EditTravelogueView = ({ id }: Props) => {
         <title>{`ویرایش سفرنامه | ${data?.trip?.title} `}</title>
       </Head>
       <EditTravelogueHeader
+        data={data as TripDetailQuery}
         id={data?.trip?.id as string}
         title={data?.trip?.title}
         categories={data?.trip?.categories.edges}
@@ -130,11 +158,20 @@ const EditTravelogueView = ({ id }: Props) => {
           deleteTrip: () => deleteTrip(),
           publishTrip: () => publishTrip(),
           unPublishTrip: () => unPublishTrip(),
+          updateTrip: (inputs: UpdateTripMutationVariables) =>
+            updateTrip({ variables: { ...inputs } }),
+          getProvincesOfCountry: (countryId: string) =>
+            getProvincesOfCountry({
+              variables: { allProvincesCountry: countryId },
+            }),
         }}
         queries={{
           deleteTripStatus,
           unPublishTripStatus,
           publishTripStatus,
+          countriesQuery,
+          provincesOfCountryQuery,
+          categoriesQuery,
         }}
       />
       <EditTravelogueContainer data={data as TripDetailQuery} />

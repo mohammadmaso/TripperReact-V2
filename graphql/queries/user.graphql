@@ -125,6 +125,7 @@ query AllProfiles {
         profilemodel {
           tripStatus
           header
+          about
           followersCount
           followingsCount
           achievements {

@@ -35,6 +35,27 @@ mutation CreateInitialTrip(
   }
 }
 
+mutation UpdateTrip(
+  $tripData: UpdateTripInput
+  $tripId: ID!
+  $tripRelatedData: TripRelatedInput
+  $province: ID
+  $country: ID
+) {
+  updateTrip(
+    tripData: $tripData
+    tripId: $tripId
+    tripRelatedData: $tripRelatedData
+    province: $province
+    country: $country
+  ) {
+    trip {
+      id
+    }
+    success
+  }
+}
+
 mutation LikeTripReviewMutation($likeTripReviewReview: ID!) {
   likeTripReview(review: $likeTripReviewReview) {
     tripReviewLike {

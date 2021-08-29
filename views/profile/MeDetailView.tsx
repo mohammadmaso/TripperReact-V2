@@ -28,8 +28,12 @@ interface Props {}
 const MeDetailView = (props: Props) => {
   const { data, loading, error } = useMeDetailQuery();
   const [getUnpublishedTrips, unpublishedTripsQuery] = useMyTripsLazyQuery();
-  const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery();
-  const [getFollowers, followersQuery] = useMeFollowersLazyQuery();
+  const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery({
+    fetchPolicy: 'no-cache',
+  });
+  const [getFollowers, followersQuery] = useMeFollowersLazyQuery({
+    fetchPolicy: 'no-cache',
+  });
   const savedTripsQuery = useMeSavedTripsQuery();
   const [changeProfile, changeProfileQuery] = useUpdateProfileMutation();
   const [changeUser, changeUserQuery] = useUpdateUserMutation();
