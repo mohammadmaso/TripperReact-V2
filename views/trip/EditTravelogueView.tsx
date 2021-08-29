@@ -34,6 +34,7 @@ const EditTravelogueView = ({ id }: Props) => {
   });
 
   const [updateTrip, updateTripStatus] = useUpdateTripMutation({
+    refetchQueries: [namedOperations.Query.TripDetail],
     onCompleted: (data) => {
       if (data.updateTrip?.success) {
         toast({
@@ -172,6 +173,7 @@ const EditTravelogueView = ({ id }: Props) => {
           countriesQuery,
           provincesOfCountryQuery,
           categoriesQuery,
+          updateTripStatus,
         }}
       />
       <EditTravelogueContainer data={data as TripDetailQuery} />
