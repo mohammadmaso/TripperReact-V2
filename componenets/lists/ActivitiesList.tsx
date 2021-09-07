@@ -21,7 +21,7 @@ const ActivitiesList = (props: Props) => {
             <ActivityCard
               key={item.node.id}
               id={item.node.id}
-              title={item.node.title}
+              title={item.node.titleFa}
               svg={item.node.svg}
             />
           </>

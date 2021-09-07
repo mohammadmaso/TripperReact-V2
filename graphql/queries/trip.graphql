@@ -135,6 +135,7 @@ query AllActivities {
       node {
         svg
         title
+        titleFa
         description
       }
     }
@@ -164,6 +165,7 @@ query TripDetail($tripId: ID!) {
         node {
           svg
           title
+          titleFa
           id
         }
       }
@@ -194,6 +196,7 @@ query TripDetail($tripId: ID!) {
     images {
       edges {
         node {
+          id
           image
           description
           copyrightName
@@ -254,6 +257,18 @@ query TripDetail($tripId: ID!) {
                 id
                 title
                 svg
+              }
+            }
+          }
+          images {
+            edges {
+              node {
+                id
+                latitude
+                longitude
+                description
+                image
+                copyrightName
               }
             }
           }

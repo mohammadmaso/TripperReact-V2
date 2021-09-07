@@ -3,35 +3,40 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FiEye, FiUsers } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
+import { ExperienceType, PlaceType } from '../../graphql/generated/types';
+import ImageCard from '../ImageCard';
+import { IImage } from '../ImageGallery';
 
 interface Props {
   experiences: any;
+  imageOnClick: any;
 }
 
-function ExperienceCard(props: any) {
+interface cardProps {
+  node:
+    | (ExperienceType & {
+        place: PlaceType;
+      })
+    | undefined;
+  imageOnClick: () => void;
+}
+
+function ExperienceCard(props: cardProps) {
   return (
     <Box borderRadius="lg" borderWidth="thin" w="full" minH="7rem" p="2">
       <Stack spacing="0.5">
         <Flex justify="space-between">
           <Stack>
-            <Text>{props.title}</Text>
+            <Text>{props.node?.title}</Text>
             <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
-              <Text>{props.place.name}</Text>
+              <Text>{props.node?.place.name}</Text>
             </Wrap>
           </Stack>
-          <Wrap>
-            <Image
-              src={props.defaultImage}
-              rounded="md"
-              alt={props.place.name}
-            />
-          </Wrap>
         </Flex>
-
         <Wrap fontSize="sm" fontWeight="light" p="2">
           <Divider />
-          <Text>{props.description}</Text>
+          <Text>{props.node?.description}</Text>
         </Wrap>
       </Stack>
     </Box>
@@ -47,7 +52,11 @@ export const TravelogueExperiences = (props: Props) => {
       </Wrap>
       <Stack spacing="2">
         {props.experiences?.map((item: any) => (
-          <ExperienceCard key={item?.node?.id} {...item?.node} />
+          <ExperienceCard
+            key={item?.node?.id}
+            node={item?.node}
+            imageOnClick={props.imageOnClick}
+          />
         ))}
       </Stack>
     </Stack>

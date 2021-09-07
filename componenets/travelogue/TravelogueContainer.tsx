@@ -30,7 +30,7 @@ import { TraveloguePlaces } from '../../componenets/travelogue/TraveloguePlaces'
 import TravelogueAccessories from '../../componenets/travelogue/TravelogueAccessories';
 import { Transfers } from '../../componenets/travelogue/TravelogueTransfers';
 import TravelogueActivities from '../../componenets/travelogue/TravelogueActivities';
-import { TripDetailQuery } from '../../graphql/generated/types';
+import { TripDetailQuery, TripImageType } from '../../graphql/generated/types';
 import ApiLoading from '../ApiLoading';
 import TravelogueReview from './TravelogueReview';
 import useScrollReachedId from '../../hooks/useIsScrollReachedId';
@@ -39,6 +39,7 @@ import EmptyResult from '../EmptyResult';
 import { BiComment, BiCommentAdd } from 'react-icons/bi';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
 import AddReviewModal from '../Modals/AddReviewModal';
+import ImageGallery, { IImage } from '../ImageGallery';
 
 interface Props {
   data: TripDetailQuery;
@@ -50,6 +51,56 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
   const isSignedIn = useIsSignedIn();
   const toast = useToast();
   const addReviewModal = useDisclosure();
+
+  const lighBox = useDisclosure();
+
+  const [imageIdToShow, setImageIdToShow] = useState<string>('0');
+
+  const experiencesEdges = data.trip?.experiences?.edges.map(
+    (experience) => experience?.node?.images.edges
+  );
+
+  const experiencesImagesArray = experiencesEdges?.map(
+    (item) =>
+      item?.map(
+        (i) =>
+          ({
+            id: i?.node?.id,
+            description: i?.node?.description,
+            image: i?.node?.image,
+          } as IImage)
+      ) as IImage[]
+  ) as IImage[][];
+  const experiencesImages = experiencesImagesArray.flat();
+
+  const tripImages = [
+    {
+      id: '0',
+      image: data.trip?.defaultImage!,
+      description: data.trip?.description!,
+    },
+
+    ...(data.trip?.images.edges.map((item) => ({
+      id: item?.node?.id,
+      description: item?.node?.description!,
+      image: item?.node?.image!,
+    })) as IImage[]),
+  ];
+
+  const [images, setImages] = useState<IImage[]>([
+    ...tripImages,
+    ...experiencesImages,
+  ]);
+
+  // console.log(experiencesImages);
+  // console.log(images);
+
+  const showImage = (id: string) => {
+    //set imageToShow to be the one that's been clicked on
+    setImageIdToShow(id);
+    //set lightbox visibility to true
+    lighBox.onOpen();
+  };
 
   function handleAddReviewClick() {
     if (!isSignedIn) {
@@ -76,7 +127,8 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             <Stack pl={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
               {data?.trip?.images.edges.length != 0 && (
                 <TravelogueGallery
-                  images={data?.trip?.images.edges!}
+                  images={tripImages}
+                  imageOnClick={(id: string) => showImage(id)}
                   // videos={data?.trip?.videos.edges}
                 />
               )}
@@ -106,6 +158,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
                   <Divider />
                   <TravelogueExperiences
                     experiences={data?.trip?.experiences?.edges!}
+                    imageOnClick={(id: string) => showImage(id)}
                   />
                 </>
               )}
@@ -191,6 +244,13 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
           contentId={data?.trip?.id!}
         />
       </Wrap>
+
+      <ImageGallery
+        {...lighBox}
+        imageIdToShow={imageIdToShow}
+        images={images}
+        user={data.trip?.author}
+      />
 
       <Box h="5vh" />
     </>

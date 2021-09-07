@@ -313,7 +313,10 @@ const ProfileHeader = ({
             .then(uploadHeaderModal.onClose)
         }
       />
-      <ShareModal {...shareModal} url={isSelf ? `/profile/${data.id}` : null} />
+      <ShareModal
+        {...shareModal}
+        url={isSelf ? `/profile/${data.username}` : null}
+      />
     </>
   );
 };

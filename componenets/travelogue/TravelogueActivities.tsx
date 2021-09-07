@@ -15,7 +15,7 @@ interface Props {
         | Maybe<
             {
               __typename?: 'TripActivitieType' | undefined;
-            } & Pick<TripActivitieType, 'id' | 'title' | 'svg'>
+            } & Pick<TripActivitieType, 'id' | 'title' | 'titleFa' | 'svg'>
           >
         | undefined;
     }

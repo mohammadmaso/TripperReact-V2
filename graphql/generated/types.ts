@@ -1350,7 +1350,7 @@ export type ExperienceCollectionsType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   user: UserType;
-  experience: ExperienceImageType;
+  experience: ExperienceType;
 };
 
 export type ExperienceCollectionsTypeConnection = {
@@ -1374,72 +1374,24 @@ export type ExperienceImageType = Node & {
   __typename?: 'ExperienceImageType';
   /** The ID of the object. */
   id: Scalars['ID'];
-  title: Scalars['String'];
-  defaultImage: Scalars['String'];
+  image: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  published: Scalars['Boolean'];
-  author: UserType;
-  place: PlaceType;
-  activities: TripActivitieTypeConnection;
-  videos: ExperienceVideoTypeConnection;
-  tripmodelSet: TripTypeConnection;
-  usersSavedExperience: ExperienceCollectionsTypeConnection;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  copyrightName?: Maybe<Scalars['String']>;
+  user: UserType;
+  experiencemodelSet: ExperienceTypeConnection;
 };
 
 
-export type ExperienceImageTypeActivitiesArgs = {
+export type ExperienceImageTypeExperiencemodelSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-};
-
-
-export type ExperienceImageTypeVideosArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
-export type ExperienceImageTypeTripmodelSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  categories_Title_Iexact?: Maybe<Scalars['String']>;
-  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  cities_Name_Iexact?: Maybe<Scalars['String']>;
-  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  country_Name_Iexact?: Maybe<Scalars['String']>;
-  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  activities_Title_Iexact?: Maybe<Scalars['String']>;
-  published?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type ExperienceImageTypeUsersSavedExperienceArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  user?: Maybe<Scalars['ID']>;
-  experience?: Maybe<Scalars['ID']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type ExperienceImageTypeConnection = {
@@ -1486,6 +1438,7 @@ export type ExperienceType = Node & {
   author: UserType;
   place: PlaceType;
   activities: TripActivitieTypeConnection;
+  images: ExperienceImageTypeConnection;
   videos: ExperienceVideoTypeConnection;
   tripmodelSet: TripTypeConnection;
   usersSavedExperience: ExperienceCollectionsTypeConnection;
@@ -1499,6 +1452,15 @@ export type ExperienceTypeActivitiesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
+};
+
+
+export type ExperienceTypeImagesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1574,7 +1536,7 @@ export type ExperienceVideoType = Node & {
   longitude?: Maybe<Scalars['String']>;
   copyrightName?: Maybe<Scalars['String']>;
   user: UserType;
-  experiencemodelSet: ExperienceImageTypeConnection;
+  experiencemodelSet: ExperienceTypeConnection;
 };
 
 
@@ -1584,6 +1546,8 @@ export type ExperienceVideoTypeExperiencemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type ExperienceVideoTypeConnection = {
@@ -2472,7 +2436,7 @@ export type PlaceType = Node & {
   feelsOfPlace: PlaceFeelTypeConnection;
   articlesInPlace: ArticleTypeConnection;
   usersSavedPlace: PlaceCollectionsTypeConnection;
-  experiencesOfPlace: ExperienceImageTypeConnection;
+  experiencesOfPlace: ExperienceTypeConnection;
 };
 
 
@@ -2611,6 +2575,8 @@ export type PlaceTypeExperiencesOfPlaceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type PlaceTypeConnection = {
@@ -3259,8 +3225,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -3275,8 +3241,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -4192,7 +4158,7 @@ export type TripActivitieType = Node & {
   plansActivities: TripPlanTypeConnection;
   placeActivities: PlaceTypeConnection;
   articlesOfActivity: ArticleTypeConnection;
-  experiencemodelSet: ExperienceImageTypeConnection;
+  experiencemodelSet: ExperienceTypeConnection;
 };
 
 
@@ -4307,6 +4273,8 @@ export type TripActivitieTypeExperiencemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TripActivitieTypeConnection = {
@@ -4985,8 +4953,8 @@ export type TripTypeExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -5269,7 +5237,8 @@ export type UserNode = Node & {
   savedAccommodations: AccommodationCollectionsTypeConnection;
   savedDiscounts: DiscountCollectionsTypeConnection;
   experienceVideosOfUser: ExperienceVideoTypeConnection;
-  experiencesOfUser: ExperienceImageTypeConnection;
+  experienceImagesOfUser: ExperienceImageTypeConnection;
+  experiencesOfUser: ExperienceTypeConnection;
   notificationmodelSet: Array<NotificationType>;
   pk?: Maybe<Scalars['Int']>;
   secondaryEmail?: Maybe<Scalars['String']>;
@@ -5645,12 +5614,23 @@ export type UserNodeExperienceVideosOfUserArgs = {
 };
 
 
+export type UserNodeExperienceImagesOfUserArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type UserNodeExperiencesOfUserArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type UserRegisteredTourType = Node & {
@@ -5735,7 +5715,8 @@ export type UserType = Node & {
   savedAccommodations: AccommodationCollectionsTypeConnection;
   savedDiscounts: DiscountCollectionsTypeConnection;
   experienceVideosOfUser: ExperienceVideoTypeConnection;
-  experiencesOfUser: ExperienceImageTypeConnection;
+  experienceImagesOfUser: ExperienceImageTypeConnection;
+  experiencesOfUser: ExperienceTypeConnection;
   notificationmodelSet: Array<NotificationType>;
   /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars['Boolean'];
@@ -6111,12 +6092,23 @@ export type UserTypeExperienceVideosOfUserArgs = {
 };
 
 
+export type UserTypeExperienceImagesOfUserArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
 export type UserTypeExperiencesOfUserArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  place?: Maybe<Scalars['ID']>;
+  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type UserTypeConnection = {
@@ -6722,7 +6714,7 @@ export type AllActivitiesQuery = (
       { __typename?: 'TripActivitieTypeEdge' }
       & { node?: Maybe<(
         { __typename?: 'TripActivitieType' }
-        & Pick<TripActivitieType, 'svg' | 'title' | 'description'>
+        & Pick<TripActivitieType, 'svg' | 'title' | 'titleFa' | 'description'>
       )> }
     )>> }
   )> }
@@ -6757,7 +6749,7 @@ export type TripDetailQuery = (
         { __typename?: 'TripActivitieTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'TripActivitieType' }
-          & Pick<TripActivitieType, 'svg' | 'title' | 'id'>
+          & Pick<TripActivitieType, 'svg' | 'title' | 'titleFa' | 'id'>
         )> }
       )>> }
     ), accessories: (
@@ -6788,7 +6780,7 @@ export type TripDetailQuery = (
         { __typename?: 'TripImageTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'TripImageType' }
-          & Pick<TripImageType, 'image' | 'description' | 'copyrightName'>
+          & Pick<TripImageType, 'id' | 'image' | 'description' | 'copyrightName'>
         )> }
       )>> }
     ), reviewsOfTrip: (
@@ -6833,6 +6825,15 @@ export type TripDetailQuery = (
               & { node?: Maybe<(
                 { __typename?: 'TripActivitieType' }
                 & Pick<TripActivitieType, 'id' | 'title' | 'svg'>
+              )> }
+            )>> }
+          ), images: (
+            { __typename?: 'ExperienceImageTypeConnection' }
+            & { edges: Array<Maybe<(
+              { __typename?: 'ExperienceImageTypeEdge' }
+              & { node?: Maybe<(
+                { __typename?: 'ExperienceImageType' }
+                & Pick<ExperienceImageType, 'id' | 'latitude' | 'longitude' | 'description' | 'image' | 'copyrightName'>
               )> }
             )>> }
           ) }
@@ -8403,6 +8404,7 @@ export const AllActivitiesDocument = gql`
       node {
         svg
         title
+        titleFa
         description
       }
     }
@@ -8489,6 +8491,7 @@ export const TripDetailDocument = gql`
         node {
           svg
           title
+          titleFa
           id
         }
       }
@@ -8519,6 +8522,7 @@ export const TripDetailDocument = gql`
     images {
       edges {
         node {
+          id
           image
           description
           copyrightName
@@ -8577,6 +8581,18 @@ export const TripDetailDocument = gql`
                 id
                 title
                 svg
+              }
+            }
+          }
+          images {
+            edges {
+              node {
+                id
+                latitude
+                longitude
+                description
+                image
+                copyrightName
               }
             }
           }
