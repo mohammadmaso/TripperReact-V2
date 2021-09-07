@@ -4,6 +4,7 @@ import { FcGallery } from 'react-icons/fc';
 import { FiHome, FiImage } from 'react-icons/fi';
 import ImageGallery from 'react-image-gallery';
 import { Maybe, TripImageType } from '../../../graphql/generated/types';
+import AddButton from './AddButton';
 
 const images = [
   {
@@ -34,6 +35,7 @@ interface Props {
         | undefined;
     }
   >[];
+  onAddButtonClick: () => void;
 }
 
 export const EditTravelogueGallery = (props: Props) => {
@@ -48,7 +50,8 @@ export const EditTravelogueGallery = (props: Props) => {
       <Stack>
         <Wrap align="center">
           <FiImage />
-          <Text>گالری</Text>
+          <Text fontWeight="extrabold">گالری</Text>
+          <AddButton onClick={props.onAddButtonClick} />
         </Wrap>
         <ImageGallery isRTL items={images} />
       </Stack>

@@ -77,7 +77,7 @@ const TravelogueReview = (props: Props) => {
         <Stack>
           <Flex justify="space-between">
             <Box>
-              <Link href={`/profile/${props.author?.id}`} passHref>
+              <Link href={`/profile/${props.author?.username}`} passHref>
                 <Wrap align="center" cursor="pointer">
                   <Avatar src={props.author?.avatar} />
                   <Text>{props.author?.username}</Text>

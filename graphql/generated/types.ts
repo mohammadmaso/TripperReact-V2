@@ -103,7 +103,7 @@ export type AccessoryBrandTypeAccessorymodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -136,7 +136,7 @@ export type AccessoryCategoryType = Node & {
   id: Scalars['ID'];
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
-  image: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
   accessoriesInCategory: AccessoryTypeConnection;
 };
 
@@ -147,7 +147,7 @@ export type AccessoryCategoryTypeAccessoriesInCategoryArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -229,7 +229,8 @@ export type AccessoryReferenceyType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   site: AccessorySiteType;
-  link: Scalars['String'];
+  accessoryIdInSite?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['Float']>;
   accessoriesInRefrence: AccessoryTypeConnection;
 };
@@ -241,7 +242,7 @@ export type AccessoryReferenceyTypeAccessoriesInRefrenceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -305,6 +306,7 @@ export type AccessorySiteTypeAccessoriesSiteArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   site?: Maybe<Scalars['ID']>;
+  accessoryIdInSite?: Maybe<Scalars['String']>;
   link?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['Float']>;
 };
@@ -335,23 +337,13 @@ export type AccessoryType = Node & {
   imageLink?: Maybe<Scalars['String']>;
   likesCount: Scalars['Int'];
   brand?: Maybe<AccessoryBrandType>;
-  category: AccessoryCategoryTypeConnection;
+  category: AccessoryCategoryType;
   referenceLinks: AccessoryReferenceyTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansAccessories: TripPlanTypeConnection;
   likesOfAccessory: AccessoryLikeTypeConnection;
   articleWithAccessory: ArticleTypeConnection;
   usersSavedAccessory: AccessoryCollectionsTypeConnection;
-};
-
-
-export type AccessoryTypeCategoryArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -362,6 +354,7 @@ export type AccessoryTypeReferenceLinksArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   site?: Maybe<Scalars['ID']>;
+  accessoryIdInSite?: Maybe<Scalars['String']>;
   link?: Maybe<Scalars['String']>;
   score?: Maybe<Scalars['Float']>;
 };
@@ -692,7 +685,7 @@ export type ArticleTypeAccessoriesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -2192,6 +2185,7 @@ export type MutationUndoPublishTripArgs = {
 export type MutationUpdateTripArgs = {
   country?: Maybe<Scalars['ID']>;
   province?: Maybe<Scalars['ID']>;
+  removeTripRelatedData?: Maybe<TripRelatedInput>;
   tripData?: Maybe<UpdateTripInput>;
   tripId: Scalars['ID'];
   tripRelatedData?: Maybe<TripRelatedInput>;
@@ -2199,9 +2193,9 @@ export type MutationUpdateTripArgs = {
 
 
 export type MutationUpdateTripReviewArgs = {
-  description: Scalars['String'];
-  subject: Scalars['String'];
-  tripReviewId?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
+  subject?: Maybe<Scalars['String']>;
+  tripReviewId: Scalars['ID'];
 };
 
 
@@ -2223,6 +2217,16 @@ export type MutationDeleteTripImageArgs = {
 export type Node = {
   /** The ID of the object. */
   id: Scalars['ID'];
+};
+
+export type NotificationType = {
+  __typename?: 'NotificationType';
+  id: Scalars['ID'];
+  user?: Maybe<UserType>;
+  toAll: Scalars['Boolean'];
+  text: Scalars['String'];
+  dateTime: Scalars['DateTime'];
+  red: Scalars['Boolean'];
 };
 
 /**
@@ -2451,7 +2455,7 @@ export type PlaceType = Node & {
   defaultImage: Scalars['String'];
   facilities?: Maybe<Scalars['JSONString']>;
   openHours?: Maybe<Scalars['JSONString']>;
-  googlePlusCode?: Maybe<Scalars['String']>;
+  googleId?: Maybe<Scalars['String']>;
   feelsSum: Scalars['Int'];
   feelsCount: Scalars['Int'];
   feelAverage: Scalars['Int'];
@@ -2940,6 +2944,9 @@ export type PublishTripMutation = {
 export type Query = {
   __typename?: 'Query';
   /** The ID of the object */
+  notification?: Maybe<NotificationType>;
+  notificationsCount?: Maybe<Scalars['Int']>;
+  /** The ID of the object */
   transfer?: Maybe<TransferType>;
   allTransfer?: Maybe<TransferTypeConnection>;
   /** The ID of the object */
@@ -2952,7 +2959,6 @@ export type Query = {
   myTripPlans?: Maybe<TripPlanType>;
   allMyTripPlans?: Maybe<TripPlanTypeConnection>;
   me?: Maybe<UserType>;
-  /** The ID of the object */
   user?: Maybe<UserType>;
   allUsers?: Maybe<UserTypeConnection>;
   /** The ID of the object */
@@ -3043,6 +3049,11 @@ export type Query = {
 };
 
 
+export type QueryNotificationArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type QueryTransferArgs = {
   id: Scalars['ID'];
 };
@@ -3110,7 +3121,7 @@ export type QueryAllMyTripPlansArgs = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  username: Scalars['String'];
 };
 
 
@@ -3140,7 +3151,7 @@ export type QueryAllProfileArgs = {
 
 
 export type QueryFollowedUserArgs = {
-  id: Scalars['ID'];
+  username: Scalars['String'];
 };
 
 
@@ -3248,8 +3259,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3264,8 +3275,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3311,7 +3322,7 @@ export type QueryAllAccessoryArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -4650,7 +4661,7 @@ export type TripPlanTypeAccessoriesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -4962,7 +4973,7 @@ export type TripTypeAccessoriesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  category?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
 };
 
@@ -4974,8 +4985,8 @@ export type TripTypeExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -5259,6 +5270,7 @@ export type UserNode = Node & {
   savedDiscounts: DiscountCollectionsTypeConnection;
   experienceVideosOfUser: ExperienceVideoTypeConnection;
   experiencesOfUser: ExperienceImageTypeConnection;
+  notificationmodelSet: Array<NotificationType>;
   pk?: Maybe<Scalars['Int']>;
   secondaryEmail?: Maybe<Scalars['String']>;
 };
@@ -5724,6 +5736,7 @@ export type UserType = Node & {
   savedDiscounts: DiscountCollectionsTypeConnection;
   experienceVideosOfUser: ExperienceVideoTypeConnection;
   experiencesOfUser: ExperienceImageTypeConnection;
+  notificationmodelSet: Array<NotificationType>;
   /** Designates that this user has all permissions without explicitly assigning them. */
   isSuperuser: Scalars['Boolean'];
 };
@@ -6983,8 +6996,8 @@ export type MeDetailQuery = (
 );
 
 export type UserDetailQueryVariables = Exact<{
-  userId: Scalars['ID'];
-  followedUserId: Scalars['ID'];
+  username: Scalars['String'];
+  followedUsername: Scalars['String'];
 }>;
 
 
@@ -7011,7 +7024,7 @@ export type UserDetailQuery = (
 );
 
 export type IsFollowedQueryVariables = Exact<{
-  followedUserId: Scalars['ID'];
+  followedUsername: Scalars['String'];
 }>;
 
 
@@ -7021,7 +7034,7 @@ export type IsFollowedQuery = (
 );
 
 export type UserFollowingsQueryVariables = Exact<{
-  userId: Scalars['ID'];
+  username: Scalars['String'];
 }>;
 
 
@@ -7046,7 +7059,7 @@ export type UserFollowingsQuery = (
 );
 
 export type UserFollowersQueryVariables = Exact<{
-  userId: Scalars['ID'];
+  username: Scalars['String'];
 }>;
 
 
@@ -8918,8 +8931,8 @@ export type MeDetailQueryHookResult = ReturnType<typeof useMeDetailQuery>;
 export type MeDetailLazyQueryHookResult = ReturnType<typeof useMeDetailLazyQuery>;
 export type MeDetailQueryResult = Apollo.QueryResult<MeDetailQuery, MeDetailQueryVariables>;
 export const UserDetailDocument = gql`
-    query UserDetail($userId: ID!, $followedUserId: ID!) {
-  user(id: $userId) {
+    query UserDetail($username: String!, $followedUsername: String!) {
+  user(username: $username) {
     ...UserFields
     profilemodel {
       ...ProfileFields
@@ -8932,7 +8945,7 @@ export const UserDetailDocument = gql`
       }
     }
   }
-  followedUser(id: $followedUserId)
+  followedUser(username: $followedUsername)
 }
     ${UserFieldsFragmentDoc}
 ${ProfileFieldsFragmentDoc}
@@ -8950,8 +8963,8 @@ ${TripSimpleFieldsFragmentDoc}`;
  * @example
  * const { data, loading, error } = useUserDetailQuery({
  *   variables: {
- *      userId: // value for 'userId'
- *      followedUserId: // value for 'followedUserId'
+ *      username: // value for 'username'
+ *      followedUsername: // value for 'followedUsername'
  *   },
  * });
  */
@@ -8967,8 +8980,8 @@ export type UserDetailQueryHookResult = ReturnType<typeof useUserDetailQuery>;
 export type UserDetailLazyQueryHookResult = ReturnType<typeof useUserDetailLazyQuery>;
 export type UserDetailQueryResult = Apollo.QueryResult<UserDetailQuery, UserDetailQueryVariables>;
 export const IsFollowedDocument = gql`
-    query isFollowed($followedUserId: ID!) {
-  followedUser(id: $followedUserId)
+    query isFollowed($followedUsername: String!) {
+  followedUser(username: $followedUsername)
 }
     `;
 
@@ -8984,7 +8997,7 @@ export const IsFollowedDocument = gql`
  * @example
  * const { data, loading, error } = useIsFollowedQuery({
  *   variables: {
- *      followedUserId: // value for 'followedUserId'
+ *      followedUsername: // value for 'followedUsername'
  *   },
  * });
  */
@@ -9000,8 +9013,8 @@ export type IsFollowedQueryHookResult = ReturnType<typeof useIsFollowedQuery>;
 export type IsFollowedLazyQueryHookResult = ReturnType<typeof useIsFollowedLazyQuery>;
 export type IsFollowedQueryResult = Apollo.QueryResult<IsFollowedQuery, IsFollowedQueryVariables>;
 export const UserFollowingsDocument = gql`
-    query userFollowings($userId: ID!) {
-  user(id: $userId) {
+    query userFollowings($username: String!) {
+  user(username: $username) {
     followingUsers {
       edges {
         node {
@@ -9029,7 +9042,7 @@ export const UserFollowingsDocument = gql`
  * @example
  * const { data, loading, error } = useUserFollowingsQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      username: // value for 'username'
  *   },
  * });
  */
@@ -9045,8 +9058,8 @@ export type UserFollowingsQueryHookResult = ReturnType<typeof useUserFollowingsQ
 export type UserFollowingsLazyQueryHookResult = ReturnType<typeof useUserFollowingsLazyQuery>;
 export type UserFollowingsQueryResult = Apollo.QueryResult<UserFollowingsQuery, UserFollowingsQueryVariables>;
 export const UserFollowersDocument = gql`
-    query UserFollowers($userId: ID!) {
-  user(id: $userId) {
+    query UserFollowers($username: String!) {
+  user(username: $username) {
     followerUsers {
       edges {
         node {
@@ -9074,7 +9087,7 @@ export const UserFollowersDocument = gql`
  * @example
  * const { data, loading, error } = useUserFollowersQuery({
  *   variables: {
- *      userId: // value for 'userId'
+ *      username: // value for 'username'
  *   },
  * });
  */

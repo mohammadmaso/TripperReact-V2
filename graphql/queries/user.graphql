@@ -23,8 +23,8 @@ query MeDetail {
   }
 }
 
-query UserDetail($userId: ID!, $followedUserId: ID!) {
-  user(id: $userId) {
+query UserDetail($username: String!, $followedUsername: String!) {
+  user(username: $username) {
     ...UserFields
     profilemodel {
       ...ProfileFields
@@ -37,15 +37,15 @@ query UserDetail($userId: ID!, $followedUserId: ID!) {
       }
     }
   }
-  followedUser(id: $followedUserId)
+  followedUser(username: $followedUsername)
 }
 
-query isFollowed($followedUserId: ID!) {
-  followedUser(id: $followedUserId)
+query isFollowed($followedUsername: String!) {
+  followedUser(username: $followedUsername)
 }
 
-query userFollowings($userId: ID!) {
-  user(id: $userId) {
+query userFollowings($username: String!) {
+  user(username: $username) {
     followingUsers {
       edges {
         node {
@@ -60,8 +60,8 @@ query userFollowings($userId: ID!) {
   }
 }
 
-query UserFollowers($userId: ID!) {
-  user(id: $userId) {
+query UserFollowers($username: String!) {
+  user(username: $username) {
     followerUsers {
       edges {
         node {

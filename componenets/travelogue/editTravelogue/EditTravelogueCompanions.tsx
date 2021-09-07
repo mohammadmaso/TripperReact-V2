@@ -11,6 +11,7 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FiFeather, FiUsers } from 'react-icons/fi';
 import { UserType } from '../../../graphql/generated/types';
+import AddButton from './AddButton';
 
 interface Props {
   companions: Maybe<
@@ -26,6 +27,7 @@ interface Props {
         | undefined;
     }
   >[];
+  onAddButtonClick: () => void;
 }
 
 function CompanionCard(props: any) {
@@ -52,7 +54,8 @@ const EditTravelogueCompanions = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiUsers />
-        <Text>همراهان</Text>
+        <Text fontWeight="extrabold">همراهان</Text>
+        <AddButton onClick={props.onAddButtonClick} />
       </Wrap>
       <Wrap>
         {props.companions.map((item) => (

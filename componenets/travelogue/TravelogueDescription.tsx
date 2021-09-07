@@ -12,7 +12,7 @@ export function TravelogueDescription(props: Props) {
     <Stack>
       <Wrap align="center">
         <FiFeather />
-        <Text>خلاصه سفر</Text>
+        <Text fontWeight="extrabold">خلاصه سفر</Text>
       </Wrap>
       <Wrap>
         <Text fontSize="sm" lineHeight="7" whiteSpace="pre-line">

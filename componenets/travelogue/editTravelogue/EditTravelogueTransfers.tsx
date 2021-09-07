@@ -12,7 +12,10 @@ import { BiSquareRounded, BiTransfer } from 'react-icons/bi';
 import { FaCampground } from 'react-icons/fa';
 import { FiArrowLeft, FiHome } from 'react-icons/fi';
 import { MdFlightTakeoff, MdPlace } from 'react-icons/md';
-
+import AddButton from './AddButton';
+interface Props {
+  onAddButtonClick: () => void;
+}
 function TravelogueTransferCard() {
   return (
     <Flex
@@ -39,17 +42,20 @@ function TravelogueTransferCard() {
   );
 }
 
-export function EditTransfers() {
+export default function EditTravelogueTransfers(props: Props) {
   return (
-    <Stack>
-      <Wrap align="center">
-        <BiTransfer />
-        <Text>رفت و آمد</Text>
-      </Wrap>
-      <Wrap>
-        <TravelogueTransferCard />
-        <TravelogueTransferCard />
-      </Wrap>
-    </Stack>
+    <>
+      <Stack>
+        <Wrap align="center">
+          <BiTransfer />
+          <Text fontWeight="extrabold">رفت و آمد</Text>
+          <AddButton onClick={props.onAddButtonClick} />
+        </Wrap>
+        <Wrap>
+          <TravelogueTransferCard />
+          <TravelogueTransferCard />
+        </Wrap>
+      </Stack>
+    </>
   );
 }

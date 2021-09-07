@@ -28,7 +28,7 @@ import EditTravelogueCompanions from './EditTravelogueCompanions';
 import { EditTravelogueExperiences } from './EditTravelogueExperiences';
 import { EditTraveloguePlaces } from './EditTraveloguePlaces';
 import EditTravelogueAccessories from './EditTravelogueAccessories';
-import { EditTransfers } from './EditTravelogueTransfers';
+import EditTravelogueTransfers from './EditTravelogueTransfers';
 import EditTravelogueActivities from './EditTravelogueActivities';
 import { TripDetailQuery } from '../../../graphql/generated/types';
 import ApiLoading from '../../ApiLoading';
@@ -68,40 +68,25 @@ export default function EditTravelogueContainer({
               <Divider />
               <EditTravelogueAccomodations />
               <Divider />
-              <EditTransfers />
+              <EditTravelogueTransfers />
 
-              {data?.trip?.places.edges.length != 0 && (
-                <>
-                  <Divider />
-                  <EditTraveloguePlaces places={data?.trip?.places.edges} />
-                </>
-              )}
-              {data?.trip?.description && (
-                <>
-                  <Divider />
-                  <EditTravelogueDescription
-                    description={data?.trip?.description}
-                  />
-                </>
-              )}
+              <Divider />
+              <EditTraveloguePlaces places={data?.trip?.places.edges} />
 
-              {data?.trip?.experiences?.edges.length != 0 && (
-                <>
-                  <Divider />
-                  <EditTravelogueExperiences
-                    experiences={data?.trip?.experiences?.edges!}
-                  />
-                </>
-              )}
+              <Divider />
+              <EditTravelogueDescription
+                description={data?.trip?.description as string}
+              />
 
-              {data?.trip?.companions.edges.length != 0 && (
-                <>
-                  <Divider />
-                  <EditTravelogueCompanions
-                    companions={data?.trip?.companions.edges!}
-                  />
-                </>
-              )}
+              <Divider />
+              <EditTravelogueExperiences
+                experiences={data?.trip?.experiences?.edges!}
+              />
+
+              <Divider />
+              <EditTravelogueCompanions
+                companions={data?.trip?.companions.edges!}
+              />
             </Stack>
           </Wrap>
 
@@ -109,23 +94,15 @@ export default function EditTravelogueContainer({
             <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
               <EditTravelogueMap />
 
-              {data?.trip?.activities.edges.length != 0 && (
-                <>
-                  <Divider />
-                  <EditTravelogueActivities
-                    activities={data?.trip?.activities.edges!}
-                  />
-                </>
-              )}
+              <Divider />
+              <EditTravelogueActivities
+                activities={data?.trip?.activities.edges!}
+              />
 
-              {data?.trip?.accessories.edges.length != 0 && (
-                <>
-                  <Divider />
-                  <EditTravelogueAccessories
-                    accessories={data?.trip?.accessories.edges}
-                  />
-                </>
-              )}
+              <Divider />
+              <EditTravelogueAccessories
+                accessories={data?.trip?.accessories.edges}
+              />
             </Stack>
           </Wrap>
         </Flex>

@@ -5,6 +5,7 @@ import { FiActivity } from 'react-icons/fi';
 import { IoCloudyNight } from 'react-icons/io5';
 import { TripActivitieType } from '../../../graphql/generated/types';
 import { ActivityCard } from '../../cards/ActivityCard';
+import AddButton from './AddButton';
 
 interface Props {
   activities: Maybe<
@@ -20,6 +21,7 @@ interface Props {
         | undefined;
     }
   >[];
+  onAddButtonClick: () => void;
 }
 
 const EditTravelogueActivities = (props: Props) => {
@@ -27,7 +29,8 @@ const EditTravelogueActivities = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiActivity />
-        <Text>فعالیت‌ها</Text>
+        <Text fontWeight="extrabold">فعالیت‌ها</Text>
+        <AddButton onClick={props.onAddButtonClick} />
       </Wrap>
       <Wrap>
         {props.activities?.map((item) => (

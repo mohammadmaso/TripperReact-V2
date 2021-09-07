@@ -43,7 +43,7 @@ export const TravelogueExperiences = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiEye />
-        <Text>تجربه‌ها</Text>
+        <Text fontWeight="extrabold">تجربه‌ها</Text>
       </Wrap>
       <Stack spacing="2">
         {props.experiences?.map((item: any) => (

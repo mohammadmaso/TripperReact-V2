@@ -80,7 +80,7 @@ export function TraveloguePlaces(props: Props) {
     <Stack>
       <Wrap align="center">
         <MdPlace />
-        <Text>جاذبه‌ها</Text>
+        <Text fontWeight="extrabold">جاذبه‌ها</Text>
       </Wrap>
       <SimpleGrid columns={{ base: 2, sm: 3, md: 4 }} spacing={2}>
         {props.places?.map((item) => (

@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter();
   return (
     <BaseLayout>
-      <ProfileDetailView id={router.query.id! as string} />
+      <ProfileDetailView username={router.query.username! as string} />
     </BaseLayout>
   );
 }

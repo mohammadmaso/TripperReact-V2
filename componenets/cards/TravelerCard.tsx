@@ -19,7 +19,7 @@ import { UserType } from '../../graphql/generated/types';
 
 export default function TravelerCard(props: UserType) {
   return (
-    <Link href={`/profile/${props.id}`} passHref>
+    <Link href={`/profile/${props.username}`} passHref>
       <Center py={6} cursor="pointer">
         <Stack
           maxW={'270px'}

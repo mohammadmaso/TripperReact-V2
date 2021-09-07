@@ -44,7 +44,7 @@ export function Transfers() {
     <Stack>
       <Wrap align="center">
         <BiTransfer />
-        <Text>رفت و آمد</Text>
+        <Text fontWeight="extrabold">رفت و آمد</Text>
       </Wrap>
       <Wrap>
         <TravelogueTransferCard />

@@ -15,7 +15,7 @@ interface Props {}
 const UserSimpleListCard = (props: any) => {
   return (
     <div>
-      <Link href={`/profile/${props.id}`} passHref>
+      <Link href={`/profile/${props.username}`} passHref>
         <>
           <Box rounded="md" p="2" cursor="pointer">
             <Flex justify="space-between">

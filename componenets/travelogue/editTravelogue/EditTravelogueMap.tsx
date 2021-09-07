@@ -13,7 +13,7 @@ export function EditTravelogueMap(props: any) {
     <Stack>
       <Wrap align="center">
         <FiMap />
-        <Text>نقشه سفر</Text>
+        <Text fontWeight="extrabold">نقشه سفر</Text>
       </Wrap>
       <Box position="relative">
         <Center

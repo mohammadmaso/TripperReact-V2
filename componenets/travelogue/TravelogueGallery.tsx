@@ -48,7 +48,7 @@ export const TravelogueGallery = (props: Props) => {
       <Stack>
         <Wrap align="center">
           <FiImage />
-          <Text>گالری</Text>
+          <Text fontWeight="extrabold">گالری</Text>
         </Wrap>
         <ImageGallery isRTL items={images} />
       </Stack>

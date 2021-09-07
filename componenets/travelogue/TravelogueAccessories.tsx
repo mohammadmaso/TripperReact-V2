@@ -23,7 +23,7 @@ const TravelogueAccessories = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiShoppingBag />
-        <Text>تجهیزات</Text>
+        <Text fontWeight="extrabold">تجهیزات</Text>
       </Wrap>
       <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }} spacing="5">
         {props.accessories.map((item: any) => (

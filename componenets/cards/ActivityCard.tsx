@@ -1,4 +1,11 @@
-import { Center, Stack, Text, Image } from '@chakra-ui/react';
+import {
+  Center,
+  Stack,
+  Text,
+  Image,
+  Img,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { FaFire } from 'react-icons/fa';
 interface Props {
@@ -16,13 +23,17 @@ export function ActivityCard(props: Props) {
       _hover={{ transform: 'scale(1.1,1.1)' }}
       transition={'all .3s ease'}
     >
-      <Stack align="center" justify="center" textAlign={'center'}>
-        <Image
+      <Stack align="center" justify="space-between" textAlign={'center'}>
+        <Img
           w={'4rem'}
           h={'4rem'}
           src={props.svg}
           objectFit="scale-down"
           alt={props.title}
+          filter={useColorModeValue(
+            '',
+            'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
+          )}
         />
         <Text fontSize="xs">{props.title}</Text>
       </Stack>

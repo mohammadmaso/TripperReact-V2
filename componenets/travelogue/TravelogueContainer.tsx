@@ -149,7 +149,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
         <Stack className="reviews">
           <Wrap align="center">
             <BiComment />
-            <Text fontWeight="bold">نقد و بررسی‌ها</Text>
+            <Text fontWeight="extrabold">نقد و بررسی‌ها</Text>
             <Button size="sm" onClick={actions.getReviews}>
               مشاهده
             </Button>

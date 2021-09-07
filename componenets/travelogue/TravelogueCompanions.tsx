@@ -52,7 +52,7 @@ const TravelogueCompanions = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiUsers />
-        <Text>همراهان</Text>
+        <Text fontWeight="extrabold">همراهان</Text>
       </Wrap>
       <Wrap>
         {props.companions.map((item) => (

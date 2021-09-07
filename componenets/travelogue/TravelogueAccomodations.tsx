@@ -15,7 +15,7 @@ export function TravelogueAccomodations() {
     <Stack>
       <Wrap align="center">
         <FiHome />
-        <Text>اقامتگاه‌ها</Text>
+        <Text fontWeight="extrabold">اقامتگاه‌ها</Text>
       </Wrap>
       <Wrap>
         <Flex

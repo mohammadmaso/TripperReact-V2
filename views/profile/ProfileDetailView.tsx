@@ -21,19 +21,19 @@ import ProfileContainer from '../../componenets/profile/ProfileContainer';
 import { object } from 'yup/lib/locale';
 
 interface Props {
-  id: string;
+  username: string;
 }
 
 const ProfileDetailView = (props: Props) => {
   const { data, loading, error } = useUserDetailQuery({
-    variables: { userId: props.id, followedUserId: props.id },
+    variables: { username: props.username, followedUsername: props.username },
   });
   const [getFollowings, followingsQuery] = useUserFollowingsLazyQuery({
-    variables: { userId: props.id },
+    variables: { username: props.username },
     fetchPolicy: 'no-cache',
   });
   const [getFollowers, followersQuery] = useUserFollowersLazyQuery({
-    variables: { userId: props.id },
+    variables: { username: props.username },
     fetchPolicy: 'no-cache',
   });
 
@@ -41,7 +41,7 @@ const ProfileDetailView = (props: Props) => {
     useFollowOrUnfollowMutation({
       variables: {
         followOrUnfollowInput: {
-          followedId: props.id,
+          followedId: data?.user?.id!,
         },
       },
       // refetchQueries: [namedOperations.Query.UserDetail],

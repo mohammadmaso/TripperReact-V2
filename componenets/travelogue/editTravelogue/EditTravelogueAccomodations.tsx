@@ -8,14 +8,18 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { FaCampground } from 'react-icons/fa';
-import { FiHome } from 'react-icons/fi';
-
-export function EditTravelogueAccomodations() {
+import { FiHome, FiPlusCircle } from 'react-icons/fi';
+import AddButton from './AddButton';
+interface Props {
+  onAddButtonClick: () => void;
+}
+export function EditTravelogueAccomodations(props: Props) {
   return (
     <Stack>
       <Wrap align="center">
         <FiHome />
-        <Text>اقامتگاه‌ها</Text>
+        <Text fontWeight="extrabold">اقامتگاه‌ها</Text>
+        <AddButton onClick={props.onAddButtonClick} />
       </Wrap>
       <Wrap>
         <Flex

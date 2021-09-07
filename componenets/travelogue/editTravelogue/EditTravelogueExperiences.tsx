@@ -3,9 +3,11 @@ import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FiEye, FiUsers } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
+import AddButton from './AddButton';
 
 interface Props {
   experiences: any;
+  onAddButtonClick: () => void;
 }
 
 function ExperienceCard(props: any) {
@@ -43,7 +45,8 @@ export const EditTravelogueExperiences = (props: Props) => {
     <Stack>
       <Wrap align="center">
         <FiEye />
-        <Text>تجربه‌ها</Text>
+        <Text fontWeight="extrabold">تجربه‌ها</Text>
+        <AddButton onClick={props.onAddButtonClick} />
       </Wrap>
       <Stack spacing="2">
         {props.experiences?.map((item: any) => (
