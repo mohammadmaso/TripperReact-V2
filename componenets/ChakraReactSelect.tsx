@@ -48,6 +48,10 @@ const chakraStyles = {
     ...provided,
     boxShadow: 'none',
   }),
+  singleValue: (provided: any) => ({
+    ...provided,
+    color: useColorModeValue('black', 'white'),
+  }),
   valueContainer: (provided: any, { selectProps: { size } }: any) => {
     const px: any = {
       sm: '0.75rem',
@@ -262,7 +266,7 @@ const chakraComponents = {
           w: '100%',
           textAlign: 'right',
           bg: isFocused ? item._focus.bg : 'transparent',
-          fontSize: size,
+          fontSize: 'sm',
           ...(isDisabled && item._disabled),
         }}
         ref={innerRef}
@@ -304,6 +308,10 @@ const ChakraReactSelect = ({
   // The chakra UI global placeholder color
   // https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/styles.ts#L13
   const placeholderColor = useColorModeValue(
+    chakraTheme.colors.gray[400],
+    chakraTheme.colors.whiteAlpha[400]
+  );
+  const selectedTextColor = useColorModeValue(
     chakraTheme.colors.gray[400],
     chakraTheme.colors.whiteAlpha[400]
   );
