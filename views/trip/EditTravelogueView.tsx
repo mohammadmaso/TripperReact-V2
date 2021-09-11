@@ -7,14 +7,22 @@ import ApiLoading from '../../componenets/ApiLoading';
 import EditTravelogueContainer from '../../componenets/travelogue/editTravelogue/EditTravelogueContainer';
 import { EditTravelogueHeader } from '../../componenets/travelogue/editTravelogue/EditTravelogueHeader';
 import {
+  CreateSinglTransferMutationVariables,
   namedOperations,
   TripDetailQuery,
   UpdateTripMutationVariables,
+  useAllActivitiesLazyQuery,
+  useAllCitiesOfProvinceLazyQuery,
   useAllCountriesQuery,
   useAllProvincesOfCountryLazyQuery,
+  useAllTransferTypesLazyQuery,
   useAllTripCategoriesQuery,
+  useCreateSinglTransferMutation,
+  useDeleteSingleTransferMutation,
   useDeleteTripMutation,
   usePublisTripMutation,
+  useSearchAccessoryLazyQuery,
+  useSearchUsernameLazyQuery,
   useTripDetailQuery,
   useUnPublisTripMutation,
   useUpdateTripMutation,
@@ -32,7 +40,7 @@ const EditTravelogueView = ({ id }: Props) => {
   const { data, loading, error } = useTripDetailQuery({
     variables: { tripId: id },
   });
-
+  const [getAllActivitites, allActivititesQuery] = useAllActivitiesLazyQuery();
   const [updateTrip, updateTripStatus] = useUpdateTripMutation({
     refetchQueries: [namedOperations.Query.TripDetail],
     onCompleted: (data) => {
@@ -98,6 +106,35 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
+  const [createTransfer, createTransferStatus] = useCreateSinglTransferMutation(
+    {
+      onCompleted: (data) => {
+        toast({
+          title: 'حمل و  نقل با موفقیت ساخته شد.',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      },
+    }
+  );
+
+  const [deleteTransfer, deleteTransferStatus] =
+    useDeleteSingleTransferMutation({
+      onCompleted: (data) => {
+        if (data.deleteTransfer?.success == true) {
+          toast({
+            title: 'حمل و نثل با موفقیت حذف شد.',
+            status: 'success',
+            duration: 8000,
+            isClosable: true,
+            position: 'top-right',
+          });
+        }
+      },
+    });
+
   const [deleteTrip, deleteTripStatus] = useDeleteTripMutation({
     variables: { deleteTripTripId: id },
     refetchQueries: [namedOperations.Query.MeDetail],
@@ -127,6 +164,17 @@ const EditTravelogueView = ({ id }: Props) => {
   const [getProvincesOfCountry, provincesOfCountryQuery] =
     useAllProvincesOfCountryLazyQuery();
 
+  const [getCitiesOfProvince, citiesOfProvinceQuery] =
+    useAllCitiesOfProvinceLazyQuery();
+
+  const [searchUsername, searchUsernameQuery] = useSearchUsernameLazyQuery({
+    variables: { first: 10 },
+  });
+  const [searchAccessory, searchAccessoryQuery] = useSearchAccessoryLazyQuery({
+    variables: { first: 10 },
+  });
+
+  const [getTransferTypes, transferTypesQuery] = useAllTransferTypesLazyQuery();
   const categoriesQuery = useAllTripCategoriesQuery();
 
   if (loading) {
@@ -176,7 +224,50 @@ const EditTravelogueView = ({ id }: Props) => {
           updateTripStatus,
         }}
       />
-      <EditTravelogueContainer data={data as TripDetailQuery} />
+      <EditTravelogueContainer
+        data={data as TripDetailQuery}
+        actions={{
+          deleteTrip: () => deleteTrip(),
+          publishTrip: () => publishTrip(),
+          unPublishTrip: () => unPublishTrip(),
+          searchUsername: (username: string) =>
+            searchUsername({ variables: { username: username } }),
+          searchAccessory: (id: string, name: string) =>
+            searchAccessory({ variables: { id: id, name: name } }),
+          updateTrip: (inputs: UpdateTripMutationVariables) =>
+            updateTrip({ variables: { ...inputs } }),
+          getAllActivitites: () => getAllActivitites(),
+          getProvincesOfCountry: (countryId: string) =>
+            getProvincesOfCountry({
+              variables: { allProvincesCountry: countryId },
+            }),
+          getCitiesOfProvince: (provinceId: string) =>
+            getCitiesOfProvince({
+              variables: { province: provinceId },
+            }),
+          createTransfer: (inputs: CreateSinglTransferMutationVariables) =>
+            createTransfer({ variables: { ...inputs } }),
+          deleteTransfer: (id: string) =>
+            deleteTransfer({ variables: { id: id } }),
+          getTransferTypes: () => getTransferTypes(),
+        }}
+        queries={{
+          deleteTripStatus,
+          unPublishTripStatus,
+          publishTripStatus,
+          countriesQuery,
+          provincesOfCountryQuery,
+          categoriesQuery,
+          updateTripStatus,
+          searchUsernameQuery,
+          searchAccessoryQuery,
+          allActivititesQuery,
+          deleteTransferStatus,
+          createTransferStatus,
+          citiesOfProvinceQuery,
+          transferTypesQuery,
+        }}
+      />
     </>
   );
 };
