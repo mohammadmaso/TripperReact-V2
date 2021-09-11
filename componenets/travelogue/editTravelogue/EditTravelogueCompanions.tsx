@@ -1,3 +1,4 @@
+import { CloseIcon } from '@chakra-ui/icons';
 import {
   Stack,
   Wrap,
@@ -5,13 +6,22 @@ import {
   Avatar,
   HStack,
   Flex,
+  Icon,
   useColorModeValue,
+  IconButton,
 } from '@chakra-ui/react';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
-import { FiFeather, FiUsers } from 'react-icons/fi';
+import {
+  FiDelete,
+  FiFeather,
+  FiTrash,
+  FiTrash2,
+  FiUsers,
+} from 'react-icons/fi';
+import { IoClose } from 'react-icons/io5';
 import { UserType } from '../../../graphql/generated/types';
-import AddButton from './AddButton';
+import AddEditButton from './AddEditButton';
 
 interface Props {
   companions: Maybe<
@@ -28,6 +38,7 @@ interface Props {
     }
   >[];
   onAddButtonClick: () => void;
+  onDeleteClick: any;
 }
 
 function CompanionCard(props: any) {
@@ -45,6 +56,14 @@ function CompanionCard(props: any) {
       <Text fontWeight={300} fontSize="sm" dir="ltr">
         {props.username}
       </Text>
+      <IconButton
+        aria-label="حذف"
+        rounded="full"
+        variant="ghost"
+        colorScheme="red"
+        icon={<IoClose />}
+        onClick={() => props.onDeleteClick(props.id)}
+      />
     </HStack>
   );
 }
@@ -55,11 +74,15 @@ const EditTravelogueCompanions = (props: Props) => {
       <Wrap align="center">
         <FiUsers />
         <Text fontWeight="extrabold">همراهان</Text>
-        <AddButton onClick={props.onAddButtonClick} />
+        <AddEditButton onClick={props.onAddButtonClick} mode="add" />
       </Wrap>
       <Wrap>
         {props.companions.map((item) => (
-          <CompanionCard key={item?.node?.id} {...item?.node} />
+          <CompanionCard
+            key={item?.node?.id}
+            {...item?.node}
+            onDeleteClick={props.onDeleteClick}
+          />
         ))}
       </Wrap>
     </Stack>

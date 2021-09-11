@@ -18,9 +18,17 @@ function AccessoryCard(props: any) {
           />
         </Flex>
 
-        <Image fit="contain" w="full" src={props.image} alt="accessories" />
+        <Image fit="contain" w="full" src={props.imageLink} alt="accessories" />
         <Text px="3">{props.name}</Text>
-        <Button>خرید در دیجیکالا</Button>
+        <Button
+          size="sm"
+          fontWeight="light"
+          variant="outline"
+          colorScheme="red"
+          leftIcon={<FiShoppingBag />}
+        >
+          خرید در دیجیکالا
+        </Button>
       </Stack>
     </Box>
   );

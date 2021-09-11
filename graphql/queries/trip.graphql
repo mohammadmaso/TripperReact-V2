@@ -133,6 +133,7 @@ query AllActivities {
   allActivities {
     edges {
       node {
+        id
         svg
         title
         titleFa
@@ -180,6 +181,7 @@ query TripDetail($tripId: ID!) {
             name
           }
           image
+          imageLink
           name
         }
       }
@@ -204,22 +206,6 @@ query TripDetail($tripId: ID!) {
       }
     }
 
-    reviewsOfTrip {
-      edges {
-        node {
-          author {
-            id
-            username
-            avatar
-          }
-          likesCount
-          dislikesCount
-          description
-          createdAt
-          id
-        }
-      }
-    }
     videos {
       edges {
         node {
@@ -256,6 +242,7 @@ query TripDetail($tripId: ID!) {
               node {
                 id
                 title
+                titleFa
                 svg
               }
             }
@@ -282,6 +269,32 @@ query TripDetail($tripId: ID!) {
           name
           longitude
           latitude
+        }
+      }
+    }
+    transfers {
+      edges {
+        node {
+          id
+          duration
+          startTime
+          src {
+            name
+            latitude
+            longitude
+            id
+          }
+          destination {
+            name
+            latitude
+            longitude
+            id
+          }
+          transferType {
+            id
+            title
+            svg
+          }
         }
       }
     }
@@ -350,8 +363,8 @@ query AllProvincesOfCountry($allProvincesCountry: ID) {
   }
 }
 
-query AllCitiesOfCountry($allCitiesProvince: ID) {
-  allCities(province: $allCitiesProvince) {
+query AllCitiesOfProvince($province: ID!) {
+  allCities(province: $province) {
     edges {
       node {
         id

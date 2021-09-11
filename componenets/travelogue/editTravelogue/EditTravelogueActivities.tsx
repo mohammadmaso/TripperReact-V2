@@ -5,22 +5,24 @@ import { FiActivity } from 'react-icons/fi';
 import { IoCloudyNight } from 'react-icons/io5';
 import { TripActivitieType } from '../../../graphql/generated/types';
 import { ActivityCard } from '../../cards/ActivityCard';
-import AddButton from './AddButton';
+import AddEditButton from './AddEditButton';
 
 interface Props {
-  activities: Maybe<
-    {
-      __typename?: 'TripActivitieTypeEdge' | undefined;
-    } & {
-      node?:
-        | Maybe<
-            {
-              __typename?: 'TripActivitieType' | undefined;
-            } & Pick<TripActivitieType, 'id' | 'title' | 'svg'>
-          >
-        | undefined;
-    }
-  >[];
+  activities:
+    | Maybe<
+        {
+          __typename?: 'TripActivitieTypeEdge' | undefined;
+        } & {
+          node?:
+            | Maybe<
+                {
+                  __typename?: 'TripActivitieType' | undefined;
+                } & Pick<TripActivitieType, 'id' | 'title' | 'svg' | 'titleFa'>
+              >
+            | undefined;
+        }
+      >[]
+    | undefined;
   onAddButtonClick: () => void;
 }
 
@@ -30,14 +32,14 @@ const EditTravelogueActivities = (props: Props) => {
       <Wrap align="center">
         <FiActivity />
         <Text fontWeight="extrabold">فعالیت‌ها</Text>
-        <AddButton onClick={props.onAddButtonClick} />
+        <AddEditButton onClick={props.onAddButtonClick} mode="edit" />
       </Wrap>
       <Wrap>
         {props.activities?.map((item) => (
           <ActivityCard
             key={item?.node?.id as string}
             svg={item?.node?.svg as string}
-            title={item?.node?.title as string}
+            title={item?.node?.titleFa as string}
             id={item?.node?.id as string}
           />
         ))}

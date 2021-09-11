@@ -16,6 +16,6 @@ generates:
   graphql/graphql.schema.json:
     plugins:
       - 'introspection'
-  graphql/fragment-matcher.ts:
-    plugins:
-      - fragment-matcher
+  # graphql/fragment-matcher.ts:
+  #   plugins:
+  #     - fragment-matcher

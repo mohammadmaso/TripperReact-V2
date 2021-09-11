@@ -51,6 +51,7 @@ const TripView = ({ id }: Props) => {
 
   const [getReviews, reviewsLazyQuery] = useTripReviewsLazyQuery({
     variables: { tripId: id },
+    fetchPolicy: 'no-cache',
   });
 
   // const reviewsLazyQuery = useTripReviewsQuery({

@@ -14,7 +14,7 @@ import { FaCampground } from 'react-icons/fa';
 import { FiBell, FiHome } from 'react-icons/fi';
 import { MdPlace } from 'react-icons/md';
 import { PlaceType } from '../../../graphql/generated/types';
-import AddButton from './AddButton';
+import AddEditButton from './AddEditButton';
 
 interface Props {
   places:
@@ -83,7 +83,7 @@ export function EditTraveloguePlaces(props: Props) {
       <Wrap align="center">
         <MdPlace />
         <Text fontWeight="extrabold">جاذبه‌ها</Text>
-        <AddButton onClick={props.onAddButtonClick} />
+        <AddEditButton onClick={props.onAddButtonClick} mode="edit" />
       </Wrap>
       <SimpleGrid columns={{ base: 2, sm: 3, md: 4 }} spacing={2}>
         {props.places?.map((item) => (

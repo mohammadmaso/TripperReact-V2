@@ -8,10 +8,14 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { FaFire } from 'react-icons/fa';
+import { TripActivitieType } from '../../graphql/generated/types';
 interface Props {
   id: string;
   title: string;
   svg: string;
+  size?: number;
+  isSelected?: boolean;
+  onToggle?: (activity: TripActivitieType | string) => void;
 }
 
 export function ActivityCard(props: Props) {
@@ -22,14 +26,28 @@ export function ActivityCard(props: Props) {
       // shadow="sm"
       _hover={{ transform: 'scale(1.1,1.1)' }}
       transition={'all .3s ease'}
+      borderWidth={props.isSelected ? 'medium' : '0'}
+      borderColor="green.400"
+      borderRadius="md"
     >
       <Stack align="center" justify="space-between" textAlign={'center'}>
         <Img
-          w={'4rem'}
-          h={'4rem'}
+          w={props.size ? `${props.size}rem` : '4rem'}
+          h={props.size ? `${props.size}rem` : '4rem'}
           src={props.svg}
           objectFit="scale-down"
           alt={props.title}
+          onClick={() => {
+            props.onToggle
+              ? props.isSelected
+                ? props.onToggle(props.id as string)
+                : props.onToggle({
+                    id: props.id,
+                    svg: props.svg,
+                    titleFa: props.title,
+                  } as TripActivitieType)
+              : null;
+          }}
           filter={useColorModeValue(
             '',
             'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'

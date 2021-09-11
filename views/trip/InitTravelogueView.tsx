@@ -30,7 +30,7 @@ const InitTravelogueView = (props: Props) => {
             isClosable: true,
             position: 'top-right',
           });
-          router.push('/travelogues/new/detail');
+          router.push(`/travelogues/edit/${data.createTrip.trip?.id}`);
         }
       },
     });

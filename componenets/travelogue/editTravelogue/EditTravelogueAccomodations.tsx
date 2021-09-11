@@ -9,7 +9,7 @@ import {
 import React from 'react';
 import { FaCampground } from 'react-icons/fa';
 import { FiHome, FiPlusCircle } from 'react-icons/fi';
-import AddButton from './AddButton';
+import AddEditButton from './AddEditButton';
 interface Props {
   onAddButtonClick: () => void;
 }
@@ -19,7 +19,7 @@ export function EditTravelogueAccomodations(props: Props) {
       <Wrap align="center">
         <FiHome />
         <Text fontWeight="extrabold">اقامتگاه‌ها</Text>
-        <AddButton onClick={props.onAddButtonClick} />
+        <AddEditButton onClick={props.onAddButtonClick} mode="add" />
       </Wrap>
       <Wrap>
         <Flex

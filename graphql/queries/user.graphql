@@ -3,7 +3,6 @@ query Me {
     id
     username
     avatar
-    verified
   }
 }
 
@@ -168,9 +167,7 @@ fragment UserFields on UserType {
   id
   username
   avatar
-  verified
   email
-  phoneNumber
   dateJoined
   # firstName
   # lastName
@@ -207,6 +204,18 @@ mutation UnPublisTrip($tripId: ID!) {
     errors
     trip {
       published
+    }
+  }
+}
+
+query SearchUsername($username: String, $first: Int) {
+  allUsers(username_Icontains: $username, first: $first) {
+    edges {
+      node {
+        username
+        id
+        avatar
+      }
     }
   }
 }

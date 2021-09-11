@@ -16,7 +16,6 @@ mutation UpdateUser($updateUserInput: UpdateUserInput!) {
     user {
       avatar
       username
-      phoneNumber
       id
     }
   }

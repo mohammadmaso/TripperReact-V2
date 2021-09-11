@@ -41,9 +41,8 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { FiArrowLeft, FiDelete, FiTrash, FiUpload } from 'react-icons/fi';
 import { MdCardTravel } from 'react-icons/md';
-import { RangeDatePicker } from 'jalali-react-datepicker';
-import { DatePicker } from 'jalali-react-datepicker';
 import SelectForm from './SelectForm';
+import DatePicker from '../../DatePicker';
 import {
   LazyQueryResult,
   MutationResult,
@@ -285,7 +284,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ شروع سفر</FormLabel>
-                          <DatePicker timePicker={false} />
+                          <DatePicker />
                           <Box textColor="red" mt="2">
                             <ErrorMessage name="startDate" component="div" />
                           </Box>
@@ -296,7 +295,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ پایان سفر</FormLabel>
-                          <DatePicker timePicker={false} />
+                          <DatePicker />
                           <Box textColor="red" mt="2">
                             <ErrorMessage name="endDate" component="div" />
                           </Box>

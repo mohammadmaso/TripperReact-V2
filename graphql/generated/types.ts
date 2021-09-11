@@ -105,6 +105,12 @@ export type AccessoryBrandTypeAccessorymodelSetArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 export type AccessoryBrandTypeConnection = {
@@ -149,6 +155,12 @@ export type AccessoryCategoryTypeAccessoriesInCategoryArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 export type AccessoryCategoryTypeConnection = {
@@ -244,6 +256,12 @@ export type AccessoryReferenceyTypeAccessoriesInRefrenceArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 export type AccessoryReferenceyTypeConnection = {
@@ -687,6 +705,12 @@ export type ArticleTypeAccessoriesArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -862,7 +886,7 @@ export type CityTypeTransferSrcArgs = {
   last?: Maybe<Scalars['Int']>;
   src?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferType?: Maybe<Scalars['ID']>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
 };
@@ -876,7 +900,7 @@ export type CityTypeTransferDestArgs = {
   last?: Maybe<Scalars['Int']>;
   src?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferType?: Maybe<Scalars['ID']>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
 };
@@ -1220,6 +1244,11 @@ export type DeleteTourReview = {
   deleted?: Maybe<Scalars['Boolean']>;
 };
 
+export type DeleteTransferMutation = {
+  __typename?: 'DeleteTransferMutation';
+  success?: Maybe<Scalars['Boolean']>;
+};
+
 /** delete trip mutation. */
 export type DeleteTrip = {
   __typename?: 'DeleteTrip';
@@ -1390,8 +1419,8 @@ export type ExperienceImageTypeExperiencemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type ExperienceImageTypeConnection = {
@@ -1546,8 +1575,8 @@ export type ExperienceVideoTypeExperiencemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type ExperienceVideoTypeConnection = {
@@ -1845,8 +1874,8 @@ export type MutationSaveAccessoryArgs = {
 export type MutationCreateTransferArgs = {
   destination: Scalars['ID'];
   src: Scalars['ID'];
-  transferInput: TransferInput;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferInput?: Maybe<TransferInput>;
+  transferType: Scalars['ID'];
 };
 
 
@@ -2575,8 +2604,8 @@ export type PlaceTypeExperiencesOfPlaceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type PlaceTypeConnection = {
@@ -3033,7 +3062,7 @@ export type QueryAllTransferArgs = {
   last?: Maybe<Scalars['Int']>;
   src?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferType?: Maybe<Scalars['ID']>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
 };
@@ -3098,6 +3127,8 @@ export type QueryAllUsersArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['String']>;
+  username_Icontains?: Maybe<Scalars['String']>;
+  username_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -3225,8 +3256,8 @@ export type QueryAllExperienceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3241,8 +3272,8 @@ export type QueryAllMyExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3290,6 +3321,12 @@ export type QueryAllAccessoryArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -4045,20 +4082,10 @@ export type TransferType = Node & {
   id: Scalars['ID'];
   src: CityType;
   destination: CityType;
-  transferType: TransferTypeTypeConnection;
+  transferType?: Maybe<TransferTypeType>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
   tripsInTransfer: TripTypeConnection;
-};
-
-
-export type TransferTypeTransferTypeArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4122,7 +4149,7 @@ export type TransferTypeTypeTransfermodelSetArgs = {
   last?: Maybe<Scalars['Int']>;
   src?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferType?: Maybe<Scalars['ID']>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
 };
@@ -4273,8 +4300,8 @@ export type TripActivitieTypeExperiencemodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type TripActivitieTypeConnection = {
@@ -4620,6 +4647,8 @@ export type TripPlanTypeCompanionsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['String']>;
+  username_Icontains?: Maybe<Scalars['String']>;
+  username_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -4631,6 +4660,12 @@ export type TripPlanTypeAccessoriesArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -4683,11 +4718,12 @@ export type TripRelatedInput = {
   companions?: Maybe<Array<Maybe<Scalars['ID']>>>;
   images?: Maybe<Array<Maybe<Scalars['ID']>>>;
   reviews?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  Places?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
   accessories?: Maybe<Array<Maybe<Scalars['ID']>>>;
   transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
   accommodations?: Maybe<Array<Maybe<Scalars['ID']>>>;
   cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  experiences?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 /** An enumeration. */
@@ -4866,6 +4902,8 @@ export type TripTypeCompanionsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   username?: Maybe<Scalars['String']>;
+  username_Icontains?: Maybe<Scalars['String']>;
+  username_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -4943,6 +4981,12 @@ export type TripTypeAccessoriesArgs = {
   last?: Maybe<Scalars['Int']>;
   category?: Maybe<Scalars['ID']>;
   category_Title?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  name_Istartswith?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Icontains?: Maybe<Scalars['String']>;
+  referenceLinks_AccessoryIdInSite_Istartswith?: Maybe<Scalars['String']>;
 };
 
 
@@ -4953,8 +4997,8 @@ export type TripTypeExperiencesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -4967,7 +5011,7 @@ export type TripTypeTransfersArgs = {
   last?: Maybe<Scalars['Int']>;
   src?: Maybe<Scalars['ID']>;
   destination?: Maybe<Scalars['ID']>;
-  transferType?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  transferType?: Maybe<Scalars['ID']>;
   duration?: Maybe<Scalars['Int']>;
   startTime?: Maybe<Scalars['DateTime']>;
 };
@@ -5629,8 +5673,8 @@ export type UserNodeExperiencesOfUserArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type UserRegisteredTourType = Node & {
@@ -5677,12 +5721,9 @@ export type UserType = Node & {
   dateJoined: Scalars['DateTime'];
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars['String'];
-  phoneNumber?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   avatar: Scalars['String'];
-  verified: Scalars['Boolean'];
   archived: Scalars['Boolean'];
-  acceptedTerms: Scalars['Boolean'];
   profilemodel?: Maybe<ProfileType>;
   followingUsers: FollowingTypeConnection;
   followerUsers: FollowingTypeConnection;
@@ -6107,8 +6148,8 @@ export type UserTypeExperiencesOfUserArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  place?: Maybe<Scalars['ID']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  place?: Maybe<Scalars['ID']>;
 };
 
 export type UserTypeConnection = {
@@ -6151,11 +6192,6 @@ export type VerifySms = {
   __typename?: 'VerifySMS';
   success?: Maybe<Scalars['Boolean']>;
   errors?: Maybe<Scalars['ExpectedErrorType']>;
-};
-
-export type DeleteTransferMutation = {
-  __typename?: 'deleteTransferMutation';
-  success?: Maybe<Scalars['Boolean']>;
 };
 
 export type VerifySmsMutationVariables = Exact<{
@@ -6287,6 +6323,49 @@ export type UsernameChangeMutation = (
   )> }
 );
 
+export type CreateSinglTransferMutationVariables = Exact<{
+  src: Scalars['ID'];
+  destination: Scalars['ID'];
+  transferInput?: Maybe<TransferInput>;
+  transferType: Scalars['ID'];
+}>;
+
+
+export type CreateSinglTransferMutation = (
+  { __typename?: 'Mutation' }
+  & { createTransfer?: Maybe<(
+    { __typename?: 'CreateTransferMutation' }
+    & Pick<CreateTransferMutation, 'success'>
+    & { transfer?: Maybe<(
+      { __typename?: 'TransferType' }
+      & Pick<TransferType, 'id' | 'duration' | 'startTime'>
+      & { src: (
+        { __typename?: 'CityType' }
+        & Pick<CityType, 'name' | 'latitude' | 'longitude' | 'id'>
+      ), destination: (
+        { __typename?: 'CityType' }
+        & Pick<CityType, 'name' | 'latitude' | 'longitude' | 'id'>
+      ), transferType?: Maybe<(
+        { __typename?: 'TransferTypeType' }
+        & Pick<TransferTypeType, 'id' | 'title' | 'svg'>
+      )> }
+    )> }
+  )> }
+);
+
+export type DeleteSingleTransferMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type DeleteSingleTransferMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteTransfer?: Maybe<(
+    { __typename?: 'DeleteTransferMutation' }
+    & Pick<DeleteTransferMutation, 'success'>
+  )> }
+);
+
 export type LikeTripMutationVariables = Exact<{
   createTripLikeTripId: Scalars['ID'];
 }>;
@@ -6340,6 +6419,7 @@ export type CreateInitialTripMutation = (
 export type UpdateTripMutationVariables = Exact<{
   tripData?: Maybe<UpdateTripInput>;
   tripId: Scalars['ID'];
+  removeTripRelatedData?: Maybe<TripRelatedInput>;
   tripRelatedData?: Maybe<TripRelatedInput>;
   province?: Maybe<Scalars['ID']>;
   country?: Maybe<Scalars['ID']>;
@@ -6449,7 +6529,7 @@ export type UpdateUserMutation = (
     { __typename?: 'UpdateUserPayload' }
     & { user?: Maybe<(
       { __typename?: 'UserType' }
-      & Pick<UserType, 'avatar' | 'username' | 'phoneNumber' | 'id'>
+      & Pick<UserType, 'avatar' | 'username' | 'id'>
     )> }
   )> }
 );
@@ -6464,6 +6544,31 @@ export type FollowOrUnfollowMutation = (
   & { followOrUnfollow?: Maybe<(
     { __typename?: 'FollowOrUnfollowPayload' }
     & Pick<FollowOrUnfollowPayload, 'followStatus'>
+  )> }
+);
+
+export type SearchAccessoryQueryVariables = Exact<{
+  name?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SearchAccessoryQuery = (
+  { __typename?: 'Query' }
+  & { allAccessory?: Maybe<(
+    { __typename?: 'AccessoryTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'AccessoryTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'AccessoryType' }
+        & Pick<AccessoryType, 'id' | 'name' | 'imageLink'>
+        & { category: (
+          { __typename?: 'AccessoryCategoryType' }
+          & Pick<AccessoryCategoryType, 'id' | 'title'>
+        ) }
+      )> }
+    )>> }
   )> }
 );
 
@@ -6576,6 +6681,23 @@ export type ArticleQuery = (
         )> }
       )>> }
     ) }
+  )> }
+);
+
+export type AllTransferTypesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTransferTypesQuery = (
+  { __typename?: 'Query' }
+  & { allTransferType?: Maybe<(
+    { __typename?: 'TransferTypeTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TransferTypeTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TransferTypeType' }
+        & Pick<TransferTypeType, 'id' | 'title' | 'svg'>
+      )> }
+    )>> }
   )> }
 );
 
@@ -6714,7 +6836,7 @@ export type AllActivitiesQuery = (
       { __typename?: 'TripActivitieTypeEdge' }
       & { node?: Maybe<(
         { __typename?: 'TripActivitieType' }
-        & Pick<TripActivitieType, 'svg' | 'title' | 'titleFa' | 'description'>
+        & Pick<TripActivitieType, 'id' | 'svg' | 'title' | 'titleFa' | 'description'>
       )> }
     )>> }
   )> }
@@ -6758,7 +6880,7 @@ export type TripDetailQuery = (
         { __typename?: 'AccessoryTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'AccessoryType' }
-          & Pick<AccessoryType, 'id' | 'likesCount' | 'image' | 'name'>
+          & Pick<AccessoryType, 'id' | 'likesCount' | 'image' | 'imageLink' | 'name'>
           & { brand?: Maybe<(
             { __typename?: 'AccessoryBrandType' }
             & Pick<AccessoryBrandType, 'logo' | 'name'>
@@ -6781,19 +6903,6 @@ export type TripDetailQuery = (
         & { node?: Maybe<(
           { __typename?: 'TripImageType' }
           & Pick<TripImageType, 'id' | 'image' | 'description' | 'copyrightName'>
-        )> }
-      )>> }
-    ), reviewsOfTrip: (
-      { __typename?: 'TripReviewTypeConnection' }
-      & { edges: Array<Maybe<(
-        { __typename?: 'TripReviewTypeEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'TripReviewType' }
-          & Pick<TripReviewType, 'likesCount' | 'dislikesCount' | 'description' | 'createdAt' | 'id'>
-          & { author: (
-            { __typename?: 'UserType' }
-            & Pick<UserType, 'id' | 'username' | 'avatar'>
-          ) }
         )> }
       )>> }
     ), videos: (
@@ -6824,7 +6933,7 @@ export type TripDetailQuery = (
               { __typename?: 'TripActivitieTypeEdge' }
               & { node?: Maybe<(
                 { __typename?: 'TripActivitieType' }
-                & Pick<TripActivitieType, 'id' | 'title' | 'svg'>
+                & Pick<TripActivitieType, 'id' | 'title' | 'titleFa' | 'svg'>
               )> }
             )>> }
           ), images: (
@@ -6846,6 +6955,25 @@ export type TripDetailQuery = (
         & { node?: Maybe<(
           { __typename?: 'PlaceType' }
           & Pick<PlaceType, 'id' | 'name' | 'longitude' | 'latitude'>
+        )> }
+      )>> }
+    ), transfers: (
+      { __typename?: 'TransferTypeConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'TransferTypeEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TransferType' }
+          & Pick<TransferType, 'id' | 'duration' | 'startTime'>
+          & { src: (
+            { __typename?: 'CityType' }
+            & Pick<CityType, 'name' | 'latitude' | 'longitude' | 'id'>
+          ), destination: (
+            { __typename?: 'CityType' }
+            & Pick<CityType, 'name' | 'latitude' | 'longitude' | 'id'>
+          ), transferType?: Maybe<(
+            { __typename?: 'TransferTypeType' }
+            & Pick<TransferTypeType, 'id' | 'title' | 'svg'>
+          )> }
         )> }
       )>> }
     ), country: (
@@ -6929,12 +7057,12 @@ export type AllProvincesOfCountryQuery = (
   )> }
 );
 
-export type AllCitiesOfCountryQueryVariables = Exact<{
-  allCitiesProvince?: Maybe<Scalars['ID']>;
+export type AllCitiesOfProvinceQueryVariables = Exact<{
+  province: Scalars['ID'];
 }>;
 
 
-export type AllCitiesOfCountryQuery = (
+export type AllCitiesOfProvinceQuery = (
   { __typename?: 'Query' }
   & { allCities?: Maybe<(
     { __typename?: 'CityTypeConnection' }
@@ -6968,7 +7096,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'UserType' }
-    & Pick<UserType, 'id' | 'username' | 'avatar' | 'verified'>
+    & Pick<UserType, 'id' | 'username' | 'avatar'>
   )> }
 );
 
@@ -7211,7 +7339,7 @@ export type MyTripsQuery = (
 
 export type UserFieldsFragment = (
   { __typename?: 'UserType' }
-  & Pick<UserType, 'id' | 'username' | 'avatar' | 'verified' | 'email' | 'phoneNumber' | 'dateJoined'>
+  & Pick<UserType, 'id' | 'username' | 'avatar' | 'email' | 'dateJoined'>
 );
 
 export type ProfileFieldsFragment = (
@@ -7263,6 +7391,26 @@ export type UnPublisTripMutation = (
       { __typename?: 'TripType' }
       & Pick<TripType, 'published'>
     )> }
+  )> }
+);
+
+export type SearchUsernameQueryVariables = Exact<{
+  username?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type SearchUsernameQuery = (
+  { __typename?: 'Query' }
+  & { allUsers?: Maybe<(
+    { __typename?: 'UserTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'UserTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'UserType' }
+        & Pick<UserType, 'username' | 'id' | 'avatar'>
+      )> }
+    )>> }
   )> }
 );
 
@@ -7318,9 +7466,7 @@ export const UserFieldsFragmentDoc = gql`
   id
   username
   avatar
-  verified
   email
-  phoneNumber
   dateJoined
 }
     `;
@@ -7674,6 +7820,102 @@ export function useUsernameChangeMutation(baseOptions?: Apollo.MutationHookOptio
 export type UsernameChangeMutationHookResult = ReturnType<typeof useUsernameChangeMutation>;
 export type UsernameChangeMutationResult = Apollo.MutationResult<UsernameChangeMutation>;
 export type UsernameChangeMutationOptions = Apollo.BaseMutationOptions<UsernameChangeMutation, UsernameChangeMutationVariables>;
+export const CreateSinglTransferDocument = gql`
+    mutation CreateSinglTransfer($src: ID!, $destination: ID!, $transferInput: TransferInput, $transferType: ID!) {
+  createTransfer(
+    src: $src
+    destination: $destination
+    transferInput: $transferInput
+    transferType: $transferType
+  ) {
+    success
+    transfer {
+      id
+      duration
+      src {
+        name
+        latitude
+        longitude
+        id
+      }
+      destination {
+        name
+        latitude
+        longitude
+        id
+      }
+      startTime
+      transferType {
+        id
+        title
+        svg
+      }
+    }
+  }
+}
+    `;
+export type CreateSinglTransferMutationFn = Apollo.MutationFunction<CreateSinglTransferMutation, CreateSinglTransferMutationVariables>;
+
+/**
+ * __useCreateSinglTransferMutation__
+ *
+ * To run a mutation, you first call `useCreateSinglTransferMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSinglTransferMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSinglTransferMutation, { data, loading, error }] = useCreateSinglTransferMutation({
+ *   variables: {
+ *      src: // value for 'src'
+ *      destination: // value for 'destination'
+ *      transferInput: // value for 'transferInput'
+ *      transferType: // value for 'transferType'
+ *   },
+ * });
+ */
+export function useCreateSinglTransferMutation(baseOptions?: Apollo.MutationHookOptions<CreateSinglTransferMutation, CreateSinglTransferMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSinglTransferMutation, CreateSinglTransferMutationVariables>(CreateSinglTransferDocument, options);
+      }
+export type CreateSinglTransferMutationHookResult = ReturnType<typeof useCreateSinglTransferMutation>;
+export type CreateSinglTransferMutationResult = Apollo.MutationResult<CreateSinglTransferMutation>;
+export type CreateSinglTransferMutationOptions = Apollo.BaseMutationOptions<CreateSinglTransferMutation, CreateSinglTransferMutationVariables>;
+export const DeleteSingleTransferDocument = gql`
+    mutation DeleteSingleTransfer($id: ID!) {
+  deleteTransfer(transferId: $id) {
+    success
+  }
+}
+    `;
+export type DeleteSingleTransferMutationFn = Apollo.MutationFunction<DeleteSingleTransferMutation, DeleteSingleTransferMutationVariables>;
+
+/**
+ * __useDeleteSingleTransferMutation__
+ *
+ * To run a mutation, you first call `useDeleteSingleTransferMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteSingleTransferMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteSingleTransferMutation, { data, loading, error }] = useDeleteSingleTransferMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteSingleTransferMutation(baseOptions?: Apollo.MutationHookOptions<DeleteSingleTransferMutation, DeleteSingleTransferMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteSingleTransferMutation, DeleteSingleTransferMutationVariables>(DeleteSingleTransferDocument, options);
+      }
+export type DeleteSingleTransferMutationHookResult = ReturnType<typeof useDeleteSingleTransferMutation>;
+export type DeleteSingleTransferMutationResult = Apollo.MutationResult<DeleteSingleTransferMutation>;
+export type DeleteSingleTransferMutationOptions = Apollo.BaseMutationOptions<DeleteSingleTransferMutation, DeleteSingleTransferMutationVariables>;
 export const LikeTripDocument = gql`
     mutation LikeTrip($createTripLikeTripId: ID!) {
   createTripLike(tripId: $createTripLikeTripId) {
@@ -7791,11 +8033,12 @@ export type CreateInitialTripMutationHookResult = ReturnType<typeof useCreateIni
 export type CreateInitialTripMutationResult = Apollo.MutationResult<CreateInitialTripMutation>;
 export type CreateInitialTripMutationOptions = Apollo.BaseMutationOptions<CreateInitialTripMutation, CreateInitialTripMutationVariables>;
 export const UpdateTripDocument = gql`
-    mutation UpdateTrip($tripData: UpdateTripInput, $tripId: ID!, $tripRelatedData: TripRelatedInput, $province: ID, $country: ID) {
+    mutation UpdateTrip($tripData: UpdateTripInput, $tripId: ID!, $removeTripRelatedData: TripRelatedInput, $tripRelatedData: TripRelatedInput, $province: ID, $country: ID) {
   updateTrip(
     tripData: $tripData
     tripId: $tripId
     tripRelatedData: $tripRelatedData
+    removeTripRelatedData: $removeTripRelatedData
     province: $province
     country: $country
   ) {
@@ -7823,6 +8066,7 @@ export type UpdateTripMutationFn = Apollo.MutationFunction<UpdateTripMutation, U
  *   variables: {
  *      tripData: // value for 'tripData'
  *      tripId: // value for 'tripId'
+ *      removeTripRelatedData: // value for 'removeTripRelatedData'
  *      tripRelatedData: // value for 'tripRelatedData'
  *      province: // value for 'province'
  *      country: // value for 'country'
@@ -7998,7 +8242,6 @@ export const UpdateUserDocument = gql`
     user {
       avatar
       username
-      phoneNumber
       id
     }
   }
@@ -8063,6 +8306,57 @@ export function useFollowOrUnfollowMutation(baseOptions?: Apollo.MutationHookOpt
 export type FollowOrUnfollowMutationHookResult = ReturnType<typeof useFollowOrUnfollowMutation>;
 export type FollowOrUnfollowMutationResult = Apollo.MutationResult<FollowOrUnfollowMutation>;
 export type FollowOrUnfollowMutationOptions = Apollo.BaseMutationOptions<FollowOrUnfollowMutation, FollowOrUnfollowMutationVariables>;
+export const SearchAccessoryDocument = gql`
+    query SearchAccessory($name: String, $id: String, $first: Int) {
+  allAccessory(
+    name_Icontains: $name
+    referenceLinks_AccessoryIdInSite_Icontains: $id
+    first: $first
+  ) {
+    edges {
+      node {
+        id
+        name
+        imageLink
+        category {
+          id
+          title
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchAccessoryQuery__
+ *
+ * To run a query within a React component, call `useSearchAccessoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchAccessoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchAccessoryQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *      id: // value for 'id'
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useSearchAccessoryQuery(baseOptions?: Apollo.QueryHookOptions<SearchAccessoryQuery, SearchAccessoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchAccessoryQuery, SearchAccessoryQueryVariables>(SearchAccessoryDocument, options);
+      }
+export function useSearchAccessoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchAccessoryQuery, SearchAccessoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchAccessoryQuery, SearchAccessoryQueryVariables>(SearchAccessoryDocument, options);
+        }
+export type SearchAccessoryQueryHookResult = ReturnType<typeof useSearchAccessoryQuery>;
+export type SearchAccessoryLazyQueryHookResult = ReturnType<typeof useSearchAccessoryLazyQuery>;
+export type SearchAccessoryQueryResult = Apollo.QueryResult<SearchAccessoryQuery, SearchAccessoryQueryVariables>;
 export const AllArticleDocument = gql`
     query AllArticle($allArticleOffset: Int, $allArticleBefore: String, $allArticleAfter: String, $allArticleFirst: Int, $allArticleLast: Int, $allArticleCategory: ID) {
   allArticle(
@@ -8257,6 +8551,46 @@ export function useArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ar
 export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
 export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
 export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
+export const AllTransferTypesDocument = gql`
+    query AllTransferTypes {
+  allTransferType {
+    edges {
+      node {
+        id
+        title
+        svg
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllTransferTypesQuery__
+ *
+ * To run a query within a React component, call `useAllTransferTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTransferTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTransferTypesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTransferTypesQuery(baseOptions?: Apollo.QueryHookOptions<AllTransferTypesQuery, AllTransferTypesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTransferTypesQuery, AllTransferTypesQueryVariables>(AllTransferTypesDocument, options);
+      }
+export function useAllTransferTypesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTransferTypesQuery, AllTransferTypesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTransferTypesQuery, AllTransferTypesQueryVariables>(AllTransferTypesDocument, options);
+        }
+export type AllTransferTypesQueryHookResult = ReturnType<typeof useAllTransferTypesQuery>;
+export type AllTransferTypesLazyQueryHookResult = ReturnType<typeof useAllTransferTypesLazyQuery>;
+export type AllTransferTypesQueryResult = Apollo.QueryResult<AllTransferTypesQuery, AllTransferTypesQueryVariables>;
 export const AllTripDocument = gql`
     query AllTrip($allTripOffset: Int, $allTripBefore: String, $allTripAfter: String, $allTripFirst: Int, $allTripLast: Int, $allTripCategories: [[ID]]) {
   allTrip(
@@ -8402,6 +8736,7 @@ export const AllActivitiesDocument = gql`
   allActivities {
     edges {
       node {
+        id
         svg
         title
         titleFa
@@ -8506,6 +8841,7 @@ export const TripDetailDocument = gql`
             name
           }
           image
+          imageLink
           name
         }
       }
@@ -8526,22 +8862,6 @@ export const TripDetailDocument = gql`
           image
           description
           copyrightName
-        }
-      }
-    }
-    reviewsOfTrip {
-      edges {
-        node {
-          author {
-            id
-            username
-            avatar
-          }
-          likesCount
-          dislikesCount
-          description
-          createdAt
-          id
         }
       }
     }
@@ -8580,6 +8900,7 @@ export const TripDetailDocument = gql`
               node {
                 id
                 title
+                titleFa
                 svg
               }
             }
@@ -8606,6 +8927,32 @@ export const TripDetailDocument = gql`
           name
           longitude
           latitude
+        }
+      }
+    }
+    transfers {
+      edges {
+        node {
+          id
+          duration
+          startTime
+          src {
+            name
+            latitude
+            longitude
+            id
+          }
+          destination {
+            name
+            latitude
+            longitude
+            id
+          }
+          transferType {
+            id
+            title
+            svg
+          }
         }
       }
     }
@@ -8788,9 +9135,9 @@ export function useAllProvincesOfCountryLazyQuery(baseOptions?: Apollo.LazyQuery
 export type AllProvincesOfCountryQueryHookResult = ReturnType<typeof useAllProvincesOfCountryQuery>;
 export type AllProvincesOfCountryLazyQueryHookResult = ReturnType<typeof useAllProvincesOfCountryLazyQuery>;
 export type AllProvincesOfCountryQueryResult = Apollo.QueryResult<AllProvincesOfCountryQuery, AllProvincesOfCountryQueryVariables>;
-export const AllCitiesOfCountryDocument = gql`
-    query AllCitiesOfCountry($allCitiesProvince: ID) {
-  allCities(province: $allCitiesProvince) {
+export const AllCitiesOfProvinceDocument = gql`
+    query AllCitiesOfProvince($province: ID!) {
+  allCities(province: $province) {
     edges {
       node {
         id
@@ -8802,32 +9149,32 @@ export const AllCitiesOfCountryDocument = gql`
     `;
 
 /**
- * __useAllCitiesOfCountryQuery__
+ * __useAllCitiesOfProvinceQuery__
  *
- * To run a query within a React component, call `useAllCitiesOfCountryQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllCitiesOfCountryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAllCitiesOfProvinceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllCitiesOfProvinceQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAllCitiesOfCountryQuery({
+ * const { data, loading, error } = useAllCitiesOfProvinceQuery({
  *   variables: {
- *      allCitiesProvince: // value for 'allCitiesProvince'
+ *      province: // value for 'province'
  *   },
  * });
  */
-export function useAllCitiesOfCountryQuery(baseOptions?: Apollo.QueryHookOptions<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>) {
+export function useAllCitiesOfProvinceQuery(baseOptions: Apollo.QueryHookOptions<AllCitiesOfProvinceQuery, AllCitiesOfProvinceQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>(AllCitiesOfCountryDocument, options);
+        return Apollo.useQuery<AllCitiesOfProvinceQuery, AllCitiesOfProvinceQueryVariables>(AllCitiesOfProvinceDocument, options);
       }
-export function useAllCitiesOfCountryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>) {
+export function useAllCitiesOfProvinceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllCitiesOfProvinceQuery, AllCitiesOfProvinceQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>(AllCitiesOfCountryDocument, options);
+          return Apollo.useLazyQuery<AllCitiesOfProvinceQuery, AllCitiesOfProvinceQueryVariables>(AllCitiesOfProvinceDocument, options);
         }
-export type AllCitiesOfCountryQueryHookResult = ReturnType<typeof useAllCitiesOfCountryQuery>;
-export type AllCitiesOfCountryLazyQueryHookResult = ReturnType<typeof useAllCitiesOfCountryLazyQuery>;
-export type AllCitiesOfCountryQueryResult = Apollo.QueryResult<AllCitiesOfCountryQuery, AllCitiesOfCountryQueryVariables>;
+export type AllCitiesOfProvinceQueryHookResult = ReturnType<typeof useAllCitiesOfProvinceQuery>;
+export type AllCitiesOfProvinceLazyQueryHookResult = ReturnType<typeof useAllCitiesOfProvinceLazyQuery>;
+export type AllCitiesOfProvinceQueryResult = Apollo.QueryResult<AllCitiesOfProvinceQuery, AllCitiesOfProvinceQueryVariables>;
 export const TripReviewLikeStatusDocument = gql`
     query TripReviewLikeStatus($tripReviewId: ID!) {
   tripReview(id: $tripReviewId) {
@@ -8869,7 +9216,6 @@ export const MeDocument = gql`
     id
     username
     avatar
-    verified
   }
 }
     `;
@@ -9454,11 +9800,55 @@ export function useUnPublisTripMutation(baseOptions?: Apollo.MutationHookOptions
 export type UnPublisTripMutationHookResult = ReturnType<typeof useUnPublisTripMutation>;
 export type UnPublisTripMutationResult = Apollo.MutationResult<UnPublisTripMutation>;
 export type UnPublisTripMutationOptions = Apollo.BaseMutationOptions<UnPublisTripMutation, UnPublisTripMutationVariables>;
+export const SearchUsernameDocument = gql`
+    query SearchUsername($username: String, $first: Int) {
+  allUsers(username_Icontains: $username, first: $first) {
+    edges {
+      node {
+        username
+        id
+        avatar
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchUsernameQuery__
+ *
+ * To run a query within a React component, call `useSearchUsernameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchUsernameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchUsernameQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *      first: // value for 'first'
+ *   },
+ * });
+ */
+export function useSearchUsernameQuery(baseOptions?: Apollo.QueryHookOptions<SearchUsernameQuery, SearchUsernameQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SearchUsernameQuery, SearchUsernameQueryVariables>(SearchUsernameDocument, options);
+      }
+export function useSearchUsernameLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SearchUsernameQuery, SearchUsernameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SearchUsernameQuery, SearchUsernameQueryVariables>(SearchUsernameDocument, options);
+        }
+export type SearchUsernameQueryHookResult = ReturnType<typeof useSearchUsernameQuery>;
+export type SearchUsernameLazyQueryHookResult = ReturnType<typeof useSearchUsernameLazyQuery>;
+export type SearchUsernameQueryResult = Apollo.QueryResult<SearchUsernameQuery, SearchUsernameQueryVariables>;
 export const namedOperations = {
   Query: {
+    SearchAccessory: 'SearchAccessory',
     AllArticle: 'AllArticle',
     AllArticleCategoryies: 'AllArticleCategoryies',
     Article: 'Article',
+    AllTransferTypes: 'AllTransferTypes',
     AllTrip: 'AllTrip',
     AllTripCategories: 'AllTripCategories',
     AllActivities: 'AllActivities',
@@ -9467,7 +9857,7 @@ export const namedOperations = {
     TripReviews: 'TripReviews',
     AllCountries: 'AllCountries',
     AllProvincesOfCountry: 'AllProvincesOfCountry',
-    AllCitiesOfCountry: 'AllCitiesOfCountry',
+    AllCitiesOfProvince: 'AllCitiesOfProvince',
     TripReviewLikeStatus: 'TripReviewLikeStatus',
     Me: 'Me',
     MeDetail: 'MeDetail',
@@ -9479,7 +9869,8 @@ export const namedOperations = {
     MeFollowers: 'MeFollowers',
     AllProfiles: 'AllProfiles',
     MeSavedTrips: 'MeSavedTrips',
-    MyTrips: 'MyTrips'
+    MyTrips: 'MyTrips',
+    SearchUsername: 'SearchUsername'
   },
   Mutation: {
     VerifySms: 'VerifySms',
@@ -9491,6 +9882,8 @@ export const namedOperations = {
     ResendVerificationSms: 'ResendVerificationSms',
     PasswordChange: 'PasswordChange',
     UsernameChange: 'UsernameChange',
+    CreateSinglTransfer: 'CreateSinglTransfer',
+    DeleteSingleTransfer: 'DeleteSingleTransfer',
     LikeTrip: 'LikeTrip',
     CreateTripReview: 'CreateTripReview',
     CreateInitialTrip: 'CreateInitialTrip',

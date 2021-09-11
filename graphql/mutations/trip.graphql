@@ -38,6 +38,7 @@ mutation CreateInitialTrip(
 mutation UpdateTrip(
   $tripData: UpdateTripInput
   $tripId: ID!
+  $removeTripRelatedData: TripRelatedInput
   $tripRelatedData: TripRelatedInput
   $province: ID
   $country: ID
@@ -46,6 +47,7 @@ mutation UpdateTrip(
     tripData: $tripData
     tripId: $tripId
     tripRelatedData: $tripRelatedData
+    removeTripRelatedData: $removeTripRelatedData
     province: $province
     country: $country
   ) {

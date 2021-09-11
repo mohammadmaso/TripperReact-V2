@@ -204,6 +204,7 @@ export function EditTravelogueHeader(props: Props) {
                 props.queries?.unPublishTripStatus?.loading
               }
               size="sm"
+              rounded="sm"
               leftIcon={<FiEye />}
               onClick={handlePublishClick}
             >
@@ -214,6 +215,7 @@ export function EditTravelogueHeader(props: Props) {
               colorScheme="red"
               aria-label="حذف سفرنامه"
               onClick={deleteModal.onOpen}
+              rounded="sm"
               icon={<FiTrash2 />}
             />
           </ButtonGroup>

@@ -4,16 +4,19 @@ import { FiEdit2, FiEdit3, FiPlus } from 'react-icons/fi';
 
 interface Props {
   onClick: () => void;
+  mode: 'add' | 'edit';
 }
-export default function AddButton(props: Props) {
+export default function AddEditButton(props: Props) {
   return (
     <IconButton
       onClick={props.onClick}
       aria-label="اضافه‌کردن"
       colorScheme="whatsapp"
-      icon={<FiEdit3 />}
+      icon={props.mode === 'edit' ? <FiEdit3 /> : <FiPlus />}
       rounded="full"
       size="xs"
-    />
+    >
+      {props.mode === 'edit' ? 'ویرایش' : 'افزودن'}
+    </IconButton>
   );
 }
