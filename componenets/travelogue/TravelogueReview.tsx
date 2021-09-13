@@ -71,53 +71,54 @@ const TravelogueReview = (props: Props) => {
       <Box
         fontWeight="light"
         rounded="md"
-        bgColor={useColorModeValue('gray.100', 'gray.900')}
+        // bgColor={useColorModeValue('gray.100', 'gray.900')}
         p="3"
       >
         <Stack>
           <Flex justify="space-between">
             <Box>
               <Link href={`/profile/${props.author?.username}`} passHref>
-                <Wrap align="center" cursor="pointer">
-                  <Avatar src={props.author?.avatar} />
-                  <Text>{props.author?.username}</Text>
+                <Wrap
+                  fontWeight="light"
+                  fontSize="md"
+                  align="center"
+                  cursor="pointer"
+                >
+                  <Avatar size="sm" src={props.author?.avatar} />
+                  <Text fontSize="sm">{props.author?.username}</Text>
                 </Wrap>
               </Link>
             </Box>
             <Wrap>
-              <Stack alignItems="center">
-                {disLikeReviewStatus.loading ? (
-                  <Spinner />
-                ) : (
-                  <Box onClick={() => disLikeReview()} cursor="pointer">
-                    {isDisLiked ? (
-                      <Icon as={BiDislike} color="red" />
-                    ) : (
-                      <Icon as={BiDislike} />
-                    )}
-                  </Box>
-                )}
+              <Wrap
+                borderWidth="1.5px"
+                px="1"
+                borderRadius="md"
+                alignItems="center"
+              >
+                <Box onClick={() => disLikeReview()} cursor="pointer">
+                  <Icon as={BiDislike} color={isDisLiked ? 'red' : 'black'} />
+                </Box>
+                <Text color={isDisLiked ? 'red' : 'black'}>{disLikeCount}</Text>
+              </Wrap>
+              <Wrap
+                borderRadius="md"
+                borderWidth="1.5px"
+                px="1"
+                alignItems="center"
+              >
+                <Box onClick={() => likeReview()} cursor="pointer">
+                  <Icon as={BiLike} color={isLiked ? 'green' : 'black'} />
+                </Box>
 
-                <Text>{disLikeCount}</Text>
-              </Stack>
-              <Stack alignItems="center">
-                {likeReviewStatus.loading ? (
-                  <Spinner />
-                ) : (
-                  <Box onClick={() => likeReview()} cursor="pointer">
-                    {isLiked ? (
-                      <Icon as={BiLike} color="green" />
-                    ) : (
-                      <Icon as={BiLike} />
-                    )}
-                  </Box>
-                )}
-                <Text>{likeCount}</Text>
-              </Stack>
+                <Text color={isLiked ? 'green' : 'black'}>{likeCount}</Text>
+              </Wrap>
             </Wrap>
           </Flex>
           <Divider />
-          <Text whiteSpace="pre-line">{props.description}</Text>
+          <Text fontSize="sm" fontWeight="md" whiteSpace="pre-line">
+            {props.description}
+          </Text>
         </Stack>
       </Box>
     </div>

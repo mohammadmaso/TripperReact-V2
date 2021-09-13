@@ -38,7 +38,11 @@ export default function LargeWithNewsletter() {
       bgColor={useColorModeValue('#f2f2f2', 'gray.900')}
       fontWeight="light"
     >
-      <Container maxW={'full'} py="10" px={[4, 4, 120]}>
+      <Container
+        maxW={'full'}
+        py="10"
+        px={{ base: 4, sm: 4, md: 120, lg: 120, xl: 350 }}
+      >
         <SimpleGrid
           columns={{ base: 1, sm: 1, md: 3 }}
           spacing={8}
@@ -66,7 +70,11 @@ export default function LargeWithNewsletter() {
               </Text>
             </Stack>
           </Box>
-          <Flex columns={{ base: 1, sm: 1, md: 2 }} justify="space-around">
+          <Flex
+            fontWeight="medium"
+            columns={{ base: 1, sm: 1, md: 2 }}
+            justify="space-around"
+          >
             <Stack fontSize="sm" textColor="primary">
               <Link>سفرنامه‌ها</Link>
               <Link>همسفر</Link>
