@@ -172,12 +172,12 @@ const AddExperienceModal = (props: Props) => {
           onSubmit={(values, { setSubmitting, setFieldError }) => {
             props.actions.createExperience({
               experienceInput: {
-                title: values.title,
-                description: values.description,
+                title: values?.title,
+                description: values?.description,
               },
               experienceRelatedInput: {
                 images: imagesUploadedId,
-                activities: values.activities,
+                activities: values?.activities,
               },
             });
           }}
@@ -225,11 +225,11 @@ const AddExperienceModal = (props: Props) => {
                       <SelectForm
                         name="فعالیت‌ها"
                         options={
-                          !props.queries.allActivititesQuery.data
+                          !props.queries.allActivititesQuery?.data
                             ? [{ label: '...', value: null }]
                             : createSelectorOptions(
                                 'titleFa',
-                                props.queries.allActivititesQuery.data
+                                props.queries.allActivititesQuery?.data
                                   .allActivities?.edges
                               )
                         }
@@ -239,7 +239,7 @@ const AddExperienceModal = (props: Props) => {
                           let a = inputValue.map((item: any) => item.value);
                           formProps.setFieldValue('activities', a);
                         }}
-                        loading={props.queries.allActivititesQuery.loading}
+                        loading={props.queries?.allActivititesQuery?.loading}
                       />
                       <Box textColor="red" my="2">
                         <ErrorMessage name="province" component="div" />
@@ -302,7 +302,7 @@ const AddExperienceModal = (props: Props) => {
               <ModalFooter>
                 <Wrap>
                   <Button
-                    isLoading={props.queries.createExperienceStatus.loading}
+                    isLoading={props.queries?.createExperienceStatus?.loading}
                     isDisabled={uploading}
                     colorScheme="primary"
                     variant="ghost"
