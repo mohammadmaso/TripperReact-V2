@@ -232,11 +232,8 @@ query TripDetail($tripId: ID!) {
         node {
           id
           title
-          defaultImage
           description
-          place {
-            name
-          }
+
           activities {
             edges {
               node {

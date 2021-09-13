@@ -28,7 +28,7 @@ export default function CallToActionCreateGroupTrip() {
         <Stack
           align={'flex-start'}
           spacing={4}
-          px={useBreakpointValue({ base: 4, md: 8 })}
+          // px={useBreakpointValue({ base: 4, md: 8 })}
           py="6"
         >
           <Stack>

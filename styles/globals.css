@@ -16,3 +16,13 @@
 .mapboxgl-map {
   border-radius: 7px;
 }
+::-moz-selection {
+  /* Code for Firefox */
+  color: white;
+  background: #009d21;
+}
+
+::selection {
+  color: white;
+  background: #009d21;
+}

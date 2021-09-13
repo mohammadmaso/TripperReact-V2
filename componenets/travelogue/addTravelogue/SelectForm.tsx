@@ -30,6 +30,7 @@ const SelectForm = (props: Props) => {
         isMulti={props.isMulti ? props.isMulti : false}
         isDisabled={props.loading}
         defaultValue={props.default}
+        
       />
     </>
   );

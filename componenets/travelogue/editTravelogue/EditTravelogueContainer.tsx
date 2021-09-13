@@ -34,6 +34,7 @@ import EditTravelogueActivities from './EditTravelogueActivities';
 import {
   AccessoryType,
   AccessoryTypeEdge,
+  ExperienceType,
   ExperienceTypeEdge,
   TransferType,
   TripActivitieType,
@@ -55,9 +56,10 @@ import AddCompanionModal from './Modals/AddCompanionModal';
 import AddAccessoryModal from './Modals/AddAccessoryModal';
 
 import _ from 'lodash';
-import { FiSave } from 'react-icons/fi';
+import { FiRotateCcw, FiSave } from 'react-icons/fi';
 import ActivitiesModal from './Modals/ActivitiesModal';
 import AddTransferModal from './Modals/AddTransferModal';
+import AddExperienceModal from './Modals/AddExperienceModal';
 
 interface Props {
   data: TripDetailQuery;
@@ -246,6 +248,10 @@ export default function EditTravelogueContainer({
       });
   };
 
+  const onIgnoreChanges = () => {
+    setTripData(initialTripData);
+  };
+
   useEffect(() => {
     if (!_.isEqual(tripData, initialTripData)) {
       saveBox.onOpen();
@@ -286,10 +292,13 @@ export default function EditTravelogueContainer({
                 images={tripImages}
                 // videos={data?.trip?.videos.edges}
                 imageOnClick={(id: string) => showImage(id)}
+                onAddButtonClick={editeInitModal.onOpen}
               />
 
               <Divider />
-              <EditTravelogueAccomodations />
+              <EditTravelogueAccomodations
+                onAddButtonClick={editeInitModal.onOpen}
+              />
               <Divider />
               <EditTravelogueTransfers
                 onAddButtonClick={addTransferModal.onOpen}
@@ -306,7 +315,10 @@ export default function EditTravelogueContainer({
               />
 
               <Divider />
-              <EditTraveloguePlaces places={tripData?.places} />
+              <EditTraveloguePlaces
+                onAddButtonClick={editeInitModal.onOpen}
+                places={tripData?.places}
+              />
 
               <Divider color="gray.800" />
               <EditTravelogueDescription
@@ -318,6 +330,18 @@ export default function EditTravelogueContainer({
               <EditTravelogueExperiences
                 experiences={tripData?.experiences as ExperienceTypeEdge[]}
                 imageOnClick={(id: string) => showImage(id)}
+                onAddClick={addExperienceModal.onOpen}
+                onEditClick={(id: string) => {
+                  addExperienceModal.onOpen();
+                }}
+                onDeleteClick={(id: string) => {
+                  setTripData((prevState) => ({
+                    ...prevState,
+                    experiences: prevState?.experiences?.filter(
+                      (item: any) => item?.node?.id !== id
+                    ),
+                  }));
+                }}
               />
 
               <Divider />
@@ -331,10 +355,6 @@ export default function EditTravelogueContainer({
                       (item: any) => item?.node?.id !== id
                     ),
                   }));
-                  // setTripDataToDelete((prev) => ({
-                  //   ...prev,
-                  //   companions: [...prev.companions, id],
-                  // }));
                 }}
               />
             </Stack>
@@ -361,11 +381,6 @@ export default function EditTravelogueContainer({
                       (item: any) => item?.node?.id !== id
                     ),
                   }));
-
-                  // setTripDataToDelete((prev) => ({
-                  //   ...prev,
-                  //   accessories: [...prev.accessories, id],
-                  // }));
                 }}
               />
             </Stack>
@@ -401,10 +416,6 @@ export default function EditTravelogueContainer({
               { node: user },
             ],
           }));
-          // setTripDataToAdd((prev) => ({
-          //   ...prev,
-          //   companions: [...prev.companions, user.id],
-          // }));
         }}
       />
       <AddAccessoryModal
@@ -420,10 +431,20 @@ export default function EditTravelogueContainer({
               { node: accessory },
             ],
           }));
-          // setTripDataToAdd((prev) => ({
-          //   ...prev,
-          //   accessories: [...prev.accessories, accessory.id],
-          // }));
+        }}
+      />
+      <AddExperienceModal
+        queries={{ ...queries }}
+        actions={{ ...actions }}
+        {...addExperienceModal}
+        onAddExperience={(experiences: ExperienceType) => {
+          setTripData((prevState) => ({
+            ...prevState,
+            experiences: [
+              ...(prevState.experiences as Array<any>),
+              { node: experiences },
+            ],
+          }));
         }}
       />
       <ActivitiesModal
@@ -475,18 +496,34 @@ export default function EditTravelogueContainer({
       />
 
       <Slide direction="bottom" in={saveBox.isOpen} style={{ zIndex: 10 }}>
-        <Button
-          p="40px"
-          mt="4"
-          colorScheme="primary"
-          rounded="none"
-          isFullWidth={true}
-          leftIcon={<FiSave />}
-          isLoading={queries?.updateTripStatus?.loading}
-          onClick={onSaveTrip}
-        >
-          ذخیره تغییرات
-        </Button>
+        <Flex>
+          <Button
+            flex={6}
+            p={{ base: '20px', sm: '20px', md: '40px', lg: '40px' }}
+            mt="4"
+            colorScheme="primary"
+            rounded="none"
+            isFullWidth={true}
+            leftIcon={<FiSave />}
+            isLoading={queries?.updateTripStatus?.loading}
+            onClick={onSaveTrip}
+          >
+            ذخیره تغییرات
+          </Button>
+          <Button
+            flex={1}
+            p={{ base: '20px', sm: '20px', md: '40px', lg: '40px' }}
+            mt="4"
+            colorScheme="red"
+            rounded="none"
+            isFullWidth={true}
+            leftIcon={<FiRotateCcw />}
+            isLoading={queries?.updateTripStatus?.loading}
+            onClick={onIgnoreChanges}
+          >
+            انصراف
+          </Button>
+        </Flex>
       </Slide>
       <Box h="5vh" />
     </>

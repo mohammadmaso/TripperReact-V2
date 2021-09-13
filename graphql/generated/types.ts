@@ -1129,6 +1129,13 @@ export type CreateAccessorySiteMutation = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
+export type CreateExperienceImagesMutation = {
+  __typename?: 'CreateExperienceImagesMutation';
+  images?: Maybe<Array<Maybe<ExperienceImageType>>>;
+  success?: Maybe<Scalars['Boolean']>;
+  message?: Maybe<Scalars['String']>;
+};
+
 export type CreateExperienceMutation = {
   __typename?: 'CreateExperienceMutation';
   experience?: Maybe<ExperienceType>;
@@ -1399,6 +1406,14 @@ export type ExperienceCollectionsTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type ExperienceImageInputType = {
+  description?: Maybe<Scalars['String']>;
+  image: Scalars['Upload'];
+  subject?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['Float']>;
+  longitude?: Maybe<Scalars['Float']>;
+};
+
 export type ExperienceImageType = Node & {
   __typename?: 'ExperienceImageType';
   /** The ID of the object. */
@@ -1420,7 +1435,6 @@ export type ExperienceImageTypeExperiencemodelSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 export type ExperienceImageTypeConnection = {
@@ -1452,8 +1466,8 @@ export type ExperienceInputUpdate = {
 
 export type ExperienceRelatedInputs = {
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  image?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  video?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  videos?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type ExperienceType = Node & {
@@ -1461,11 +1475,9 @@ export type ExperienceType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   title: Scalars['String'];
-  defaultImage: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   published: Scalars['Boolean'];
   author: UserType;
-  place: PlaceType;
   activities: TripActivitieTypeConnection;
   images: ExperienceImageTypeConnection;
   videos: ExperienceVideoTypeConnection;
@@ -1576,7 +1588,6 @@ export type ExperienceVideoTypeExperiencemodelSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 export type ExperienceVideoTypeConnection = {
@@ -1803,6 +1814,7 @@ export type Mutation = {
   createExperience?: Maybe<CreateExperienceMutation>;
   updateExperience?: Maybe<UpdateExperienceMutation>;
   deleteExperience?: Maybe<DeleteExperienceMutation>;
+  createExperienceImages?: Maybe<CreateExperienceImagesMutation>;
   /** create tour mutation */
   createTour?: Maybe<CreateTour>;
   /** create review for tour mutation */
@@ -2066,7 +2078,6 @@ export type MutationCreateAccessorySiteArgs = {
 export type MutationCreateExperienceArgs = {
   experienceInput: ExperienceInput;
   experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
-  place: Scalars['ID'];
 };
 
 
@@ -2079,6 +2090,11 @@ export type MutationUpdateExperienceArgs = {
 
 export type MutationDeleteExperienceArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationCreateExperienceImagesArgs = {
+  imageList: Array<Maybe<ExperienceImageInputType>>;
 };
 
 
@@ -2465,7 +2481,6 @@ export type PlaceType = Node & {
   feelsOfPlace: PlaceFeelTypeConnection;
   articlesInPlace: ArticleTypeConnection;
   usersSavedPlace: PlaceCollectionsTypeConnection;
-  experiencesOfPlace: ExperienceTypeConnection;
 };
 
 
@@ -2594,17 +2609,6 @@ export type PlaceTypeUsersSavedPlaceArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   user?: Maybe<Scalars['ID']>;
-  place?: Maybe<Scalars['ID']>;
-};
-
-
-export type PlaceTypeExperiencesOfPlaceArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
   place?: Maybe<Scalars['ID']>;
 };
 
@@ -3257,7 +3261,6 @@ export type QueryAllExperienceArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3273,7 +3276,6 @@ export type QueryAllMyExperiencesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -4301,7 +4303,6 @@ export type TripActivitieTypeExperiencemodelSetArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 export type TripActivitieTypeConnection = {
@@ -4998,7 +4999,6 @@ export type TripTypeExperiencesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 
@@ -5674,7 +5674,6 @@ export type UserNodeExperiencesOfUserArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 export type UserRegisteredTourType = Node & {
@@ -6149,7 +6148,6 @@ export type UserTypeExperiencesOfUserArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  place?: Maybe<Scalars['ID']>;
 };
 
 export type UserTypeConnection = {
@@ -6493,6 +6491,60 @@ export type SaveTripMutationMutation = (
       & { trip: (
         { __typename?: 'TripType' }
         & Pick<TripType, 'userSaved'>
+      ) }
+    )> }
+  )> }
+);
+
+export type CreateExperienceImageMutationVariables = Exact<{
+  imageList: Array<Maybe<ExperienceImageInputType>> | Maybe<ExperienceImageInputType>;
+}>;
+
+
+export type CreateExperienceImageMutation = (
+  { __typename?: 'Mutation' }
+  & { createExperienceImages?: Maybe<(
+    { __typename?: 'CreateExperienceImagesMutation' }
+    & Pick<CreateExperienceImagesMutation, 'success'>
+    & { images?: Maybe<Array<Maybe<(
+      { __typename?: 'ExperienceImageType' }
+      & Pick<ExperienceImageType, 'id' | 'image'>
+    )>>> }
+  )> }
+);
+
+export type CreateExperinceMutationVariables = Exact<{
+  experienceInput: ExperienceInput;
+  experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
+}>;
+
+
+export type CreateExperinceMutation = (
+  { __typename?: 'Mutation' }
+  & { createExperience?: Maybe<(
+    { __typename?: 'CreateExperienceMutation' }
+    & Pick<CreateExperienceMutation, 'success'>
+    & { experience?: Maybe<(
+      { __typename?: 'ExperienceType' }
+      & Pick<ExperienceType, 'id' | 'description' | 'title'>
+      & { images: (
+        { __typename?: 'ExperienceImageTypeConnection' }
+        & { edges: Array<Maybe<(
+          { __typename?: 'ExperienceImageTypeEdge' }
+          & { node?: Maybe<(
+            { __typename?: 'ExperienceImageType' }
+            & Pick<ExperienceImageType, 'id' | 'image'>
+          )> }
+        )>> }
+      ), activities: (
+        { __typename?: 'TripActivitieTypeConnection' }
+        & { edges: Array<Maybe<(
+          { __typename?: 'TripActivitieTypeEdge' }
+          & { node?: Maybe<(
+            { __typename?: 'TripActivitieType' }
+            & Pick<TripActivitieType, 'id' | 'titleFa' | 'svg'>
+          )> }
+        )>> }
       ) }
     )> }
   )> }
@@ -6923,11 +6975,8 @@ export type TripDetailQuery = (
         { __typename?: 'ExperienceTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'ExperienceType' }
-          & Pick<ExperienceType, 'id' | 'title' | 'defaultImage' | 'description'>
-          & { place: (
-            { __typename?: 'PlaceType' }
-            & Pick<PlaceType, 'name'>
-          ), activities: (
+          & Pick<ExperienceType, 'id' | 'title' | 'description'>
+          & { activities: (
             { __typename?: 'TripActivitieTypeConnection' }
             & { edges: Array<Maybe<(
               { __typename?: 'TripActivitieTypeEdge' }
@@ -8196,6 +8245,102 @@ export function useSaveTripMutationMutation(baseOptions?: Apollo.MutationHookOpt
 export type SaveTripMutationMutationHookResult = ReturnType<typeof useSaveTripMutationMutation>;
 export type SaveTripMutationMutationResult = Apollo.MutationResult<SaveTripMutationMutation>;
 export type SaveTripMutationMutationOptions = Apollo.BaseMutationOptions<SaveTripMutationMutation, SaveTripMutationMutationVariables>;
+export const CreateExperienceImageDocument = gql`
+    mutation CreateExperienceImage($imageList: [ExperienceImageInputType]!) {
+  createExperienceImages(imageList: $imageList) {
+    success
+    images {
+      id
+      image
+    }
+  }
+}
+    `;
+export type CreateExperienceImageMutationFn = Apollo.MutationFunction<CreateExperienceImageMutation, CreateExperienceImageMutationVariables>;
+
+/**
+ * __useCreateExperienceImageMutation__
+ *
+ * To run a mutation, you first call `useCreateExperienceImageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateExperienceImageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createExperienceImageMutation, { data, loading, error }] = useCreateExperienceImageMutation({
+ *   variables: {
+ *      imageList: // value for 'imageList'
+ *   },
+ * });
+ */
+export function useCreateExperienceImageMutation(baseOptions?: Apollo.MutationHookOptions<CreateExperienceImageMutation, CreateExperienceImageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateExperienceImageMutation, CreateExperienceImageMutationVariables>(CreateExperienceImageDocument, options);
+      }
+export type CreateExperienceImageMutationHookResult = ReturnType<typeof useCreateExperienceImageMutation>;
+export type CreateExperienceImageMutationResult = Apollo.MutationResult<CreateExperienceImageMutation>;
+export type CreateExperienceImageMutationOptions = Apollo.BaseMutationOptions<CreateExperienceImageMutation, CreateExperienceImageMutationVariables>;
+export const CreateExperinceDocument = gql`
+    mutation CreateExperince($experienceInput: ExperienceInput!, $experienceRelatedInput: ExperienceRelatedInputs) {
+  createExperience(
+    experienceInput: $experienceInput
+    experienceRelatedInput: $experienceRelatedInput
+  ) {
+    success
+    experience {
+      id
+      description
+      images {
+        edges {
+          node {
+            id
+            image
+          }
+        }
+      }
+      title
+      activities {
+        edges {
+          node {
+            id
+            titleFa
+            svg
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export type CreateExperinceMutationFn = Apollo.MutationFunction<CreateExperinceMutation, CreateExperinceMutationVariables>;
+
+/**
+ * __useCreateExperinceMutation__
+ *
+ * To run a mutation, you first call `useCreateExperinceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateExperinceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createExperinceMutation, { data, loading, error }] = useCreateExperinceMutation({
+ *   variables: {
+ *      experienceInput: // value for 'experienceInput'
+ *      experienceRelatedInput: // value for 'experienceRelatedInput'
+ *   },
+ * });
+ */
+export function useCreateExperinceMutation(baseOptions?: Apollo.MutationHookOptions<CreateExperinceMutation, CreateExperinceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateExperinceMutation, CreateExperinceMutationVariables>(CreateExperinceDocument, options);
+      }
+export type CreateExperinceMutationHookResult = ReturnType<typeof useCreateExperinceMutation>;
+export type CreateExperinceMutationResult = Apollo.MutationResult<CreateExperinceMutation>;
+export type CreateExperinceMutationOptions = Apollo.BaseMutationOptions<CreateExperinceMutation, CreateExperinceMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
   updateProfile(input: $updateProfileInput) {
@@ -8890,11 +9035,7 @@ export const TripDetailDocument = gql`
         node {
           id
           title
-          defaultImage
           description
-          place {
-            name
-          }
           activities {
             edges {
               node {
@@ -9891,6 +10032,8 @@ export const namedOperations = {
     LikeTripReviewMutation: 'LikeTripReviewMutation',
     DislikeTripReviewMutation: 'DislikeTripReviewMutation',
     SaveTripMutation: 'SaveTripMutation',
+    CreateExperienceImage: 'CreateExperienceImage',
+    CreateExperince: 'CreateExperince',
     UpdateProfile: 'UpdateProfile',
     UpdateUser: 'UpdateUser',
     FollowOrUnfollow: 'FollowOrUnfollow',

@@ -1,7 +1,17 @@
-import { Stack, Wrap, Text, Box, Divider, Image, Flex } from '@chakra-ui/react';
+import {
+  Stack,
+  Wrap,
+  Text,
+  Box,
+  Divider,
+  Image,
+  Flex,
+  IconButton,
+  Icon,
+} from '@chakra-ui/react';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
-import { FiEye, FiUsers } from 'react-icons/fi';
+import { FiEdit, FiEdit2, FiEdit3, FiEye, FiUsers } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
 import {
   ExperienceType,
@@ -12,17 +22,27 @@ import { IImage } from '../../ImageGallery';
 import ImageList from '../../ImageList';
 import AddEditButton from './AddEditButton';
 import { ActivityCard } from '../../cards/ActivityCard';
+import { IoClose } from 'react-icons/io5';
 
 interface Props {
   experiences: ExperienceTypeEdge[];
-  onAddButtonClick: () => void;
+  onAddClick: () => void;
   imageOnClick: any;
+  onEditClick: any;
+  onDeleteClick: any;
 }
 interface CardProps {
   experience: ExperienceType;
   imageOnClick: any;
+  onEditClick: any;
+  onDeleteClick: any;
 }
-function ExperienceCard({ experience, imageOnClick }: CardProps) {
+function ExperienceCard({
+  experience,
+  imageOnClick,
+  onDeleteClick,
+  onEditClick,
+}: CardProps) {
   const images = experience.images.edges.map(
     (i: any) =>
       ({
@@ -36,11 +56,30 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
       <Stack spacing="0.5">
         <Flex justify="space-between">
           <Stack>
-            <Text>{experience.title}</Text>
-            <Wrap fontSize="xs" align="center">
+            <Wrap spacing="3" align="center">
+              <Wrap>
+                <Icon
+                  aria-label="حذف"
+                  rounded="full"
+                  cursor="pointer"
+                  color="red"
+                  as={IoClose}
+                  onClick={() => onDeleteClick(experience.id)}
+                />
+                <Icon
+                  aria-label="ویرایش"
+                  cursor="pointer"
+                  color="green"
+                  as={FiEdit3}
+                  onClick={() => onEditClick(experience.id)}
+                />
+              </Wrap>
+              <Text>{experience.title}</Text>
+            </Wrap>
+            {/* <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
               <Text>{experience.place.name}</Text>
-            </Wrap>
+            </Wrap> */}
           </Stack>
           <Wrap spacing="0">
             {experience.activities?.edges.map((item) => (
@@ -73,11 +112,13 @@ export const EditTravelogueExperiences = (props: Props) => {
       <Wrap align="center">
         <FiEye />
         <Text fontWeight="extrabold">تجربه‌ها</Text>
-        <AddEditButton onClick={props.onAddButtonClick} mode="add" />
+        <AddEditButton onClick={props.onAddClick} mode="add" />
       </Wrap>
       <Stack spacing="2">
         {props.experiences?.map((item) => (
           <ExperienceCard
+            onDeleteClick={props.onDeleteClick}
+            onEditClick={props.onEditClick}
             key={item?.node?.id}
             experience={item?.node as ExperienceType}
             imageOnClick={props.imageOnClick}

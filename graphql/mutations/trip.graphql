@@ -92,3 +92,47 @@ mutation SaveTripMutation($saveTripTrip: ID) {
     success
   }
 }
+
+mutation CreateExperienceImage($imageList: [ExperienceImageInputType]!) {
+  createExperienceImages(imageList: $imageList) {
+    success
+    images {
+      id
+      image
+    }
+  }
+}
+
+mutation CreateExperince(
+  $experienceInput: ExperienceInput!
+  $experienceRelatedInput: ExperienceRelatedInputs
+) {
+  createExperience(
+    experienceInput: $experienceInput
+    experienceRelatedInput: $experienceRelatedInput
+  ) {
+    success
+    experience {
+      id
+      description
+      images {
+        edges {
+          node {
+            id
+            image
+          }
+        }
+      }
+      title
+      activities {
+        edges {
+          node {
+            id
+            titleFa
+            svg
+          }
+        }
+      }
+    }
+  }
+}

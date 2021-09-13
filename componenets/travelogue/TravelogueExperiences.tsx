@@ -28,10 +28,10 @@ function ExperienceCard(props: cardProps) {
         <Flex justify="space-between">
           <Stack>
             <Text>{props.node?.title}</Text>
-            <Wrap fontSize="xs" align="center">
+            {/* <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
               <Text>{props.node?.place.name}</Text>
-            </Wrap>
+            </Wrap> */}
           </Stack>
         </Flex>
         <Wrap fontSize="sm" fontWeight="light" p="2">

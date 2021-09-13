@@ -7,6 +7,8 @@ import ApiLoading from '../../componenets/ApiLoading';
 import EditTravelogueContainer from '../../componenets/travelogue/editTravelogue/EditTravelogueContainer';
 import { EditTravelogueHeader } from '../../componenets/travelogue/editTravelogue/EditTravelogueHeader';
 import {
+  CreateExperienceImageMutationVariables,
+  CreateExperinceMutationVariables,
   CreateSinglTransferMutationVariables,
   namedOperations,
   TripDetailQuery,
@@ -17,6 +19,8 @@ import {
   useAllProvincesOfCountryLazyQuery,
   useAllTransferTypesLazyQuery,
   useAllTripCategoriesQuery,
+  useCreateExperienceImageMutation,
+  useCreateExperinceMutation,
   useCreateSinglTransferMutation,
   useDeleteSingleTransferMutation,
   useDeleteTripMutation,
@@ -160,6 +164,34 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
+  const [createExperience, createExperienceStatus] = useCreateExperinceMutation(
+    {
+      onCompleted: (data) => {
+        toast({
+          title: 'تجربه با موفقیت افزوده شد.',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+        router.push('/me');
+      },
+      onError: () => {
+        toast({
+          title: 'حذف سفر با خطا مواجه شد.',
+          description: 'دوباره امتحان کنید',
+          status: 'error',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      },
+    }
+  );
+
+  const [createExperienceImages, createExperienceImagesStatus] =
+    useCreateExperienceImageMutation();
+
   const countriesQuery = useAllCountriesQuery();
   const [getProvincesOfCountry, provincesOfCountryQuery] =
     useAllProvincesOfCountryLazyQuery();
@@ -250,6 +282,11 @@ const EditTravelogueView = ({ id }: Props) => {
           deleteTransfer: (id: string) =>
             deleteTransfer({ variables: { id: id } }),
           getTransferTypes: () => getTransferTypes(),
+          createExperienceImages: (
+            inputs: CreateExperienceImageMutationVariables
+          ) => createExperienceImages({ variables: { ...inputs } }),
+          createExperience: (inputs: CreateExperinceMutationVariables) =>
+            createExperience({ variables: { ...inputs } }),
         }}
         queries={{
           deleteTripStatus,
@@ -266,6 +303,8 @@ const EditTravelogueView = ({ id }: Props) => {
           createTransferStatus,
           citiesOfProvinceQuery,
           transferTypesQuery,
+          createExperienceStatus,
+          createExperienceImagesStatus,
         }}
       />
     </>
