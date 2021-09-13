@@ -108,14 +108,15 @@ const AddExperienceModal = (props: Props) => {
   const handleCompressedUpload = (e: any) => {
     const image = e.target.files[0];
     setImages((prevState) => [...prevState, image]);
-
+    setUploading(true);
     new Compressor(image, {
       quality: 0.6, // 0.6 can also be used, but its not recommended to go below.
-
+      maxHeight: 1000,
+      maxWidth: 1000,
       success: (res) => {
         // compressedResult has the compressed file.
         // Use the compressed file to upload the images to your server.
-        setUploading(true);
+
         props.actions
           .createExperienceImages({ imageList: [{ image: res }] })
           .then((res) => {
