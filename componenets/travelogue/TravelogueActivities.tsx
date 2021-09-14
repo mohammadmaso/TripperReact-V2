@@ -36,6 +36,7 @@ const TravelogueActivities = (props: Props) => {
             svg={item?.node?.svg as string}
             title={item?.node?.title as string}
             id={item?.node?.id as string}
+            size={2}
           />
         ))}
       </Wrap>

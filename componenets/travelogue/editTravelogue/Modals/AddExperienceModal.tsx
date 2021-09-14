@@ -48,8 +48,8 @@ import {
   AllTransferTypesQuery,
   CreateSinglTransferMutationVariables,
   CreateSinglTransferMutation,
-  CreateExperinceMutation,
-  CreateExperinceMutationVariables,
+  CreateExperinceMutationMutation,
+  CreateExperinceMutationMutationVariables,
   CreateExperienceImageMutationVariables,
   CreateExperienceImageMutation,
 } from '../../../../graphql/generated/types';
@@ -64,10 +64,10 @@ interface Props {
   onClose: any;
   actions: {
     createExperience: (
-      inputs: CreateExperinceMutationVariables
+      inputs: CreateExperinceMutationMutationVariables
     ) => Promise<
       FetchResult<
-        CreateExperinceMutation,
+        CreateExperinceMutationMutation,
         Record<string, any>,
         Record<string, any>
       >
@@ -84,7 +84,7 @@ interface Props {
     getAllActivitites: () => void;
   };
   queries: {
-    createExperienceStatus: MutationResult<CreateExperinceMutation>;
+    createExperienceStatus: MutationResult<CreateExperinceMutationMutation>;
     createExperienceImagesStatus: MutationResult<CreateExperienceImageMutation>;
     allActivititesQuery: AllActivitiesQueryResult;
   };
@@ -173,11 +173,11 @@ const AddExperienceModal = (props: Props) => {
             props.actions.createExperience({
               experienceInput: {
                 title: values?.title,
-                description: values?.description,
+                description: values.description,
               },
               experienceRelatedInput: {
                 images: imagesUploadedId,
-                activities: values?.activities,
+                activities: values.activities,
               },
             });
           }}
