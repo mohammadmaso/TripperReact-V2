@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <ChakraProvider theme={theme}>
         <Fonts />
-        <PWAInstallPrompt />
+        {/* <PWAInstallPrompt /> */}
         <Component {...pageProps} />
       </ChakraProvider>
     </ApolloProvider>

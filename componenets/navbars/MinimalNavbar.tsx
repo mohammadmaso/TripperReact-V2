@@ -34,18 +34,18 @@ const MinimalNavBar = (props: any) => {
   const [stickyNav, setStickyNav] = useState(false);
   const { isSignedIn } = useIsSignedIn();
 
-  const handleScroll = () => {
-    if (window.pageYOffset > 200) {
-      if (!stickyNav) {
-        setStickyNav(true);
-      }
-    } else {
-      if (stickyNav) {
-        setStickyNav(false);
-      }
-    }
-  };
-  useEventListener('scroll', handleScroll);
+  // const handleScroll = () => {
+  //   if (window.pageYOffset > 200) {
+  //     if (!stickyNav) {
+  //       setStickyNav(true);
+  //     }
+  //   } else {
+  //     if (stickyNav) {
+  //       setStickyNav(false);
+  //     }
+  //   }
+  // };
+  // useEventListener('scroll', handleScroll);
 
   return (
     <Box>

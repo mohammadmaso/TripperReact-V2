@@ -30,6 +30,7 @@ import { BeatLoader } from 'react-spinners';
 import { fromPromise } from '@apollo/client';
 import { getNewToken } from '../graphql/ApolloLink';
 import { BiError } from 'react-icons/bi';
+import NavButtons from '../componenets/navbars/NavButtons';
 
 interface Props {
   minimal?: boolean;
@@ -57,19 +58,7 @@ const NavBarUserView = (props: Props) => {
   }
 
   if (error) {
-    return (
-      <Tooltip
-        label="خطا در دریافت پروفایل/ ورود دوباره"
-        aria-label="A tooltip"
-        placement="bottom-end"
-      >
-        <Icon
-          onClick={() => router.push('/auth/login')}
-          as={BiError}
-          color="red.300"
-        />
-      </Tooltip>
-    );
+    return <NavButtons />;
   }
 
   return (
