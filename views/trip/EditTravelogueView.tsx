@@ -8,7 +8,7 @@ import EditTravelogueContainer from '../../componenets/travelogue/editTravelogue
 import { EditTravelogueHeader } from '../../componenets/travelogue/editTravelogue/EditTravelogueHeader';
 import {
   CreateExperienceImageMutationVariables,
-  CreateExperinceMutationVariables,
+  CreateExperinceMutationMutationVariables,
   CreateSinglTransferMutationVariables,
   namedOperations,
   TripDetailQuery,
@@ -20,7 +20,7 @@ import {
   useAllTransferTypesLazyQuery,
   useAllTripCategoriesQuery,
   useCreateExperienceImageMutation,
-  useCreateExperinceMutation,
+  useCreateExperinceMutationMutation,
   useCreateSinglTransferMutation,
   useDeleteSingleTransferMutation,
   useDeleteTripMutation,
@@ -164,8 +164,8 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
-  const [createExperience, createExperienceStatus] = useCreateExperinceMutation(
-    {
+  const [createExperience, createExperienceStatus] =
+    useCreateExperinceMutationMutation({
       onCompleted: (data) => {
         toast({
           title: 'تجربه با موفقیت افزوده شد.',
@@ -174,11 +174,10 @@ const EditTravelogueView = ({ id }: Props) => {
           isClosable: true,
           position: 'top-right',
         });
-        router.push('/me');
       },
       onError: () => {
         toast({
-          title: 'حذف سفر با خطا مواجه شد.',
+          title: 'ساخت تجربه با خطا مواجه شد.',
           description: 'دوباره امتحان کنید',
           status: 'error',
           duration: 8000,
@@ -186,8 +185,7 @@ const EditTravelogueView = ({ id }: Props) => {
           position: 'top-right',
         });
       },
-    }
-  );
+    });
 
   const [createExperienceImages, createExperienceImagesStatus] =
     useCreateExperienceImageMutation();
@@ -285,8 +283,9 @@ const EditTravelogueView = ({ id }: Props) => {
           createExperienceImages: (
             inputs: CreateExperienceImageMutationVariables
           ) => createExperienceImages({ variables: { ...inputs } }),
-          createExperience: (inputs: CreateExperinceMutationVariables) =>
-            createExperience({ variables: { ...inputs } }),
+          createExperience: (
+            inputs: CreateExperinceMutationMutationVariables
+          ) => createExperience({ variables: { ...inputs } }),
         }}
         queries={{
           deleteTripStatus,

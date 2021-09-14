@@ -39,6 +39,7 @@ const NavProfile = (props: Props) => {
           bgColor="transparent"
           leftIcon={<ChevronDownIcon />}
           size="sm"
+          rounded="full"
         >
           {props.minimal ? (
             <FiUser />
@@ -47,8 +48,8 @@ const NavProfile = (props: Props) => {
               <Avatar
                 shadow="lg"
                 size="md"
-                h="10"
-                w="10"
+                h="8"
+                w="8"
                 // name={data.me.firstName + data.me.lastName}
                 src={props.user?.avatar}
               />
@@ -64,13 +65,15 @@ const NavProfile = (props: Props) => {
         </MenuButton>
         <MenuList>
           <Link href="/me" passHref>
-            <MenuItem icon={<AtSignIcon />} fontWeight="light">
+            <MenuItem fontSize="sm" icon={<AtSignIcon />} fontWeight="light">
               {props.user?.username}
             </MenuItem>
           </Link>
           <Divider />
           <Link href="/travelogues/new/init" passHref>
-            <MenuItem icon={<FiFeather />}>سفرنامه جدید</MenuItem>
+            <MenuItem fontSize="sm" fontWeight="semibold" icon={<FiFeather />}>
+              سفرنامه جدید
+            </MenuItem>
           </Link>
           {/* <Link href="/wizard/" passHref>
             <MenuItem icon={<BiListPlus />}>برنامه‌ریزی سفر</MenuItem>
@@ -79,12 +82,28 @@ const NavProfile = (props: Props) => {
           {/* <MenuItem icon={<FiUser />}>پروفایل من</MenuItem> */}
 
           <Link href="/me" passHref>
-            <MenuItem icon={<MdCardTravel />}>سفرهای من</MenuItem>
+            <MenuItem
+              fontSize="sm"
+              fontWeight="semibold"
+              icon={<MdCardTravel />}
+            >
+              سفرهای من
+            </MenuItem>
           </Link>
-          <MenuItem onClick={toggleColorMode} icon={<MoonIcon />}>
+          <MenuItem
+            fontSize="sm"
+            fontWeight="semibold"
+            onClick={toggleColorMode}
+            icon={<MoonIcon />}
+          >
             حالت شب
           </MenuItem>
-          <MenuItem onClick={props.signOut} icon={<FiLogOut />}>
+          <MenuItem
+            fontSize="sm"
+            fontWeight="semibold"
+            onClick={props.signOut}
+            icon={<FiLogOut />}
+          >
             خروج
           </MenuItem>
         </MenuList>

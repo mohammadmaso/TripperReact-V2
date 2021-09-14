@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import {
   Box,
@@ -35,10 +35,23 @@ interface Props {
   queries: any;
 }
 export default function TripSmallCard({ data }: Props) {
+  const [isLiked, setIsLiked] = useState(data.userLiked);
+  const [likeCount, setLikeCount] = useState(data.likes);
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
     refetchQueries: [namedOperations.Query.TripDetailLikes],
     variables: { createTripLikeTripId: data.id },
+    onCompleted: (data) => {
+      setIsLiked(data.createTripLike?.like);
+      setLikeCount(data?.createTripLike?.trip?.likes);
+    },
   });
+
+  const onLikeTrip = () => {
+    isLiked ? setLikeCount(likeCount - 1) : setLikeCount(likeCount + 1);
+
+    setIsLiked(!isLiked);
+    likeTrip();
+  };
 
   return (
     // <Link href={`/travelogues/${data.id}`} passHref>
@@ -96,27 +109,18 @@ export default function TripSmallCard({ data }: Props) {
           </Flex>
           <Stack justify="flex-start" alignItems="flex-end">
             <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
-              <Text fontSize="sm">
-                {likeTripStatus?.data == null
-                  ? `${data.likes}`
-                  : `${likeTripStatus?.data?.createTripLike?.trip?.likes}`}
-              </Text>
+              <Text fontSize="sm">{likeCount}</Text>
               <Wrap
                 spacing="0.5"
                 transition={'all .3s ease'}
                 _hover={{ transform: 'scale(1.3,1.3)' }}
-                onClick={() => likeTrip()}
+                onClick={onLikeTrip}
                 cursor="pointer"
               >
-                {!likeTripStatus?.loading ? (
-                  data.userLiked ||
-                  likeTripStatus?.data?.createTripLike?.like ? (
-                    <AiFillHeart size="20" color="red" />
-                  ) : (
-                    <AiOutlineHeart size="20" />
-                  )
+                {isLiked ? (
+                  <AiFillHeart size="20" color="red" />
                 ) : (
-                  <Spinner size="xs" />
+                  <AiOutlineHeart size="20" />
                 )}
               </Wrap>
             </Wrap>

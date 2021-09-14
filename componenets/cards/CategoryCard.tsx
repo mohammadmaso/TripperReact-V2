@@ -33,25 +33,26 @@ export default function CategoryCard(props: any) {
           objectPosition="top"
           fallbackSrc="images/placeholder.png"
         />
-        <Flex
+        <Center
           position="absolute"
           bottom="0"
           right="0"
-          bgGradient="linear(to-t, #000000,#ffffff00)"
-          height="70%"
+          bgGradient="linear(to-t, #000000cc,#ffffff00)"
+          height="100%"
           width="full"
           align="flex-end"
         >
           <Text
             width="full"
-            textAlign="end"
-            fontWeight={500}
+            textAlign="center"
+            fontWeight="extrabold"
+            fontSize="lg"
             color={'white'}
             p="3"
           >
             {props.title}
           </Text>
-        </Flex>
+        </Center>
       </Box>
     </Center>
   );

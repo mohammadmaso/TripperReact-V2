@@ -103,7 +103,7 @@ mutation CreateExperienceImage($imageList: [ExperienceImageInputType]!) {
   }
 }
 
-mutation CreateExperince(
+mutation CreateExperinceMutation(
   $experienceInput: ExperienceInput!
   $experienceRelatedInput: ExperienceRelatedInputs
 ) {

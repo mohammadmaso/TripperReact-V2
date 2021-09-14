@@ -6513,13 +6513,13 @@ export type CreateExperienceImageMutation = (
   )> }
 );
 
-export type CreateExperinceMutationVariables = Exact<{
+export type CreateExperinceMutationMutationVariables = Exact<{
   experienceInput: ExperienceInput;
   experienceRelatedInput?: Maybe<ExperienceRelatedInputs>;
 }>;
 
 
-export type CreateExperinceMutation = (
+export type CreateExperinceMutationMutation = (
   { __typename?: 'Mutation' }
   & { createExperience?: Maybe<(
     { __typename?: 'CreateExperienceMutation' }
@@ -8282,8 +8282,8 @@ export function useCreateExperienceImageMutation(baseOptions?: Apollo.MutationHo
 export type CreateExperienceImageMutationHookResult = ReturnType<typeof useCreateExperienceImageMutation>;
 export type CreateExperienceImageMutationResult = Apollo.MutationResult<CreateExperienceImageMutation>;
 export type CreateExperienceImageMutationOptions = Apollo.BaseMutationOptions<CreateExperienceImageMutation, CreateExperienceImageMutationVariables>;
-export const CreateExperinceDocument = gql`
-    mutation CreateExperince($experienceInput: ExperienceInput!, $experienceRelatedInput: ExperienceRelatedInputs) {
+export const CreateExperinceMutationDocument = gql`
+    mutation CreateExperinceMutation($experienceInput: ExperienceInput!, $experienceRelatedInput: ExperienceRelatedInputs) {
   createExperience(
     experienceInput: $experienceInput
     experienceRelatedInput: $experienceRelatedInput
@@ -8314,33 +8314,33 @@ export const CreateExperinceDocument = gql`
   }
 }
     `;
-export type CreateExperinceMutationFn = Apollo.MutationFunction<CreateExperinceMutation, CreateExperinceMutationVariables>;
+export type CreateExperinceMutationMutationFn = Apollo.MutationFunction<CreateExperinceMutationMutation, CreateExperinceMutationMutationVariables>;
 
 /**
- * __useCreateExperinceMutation__
+ * __useCreateExperinceMutationMutation__
  *
- * To run a mutation, you first call `useCreateExperinceMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateExperinceMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateExperinceMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateExperinceMutationMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createExperinceMutation, { data, loading, error }] = useCreateExperinceMutation({
+ * const [createExperinceMutationMutation, { data, loading, error }] = useCreateExperinceMutationMutation({
  *   variables: {
  *      experienceInput: // value for 'experienceInput'
  *      experienceRelatedInput: // value for 'experienceRelatedInput'
  *   },
  * });
  */
-export function useCreateExperinceMutation(baseOptions?: Apollo.MutationHookOptions<CreateExperinceMutation, CreateExperinceMutationVariables>) {
+export function useCreateExperinceMutationMutation(baseOptions?: Apollo.MutationHookOptions<CreateExperinceMutationMutation, CreateExperinceMutationMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateExperinceMutation, CreateExperinceMutationVariables>(CreateExperinceDocument, options);
+        return Apollo.useMutation<CreateExperinceMutationMutation, CreateExperinceMutationMutationVariables>(CreateExperinceMutationDocument, options);
       }
-export type CreateExperinceMutationHookResult = ReturnType<typeof useCreateExperinceMutation>;
-export type CreateExperinceMutationResult = Apollo.MutationResult<CreateExperinceMutation>;
-export type CreateExperinceMutationOptions = Apollo.BaseMutationOptions<CreateExperinceMutation, CreateExperinceMutationVariables>;
+export type CreateExperinceMutationMutationHookResult = ReturnType<typeof useCreateExperinceMutationMutation>;
+export type CreateExperinceMutationMutationResult = Apollo.MutationResult<CreateExperinceMutationMutation>;
+export type CreateExperinceMutationMutationOptions = Apollo.BaseMutationOptions<CreateExperinceMutationMutation, CreateExperinceMutationMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
   updateProfile(input: $updateProfileInput) {
@@ -10033,7 +10033,7 @@ export const namedOperations = {
     DislikeTripReviewMutation: 'DislikeTripReviewMutation',
     SaveTripMutation: 'SaveTripMutation',
     CreateExperienceImage: 'CreateExperienceImage',
-    CreateExperince: 'CreateExperince',
+    CreateExperinceMutation: 'CreateExperinceMutation',
     UpdateProfile: 'UpdateProfile',
     UpdateUser: 'UpdateUser',
     FollowOrUnfollow: 'FollowOrUnfollow',

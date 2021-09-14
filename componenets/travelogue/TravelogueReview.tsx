@@ -61,6 +61,15 @@ const TravelogueReview = (props: Props) => {
       },
     });
 
+  const onLikeReview = () => {
+    setIsLiked(!isLiked);
+    likeReview();
+  };
+  const onDisLikeReview = () => {
+    setIsDisLiked(!isDisLiked);
+    disLikeReview();
+  };
+
   const [likeCount, setLikeCount] = useState(props.likesCount);
   const [disLikeCount, setDisLikeCount] = useState(props.dislikesCount);
   const [isLiked, setIsLiked] = useState(props.userLiked == '1');
@@ -96,7 +105,7 @@ const TravelogueReview = (props: Props) => {
                 borderRadius="md"
                 alignItems="center"
               >
-                <Box onClick={() => disLikeReview()} cursor="pointer">
+                <Box onClick={() => onDisLikeReview()} cursor="pointer">
                   <Icon as={BiDislike} color={isDisLiked ? 'red' : 'black'} />
                 </Box>
                 <Text color={isDisLiked ? 'red' : 'black'}>{disLikeCount}</Text>
@@ -107,7 +116,7 @@ const TravelogueReview = (props: Props) => {
                 px="1"
                 alignItems="center"
               >
-                <Box onClick={() => likeReview()} cursor="pointer">
+                <Box onClick={() => onLikeReview()} cursor="pointer">
                   <Icon as={BiLike} color={isLiked ? 'green' : 'black'} />
                 </Box>
 

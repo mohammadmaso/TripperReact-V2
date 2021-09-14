@@ -26,6 +26,7 @@ import { NAV_ITEMS } from './NAV_ITEMS';
 import Logo from '../logos/TextLogo';
 import { useAddToHomescreenPrompt } from '../../hooks/useAddToHomescreenPrompt';
 import { SocialButtons } from '../SocialButtons';
+import CircleLogo from '../logos/CircleLogo';
 
 export const MobileNav = ({
   onClose,
@@ -43,7 +44,7 @@ export const MobileNav = ({
           <DrawerCloseButton />
 
           <DrawerHeader>
-            <Logo height={70} width={150} />
+            <CircleLogo />
             <Divider />
           </DrawerHeader>
           <DrawerBody>

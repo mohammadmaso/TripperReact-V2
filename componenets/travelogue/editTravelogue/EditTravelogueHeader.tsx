@@ -32,6 +32,7 @@ import {
   FiEdit2,
   FiEdit3,
   FiEye,
+  FiEyeOff,
   FiHeart,
   FiMoreVertical,
   FiShare,
@@ -199,13 +200,14 @@ export function EditTravelogueHeader(props: Props) {
           <ButtonGroup>
             <Button
               colorScheme="primary"
+              variant="ghost"
               isDisabled={
                 props.queries?.publishTripStatus?.loading ||
                 props.queries?.unPublishTripStatus?.loading
               }
               size="sm"
               rounded="sm"
-              leftIcon={<FiEye />}
+              leftIcon={isPublished ? <FiEyeOff /> : <FiEye />}
               onClick={handlePublishClick}
             >
               {isPublished ? 'عدم انتشار' : 'انتشار'}
@@ -216,6 +218,7 @@ export function EditTravelogueHeader(props: Props) {
               aria-label="حذف سفرنامه"
               onClick={deleteModal.onOpen}
               rounded="sm"
+              variant="ghost"
               icon={<FiTrash2 />}
             />
           </ButtonGroup>
