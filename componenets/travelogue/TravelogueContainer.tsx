@@ -33,8 +33,7 @@ import TravelogueActivities from '../../componenets/travelogue/TravelogueActivit
 import { TripDetailQuery, TripImageType } from '../../graphql/generated/types';
 import ApiLoading from '../ApiLoading';
 import TravelogueReview from './TravelogueReview';
-import useScrollReachedId from '../../hooks/useIsScrollReachedId';
-import useIsScrollReachedId from '../../hooks/useIsScrollReachedId';
+
 import EmptyResult from '../EmptyResult';
 import { BiComment, BiCommentAdd } from 'react-icons/bi';
 import useIsSignedIn from '../../hooks/useIsSignedIn';

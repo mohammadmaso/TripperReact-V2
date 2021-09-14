@@ -103,18 +103,18 @@ export function EditTravelogueHeader(props: Props) {
     }
   };
 
-  const handleScroll = () => {
-    if (window.pageYOffset > 120) {
-      if (!stickyHeader) {
-        setStickyHeader(true);
-      }
-    } else {
-      if (stickyHeader) {
-        setStickyHeader(false);
-      }
-    }
-  };
-  useEventListener('scroll', handleScroll);
+  // const handleScroll = () => {
+  //   if (window.pageYOffset > 120) {
+  //     if (!stickyHeader) {
+  //       setStickyHeader(true);
+  //     }
+  //   } else {
+  //     if (stickyHeader) {
+  //       setStickyHeader(false);
+  //     }
+  //   }
+  // };
+  // useEventListener('scroll', handleScroll);
 
   return (
     <>
