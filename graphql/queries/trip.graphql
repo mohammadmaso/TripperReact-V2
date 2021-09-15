@@ -304,6 +304,8 @@ query TripDetail($tripId: ID!) {
     province {
       id
       name
+      longitude
+      latitude
     }
     categories {
       edges {

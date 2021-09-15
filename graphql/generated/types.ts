@@ -469,6 +469,7 @@ export type AccommodationCollectionsType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   user: UserType;
+  accommodation: AccommodationType;
 };
 
 export type AccommodationCollectionsTypeConnection = {
@@ -484,6 +485,180 @@ export type AccommodationCollectionsTypeEdge = {
   __typename?: 'AccommodationCollectionsTypeEdge';
   /** The item at the end of the edge */
   node?: Maybe<AccommodationCollectionsType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type AccommodationImageType = Node & {
+  __typename?: 'AccommodationImageType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  image: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  copyrightName?: Maybe<Scalars['String']>;
+  user?: Maybe<UserType>;
+  accommodationImages: AccommodationTypeConnection;
+};
+
+
+export type AccommodationImageTypeAccommodationImagesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['ID']>;
+  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+};
+
+export type AccommodationImageTypeConnection = {
+  __typename?: 'AccommodationImageTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<AccommodationImageTypeEdge>>;
+};
+
+/** A Relay edge containing a `AccommodationImageType` and its cursor. */
+export type AccommodationImageTypeEdge = {
+  __typename?: 'AccommodationImageTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<AccommodationImageType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type AccommodationType = Node & {
+  __typename?: 'AccommodationType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  defaultImage: Scalars['String'];
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  city: CityType;
+  images: AccommodationImageTypeConnection;
+  accommodationType: AccommodationTypeTypeConnection;
+  tripsOfAccomodation: TripTypeConnection;
+  usersSavedAccommodation: AccommodationCollectionsTypeConnection;
+};
+
+
+export type AccommodationTypeImagesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['String']>;
+  latitude_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type AccommodationTypeAccommodationTypeArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type AccommodationTypeTripsOfAccomodationArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  categories_Title_Iexact?: Maybe<Scalars['String']>;
+  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cities_Name_Iexact?: Maybe<Scalars['String']>;
+  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  country?: Maybe<Scalars['ID']>;
+  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  country_Name_Iexact?: Maybe<Scalars['String']>;
+  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  activities_Title_Iexact?: Maybe<Scalars['String']>;
+  published?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type AccommodationTypeUsersSavedAccommodationArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  user?: Maybe<Scalars['ID']>;
+  accommodation?: Maybe<Scalars['ID']>;
+};
+
+export type AccommodationTypeConnection = {
+  __typename?: 'AccommodationTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<AccommodationTypeEdge>>;
+};
+
+/** A Relay edge containing a `AccommodationType` and its cursor. */
+export type AccommodationTypeEdge = {
+  __typename?: 'AccommodationTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<AccommodationType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
+export type AccommodationTypeType = Node & {
+  __typename?: 'AccommodationTypeType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  svg: Scalars['String'];
+  image: Scalars['String'];
+  accommodationmodelSet: AccommodationTypeConnection;
+};
+
+
+export type AccommodationTypeTypeAccommodationmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['ID']>;
+  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+};
+
+export type AccommodationTypeTypeConnection = {
+  __typename?: 'AccommodationTypeTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<AccommodationTypeTypeEdge>>;
+};
+
+/** A Relay edge containing a `AccommodationTypeType` and its cursor. */
+export type AccommodationTypeTypeEdge = {
+  __typename?: 'AccommodationTypeTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<AccommodationTypeType>;
   /** A cursor for use in pagination */
   cursor: Scalars['String'];
 };
@@ -790,6 +965,7 @@ export type CityType = Node & {
   toursOfCity: TourTypeConnection;
   tripsOfCity: TripTypeConnection;
   placesOfCity: PlaceTypeConnection;
+  accommodationsOfCity: AccommodationTypeConnection;
   transferSrc: TransferTypeConnection;
   transferDest: TransferTypeConnection;
 };
@@ -875,6 +1051,19 @@ export type CityTypePlacesOfCityArgs = {
   type?: Maybe<Scalars['ID']>;
   type_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   type_Title_Iexact?: Maybe<Scalars['String']>;
+};
+
+
+export type CityTypeAccommodationsOfCityArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['ID']>;
+  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
 };
 
 
@@ -1457,11 +1646,15 @@ export type ExperienceImageTypeEdge = {
 export type ExperienceInput = {
   title: Scalars['String'];
   description: Scalars['String'];
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
 };
 
 export type ExperienceInputUpdate = {
   title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
 };
 
 export type ExperienceRelatedInputs = {
@@ -1477,6 +1670,8 @@ export type ExperienceType = Node & {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   published: Scalars['Boolean'];
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
   author: UserType;
   activities: TripActivitieTypeConnection;
   images: ExperienceImageTypeConnection;
@@ -2943,6 +3138,12 @@ export type PublishTripMutation = {
 export type Query = {
   __typename?: 'Query';
   /** The ID of the object */
+  accomodation?: Maybe<AccommodationType>;
+  allAccomodations?: Maybe<AccommodationTypeConnection>;
+  /** The ID of the object */
+  accomodationType?: Maybe<AccommodationTypeType>;
+  allAccomodationTypes?: Maybe<AccommodationTypeTypeConnection>;
+  /** The ID of the object */
   notification?: Maybe<NotificationType>;
   notificationsCount?: Maybe<Scalars['Int']>;
   /** The ID of the object */
@@ -3045,6 +3246,40 @@ export type Query = {
   tripImage?: Maybe<TripImageType>;
   allTripImages?: Maybe<TripImageTypeConnection>;
   allActivities?: Maybe<TripActivitieTypeConnection>;
+};
+
+
+export type QueryAccomodationArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllAccomodationsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['ID']>;
+  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+};
+
+
+export type QueryAccomodationTypeArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllAccomodationTypesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title?: Maybe<Scalars['String']>;
+  title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -4864,6 +5099,7 @@ export type TripType = Node & {
   experiences?: Maybe<ExperienceTypeConnection>;
   transfers: TransferTypeConnection;
   cities: CityTypeConnection;
+  accommodations: AccommodationTypeConnection;
   likes: Scalars['Int'];
   tripLikes?: Maybe<TripLikeType>;
   reviewsOfTrip: TripReviewTypeConnection;
@@ -5032,6 +5268,20 @@ export type TripTypeCitiesArgs = {
   province_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
   province_Name_Iexact?: Maybe<Scalars['String']>;
   province_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+/** Trip description */
+export type TripTypeAccommodationsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  city?: Maybe<Scalars['ID']>;
+  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
 };
 
 
@@ -5269,6 +5519,7 @@ export type UserNode = Node & {
   placesImages: PlaceImageTypeConnection;
   placesVideos: PlaceVideoTypeConnection;
   feelsOfUser: PlaceFeelTypeConnection;
+  accommodationimagemodelSet: AccommodationImageTypeConnection;
   likedAccessories: AccessoryLikeTypeConnection;
   articles: ArticleTypeConnection;
   articleReviews: ArticleReviewTypeConnection;
@@ -5526,6 +5777,17 @@ export type UserNodeFeelsOfUserArgs = {
 };
 
 
+export type UserNodeAccommodationimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['String']>;
+  latitude_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
 export type UserNodeLikedAccessoriesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -5743,6 +6005,7 @@ export type UserType = Node & {
   placesImages: PlaceImageTypeConnection;
   placesVideos: PlaceVideoTypeConnection;
   feelsOfUser: PlaceFeelTypeConnection;
+  accommodationimagemodelSet: AccommodationImageTypeConnection;
   likedAccessories: AccessoryLikeTypeConnection;
   articles: ArticleTypeConnection;
   articleReviews: ArticleReviewTypeConnection;
@@ -5997,6 +6260,17 @@ export type UserTypeFeelsOfUserArgs = {
   place?: Maybe<Scalars['ID']>;
   user?: Maybe<Scalars['ID']>;
   feel?: Maybe<Scalars['String']>;
+};
+
+
+export type UserTypeAccommodationimagemodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  latitude?: Maybe<Scalars['String']>;
+  latitude_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -7030,7 +7304,7 @@ export type TripDetailQuery = (
       & Pick<CountryType, 'id' | 'name'>
     ), province: (
       { __typename?: 'ProvinceType' }
-      & Pick<ProvinceType, 'id' | 'name'>
+      & Pick<ProvinceType, 'id' | 'name' | 'longitude' | 'latitude'>
     ), categories: (
       { __typename?: 'TripCategoryTypeConnection' }
       & { edges: Array<Maybe<(
@@ -9106,6 +9380,8 @@ export const TripDetailDocument = gql`
     province {
       id
       name
+      longitude
+      latitude
     }
     categories {
       edges {

@@ -1,14 +1,165 @@
-import { Stack, Wrap, Text, Box, Center } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import ReactMapGL from 'react-map-gl';
+import { Stack, Wrap, Text, Box, Center, Image } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import ReactMapGL, {
+  CanvasOverlay,
+  Layer,
+  NavigationControl,
+  ScaleControl,
+  Source,
+  HTMLOverlay,
+  Marker,
+} from 'react-map-gl';
+import * as turf from '@turf/turf';
 import { FiMap } from 'react-icons/fi';
+import { TripDetailQuery } from '../../graphql/generated/types';
+import { TravelogueTransferCard } from './TravelogueTransfers';
+import { FeatureCollection, LineString } from '@turf/turf';
 
-export function TravelogueMap(props: any) {
-  const [viewport, setViewport] = useState({
-    latitude: 37.7577,
-    longitude: -122.4376,
+const getArchRoute = (originAirport: any, destinationAirport: any) => {
+  const start = [parseFloat(originAirport[0]), parseFloat(originAirport[1])];
+  const end = [
+    parseFloat(destinationAirport[0]),
+    parseFloat(destinationAirport[1]),
+  ];
+  const distance = turf.distance(start, end);
+  const midpoint = turf.midpoint(start, end);
+  const bearing = turf.bearing(start, end) - 90;
+  const destination = turf.destination(midpoint, distance, bearing);
+
+  const curvedLine = turf.lineArc(
+    destination,
+    turf.distance(destination, start),
+    turf.bearing(destination, end),
+    turf.bearing(destination, start),
+    { steps: 128 }
+  );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  return curvedLine;
+};
+
+interface Props {
+  data: TripDetailQuery;
+}
+
+export function TravelogueMap({ data }: Props) {
+  const mapCenter = {
+    latitude: parseFloat(data.trip?.province.latitude),
+    longitude: parseFloat(data.trip?.province.longitude),
     zoom: 8,
-  });
+  };
+
+  const transferLayer = {
+    source: 'route',
+    layout: {
+      'line-join': 'round',
+      'line-cap': 'round',
+    },
+    paint: {
+      'line-color': '#333333',
+      'line-width': 3,
+    },
+  };
+
+  var transfers = data.trip?.transfers.edges.map((item) => ({
+    transferData: item?.node,
+    midPoint: [
+      (parseFloat(item?.node?.src.latitude) +
+        parseFloat(item?.node?.destination.latitude)) /
+        2,
+      (parseFloat(item?.node?.src.longitude) +
+        parseFloat(item?.node?.destination.longitude)) /
+        2,
+    ],
+    type: 'FeatureCollection',
+    features: [
+      {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: [
+            [
+              parseFloat(item?.node?.src.latitude),
+              parseFloat(item?.node?.src.longitude),
+            ],
+            [
+              parseFloat(item?.node?.destination.latitude),
+              parseFloat(item?.node?.destination.longitude),
+            ],
+          ],
+        },
+      },
+    ],
+  }));
+
+  let steps = 10;
+
+  const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
+  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
+  C20.1,15.8,20.2,15.8,20.2,15.7z`;
+
+  const SIZE = 20;
+
+  const transfersMarker = React.useMemo(
+    () =>
+      transfers?.map((item, index) => (
+        <div key={index}>
+          <Marker longitude={item.midPoint[0]} latitude={item.midPoint[1]}>
+            <Center
+              borderWidth="1px"
+              borderColor="gray.800"
+              h="2rem"
+              w="2rem"
+              borderRadius="full"
+              bgColor="yellow.400"
+            >
+              <Image
+                filter={
+                  'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
+                }
+                h="15"
+                w="15"
+                src={item?.transferData?.transferType?.svg!}
+                alt=""
+              />
+            </Center>
+          </Marker>
+          {item.features[0].geometry.coordinates.map((point) => (
+            <Marker
+              key={`marker-${index}`}
+              longitude={point[0]}
+              latitude={point[1]}
+            >
+              <svg
+                height={SIZE}
+                viewBox="0 0 24 24"
+                style={{
+                  cursor: 'pointer',
+                  fill: 'green',
+                  stroke: 'none',
+                  transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
+                }}
+              >
+                <path d={ICON} />
+              </svg>
+            </Marker>
+          ))}
+        </div>
+      )),
+    [data]
+  );
+
+  var greatCircles = transfers?.map((item) =>
+    getArchRoute(
+      item.features[0].geometry.coordinates[0],
+      item.features[0].geometry.coordinates[1]
+    )
+  );
+
+  const [viewport, setViewport] = useState(mapCenter);
+
   return (
     <Stack>
       <Wrap align="center">
@@ -16,7 +167,7 @@ export function TravelogueMap(props: any) {
         <Text fontWeight="extrabold">نقشه سفر</Text>
       </Wrap>
       <Box position="relative">
-        <Center
+        {/* <Center
           position="absolute"
           left={'calc(50% - 50px)'}
           top={'calc(50% - 10px)'}
@@ -26,8 +177,8 @@ export function TravelogueMap(props: any) {
           zIndex="10"
         >
           <Text fontSize="sm">درحال توسعه</Text>
-        </Center>
-        <Box style={{ filter: 'blur(5px)' }}>
+        </Center> */}
+        <Box>
           <ReactMapGL
             mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
             {...viewport}
@@ -35,12 +186,41 @@ export function TravelogueMap(props: any) {
             width="100%"
             height="500px"
             scrollZoom={false}
-            dragPan={false}
-            touchZoom={false}
-            touchRotate={false}
+            // dragPan={false}
+            // touchZoom={false}
+            // touchRotate={false}
 
-            // onViewportChange={(viewport: any) => setViewport(viewport)}
-          />
+            onViewportChange={(viewport: any) => setViewport(viewport)}
+          >
+            {greatCircles?.map((item, index) => (
+              <div key={index}>
+                <Source id={`lineSource-${index}`} type="geojson" data={item}>
+                  <Layer
+                    type="line"
+                    id={`lineLayer-${index}`}
+                    {...transferLayer}
+                    source="route"
+                    layout={{
+                      'line-join': 'round',
+                      'line-cap': 'round',
+                    }}
+                    paint={{
+                      'line-color': '#333333',
+                      'line-width': 3,
+                    }}
+                  />
+                </Source>
+              </div>
+            ))}
+
+            <NavigationControl
+              style={{
+                right: 10,
+                top: 10,
+              }}
+            />
+            {transfersMarker}
+          </ReactMapGL>
         </Box>
       </Box>
     </Stack>

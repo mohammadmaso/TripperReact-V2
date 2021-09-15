@@ -16,7 +16,7 @@ export default function Home() {
       <CallToActionWithVideo />
       <LastTripsView />
       <TripCategoriesView />
-      <CallToActionCreateGroupTrip />
+      {/* <CallToActionCreateGroupTrip /> */}
       <LastArticlesView />
     </BaseLayout>
   );

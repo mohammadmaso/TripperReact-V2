@@ -16,7 +16,7 @@ export function EditTravelogueMap(props: any) {
         <Text fontWeight="extrabold">نقشه سفر</Text>
       </Wrap>
       <Box position="relative">
-        <Center
+        {/* <Center
           position="absolute"
           left={'calc(50% - 50px)'}
           top={'calc(50% - 10px)'}
@@ -26,7 +26,7 @@ export function EditTravelogueMap(props: any) {
           zIndex="10"
         >
           <Text fontSize="sm">درحال توسعه</Text>
-        </Center>
+        </Center> */}
         <Box style={{ filter: 'blur(5px)' }}>
           <ReactMapGL
             mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"

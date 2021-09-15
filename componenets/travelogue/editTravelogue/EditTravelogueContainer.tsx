@@ -21,7 +21,6 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import BaseLayout from '../../../layouts/BaseLayout';
 import { EditTravelogueAccomodations } from './EditTravelogueAccomodations';
-import { EditTravelogueMap } from './EditTravelogueMap';
 import { EditTravelogueHeader } from './EditTravelogueHeader';
 import { EditTravelogueGallery } from './EditTravelogueGallery';
 import { EditTravelogueDescription } from './EditTravelogueDescription';
@@ -34,6 +33,7 @@ import EditTravelogueActivities from './EditTravelogueActivities';
 import {
   AccessoryType,
   AccessoryTypeEdge,
+  AccommodationType,
   ExperienceType,
   ExperienceTypeEdge,
   TransferType,
@@ -60,6 +60,8 @@ import { FiRotateCcw, FiSave } from 'react-icons/fi';
 import ActivitiesModal from './Modals/ActivitiesModal';
 import AddTransferModal from './Modals/AddTransferModal';
 import AddExperienceModal from './Modals/AddExperienceModal';
+import { TravelogueMap } from '../TravelogueMap';
+import AddAccomodationsModal from './Modals/AddAccomodationsModal';
 
 interface Props {
   data: TripDetailQuery;
@@ -297,7 +299,7 @@ export default function EditTravelogueContainer({
 
               <Divider />
               <EditTravelogueAccomodations
-                onAddButtonClick={editeInitModal.onOpen}
+                onAddButtonClick={addAccomodationModal.onOpen}
               />
               <Divider />
               <EditTravelogueTransfers
@@ -362,7 +364,7 @@ export default function EditTravelogueContainer({
 
           <Wrap flex="1" pt={{ base: '5', md: '0', lg: '0' }}>
             <Stack pr={{ base: '0', md: '5', lg: '5' }} spacing="4" w="full">
-              <EditTravelogueMap />
+              <TravelogueMap data={data} />
 
               <Divider />
               <EditTravelogueActivities
@@ -418,6 +420,22 @@ export default function EditTravelogueContainer({
           }));
         }}
       />
+
+      <AddAccomodationsModal
+        data={tripData}
+        queries={{ ...queries }}
+        actions={{ ...actions }}
+        {...addAccomodationModal}
+        onAddAccomodation={(accomodation: AccommodationType) => {
+          setTripData((prevState) => ({
+            ...prevState,
+            accomodation: [
+              ...(prevState.accomodation as Array<any>),
+              { node: accomodation },
+            ],
+          }));
+        }}
+      />
       <AddAccessoryModal
         queries={{ ...queries }}
         actions={{ ...actions }}
@@ -434,6 +452,7 @@ export default function EditTravelogueContainer({
         }}
       />
       <AddExperienceModal
+        data={tripData}
         queries={{ ...queries }}
         actions={{ ...actions }}
         {...addExperienceModal}

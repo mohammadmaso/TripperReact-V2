@@ -58,8 +58,10 @@ import SelectForm from '../../addTravelogue/SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
 import { Form, Formik, ErrorMessage, Field } from 'formik';
 import { FetchResult } from '@apollo/client/link/core/types';
+import { ExperienceSelectMap } from './ExperienceSelectMap';
 
 interface Props {
+  data: any;
   isOpen: boolean;
   onClose: any;
   actions: {
@@ -101,6 +103,8 @@ const AddExperienceModal = (props: Props) => {
   const inputFileImage = React.useRef<HTMLInputElement>(null);
 
   const [images, setImages] = useState<any[]>([]);
+  const [location, setLocation] = useState<any>([]);
+
   const [imagesUploadedId, setImagesUploadedId] = useState<any[]>([]);
 
   const [uploading, setUploading] = useState(false);
@@ -174,6 +178,8 @@ const AddExperienceModal = (props: Props) => {
               experienceInput: {
                 title: values?.title,
                 description: values.description,
+                longitude: location.longitude,
+                latitude: location.latitude,
               },
               experienceRelatedInput: {
                 images: imagesUploadedId,
@@ -297,6 +303,13 @@ const AddExperienceModal = (props: Props) => {
                       ))}
                     </Wrap>
                   </Box>
+                  <ExperienceSelectMap
+                    setLocation={(location: any) => setLocation(location)}
+                    initialLocation={{
+                      longitude: props.data.province.longitude,
+                      latitude: props.data.province.latitude,
+                    }}
+                  />
                 </Stack>
               </ModalBody>
               <ModalFooter>

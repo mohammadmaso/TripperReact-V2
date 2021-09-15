@@ -34,7 +34,7 @@ const TravelogueActivities = (props: Props) => {
           <ActivityCard
             key={item?.node?.id as string}
             svg={item?.node?.svg as string}
-            title={item?.node?.title as string}
+            title={item?.node?.titleFa as string}
             id={item?.node?.id as string}
             size={2}
           />
