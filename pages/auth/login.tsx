@@ -25,6 +25,7 @@ import {
   TokenAuthMutation,
   useTokenAuthMutation,
 } from '../../graphql/generated/types';
+import CircleLogo from '../../componenets/logos/CircleLogo';
 
 export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -71,7 +72,8 @@ export default function SignIn() {
       </Head>
       <Flex p={8} flex="1" align={'center'} justify={'center'}>
         <Stack spacing={6} w={'full'} maxW={'md'}>
-          <TextLogo height="100" width="200" />
+          {/* <TextLogo height="100" width="200" /> */}
+          <CircleLogo />
           {/* <Heading fontWeight="medium" fontSize={'xl'}>
             ورود به حساب کاربری
           </Heading> */}

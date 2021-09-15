@@ -29,6 +29,7 @@ import {
   VerifySmsMutationVariables,
 } from '../../graphql/generated/types';
 import Head from 'next/head';
+import CircleLogo from '../../componenets/logos/CircleLogo';
 
 export default function SignIn() {
   const [code, setCode] = useState('');
@@ -122,7 +123,8 @@ export default function SignIn() {
       </Head>
       <Flex p={8} flex={1} align={'center'} justify={'center'} zIndex={100}>
         <Stack spacing={4} w={'full'} maxW={'md'}>
-          <TextLogo height="100" width="200" />
+          <CircleLogo />
+          {/* <TextLogo height="100" width="200" /> */}
           <Heading fontWeight="medium" fontSize={'xl'}>
             فعالسازی‌ حساب ‌کاربری
           </Heading>

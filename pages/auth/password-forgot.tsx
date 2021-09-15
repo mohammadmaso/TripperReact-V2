@@ -28,6 +28,7 @@ import {
   useForgotPasswordSmsMutation,
   useRegisterSmsMutation,
 } from '../../graphql/generated/types';
+import CircleLogo from '../../componenets/logos/CircleLogo';
 
 export default function SingUp() {
   const router = useRouter();
@@ -56,7 +57,8 @@ export default function SingUp() {
         </Head>
         <Flex p={8} flex={1} align={'center'} justify={'center'} zIndex={100}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
-            <TextLogo height="100" width="200" />
+            {/* <TextLogo height="100" width="200" /> */}
+            <CircleLogo />
             <Heading fontWeight="medium" fontSize={'xl'}>
               فراموشی رمزعبور
             </Heading>

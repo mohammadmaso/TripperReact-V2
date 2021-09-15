@@ -26,6 +26,7 @@ import Head from 'next/head';
 import TermOfUseModal from '../../componenets/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
 import { usernameRegex } from '../../utils/regex';
+import CircleLogo from '../../componenets/logos/CircleLogo';
 
 export default function SingUp() {
   const router = useRouter();
@@ -55,7 +56,8 @@ export default function SingUp() {
         </Head>
         <Flex p={8} flex={1} align={'center'} justify={'center'} zIndex={100}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
-            <TextLogo height="100" width="200" />
+            <CircleLogo />
+            {/* <TextLogo height="100" width="200" /> */}
             {/* <Heading fontWeight="medium" fontSize={'xl'}>
               ثبت‌نام در تریپر
             </Heading> */}
