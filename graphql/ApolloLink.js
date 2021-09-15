@@ -9,7 +9,7 @@ import { createUploadLink } from 'apollo-upload-client'
 
 
 export const getNewToken = async () => {
-  const refreshToken = await  localStorage.getItem('refresh-token')
+  const refreshToken = localStorage.getItem('refresh-token')
   return client.mutate({ mutation: RefreshTokenDocument, variables:{refreshTokenRefreshToken : refreshToken} }).then((response) => {
     // extract your accessToken from your response data and return it
     return response.data.refreshToken;
