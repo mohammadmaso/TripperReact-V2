@@ -14,6 +14,7 @@ import { FiMap } from 'react-icons/fi';
 import { TripDetailQuery } from '../../graphql/generated/types';
 import { TravelogueTransferCard } from './TravelogueTransfers';
 import { FeatureCollection, LineString } from '@turf/turf';
+import useMobileDetect from '../../hooks/useMobileDetect';
 
 const getArchRoute = (originAirport: any, destinationAirport: any) => {
   const start = [parseFloat(originAirport[0]), parseFloat(originAirport[1])];
@@ -49,6 +50,8 @@ export function TravelogueMap({ data }: Props) {
     longitude: parseFloat(data.trip?.province.longitude),
     zoom: 8,
   };
+
+  const { isMobile } = useMobileDetect();
 
   const transferLayer = {
     source: 'route',
@@ -186,7 +189,7 @@ export function TravelogueMap({ data }: Props) {
             width="100%"
             height="500px"
             scrollZoom={false}
-            dragPan={false}
+            dragPan={isMobile()}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
