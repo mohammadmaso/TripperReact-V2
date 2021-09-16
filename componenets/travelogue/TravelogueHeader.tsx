@@ -143,7 +143,17 @@ export function TravelogueHeader(props: Props) {
               {props.title}
             </Text>
           </Wrap>
-          <Wrap fontWeight="light" fontSize="sm">
+          <Wrap
+            direction={{
+              base: 'column',
+              sm: 'column',
+              md: 'row',
+              lg: 'row',
+              xl: 'row',
+            }}
+            fontWeight="light"
+            fontSize="sm"
+          >
             <HStack align={'center'} justify="space-between">
               <Avatar
                 src={props.author?.avatar}
@@ -155,26 +165,29 @@ export function TravelogueHeader(props: Props) {
                 {props.author?.username}
               </Text>
             </HStack>
-            {props.categories?.map((item: any) => (
-              <Tag key={item.node.id} colorScheme="primary">
-                {item.node.title}
-              </Tag>
-            ))}
+            <Wrap>
+              {props.categories?.map((item: any) => (
+                <Tag key={item.node.id} colorScheme="primary">
+                  {item.node.title}
+                </Tag>
+              ))}
+            </Wrap>
 
-            <Divider orientation="vertical" />
-            <Wrap align="center">
-              <TimeIcon ml="1" />
-              <Text>{props.days}</Text>
-            </Wrap>
-            <Divider orientation="vertical" />
-            <Wrap align="center">
-              <CalendarIcon ml="1" />
-              <Text>{props.date}</Text>
-            </Wrap>
-            <Divider orientation="vertical" />
-            <Wrap align="center">
-              <HiLocationMarker />
-              <Text>{`${props.country} - ${props.province}`}</Text>
+            <Wrap>
+              <Wrap align="center">
+                <TimeIcon ml="1" />
+                <Text>{props.days}</Text>
+              </Wrap>
+              <Divider orientation="vertical" />
+              <Wrap align="center">
+                <CalendarIcon ml="1" />
+                <Text>{props.date}</Text>
+              </Wrap>
+              <Divider orientation="vertical" />
+              <Wrap align="center">
+                <HiLocationMarker />
+                <Text>{`${props.country} - ${props.province}`}</Text>
+              </Wrap>
             </Wrap>
           </Wrap>
         </Stack>
