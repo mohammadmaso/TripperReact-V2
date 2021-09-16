@@ -161,7 +161,7 @@ export function EditTravelogueHeader(props: Props) {
             fontWeight="light"
             fontSize="sm"
           >
-            <HStack align={'center'} justify="space-between">
+            <HStack w="fit-content" align={'center'}>
               <Avatar
                 src={props.author?.avatar}
                 alt={props.author?.username}
