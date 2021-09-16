@@ -186,10 +186,11 @@ export function TravelogueMap({ data }: Props) {
             width="100%"
             height="500px"
             scrollZoom={false}
+            dragPan={false}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
-
+            touchAction="pan-y"
             onViewportChange={(viewport: any) => setViewport(viewport)}
           >
             {greatCircles?.map((item, index) => (
