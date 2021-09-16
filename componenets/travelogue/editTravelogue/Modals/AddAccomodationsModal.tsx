@@ -33,7 +33,7 @@ import {
   IconButton,
 } from '@chakra-ui/react';
 import { BiBed } from 'react-icons/bi';
-import { ExperienceSelectMap } from './ExperienceSelectMap';
+import { SelectPointMap } from './SelectPointMap';
 
 interface Props {
   data: any;
@@ -75,7 +75,7 @@ const AddAccomodationsModal = (props: Props) => {
             <TabPanels>
               <TabPanel></TabPanel>
               <TabPanel>
-                <ExperienceSelectMap
+                <SelectPointMap
                   setLocation={(location: any) => setLocation(location)}
                   initialLocation={{
                     longitude: props.data.province.longitude,

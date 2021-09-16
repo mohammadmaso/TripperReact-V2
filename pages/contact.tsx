@@ -42,7 +42,7 @@ export default function Home() {
                 <Text fontWeight="bold">آدرس</Text>
               </Wrap>
               <Text dir="ltr">
-                ایران، تهران، دانشکده‌ مهندسی برق دانشگاه خواجه‌نصیر
+                ایران، تهران، مرکز ‌رشد دانشگاه خواجه‌نصیر طوسی
               </Text>
             </Wrap>
             <Divider />
@@ -59,29 +59,47 @@ export default function Home() {
             </Wrap>
           </Stack>
         </Center>
-        <Box p="0" rounded="lg" shadow="lg">
-          <ReactMapGL
-            mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
-            mapStyle="mapbox://styles/mapbox/outdoors-v11"
-            width="100%"
-            height="500px"
-            longitude={51.4482906}
-            latitude={35.7407193}
-            zoom={15}
-          >
-            <Marker
+
+        <Box position="relative">
+          <Box>
+            <ReactMapGL
+              mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+              mapStyle="mapbox://styles/mapbox/outdoors-v11"
+              width="100%"
+              height="500px"
               longitude={51.4482906}
               latitude={35.7407193}
-              offsetTop={-30}
+              zoom={15}
+              scrollZoom={false}
+              // dragPan={!isMobile()}
+              // dragPan={false}
+              // touchZoom={false}
+              // touchRotate={false}
+              touchAction="pan-y"
+              // dragPan={false}
+              // touchZoom={false}
+              // touchRotate={false}
             >
-              <Icon
-                as={HiLocationMarker}
-                h="40px"
-                w="40px"
-                color="primary.500"
-              />
-            </Marker>
-          </ReactMapGL>
+              <Marker
+                key={`marker`}
+                longitude={51.4482906}
+                latitude={35.7407193}
+              >
+                <Icon
+                  as={HiLocationMarker}
+                  height={'30px'}
+                  width={'30px'}
+                  viewBox="0 0 24 24"
+                  style={{
+                    cursor: 'pointer',
+                    fill: 'green',
+                    stroke: 'none',
+                    transform: `translate(${-30 / 2}px,${-30}px)`,
+                  }}
+                />
+              </Marker>
+            </ReactMapGL>
+          </Box>
         </Box>
       </SimpleGrid>
     </BaseLayout>

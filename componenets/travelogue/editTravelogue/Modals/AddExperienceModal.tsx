@@ -58,7 +58,7 @@ import SelectForm from '../../addTravelogue/SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
 import { Form, Formik, ErrorMessage, Field } from 'formik';
 import { FetchResult } from '@apollo/client/link/core/types';
-import { ExperienceSelectMap } from './ExperienceSelectMap';
+import { SelectPointMap } from './SelectPointMap';
 
 interface Props {
   data: any;
@@ -303,7 +303,7 @@ const AddExperienceModal = (props: Props) => {
                       ))}
                     </Wrap>
                   </Box>
-                  <ExperienceSelectMap
+                  <SelectPointMap
                     setLocation={(location: any) => setLocation(location)}
                     initialLocation={{
                       longitude: props.data.province.longitude,

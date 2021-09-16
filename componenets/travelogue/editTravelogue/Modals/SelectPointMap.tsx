@@ -1,4 +1,4 @@
-import { Stack, Wrap, Text, Box, Center, Image } from '@chakra-ui/react';
+import { Stack, Wrap, Text, Box, Center, Image, Icon } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, {
   CanvasOverlay,
@@ -12,13 +12,14 @@ import ReactMapGL, {
 import * as turf from '@turf/turf';
 import { FiMap } from 'react-icons/fi';
 import { TripDetailQuery } from '../../../../graphql/generated/types';
+import { HiLocationMarker } from 'react-icons/hi';
 
 interface Props {
   initialLocation: any;
   setLocation: any;
 }
 
-export function ExperienceSelectMap({ initialLocation, setLocation }: Props) {
+export function SelectPointMap({ initialLocation, setLocation }: Props) {
   const mapCenter = {
     latitude: parseFloat(initialLocation.latitude),
     longitude: parseFloat(initialLocation.longitude),
@@ -37,9 +38,9 @@ export function ExperienceSelectMap({ initialLocation, setLocation }: Props) {
     <Stack>
       <Wrap align="center">
         <FiMap />
-        <Text fontWeight="extrabold">لوکیشن تجربه روی نقشه</Text>
+        <Text fontWeight="extrabold">انتخاب مکان از روی نقشه</Text>
       </Wrap>
-      <Box pr="10" position="relative">
+      <Box position="relative">
         <Box>
           <ReactMapGL
             mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
@@ -48,6 +49,11 @@ export function ExperienceSelectMap({ initialLocation, setLocation }: Props) {
             width="100%"
             height="400px"
             scrollZoom={false}
+            // dragPan={!isMobile()}
+            // dragPan={false}
+            // touchZoom={false}
+            // touchRotate={false}
+            touchAction="pan-y"
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
@@ -62,18 +68,18 @@ export function ExperienceSelectMap({ initialLocation, setLocation }: Props) {
               longitude={viewport.longitude}
               latitude={viewport.latitude}
             >
-              <svg
-                height={SIZE}
+              <Icon
+                as={HiLocationMarker}
+                height={'40px'}
+                width={'40px'}
                 viewBox="0 0 24 24"
                 style={{
                   cursor: 'pointer',
                   fill: 'green',
                   stroke: 'none',
-                  transform: `translate(${-SIZE / 2}px,${-SIZE}px)`,
+                  transform: `translate(${-40 / 2}px,${-40}px)`,
                 }}
-              >
-                <path d={ICON} />
-              </svg>
+              />
             </Marker>
             <NavigationControl
               style={{

@@ -27,8 +27,8 @@ const BaseLayout = (props: Props): ReactElement => {
       {props.subNav}
       <Box
         height={{
-          base: '50px',
-          sm: '50px',
+          base: '60px',
+          sm: '60px',
           md: '100',
           lg: '100px',
           xl: '100px',
