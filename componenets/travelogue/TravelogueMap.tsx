@@ -189,7 +189,7 @@ export function TravelogueMap({ data }: Props) {
             width="100%"
             height="500px"
             scrollZoom={false}
-            dragPan={isMobile()}
+            dragPan={!isMobile()}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
