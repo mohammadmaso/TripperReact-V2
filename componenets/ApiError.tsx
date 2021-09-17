@@ -11,6 +11,9 @@ const ApiError = (props: any) => {
       <Center flexDir="column" my="2" p="3" w="full" shadow="md" rounded="lg">
         <Icon as={BiError} color="red.400" w="20px" h="20px" my="2" />
         <Text fontWeight="light">خطا در دریافت اطلاعات</Text>
+        <Text fontWeight="light" fontSize="sm">
+          در صدد رفع مشکل هستم و به زودی آن را برطرف می‌کنیم.
+        </Text>
         {/* <Icon as={MdReplay} my="2" /> */}
       </Center>
     </div>

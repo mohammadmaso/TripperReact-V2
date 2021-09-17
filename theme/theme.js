@@ -68,8 +68,8 @@ const direction = "rtl"
 
 const theme = extendTheme({direction, colors, fonts , components, config, sizes:{
   fontSizes:{
-    md: "1rem",
-    sm: "0.7rem"
+    md: "0.7rem",
+    sm: "0.5rem"
   }
 }});
 
