@@ -173,6 +173,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
             h={{ base: '5vh', sm: '10vh', md: '10vh', lg: '10vh' }}
             bottom="10px"
             overflowY="auto"
+            overflowX="hidden"
           >
             {images.map((item) => (
               <ImageCard
