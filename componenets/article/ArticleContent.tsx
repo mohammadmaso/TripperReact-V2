@@ -8,7 +8,7 @@ export function ArticleContent(props: any) {
     <Stack>
       <Wrap align="center">
         <FiFeather />
-        <Text>مقاله</Text>
+        <Text fontWeight="extrabold">مقاله</Text>
       </Wrap>
       <div dangerouslySetInnerHTML={{ __html: props.content }} />
     </Stack>

@@ -22,7 +22,7 @@ const ArticleActivities = (props: any) => {
     <Stack>
       <Wrap align="center">
         <FiActivity />
-        <Text>فعالیت‌ها</Text>
+        <Text fontWeight="extrabold"> فعالیت‌ها</Text>
       </Wrap>
       <Wrap>
         {props.data.map((item: any) => (

@@ -10,7 +10,7 @@ const ArticleAccessories = (props: any) => {
     <Stack>
       <Wrap align="center">
         <FiShoppingBag />
-        <Text>تجهیزات</Text>
+        <Text fontWeight="extrabold">تجهیزات</Text>
       </Wrap>
       <Wrap spacing="5" justify={{ base: 'center', md: 'right' }}>
         {props.data?.map((item: any) => (

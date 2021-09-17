@@ -8,7 +8,7 @@ export function ArticleDescription(props: any) {
     <Stack>
       <Wrap align="center">
         <FiFeather />
-        <Text>مختصر و مفید</Text>
+        <Text fontWeight="extrabold">مختصر و مفید</Text>
       </Wrap>
       <Wrap>
         <Text fontSize="sm" lineHeight="7">

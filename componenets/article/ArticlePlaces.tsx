@@ -59,7 +59,7 @@ export function ArticlePlaces() {
     <Stack>
       <Wrap align="center">
         <MdPlace />
-        <Text>جاذبه‌ها</Text>
+        <Text fontWeight="extrabold">جاذبه‌ها</Text>
       </Wrap>
       <Wrap>
         <CityList />
