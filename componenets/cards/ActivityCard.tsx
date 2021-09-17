@@ -17,12 +17,13 @@ interface Props {
   isSelected?: boolean;
   showText?: boolean;
   onToggle?: (activity: TripActivitieType | string) => void;
+  padding?: number;
 }
 
 export function ActivityCard(props: Props) {
   return (
     <Center
-      p="3"
+      p={props.padding}
       rounded="sm"
       // shadow="sm"
       _hover={{ transform: 'scale(1.1,1.1)' }}
@@ -60,4 +61,4 @@ export function ActivityCard(props: Props) {
   );
 }
 
-ActivityCard.defaultProps = { showText: true };
+ActivityCard.defaultProps = { showText: true, padding: 3 };

@@ -1,4 +1,13 @@
-import { Stack, Wrap, Text, Box, Divider, Image, Flex } from '@chakra-ui/react';
+import {
+  Stack,
+  Wrap,
+  Text,
+  Box,
+  Divider,
+  Image,
+  Flex,
+  Icon,
+} from '@chakra-ui/react';
 import { Maybe } from 'graphql/jsutils/Maybe';
 import React from 'react';
 import { FiEye, FiUsers } from 'react-icons/fi';
@@ -8,7 +17,7 @@ import { ActivityCard } from '../cards/ActivityCard';
 import ImageCard from '../ImageCard';
 import { IImage } from '../ImageGallery';
 import ImageList from '../ImageList';
-
+import { GoPrimitiveDot } from 'react-icons/go';
 interface Props {
   experiences: any;
   imageOnClick: any;
@@ -31,10 +40,13 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
   return (
     <Box borderRadius="lg" borderWidth="thin" w="full" minH="7rem" p="2">
       <Stack spacing="0.5">
-        <Flex justify="space-between">
+        <Flex justify="space-between" align="center">
           <Stack>
-            <Wrap spacing="3" align="center">
-              <Text fontWeight="bold">{experience.title}</Text>
+            <Wrap spacing="1" align="center">
+              <Icon as={GoPrimitiveDot} />
+              <Text fontWeight="bold" fontSize="sm">
+                {experience.title}
+              </Text>
             </Wrap>
             {/* <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
@@ -44,6 +56,7 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
           <Wrap spacing="0">
             {experience.activities?.edges.map((item) => (
               <ActivityCard
+                padding={1}
                 key={item?.node?.id as string}
                 svg={item?.node?.svg as string}
                 title={item?.node?.titleFa as string}
