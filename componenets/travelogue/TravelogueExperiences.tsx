@@ -4,39 +4,62 @@ import React from 'react';
 import { FiEye, FiUsers } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
 import { ExperienceType, PlaceType } from '../../graphql/generated/types';
+import { ActivityCard } from '../cards/ActivityCard';
 import ImageCard from '../ImageCard';
 import { IImage } from '../ImageGallery';
+import ImageList from '../ImageList';
 
 interface Props {
   experiences: any;
   imageOnClick: any;
 }
 
-interface cardProps {
-  node:
-    | (ExperienceType & {
-        place: PlaceType;
-      })
-    | undefined;
+interface CardProps {
+  experience: ExperienceType;
   imageOnClick: () => void;
 }
 
-function ExperienceCard(props: cardProps) {
+function ExperienceCard({ experience, imageOnClick }: CardProps) {
+  const images = experience.images.edges.map(
+    (i: any) =>
+      ({
+        id: i?.node?.id,
+        description: i?.node?.description,
+        image: i?.node?.image,
+      } as IImage)
+  ) as IImage[];
   return (
     <Box borderRadius="lg" borderWidth="thin" w="full" minH="7rem" p="2">
       <Stack spacing="0.5">
         <Flex justify="space-between">
           <Stack>
-            <Text>{props.node?.title}</Text>
+            <Wrap spacing="3" align="center">
+              <Text>{experience.title}</Text>
+            </Wrap>
             {/* <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
-              <Text>{props.node?.place.name}</Text>
+              <Text>{experience.place.name}</Text>
             </Wrap> */}
           </Stack>
+          <Wrap spacing="0">
+            {experience.activities?.edges.map((item) => (
+              <ActivityCard
+                key={item?.node?.id as string}
+                svg={item?.node?.svg as string}
+                title={item?.node?.titleFa as string}
+                id={item?.node?.id as string}
+                size={2}
+              />
+            ))}
+          </Wrap>
         </Flex>
+
         <Wrap fontSize="sm" fontWeight="light" p="2">
           <Divider />
-          <Text>{props.node?.description}</Text>
+
+          <ImageList images={images} imageOnClick={imageOnClick} />
+
+          <Text>{experience.description}</Text>
         </Wrap>
       </Stack>
     </Box>
@@ -54,8 +77,8 @@ export const TravelogueExperiences = (props: Props) => {
         {props.experiences?.map((item: any) => (
           <ExperienceCard
             key={item?.node?.id}
-            node={item?.node}
             imageOnClick={props.imageOnClick}
+            experience={item?.node as ExperienceType}
           />
         ))}
       </Stack>

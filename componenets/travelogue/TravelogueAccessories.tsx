@@ -25,7 +25,7 @@ const TravelogueAccessories = (props: Props) => {
         <FiShoppingBag />
         <Text fontWeight="extrabold">تجهیزات</Text>
       </Wrap>
-      <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }} spacing="5">
+      <SimpleGrid columns={{ base: 1, sm: 1, md: 3 }} spacing="5">
         {props.accessories.map((item: any) => (
           <AccessoryCard key={item?.node?.id} {...item.node} />
         ))}
