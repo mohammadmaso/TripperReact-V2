@@ -233,7 +233,8 @@ query TripDetail($tripId: ID!) {
           id
           title
           description
-
+          latitude
+          longitude
           activities {
             edges {
               node {

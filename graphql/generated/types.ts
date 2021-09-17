@@ -7238,7 +7238,7 @@ export type TripDetailQuery = (
         { __typename?: 'ExperienceTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'ExperienceType' }
-          & Pick<ExperienceType, 'id' | 'title' | 'description'>
+          & Pick<ExperienceType, 'id' | 'title' | 'description' | 'latitude' | 'longitude'>
           & { activities: (
             { __typename?: 'TripActivitieTypeConnection' }
             & { edges: Array<Maybe<(
@@ -9300,6 +9300,8 @@ export const TripDetailDocument = gql`
           id
           title
           description
+          latitude
+          longitude
           activities {
             edges {
               node {
