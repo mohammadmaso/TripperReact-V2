@@ -274,6 +274,7 @@ export function TravelogueMap({ data }: Props) {
               }}
             />
             {transfersMarker}
+            {experiencesMarker}
           </ReactMapGL>
         </Box>
       </Box>
