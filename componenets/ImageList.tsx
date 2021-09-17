@@ -12,7 +12,7 @@ const ImageList = (props: Props) => {
   return (
     <SimpleGrid
       spacing="3"
-      columns={{ base: 1, sm: 2, md: 4 }}
+      columns={{ base: 2, sm: 2, md: 4 }}
       justify="center"
     >
       {props.images.map((item: any) => (
