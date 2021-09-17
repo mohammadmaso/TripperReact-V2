@@ -15,6 +15,7 @@ interface Props {
   svg: string;
   size?: number;
   isSelected?: boolean;
+  showText?: boolean;
   onToggle?: (activity: TripActivitieType | string) => void;
 }
 
@@ -53,8 +54,10 @@ export function ActivityCard(props: Props) {
             'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
           )}
         />
-        <Text fontSize="xs">{props.title}</Text>
+        {props.showText && <Text fontSize="xs">{props.title}</Text>}
       </Stack>
     </Center>
   );
 }
+
+ActivityCard.defaultProps = { showText: true };

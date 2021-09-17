@@ -34,7 +34,7 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
         <Flex justify="space-between">
           <Stack>
             <Wrap spacing="3" align="center">
-              <Text>{experience.title}</Text>
+              <Text fontWeight="bold">{experience.title}</Text>
             </Wrap>
             {/* <Wrap fontSize="xs" align="center">
               <HiLocationMarker />
@@ -48,7 +48,8 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
                 svg={item?.node?.svg as string}
                 title={item?.node?.titleFa as string}
                 id={item?.node?.id as string}
-                size={2}
+                size={1.5}
+                showText={false}
               />
             ))}
           </Wrap>
