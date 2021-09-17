@@ -60,7 +60,6 @@ const fonts = {
 const direction = "rtl"
 
 const breakpoints = createBreakpoints({
-  sm: "330px",
   md: "768px",
   lg: "1200px",
   xl: "1600px",
