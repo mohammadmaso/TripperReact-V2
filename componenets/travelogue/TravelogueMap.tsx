@@ -145,7 +145,7 @@ export function TravelogueMap({ data }: Props) {
                 }
                 h="15"
                 w="15"
-                src={item?.experiencesData?.activities.edges[0]?.node?.svg}
+                src={item?.experiencesData?.activities.edges[0]?.node?.svg!}
                 alt=""
               />
             </Center>
