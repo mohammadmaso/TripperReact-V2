@@ -10272,6 +10272,11 @@ react-input-autosize@^3.0.0:
   dependencies:
     prop-types "^15.5.8"
 
+react-insta-stories@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-insta-stories/-/react-insta-stories-2.2.3.tgz#0ec492f409c113822e96632670db2e165b5904cf"
+  integrity sha512-egToX2loFViBPRFb0wptvOKORoTIodEARV/Adzp5lc3nFxe1vEoY8+aOCGTH5tePp3wXX+nz8mjkdfI/g/raaw==
+
 react-instagram-embed@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-instagram-embed/-/react-instagram-embed-3.0.0.tgz#a32af7755ff6e46c3914ae1c07ccd78aaafd43ac"
