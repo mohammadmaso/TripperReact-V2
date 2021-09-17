@@ -174,18 +174,25 @@ const AddExperienceModal = (props: Props) => {
             title: Yup.string().required('عنوان نمی‌تواند خالی باشد.'),
           })}
           onSubmit={(values, { setSubmitting, setFieldError }) => {
-            props.actions.createExperience({
-              experienceInput: {
-                title: values?.title,
-                description: values.description,
-                longitude: location.longitude,
-                latitude: location.latitude,
-              },
-              experienceRelatedInput: {
-                images: imagesUploadedId,
-                activities: values.activities,
-              },
-            });
+            props.actions
+              .createExperience({
+                experienceInput: {
+                  title: values?.title,
+                  description: values.description,
+                  longitude: location.longitude,
+                  latitude: location.latitude,
+                },
+                experienceRelatedInput: {
+                  images: imagesUploadedId,
+                  activities: values.activities,
+                },
+              })
+              .then((res) => {
+                if (res.data?.createExperience?.success === true) {
+                  props.onClose();
+                  props.onAddExperience(res.data.createExperience.experience);
+                }
+              });
           }}
         >
           {(formProps) => (
