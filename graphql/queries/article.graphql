@@ -91,6 +91,7 @@ query Article($articleId: ID!) {
         node {
           name
           image
+          imageLink
         }
       }
     }

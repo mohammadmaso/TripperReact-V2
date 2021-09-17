@@ -511,8 +511,8 @@ export type AccommodationImageTypeAccommodationImagesArgs = {
   last?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['ID']>;
   city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  accommodationType?: Maybe<Scalars['ID']>;
+  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type AccommodationImageTypeConnection = {
@@ -537,12 +537,12 @@ export type AccommodationType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   name: Scalars['String'];
-  defaultImage: Scalars['String'];
+  defaultImage?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
-  city: CityType;
+  city?: Maybe<CityType>;
   images: AccommodationImageTypeConnection;
-  accommodationType: AccommodationTypeTypeConnection;
+  accommodationType?: Maybe<AccommodationTypeType>;
   tripsOfAccomodation: TripTypeConnection;
   usersSavedAccommodation: AccommodationCollectionsTypeConnection;
 };
@@ -556,17 +556,6 @@ export type AccommodationTypeImagesArgs = {
   last?: Maybe<Scalars['Int']>;
   latitude?: Maybe<Scalars['String']>;
   latitude_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type AccommodationTypeAccommodationTypeArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -642,8 +631,8 @@ export type AccommodationTypeTypeAccommodationmodelSetArgs = {
   last?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['ID']>;
   city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  accommodationType?: Maybe<Scalars['ID']>;
+  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type AccommodationTypeTypeConnection = {
@@ -1062,8 +1051,8 @@ export type CityTypeAccommodationsOfCityArgs = {
   last?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['ID']>;
   city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  accommodationType?: Maybe<Scalars['ID']>;
+  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -3262,8 +3251,8 @@ export type QueryAllAccomodationsArgs = {
   last?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['ID']>;
   city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  accommodationType?: Maybe<Scalars['ID']>;
+  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -5280,8 +5269,8 @@ export type TripTypeAccommodationsArgs = {
   last?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['ID']>;
   city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
+  accommodationType?: Maybe<Scalars['ID']>;
+  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -6990,7 +6979,7 @@ export type ArticleQuery = (
         { __typename?: 'AccessoryTypeEdge' }
         & { node?: Maybe<(
           { __typename?: 'AccessoryType' }
-          & Pick<AccessoryType, 'name' | 'image'>
+          & Pick<AccessoryType, 'name' | 'image' | 'imageLink'>
         )> }
       )>> }
     ), reviewsOfArticle: (
@@ -8925,6 +8914,7 @@ export const ArticleDocument = gql`
         node {
           name
           image
+          imageLink
         }
       }
     }
