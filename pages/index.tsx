@@ -1,4 +1,4 @@
-import { Wrap } from '@chakra-ui/react';
+import { Wrap, Box } from '@chakra-ui/react';
 import React from 'react';
 import CategoryCarousal from '../componenets/carousals/CategoryCarousal';
 import TripCarousal from '../componenets/carousals/TripCarousal';
@@ -18,10 +18,10 @@ export default function Home() {
   return (
     <BaseLayout>
       {/* <LandingGallery /> */}
-      <Wrap direction="column" spacing="10">
-        <MapCTA />
-        <TourLeaderCTA />
-      </Wrap>
+
+      <MapCTA />
+      <Box h="30px" />
+      <TourLeaderCTA />
       {/* <CallToActionWithVideo /> */}
       <LastTripsView />
       <TripCategoriesView />
