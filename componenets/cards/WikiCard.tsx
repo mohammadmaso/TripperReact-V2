@@ -23,12 +23,13 @@ export default function WikiCard(props: any) {
         <Box
           bg={useColorModeValue('white', 'gray.900')}
           w={'full'}
-          boxShadow={'md'}
+          // boxShadow={'md'}
           rounded={'md'}
           p={6}
           overflow={'hidden'}
           transition={'all .3s ease'}
           _hover={{ transform: 'scale(1.1,1.1)' }}
+          minHeight="24"
         >
           <Box bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
             <Image alt="l" src={props?.image as string} objectFit={'cover'} />

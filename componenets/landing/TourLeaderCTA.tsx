@@ -19,7 +19,11 @@ const TourLeaderCTA = (props: Props) => {
     >
       <Center rounded="md" flexDirection="column" h="full" bgColor="#00000040">
         <Wrap direction="column" justify="center" align="center">
-          <Text textColor="white" fontWeight="black" fontSize="3xl">
+          <Text
+            textColor="white"
+            fontWeight="black"
+            fontSize={['2xl', '2xl', '3xl']}
+          >
             تور لیدر هستی؟
           </Text>
           <Text textColor="white" fontWeight="bold" fontSize="MD">

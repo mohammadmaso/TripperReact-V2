@@ -20,7 +20,7 @@ export default function Home() {
       {/* <LandingGallery /> */}
 
       <MapCTA />
-      <Box h="30px" />
+      <Box h={['20px', '20px', '40px']} />
       <TourLeaderCTA />
       {/* <CallToActionWithVideo /> */}
       <LastTripsView />

@@ -12,7 +12,7 @@ const MapCTA = (props: Props) => {
       backgroundSize={'cover'}
       backgroundPosition={'center center'}
       w="full"
-      h="30vh"
+      h={['20vh', '20vh', '30vh']}
       rounded="md"
     >
       <Flex
@@ -23,14 +23,24 @@ const MapCTA = (props: Props) => {
         alignSelf="center"
         justifySelf="center"
         align="center"
-        pr={[2, 2, 10, 10]}
-        bgGradient={'linear(to-l, whiteAlpha.600, transparent)'}
+        pr={[4, 4, 10, 10]}
+        bgGradient={'linear(to-l, whiteAlpha.700, transparent)'}
       >
         <Wrap direction="column" justify="flex-start" align="flex-start">
-          <Text textColor="black" fontWeight="black" fontSize="2xl">
+          <Text
+            w="60%"
+            textColor="black"
+            fontWeight="black"
+            fontSize={['lg', 'lg', '2xl']}
+          >
             تور بعدی خودت رو با دقت انتخاب کن
           </Text>
-          <Text textColor="black" fontWeight="bold" fontSize="MD">
+          <Text
+            w="70%"
+            textColor="black"
+            fontWeight="bold"
+            fontSize={['sm', 'sm', 'md']}
+          >
             جستجو میان تور‌ها با دقیق‌ترین جزییات...
           </Text>
           {/* <Link href="/auth/tourguid/register" passHref>
