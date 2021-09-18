@@ -46,8 +46,8 @@ function CompanionCard(props: any) {
     <HStack
       align={'center'}
       bgColor={useColorModeValue('gray.100', 'gray.700')}
-      pr="1"
-      pl="1"
+      pr="0"
+      pl="0"
       py="0"
       borderRadius="full"
       justify="space-between"

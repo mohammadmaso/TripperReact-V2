@@ -1,9 +1,11 @@
+import { Wrap } from '@chakra-ui/react';
 import React from 'react';
 import CategoryCarousal from '../componenets/carousals/CategoryCarousal';
 import TripCarousal from '../componenets/carousals/TripCarousal';
 import WikiCarusal from '../componenets/carousals/WikiCarousal';
 import CallToActionCreateGroupTrip from '../componenets/landing/CallToActionCreateGroupTrip';
 import CallToActionWithVideo from '../componenets/landing/CallToActionWithVideo';
+import MapCTA from '../componenets/landing/MapCTA';
 import LandingGallery from '../componenets/landing/Slider';
 import TourLeaderCTA from '../componenets/landing/TourLeaderCTA';
 
@@ -16,7 +18,10 @@ export default function Home() {
   return (
     <BaseLayout>
       {/* <LandingGallery /> */}
-      <TourLeaderCTA />
+      <Wrap direction="column" spacing="10">
+        <MapCTA />
+        <TourLeaderCTA />
+      </Wrap>
       {/* <CallToActionWithVideo /> */}
       <LastTripsView />
       <TripCategoriesView />
