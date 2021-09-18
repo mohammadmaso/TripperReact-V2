@@ -28,7 +28,7 @@ const MapCTA = (props: Props) => {
       >
         <Wrap direction="column" justify="flex-start" align="flex-start">
           <Text textColor="black" fontWeight="black" fontSize="2xl">
-            تور بعدی خودت رو با دقت اتخاب کن
+            تور بعدی خودت رو با دقت انتخاب کن
           </Text>
           <Text textColor="black" fontWeight="bold" fontSize="MD">
             جستجو میان تور‌ها با دقیق‌ترین جزییات...
