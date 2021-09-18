@@ -41,23 +41,29 @@ export default function WikiCard(props: any) {
                 fontWeight={400}
                 fontSize={'sm'}
                 p="2"
-                w="auto"
+                w="fit-content"
               >
                 {props?.category.title}
               </Tag>
-              <Heading fontSize={'md'}>{props?.title}</Heading>
-              <Text colorScheme="gray" fontSize="sm">
-                {props?.shortDescription}
+              <Text noOfLines={3} fontWeight="extrabold" fontSize={'sm'}>
+                {props?.title}
+              </Text>
+              <Text colorScheme="gray" fontSize="xs">
+                {props?.shortDescription.substring(0, 200) + ' ...'}
               </Text>
             </Stack>
-            <HStack w="full" mt={6} spacing={4} align={'center'}>
-              <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+            <HStack fontSize="xs" w="full" mt={6} spacing={1} align={'center'}>
+              <Avatar
+                size="sm"
+                src={props?.author.avatar}
+                alt={props?.author}
+              />
+              <Stack direction={'column'} spacing={0}>
                 <Text fontWeight={600}>{props?.author.username}</Text>
                 <Text color={'gray.500'} dir="rtl">
                   {props?.timeToRead} دقیقه برای خواندن
                 </Text>
               </Stack>
-              <Avatar src={props?.author.avatar} alt={props?.author} />
             </HStack>
           </Flex>
         </Box>
