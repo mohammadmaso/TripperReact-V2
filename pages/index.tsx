@@ -7,7 +7,9 @@ import CallToActionCreateGroupTrip from '../componenets/landing/CallToActionCrea
 import CallToActionWithVideo from '../componenets/landing/CallToActionWithVideo';
 import MapCTA from '../componenets/landing/MapCTA';
 import LandingGallery from '../componenets/landing/Slider';
+import ToureCard1 from '../componenets/landing/toureCard1';
 import TourLeaderCTA from '../componenets/landing/TourLeaderCTA';
+import TriAngleNatureBanner from '../componenets/landing/triAngleNature';
 
 import BaseLayout from '../layouts/BaseLayout';
 import LastArticlesView from '../views/article/LastArticlesView';
@@ -18,13 +20,14 @@ export default function Home() {
   return (
     <BaseLayout>
       {/* <LandingGallery /> */}
-
       <MapCTA />
       <Box h={['20px', '20px', '40px']} />
       <TourLeaderCTA />
+      {/* <ToureCard1 /> */}
       {/* <CallToActionWithVideo /> */}
       <LastTripsView />
       <TripCategoriesView />
+      {/* <TriAngleNatureBanner /> */}
       {/* <CallToActionCreateGroupTrip /> */}
       <LastArticlesView />
     </BaseLayout>

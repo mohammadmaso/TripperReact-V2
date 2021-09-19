@@ -7081,6 +7081,80 @@ export type AllTripQuery = (
   )> }
 );
 
+export type AllTripListQueryVariables = Exact<{
+  allTripOffset?: Maybe<Scalars['Int']>;
+  allTripBefore?: Maybe<Scalars['String']>;
+  allTripAfter?: Maybe<Scalars['String']>;
+  allTripFirst?: Maybe<Scalars['Int']>;
+  allTripLast?: Maybe<Scalars['Int']>;
+  allTripCategories?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>> | Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>>;
+}>;
+
+
+export type AllTripListQuery = (
+  { __typename?: 'Query' }
+  & { allTrip?: Maybe<(
+    { __typename?: 'TripTypeConnection' }
+    & { pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage' | 'hasPreviousPage' | 'startCursor' | 'endCursor'>
+    ), edges: Array<Maybe<(
+      { __typename?: 'TripTypeEdge' }
+      & Pick<TripTypeEdge, 'cursor'>
+      & { node?: Maybe<(
+        { __typename?: 'TripType' }
+        & Pick<TripType, 'id' | 'title' | 'description' | 'createdAt' | 'startDate' | 'endDate' | 'viewsCount' | 'defaultImage' | 'likes' | 'userLiked' | 'published'>
+        & { author: (
+          { __typename?: 'UserType' }
+          & Pick<UserType, 'id' | 'username' | 'avatar'>
+        ), categories: (
+          { __typename?: 'TripCategoryTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripCategoryTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripCategoryType' }
+              & Pick<TripCategoryType, 'title'>
+            )> }
+          )>> }
+        ), country: (
+          { __typename?: 'CountryType' }
+          & Pick<CountryType, 'name'>
+        ), province: (
+          { __typename?: 'ProvinceType' }
+          & Pick<ProvinceType, 'name'>
+        ), places: (
+          { __typename?: 'PlaceTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'PlaceTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'PlaceType' }
+              & Pick<PlaceType, 'id'>
+            )> }
+          )>> }
+        ), activities: (
+          { __typename?: 'TripActivitieTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'TripActivitieTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'TripActivitieType' }
+              & Pick<TripActivitieType, 'svg' | 'title' | 'titleFa' | 'id'>
+            )> }
+          )>> }
+        ), experiences?: Maybe<(
+          { __typename?: 'ExperienceTypeConnection' }
+          & { edges: Array<Maybe<(
+            { __typename?: 'ExperienceTypeEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'ExperienceType' }
+              & Pick<ExperienceType, 'id'>
+            )> }
+          )>> }
+        )> }
+      )> }
+    )>> }
+  )> }
+);
+
 export type AllTripCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9100,6 +9174,116 @@ export function useAllTripLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Al
 export type AllTripQueryHookResult = ReturnType<typeof useAllTripQuery>;
 export type AllTripLazyQueryHookResult = ReturnType<typeof useAllTripLazyQuery>;
 export type AllTripQueryResult = Apollo.QueryResult<AllTripQuery, AllTripQueryVariables>;
+export const AllTripListDocument = gql`
+    query AllTripList($allTripOffset: Int, $allTripBefore: String, $allTripAfter: String, $allTripFirst: Int, $allTripLast: Int, $allTripCategories: [[ID]]) {
+  allTrip(
+    offset: $allTripOffset
+    before: $allTripBefore
+    after: $allTripAfter
+    first: $allTripFirst
+    last: $allTripLast
+    categories_In: $allTripCategories
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        title
+        description
+        createdAt
+        startDate
+        endDate
+        viewsCount
+        defaultImage
+        author {
+          id
+          username
+          avatar
+        }
+        categories {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        country {
+          name
+        }
+        province {
+          name
+        }
+        likes
+        userLiked
+        places {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        activities {
+          edges {
+            node {
+              svg
+              title
+              titleFa
+              id
+            }
+          }
+        }
+        published
+        experiences {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllTripListQuery__
+ *
+ * To run a query within a React component, call `useAllTripListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTripListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTripListQuery({
+ *   variables: {
+ *      allTripOffset: // value for 'allTripOffset'
+ *      allTripBefore: // value for 'allTripBefore'
+ *      allTripAfter: // value for 'allTripAfter'
+ *      allTripFirst: // value for 'allTripFirst'
+ *      allTripLast: // value for 'allTripLast'
+ *      allTripCategories: // value for 'allTripCategories'
+ *   },
+ * });
+ */
+export function useAllTripListQuery(baseOptions?: Apollo.QueryHookOptions<AllTripListQuery, AllTripListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTripListQuery, AllTripListQueryVariables>(AllTripListDocument, options);
+      }
+export function useAllTripListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTripListQuery, AllTripListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTripListQuery, AllTripListQueryVariables>(AllTripListDocument, options);
+        }
+export type AllTripListQueryHookResult = ReturnType<typeof useAllTripListQuery>;
+export type AllTripListLazyQueryHookResult = ReturnType<typeof useAllTripListLazyQuery>;
+export type AllTripListQueryResult = Apollo.QueryResult<AllTripListQuery, AllTripListQueryVariables>;
 export const AllTripCategoriesDocument = gql`
     query AllTripCategories {
   allTripCategories {
@@ -10259,6 +10443,7 @@ export const namedOperations = {
     Article: 'Article',
     AllTransferTypes: 'AllTransferTypes',
     AllTrip: 'AllTrip',
+    AllTripList: 'AllTripList',
     AllTripCategories: 'AllTripCategories',
     AllActivities: 'AllActivities',
     TripDetailLikes: 'TripDetailLikes',

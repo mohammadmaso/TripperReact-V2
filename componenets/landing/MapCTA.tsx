@@ -27,18 +27,18 @@ const MapCTA = (props: Props) => {
         bgGradient={'linear(to-l, whiteAlpha.700, transparent)'}
       >
         <Wrap direction="column" justify="flex-start" align="flex-start">
-          <Text
-            w="60%"
+          <Heading
+            w={['60%', '60%', '100%']}
             textColor="black"
-            fontWeight="black"
+            fontWeight="extrabold"
             fontSize={['lg', 'lg', '2xl']}
           >
             تور بعدی خودت رو با دقت انتخاب کن
-          </Text>
+          </Heading>
           <Text
-            w="70%"
+            // w="70%"
             textColor="black"
-            fontWeight="bold"
+            fontWeight="light"
             fontSize={['sm', 'sm', 'md']}
           >
             جستجو میان تور‌ها با دقیق‌ترین جزییات...

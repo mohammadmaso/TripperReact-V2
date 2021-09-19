@@ -6,23 +6,12 @@ import TripListCard from '../../componenets/cards/TripListCard';
 import { TravelogueListHeader } from '../../componenets/travelogue/TravelogueListHeader';
 
 import BaseLayout from '../../layouts/BaseLayout';
+import TravelogueListView from '../../views/trip/TravelogueListView';
 
 export default function Home() {
   return (
-    <BaseLayout title="سفر‌نامه‌ها" subNav={<TravelogueListHeader />}>
-      <Wrap spacing="3" mb="4" justify="center">
-        <Divider />
-        <TripListCard />
-        <TripListCard />
-        <TripListCard />
-        <Button
-          colorScheme="primary"
-          rounded="full"
-          rightIcon={<FiArrowDown />}
-        >
-          نتایج بیشتر
-        </Button>
-      </Wrap>
+    <BaseLayout title="سفر‌نامه‌ها">
+      <TravelogueListView />
     </BaseLayout>
   );
 }

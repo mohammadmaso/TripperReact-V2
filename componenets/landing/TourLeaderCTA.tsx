@@ -19,18 +19,33 @@ const TourLeaderCTA = (props: Props) => {
     >
       <Center rounded="md" flexDirection="column" h="full" bgColor="#00000040">
         <Wrap direction="column" justify="center" align="center">
-          <Text
+          <Heading
             textColor="white"
-            fontWeight="black"
+            fontWeight="bold"
             fontSize={['2xl', '2xl', '3xl']}
           >
             تور لیدر هستی؟
-          </Text>
-          <Text textColor="white" fontWeight="bold" fontSize="MD">
+          </Heading>
+          <Text
+            bgColor="#00000074"
+            px="4"
+            py="0.5"
+            textColor="white"
+            fontWeight="bold"
+            fontSize="sm"
+          >
             تور بعدی خودت رو اینجا حرفه‌ای بساز...
           </Text>
           <Link href="/auth/tourguid/register" passHref>
-            <Button rounded="sm" fontSize="sm" colorScheme="whiteAlpha">
+            <Button
+              rounded="sm"
+              fontSize="sm"
+              // size="sm"
+              fontWeight="black"
+              // textColor="white"
+              // bgColor="whiteAlpha.700"
+              colorScheme="primary"
+            >
               ثبت نام تور لیدر‌ها
             </Button>
           </Link>

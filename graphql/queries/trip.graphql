@@ -70,6 +70,88 @@ query AllTrip(
     }
   }
 }
+query AllTripList(
+  $allTripOffset: Int
+  $allTripBefore: String
+  $allTripAfter: String
+  $allTripFirst: Int
+  $allTripLast: Int
+  $allTripCategories: [[ID]]
+) {
+  allTrip(
+    offset: $allTripOffset
+    before: $allTripBefore
+    after: $allTripAfter
+    first: $allTripFirst
+    last: $allTripLast
+    categories_In: $allTripCategories
+  ) {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      cursor
+      node {
+        id
+        title
+        description
+        createdAt
+        startDate
+        endDate
+        viewsCount
+        defaultImage
+        author {
+          id
+          username
+          avatar
+        }
+        categories {
+          edges {
+            node {
+              title
+            }
+          }
+        }
+        country {
+          name
+        }
+        province {
+          name
+        }
+        likes
+        userLiked
+        places {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        activities {
+          edges {
+            node {
+              svg
+              title
+              titleFa
+              id
+            }
+          }
+        }
+        published
+        experiences {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 query AllTripCategories {
   allTripCategories {

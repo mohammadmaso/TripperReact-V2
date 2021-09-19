@@ -39,7 +39,6 @@ export function TravelogueListHeader() {
 
   return (
     <Wrap
-      px={[4, 4, 120]}
       // position={stickyHeader ? 'fixed' : undefined}
       // pt={stickyHeader ? '4' : '0'}
       // pb={stickyHeader ? '2' : '2'}
