@@ -54,7 +54,7 @@ import {
   CreateExperienceImageMutation,
 } from '../../../../graphql/generated/types';
 import { ActivityCard } from '../../../cards/ActivityCard';
-import SelectForm from '../../addTravelogue/SelectForm';
+import SelectForm from '../../../SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
 import { Form, Formik, ErrorMessage, Field } from 'formik';
 import { FetchResult } from '@apollo/client/link/core/types';
@@ -110,8 +110,15 @@ const AddExperienceModal = (props: Props) => {
   const [uploading, setUploading] = useState(false);
 
   const handleCompressedUpload = (e: any) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      if (fileReader.readyState === 2) {
+        setImages((prevState) => [...prevState, fileReader.result as string]);
+      }
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
     const image = e.target.files[0];
-    setImages((prevState) => [...prevState, image]);
+
     setUploading(true);
     new Compressor(image, {
       quality: 0.6, // 0.6 can also be used, but its not recommended to go below.

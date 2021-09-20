@@ -13,7 +13,10 @@ import {
   Center,
   useColorModeValue,
   Icon,
+  Button,
 } from '@chakra-ui/react';
+import Link from 'next/link';
+
 import React, { useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { FaFire } from 'react-icons/fa';
@@ -24,7 +27,7 @@ import {
   TripType,
   useLikeTripMutation,
 } from '../../graphql/generated/types';
-import { getDays } from '../../utils/time';
+import { getDate, getDays } from '../../utils/time';
 import TravelogueActivities from '../travelogue/TravelogueActivities';
 import { ActivityCard } from './ActivityCard';
 
@@ -82,7 +85,7 @@ const TripListCard = ({ data }: Props) => {
             <Divider orientation="vertical" />
             <Wrap align="center">
               <CalendarIcon ml="1" />
-              <Text>{getDays(data?.startDate, data?.endDate)}</Text>
+              <Text>{getDate(data?.startDate)}</Text>
             </Wrap>
             <Divider orientation="vertical" />
             <Wrap align="center">
@@ -118,18 +121,22 @@ const TripListCard = ({ data }: Props) => {
         <Text fontWeight="light" fontSize="sm">
           {data.description?.substring(0, 200)}
         </Text>
-
-        <HStack w="fit-content" align={'center'}>
-          <Avatar
-            src={data.author?.avatar}
-            alt={data.author?.username}
-            size="sm"
-            ml="2"
-          />
-          <Text fontWeight={300} fontSize="sm" dir="ltr">
-            {data.author?.username}
-          </Text>
-        </HStack>
+        <Stack>
+          <HStack w="fit-content" align={'center'}>
+            <Avatar
+              src={data.author?.avatar}
+              alt={data.author?.username}
+              size="sm"
+              ml="2"
+            />
+            <Text fontWeight={300} fontSize="sm" dir="ltr">
+              {data.author?.username}
+            </Text>
+          </HStack>
+          <Link href={`/travelogues/${data.id}`} passHref>
+            <Button size="sm">جزییات بیشتر</Button>
+          </Link>
+        </Stack>
       </Stack>
       <Flex
         justify="flex-end"

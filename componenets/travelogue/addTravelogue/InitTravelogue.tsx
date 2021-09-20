@@ -41,7 +41,7 @@ import * as Yup from 'yup';
 import { useRouter } from 'next/router';
 import { FiArrowLeft, FiDelete, FiTrash, FiUpload } from 'react-icons/fi';
 import { MdCardTravel } from 'react-icons/md';
-import SelectForm from './SelectForm';
+import SelectForm from '../../SelectForm';
 import DatePicker from '../../DatePicker';
 import {
   LazyQueryResult,

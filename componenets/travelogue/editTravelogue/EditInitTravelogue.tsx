@@ -44,7 +44,7 @@ import { FiArrowLeft, FiDelete, FiTrash, FiUpload } from 'react-icons/fi';
 import { MdCardTravel } from 'react-icons/md';
 import { RangeDatePicker } from 'jalali-react-datepicker';
 import { DatePicker } from 'jalali-react-datepicker';
-import SelectForm from '../addTravelogue/SelectForm';
+import SelectForm from '../../SelectForm';
 import {
   LazyQueryResult,
   MutationResult,

@@ -1,4 +1,4 @@
-import { Wrap, Divider, Button } from '@chakra-ui/react';
+import { Wrap, Divider, Button, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { FiArrowDown } from 'react-icons/fi';
 import ApiError from '../../componenets/ApiError';
@@ -7,6 +7,8 @@ import TripListCard from '../../componenets/cards/TripListCard';
 import { TravelogueListHeader } from '../../componenets/travelogue/TravelogueListHeader';
 import {
   TripType,
+  useAllProvincesOfCountryLazyQuery,
+  useAllTripCategoriesQuery,
   useAllTripListQuery,
   useAllTripQuery,
 } from '../../graphql/generated/types';
@@ -14,9 +16,14 @@ import {
 interface Props {}
 
 const TravelogueListView = (props: Props) => {
-  const { data, loading, error } = useAllTripListQuery({
+  const { data, loading, error, refetch } = useAllTripListQuery({
     variables: { allTripLast: 10 },
   });
+
+  const [getProvincesOfCountry, provincesOfCountryQuery] =
+    useAllProvincesOfCountryLazyQuery();
+
+  const categoriesQuery = useAllTripCategoriesQuery();
 
   if (loading) {
     return <ApiLoading />;
@@ -26,8 +33,20 @@ const TravelogueListView = (props: Props) => {
   }
 
   return (
-    <div>
-      <TravelogueListHeader />
+    <Stack spacing="4">
+      <TravelogueListHeader
+        queries={{ provincesOfCountryQuery, categoriesQuery }}
+        actions={{
+          getProvincesOfCountry: (countryId: string) =>
+            getProvincesOfCountry({
+              variables: { allProvincesCountry: countryId },
+            }),
+        }}
+        onCategoryChange={(categoryId) =>
+          refetch({ allTripLast: 10, allTripCategories: [[categoryId]] })
+        }
+        onProvinceChange={(provinceId) => null}
+      />
       <Wrap spacing="3" mb="4" justify="center">
         <Divider />
         {data?.allTrip?.edges.map((item) => (
@@ -41,7 +60,7 @@ const TravelogueListView = (props: Props) => {
           نتایج بیشتر
         </Button>
       </Wrap>
-    </div>
+    </Stack>
   );
 };
 

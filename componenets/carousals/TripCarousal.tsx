@@ -4,6 +4,7 @@ import Slider from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import TripSmallCard from '../cards/TripSmallCard';
 import { AllTripQuery } from '../../graphql/generated/types';
+import { CarousalNextArrow, CarousalPrevArrow } from './CarousalArrow';
 
 interface Props {
   slideToShow?: number;
@@ -19,7 +20,11 @@ export default function TripCarousal(props: Props): ReactElement {
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
-    arrows: false,
+    arrows: true,
+    rtl: true,
+    nextArrow: <CarousalNextArrow />,
+    prevArrow: <CarousalPrevArrow />,
+    autoplay: true,
     responsive: [
       {
         breakpoint: 1024,

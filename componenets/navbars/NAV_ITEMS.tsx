@@ -21,7 +21,7 @@ function ComingSoonBadge() {
 
 export const NAV_ITEMS: Array<NavItem> = [
   {
-    label: 'سفر',
+    label: 'سفرنامه',
     icon: <MdCardTravel />,
     children: [
       {
@@ -43,26 +43,51 @@ export const NAV_ITEMS: Array<NavItem> = [
         // href: '/places',
         badge: <ComingSoonBadge />,
       },
+    ],
+  },
+  // {
+  //   label: 'همسفر',
+  //   icon: <AiOutlineUsergroupAdd />,
+  //   // href: '/fellow-traveler',
+  //   badge: <ComingSoonBadge />,
+  // },
+  {
+    label: 'تور',
+    icon: <RiArticleLine />,
+    href: '/tours',
+    children: [
       {
-        label: 'مقالات',
-        icon: <RiArticleLine />,
-        subLabel: 'همه‌ی آنچیزی که باید برای سفر کردن بدانید',
-        href: '/articles',
+        label: 'سفرنامه',
+        icon: <FiFeather />,
+        subLabel: 'سفرها و تجربیات دیگران را بخوانید',
+        href: '/travelogues',
+      },
+      {
+        label: 'سفر برو‌ها',
+        icon: <RiMapPinUserLine />,
+        subLabel: 'گشت و گذار میان مسافران',
+        href: '/travelers',
+      },
+      {
+        label: 'جاذبه‌ها',
+        icon: <HiOutlineLocationMarker />,
+        subLabel: 'از میان جاذبه‌ها و فعالیت‌ها کشف کنید',
+        // href: '/places',
+        badge: <ComingSoonBadge />,
       },
     ],
   },
   {
-    label: 'همسفر',
-    icon: <AiOutlineUsergroupAdd />,
-    // href: '/fellow-traveler',
-    badge: <ComingSoonBadge />,
+    label: 'بلاگ',
+    icon: <RiArticleLine />,
+    href: '/articles',
   },
-  {
-    label: 'سفرساز',
-    icon: <ImMagicWand />,
-    // href: '/wizard',
-    badge: <ComingSoonBadge />,
-  },
+  // {
+  //   label: 'سفرساز',
+  //   icon: <ImMagicWand />,
+  //   // href: '/wizard',
+  //   badge: <ComingSoonBadge />,
+  // },
   {
     label: 'درباره تریپر',
     icon: <AiOutlineInfoCircle />,

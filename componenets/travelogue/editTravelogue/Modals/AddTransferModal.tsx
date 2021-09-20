@@ -42,7 +42,7 @@ import {
   CreateSinglTransferMutation,
 } from '../../../../graphql/generated/types';
 import { ActivityCard } from '../../../cards/ActivityCard';
-import SelectForm from '../../addTravelogue/SelectForm';
+import SelectForm from '../../../SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
 import { Form, Formik, ErrorMessage } from 'formik';
 import { FetchResult } from '@apollo/client/link/core/types';

@@ -7,7 +7,7 @@ import {
   useColorModeValue,
   Tooltip,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFire } from 'react-icons/fa';
 import { TripActivitieType } from '../../graphql/generated/types';
 interface Props {
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export function ActivityCard(props: Props) {
+  const [tooltip, setTooltip] = useState(false);
   return (
     <Tooltip label={props.title}>
       <Center
@@ -33,6 +34,7 @@ export function ActivityCard(props: Props) {
         borderWidth={props.isSelected ? 'medium' : '0'}
         borderColor="green.400"
         borderRadius="md"
+        // onClick={() => setTooltip(!tooltip)}
       >
         <Stack align="center" justify="space-between" textAlign={'center'}>
           <Img

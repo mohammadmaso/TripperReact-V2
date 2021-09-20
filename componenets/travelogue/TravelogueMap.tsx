@@ -128,26 +128,31 @@ export function TravelogueMap({ data }: Props) {
       experiences?.map((item, index) => (
         <div key={index}>
           <Marker
-            longitude={item.features[0].geometry.coordinates[0]}
-            latitude={item.features[0].geometry.coordinates[1]}
+            longitude={item.features[0].geometry.coordinates[1]}
+            latitude={item.features[0].geometry.coordinates[0]}
           >
             <Center
               borderWidth="1px"
               borderColor="gray.800"
               h="2rem"
-              w="2rem"
+              minW="2rem"
               borderRadius="full"
               bgColor="green.400"
             >
-              <Image
-                filter={
-                  'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
-                }
-                h="15"
-                w="15"
-                src={item?.experiencesData?.activities.edges[0]?.node?.svg!}
-                alt=""
-              />
+              <Wrap px="3">
+                {item?.experiencesData?.activities.edges.map((experience) => (
+                  <Image
+                    key={experience?.node?.id}
+                    filter={
+                      'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
+                    }
+                    h="15"
+                    w="15"
+                    src={experience?.node?.svg!}
+                    alt=""
+                  />
+                ))}
+              </Wrap>
             </Center>
           </Marker>
         </div>

@@ -25,6 +25,11 @@ export function CarousalNextArrow(props: any) {
         colorScheme="primary"
         icon={<FiArrowLeft />}
         rounded="full"
+        _focus={{
+          borderColor: '#ffffff50',
+          borderWidth: '5px',
+          borderStyle: 'outer',
+        }}
       />
     </div>
   );
@@ -53,6 +58,11 @@ export function CarousalPrevArrow(props: any) {
         colorScheme="primary"
         icon={<FiArrowRight />}
         rounded="full"
+        _focus={{
+          borderColor: '#ffffff50',
+          borderWidth: '5px',
+          borderStyle: 'outer',
+        }}
       />
     </div>
   );

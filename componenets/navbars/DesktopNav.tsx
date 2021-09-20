@@ -3,6 +3,7 @@ import {
   Box,
   Flex,
   Stack,
+  Text,
   Link as ChakraLink,
   Popover,
   PopoverTrigger,
@@ -23,9 +24,9 @@ export const DesktopNav = () => {
             <PopoverTrigger>
               <Wrap align="center">
                 {navItem.icon}
-                <ChakraLink fontSize={'sm'} fontWeight={500} color="primary">
+                <Text fontSize={'sm'} fontWeight={600} color="primary">
                   <Link href={navItem.href ?? '#'}>{navItem.label}</Link>
-                </ChakraLink>
+                </Text>
                 {navItem.badge}
               </Wrap>
             </PopoverTrigger>
