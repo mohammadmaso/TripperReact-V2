@@ -24,9 +24,12 @@ export const DesktopNav = () => {
             <PopoverTrigger>
               <Wrap align="center">
                 {navItem.icon}
-                <Text fontSize={'sm'} fontWeight={600} color="primary">
-                  <Link href={navItem.href ?? '#'}>{navItem.label}</Link>
-                </Text>
+
+                <Link href={navItem.href ?? '#'} passHref>
+                  <Text fontSize={'sm'} fontWeight={600} color="primary">
+                    {navItem.label}
+                  </Text>
+                </Link>
                 {navItem.badge}
               </Wrap>
             </PopoverTrigger>
