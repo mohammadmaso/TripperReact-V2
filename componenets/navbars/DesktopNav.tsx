@@ -26,7 +26,12 @@ export const DesktopNav = () => {
                 {navItem.icon}
 
                 <Link href={navItem.href ?? '#'} passHref>
-                  <Text fontSize={'sm'} fontWeight={600} color="primary">
+                  <Text
+                    cursor="pointer"
+                    fontSize={'sm'}
+                    fontWeight={600}
+                    color="primary"
+                  >
                     {navItem.label}
                   </Text>
                 </Link>
