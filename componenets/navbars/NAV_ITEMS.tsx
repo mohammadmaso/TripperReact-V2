@@ -22,7 +22,7 @@ function ComingSoonBadge() {
 export const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'سفرنامه',
-    icon: <MdCardTravel />,
+    icon: <FiFeather />,
     children: [
       {
         label: 'سفرنامه‌ها',
@@ -53,7 +53,7 @@ export const NAV_ITEMS: Array<NavItem> = [
   // },
   {
     label: 'تور',
-    icon: <RiArticleLine />,
+    icon: <MdCardTravel />,
     href: '/tours',
     children: [
       {
