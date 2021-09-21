@@ -18,10 +18,10 @@ import CircleLogo from '../../../componenets/logos/CircleLogo';
 export default function SimpleCard() {
   return (
     <Center minH={'100vh'} bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'2xl'} py={12} px={6}>
+      <Stack spacing={8} mx={'auto'} maxW={'2xl'} p={2} py="4">
         <Stack align={'center'}>
           <CircleLogo />
-          <Heading fontSize={'4xl'}>
+          <Heading fontSize={'2xl'}>
             ثبت نام در اولین جامعه تورلیدر‌های ایران
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
@@ -32,9 +32,10 @@ export default function SimpleCard() {
           rounded={'lg'}
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
-          w="2xl"
-          p={8}
+          minW="auto"
           fontSize="sm"
+          p={3}
+          h="auto"
         >
           <Stack spacing={4} fontSize="sm">
             <FormControl id="">
@@ -43,6 +44,10 @@ export default function SimpleCard() {
             </FormControl>
             <FormControl id="">
               <FormLabel fontSize="sm">کد ملی</FormLabel>
+              <Input type="email" />
+            </FormControl>
+            <FormControl id="">
+              <FormLabel fontSize="sm">شماره موبایل</FormLabel>
               <Input type="email" />
             </FormControl>
             <FormControl id="">
@@ -57,8 +62,10 @@ export default function SimpleCard() {
                 justify={'space-between'}
                 fontSize="sm"
               >
-                <Checkbox fontSize="sm">پذیرش قوانین تریپر</Checkbox>
-                <Link color={'blue.400'}>قوانین و مقررات</Link>
+                <Checkbox colorScheme="primary" fontSize="sm">
+                  پذیرش قوانین تریپر
+                </Checkbox>
+                <Link color={'green.400'}>قوانین و مقررات</Link>
               </Stack>
               <Button colorScheme="primary">ثبت نام</Button>
             </Stack>
