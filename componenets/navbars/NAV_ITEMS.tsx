@@ -57,23 +57,16 @@ export const NAV_ITEMS: Array<NavItem> = [
     href: '/tours',
     children: [
       {
-        label: 'سفرنامه',
+        label: 'تمام تورها',
         icon: <FiFeather />,
         subLabel: 'سفرها و تجربیات دیگران را بخوانید',
-        href: '/travelogues',
+        href: '/tours',
       },
       {
-        label: 'سفر برو‌ها',
+        label: 'تور لیدرها',
         icon: <RiMapPinUserLine />,
         subLabel: 'گشت و گذار میان مسافران',
-        href: '/travelers',
-      },
-      {
-        label: 'جاذبه‌ها',
-        icon: <HiOutlineLocationMarker />,
-        subLabel: 'از میان جاذبه‌ها و فعالیت‌ها کشف کنید',
-        // href: '/places',
-        badge: <ComingSoonBadge />,
+        href: '/tourguids',
       },
     ],
   },
