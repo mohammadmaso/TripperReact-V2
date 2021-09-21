@@ -34,7 +34,7 @@ const BaseLayout = (props: Props): ReactElement => {
           xl: '100px',
         }}
       />
-      <Box minHeight="78vh" px={{ base: 4, sm: 4, md: 120, lg: 120, xl: 350 }}>
+      <Box minHeight="78vh" px={{ base: 4, sm: 4, md: 120, lg: 120 }}>
         {props.children}
       </Box>
       <MainFooter />

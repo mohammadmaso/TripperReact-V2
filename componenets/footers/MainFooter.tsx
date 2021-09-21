@@ -45,7 +45,7 @@ export default function LargeWithNewsletter() {
       <Container
         maxW={'full'}
         py="10"
-        px={{ base: 4, sm: 4, md: 120, lg: 120, xl: 350 }}
+        px={{ base: 4, sm: 4, md: 120, lg: 120 }}
       >
         <SimpleGrid
           columns={{ base: 1, sm: 1, md: 3 }}

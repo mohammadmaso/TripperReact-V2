@@ -53,7 +53,7 @@ const NavBar = (props: any) => {
         }}
         minH={'1rem'}
         py={{ base: 2 }}
-        px={{ base: 4, sm: 4, md: 120, lg: 120, xl: 350 }}
+        px={{ base: 4, sm: 4, md: 120, lg: 120 }}
         borderBottom={1}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
