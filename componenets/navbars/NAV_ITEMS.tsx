@@ -59,13 +59,13 @@ export const NAV_ITEMS: Array<NavItem> = [
       {
         label: 'تمام تورها',
         icon: <FiFeather />,
-        subLabel: 'سفرها و تجربیات دیگران را بخوانید',
+        subLabel: 'تمامی تورها با دقیق‌ترین جزییات',
         href: '/tours',
       },
       {
         label: 'تور لیدرها',
         icon: <RiMapPinUserLine />,
-        subLabel: 'گشت و گذار میان مسافران',
+        subLabel: 'تورلیدرهای  احراز هویت شده تریپر',
         href: '/tourguids',
       },
     ],
