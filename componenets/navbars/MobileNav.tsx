@@ -35,7 +35,7 @@ export const MobileNav = ({
   onClose: any;
   isOpen: any;
 }) => {
-  // const [prompt, promptToInstall] = useAddToHomescreenPrompt();
+  const [prompt, promptToInstall] = useAddToHomescreenPrompt();
 
   return (
     <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
@@ -59,7 +59,7 @@ export const MobileNav = ({
             rounded="none"
             colorScheme="primary"
             size="sm"
-            onClick={() => null}
+            onClick={promptToInstall}
           >
             نصب نسخه PWA
           </Button>
