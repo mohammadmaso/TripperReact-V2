@@ -31,14 +31,14 @@ export function PWAInstallPrompt() {
     setVisibleState(false);
   };
 
-  // React.useEffect(() => {
-  //   const isCancled = localStorage.getItem('pwa-prompt-showed');
-  //   if (prompt) {
-  //     if (isCancled != '1') {
-  //       setVisibleState(true);
-  //     }
-  //   }
-  // }, [prompt]);
+  React.useEffect(() => {
+    const isCancled = localStorage.getItem('pwa-prompt-showed');
+    if (prompt) {
+      if (isCancled != '1') {
+        setVisibleState(true);
+      }
+    }
+  }, [prompt]);
 
   if (!isVisible) {
     return <div />;
