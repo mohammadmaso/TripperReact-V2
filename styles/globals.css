@@ -26,3 +26,39 @@
   color: white;
   background: #009d21;
 }
+
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar-thumb {
+    background: #777777;
+    border: 0;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar-track {
+    background: #ccc;
+    border: 0;
+    border-radius: 0;
+  }
+}
