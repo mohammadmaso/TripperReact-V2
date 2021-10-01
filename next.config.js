@@ -18,3 +18,9 @@ module.exports = withPWA({
     skipWaiting: true,
   },
 })
+
+// module.exports = {
+//   images: {
+//     domains: ['cdn.pay.ir'],
+//   },
+// }
