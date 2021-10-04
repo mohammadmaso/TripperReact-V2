@@ -68,7 +68,7 @@ const NavBar = (props: any) => {
           flex={{ base: 'flex', md: 'auto' }}
           ml={{ base: -2 }}
           display={{ base: 'flex', md: 'none' }}
-          w="6.5rem"
+          w="8rem"
         >
           <IconButton
             onClick={onToggle}
@@ -104,7 +104,7 @@ const NavBar = (props: any) => {
             <DesktopNav />
           </Flex>
         </Flex>
-        <Flex justify="flex-end" w="6.5rem">
+        <Flex justify="flex-end" w="8rem">
           {props.children}
         </Flex>
       </Flex>

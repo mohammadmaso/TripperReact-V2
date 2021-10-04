@@ -1,4 +1,9 @@
-import { AtSignIcon, ChevronDownIcon, MoonIcon } from '@chakra-ui/icons';
+import {
+  AtSignIcon,
+  BellIcon,
+  ChevronDownIcon,
+  MoonIcon,
+} from '@chakra-ui/icons';
 import {
   Avatar,
   Flex,
@@ -11,9 +16,16 @@ import {
   useColorMode,
   Switch,
   Divider,
+  Wrap,
 } from '@chakra-ui/react';
 
-import { FiLogOut, FiUser, FiBookOpen, FiFeather } from 'react-icons/fi';
+import {
+  FiLogOut,
+  FiUser,
+  FiBookOpen,
+  FiFeather,
+  FiBell,
+} from 'react-icons/fi';
 
 import React from 'react';
 
@@ -32,7 +44,12 @@ const NavProfile = (props: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <div>
+    <Wrap>
+      <Menu>
+        <MenuButton as={Button} bgColor="transparent" size="sm" rounded="full">
+          <FiBell />
+        </MenuButton>
+      </Menu>
       <Menu>
         <MenuButton
           as={Button}
@@ -108,7 +125,7 @@ const NavProfile = (props: Props) => {
           </MenuItem>
         </MenuList>
       </Menu>
-    </div>
+    </Wrap>
   );
 };
 
