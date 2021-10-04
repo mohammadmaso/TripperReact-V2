@@ -17,6 +17,7 @@ import {
   Switch,
   Divider,
   Wrap,
+  Badge,
 } from '@chakra-ui/react';
 
 import {
@@ -47,7 +48,9 @@ const NavProfile = (props: Props) => {
     <Wrap>
       <Menu>
         <MenuButton as={Button} bgColor="transparent" size="sm" rounded="full">
-          <FiBell />
+          <Wrap spacing="0.5">
+            <FiBell />
+          </Wrap>
         </MenuButton>
       </Menu>
       <Menu>
