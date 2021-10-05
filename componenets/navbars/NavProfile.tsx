@@ -46,13 +46,13 @@ const NavProfile = (props: Props) => {
 
   return (
     <Wrap>
-      <Menu>
+      {/* <Menu>
         <MenuButton as={Button} bgColor="transparent" size="sm" rounded="full">
           <Wrap spacing="0.5">
             <FiBell />
           </Wrap>
         </MenuButton>
-      </Menu>
+      </Menu> */}
       <Menu>
         <MenuButton
           as={Button}
