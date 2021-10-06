@@ -57,6 +57,11 @@ const errorLink = onError(
 const httpLink = createUploadLink({
   ssrMode: typeof window === "undefined",
   uri: 'https://service.mytripper.ir/api/',
+  credentials: 'include',
+  fetchOptions: {
+    mode: 'no-cors',
+  },
+  
 });
 
 const authLink = setContext( (_, { headers }) =>  {
@@ -92,5 +97,6 @@ export const client = new ApolloClient({
   // link: authLink.concat(httpLink),
   // to use errorLink functinality
   link: ApolloLink.from([errorLink, authLink, httpLink]),
+  
   cache: cache
 });
