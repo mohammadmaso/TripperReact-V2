@@ -57,9 +57,9 @@ const errorLink = onError(
 const httpLink = createUploadLink({
   ssrMode: typeof window === "undefined",
   uri: 'https://service.mytripper.ir/api/',
-  fetchOptions: {
-    mode: 'no-cors',
-  },
+  // fetchOptions: {
+  //   mode: 'no-cors',
+  // },
   
 });
 
