@@ -13,6 +13,7 @@ import {
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
   useMeSavedTripsQuery,
+  useMeTourLeaderLazyQuery,
   useMyTripsLazyQuery,
   usePasswordChangeMutation,
   useUpdateProfileMutation,
@@ -27,6 +28,13 @@ interface Props {}
 
 const MeDetailView = (props: Props) => {
   const { data, loading, error } = useMeDetailQuery();
+
+  const [getTourLeaderDetail, tourLeaderDetailQuery] = useMeTourLeaderLazyQuery(
+    {
+      fetchPolicy: 'no-cache',
+    }
+  );
+
   const [getUnpublishedTrips, unpublishedTripsQuery] = useMyTripsLazyQuery();
   const [getFollowings, followingsQuery] = useMeFollowingsLazyQuery({
     fetchPolicy: 'no-cache',
@@ -53,6 +61,7 @@ const MeDetailView = (props: Props) => {
         data={data}
         isSelf={true}
         actions={{
+          getTourLeaderDetail: () => getTourLeaderDetail(),
           getFollowings: () => getFollowings(),
           getFollowers: () => getFollowers(),
           getUnpublishedTrips: () =>
@@ -101,6 +110,7 @@ const MeDetailView = (props: Props) => {
           changePasswordQuery,
           changeUsernameQuery,
           unpublishedTripsQuery,
+          tourLeaderDetailQuery,
         }}
       />
     </div>

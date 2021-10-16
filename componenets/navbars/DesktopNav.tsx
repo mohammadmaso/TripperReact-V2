@@ -15,7 +15,7 @@ import Link from 'next/link';
 import { DesktopSubNav } from './DesktopSubNav';
 import { NAV_ITEMS } from './NAV_ITEMS';
 
-export const DesktopNav = () => {
+export const DesktopNav = (props: any) => {
   return (
     <Stack direction={'row'} spacing={4}>
       {NAV_ITEMS.map((navItem) => (
