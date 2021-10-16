@@ -46,7 +46,7 @@ const NavBar = (props: any) => {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('rgba(255, 255, 255, 0.8)', 'gray.800')}
+        bg={useColorModeValue('rgba(255, 255, 255, 1)', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
         // style={{
         //   backdropFilter: 'saturate(180%) blur(5px)',
