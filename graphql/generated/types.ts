@@ -543,7 +543,6 @@ export type AccommodationType = Node & {
   city?: Maybe<CityType>;
   images: AccommodationImageTypeConnection;
   accommodationType?: Maybe<AccommodationTypeType>;
-  tripsOfAccomodation: TripTypeConnection;
   usersSavedAccommodation: AccommodationCollectionsTypeConnection;
 };
 
@@ -556,32 +555,6 @@ export type AccommodationTypeImagesArgs = {
   last?: Maybe<Scalars['Int']>;
   latitude?: Maybe<Scalars['String']>;
   latitude_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type AccommodationTypeTripsOfAccomodationArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  categories_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  categories_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  categories_Title_Iexact?: Maybe<Scalars['String']>;
-  cities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  cities_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  cities_Name_Iexact?: Maybe<Scalars['String']>;
-  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  country_Name_Iexact?: Maybe<Scalars['String']>;
-  activities_In?: Maybe<Array<Maybe<Array<Maybe<Scalars['ID']>>>>>;
-  activities_Iexact?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  activities_Title_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  activities_Title_Iexact?: Maybe<Scalars['String']>;
-  published?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -697,7 +670,6 @@ export type AddPlaceImages = {
 export type AddRelatedFieldToTripMutation = {
   __typename?: 'AddRelatedFieldToTripMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   trip?: Maybe<TripType>;
 };
 
@@ -929,16 +901,68 @@ export type ArticleTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type BatchRegisterInput = {
+  userRegisters?: Maybe<Array<Maybe<UserRegisterTourInput>>>;
+  tourExecution: Scalars['ID'];
+  batchType: Scalars['String'];
+  emergencyPhone: Scalars['String'];
+};
+
+/** An enumeration. */
+export enum BatchRegisterTourBatchType {
+  /** friendly */
+  FR = 'FR',
+  /** family */
+  FA = 'FA'
+}
+
+export type BatchRegisterTourType = Node & {
+  __typename?: 'BatchRegisterTourType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  tourExecution: TourExecutionType;
+  user: UserType;
+  countOfCompanions: Scalars['Int'];
+  batchType: BatchRegisterTourBatchType;
+  emergencyPhone: Scalars['String'];
+  paid: Scalars['Boolean'];
+  registertourmodelSet: UserRegisteredTourTypeConnection;
+};
+
+
+export type BatchRegisterTourTypeRegistertourmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type BatchRegisterTourTypeConnection = {
+  __typename?: 'BatchRegisterTourTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<BatchRegisterTourTypeEdge>>;
+};
+
+/** A Relay edge containing a `BatchRegisterTourType` and its cursor. */
+export type BatchRegisterTourTypeEdge = {
+  __typename?: 'BatchRegisterTourTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<BatchRegisterTourType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
 export type ChangePasswordMutation = {
   __typename?: 'ChangePasswordMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type ChangeUsernameMutation = {
   __typename?: 'ChangeUsernameMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   username?: Maybe<Scalars['String']>;
 };
 
@@ -966,27 +990,7 @@ export type CityTypeToursOfCityArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -1123,27 +1127,7 @@ export type CountryTypeTourmodelSetArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -1386,7 +1370,6 @@ export type CreateTripReviewPayload = {
 export type CreateTripStaticsMutation = {
   __typename?: 'CreateTripStaticsMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   trip?: Maybe<TripType>;
 };
 
@@ -1438,12 +1421,10 @@ export type DeleteTransferMutation = {
 export type DeleteTrip = {
   __typename?: 'DeleteTrip';
   deleted?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type DeleteTripImage = {
   __typename?: 'DeleteTripImage';
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   success?: Maybe<Scalars['Boolean']>;
 };
 
@@ -1457,13 +1438,11 @@ export type DeleteTripPlan = {
 export type DeleteTripReview = {
   __typename?: 'DeleteTripReview';
   deleted?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type DisLikeTripReviewMutation = {
   __typename?: 'DisLikeTripReviewMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   tripReviewLike?: Maybe<TripReviewLikeType>;
 };
 
@@ -1832,7 +1811,6 @@ export type FollowingTypeEdge = {
 export type ForgotPasswordSms = {
   __typename?: 'ForgotPasswordSMS';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 
@@ -1840,7 +1818,6 @@ export type ForgotPasswordSms = {
 export type LikeTripReviewMutation = {
   __typename?: 'LikeTripReviewMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   tripReviewLike?: Maybe<TripReviewLikeType>;
 };
 
@@ -2004,13 +1981,14 @@ export type Mutation = {
   /** create review for tour mutation */
   createTourReview?: Maybe<CreateTourReview>;
   /** user register to tour mutation.  */
-  userRegisterTour?: Maybe<RegisterTourMutation>;
+  registerTour?: Maybe<RegisterTourMutation>;
+  /** register tour leader.  */
+  registerTourLeader?: Maybe<RegisterTourLeader>;
+  getTourPaymentLink?: Maybe<PayTourExecution>;
   /** delete tour mutation.  */
   deleteTour?: Maybe<DeleteTour>;
   /** delete tour review mutation.  */
   deleteTourReview?: Maybe<DeleteTourReview>;
-  /** unregister user from tour mutation.  */
-  userUnregisterTour?: Maybe<UnRegisterTourMutation>;
   createPlace?: Maybe<CreatePlace>;
   addPlaceImages?: Maybe<AddPlaceImages>;
   deletePlace?: Maybe<DeletePlace>;
@@ -2292,6 +2270,21 @@ export type MutationCreateTourReviewArgs = {
 };
 
 
+export type MutationRegisterTourArgs = {
+  registerTourInput: BatchRegisterInput;
+};
+
+
+export type MutationRegisterTourLeaderArgs = {
+  tourLeader: TourLeaderInput;
+};
+
+
+export type MutationGetTourPaymentLinkArgs = {
+  batchUserRegister: Scalars['ID'];
+};
+
+
 export type MutationDeleteTourArgs = {
   id: Scalars['ID'];
 };
@@ -2492,6 +2485,12 @@ export type PasswordSet = {
   errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
+export type PayTourExecution = {
+  __typename?: 'PayTourExecution';
+  success?: Maybe<Scalars['Boolean']>;
+  paymentUrl?: Maybe<Scalars['String']>;
+};
+
 export type PlaceCollectionsType = Node & {
   __typename?: 'PlaceCollectionsType';
   /** The ID of the object. */
@@ -2659,7 +2658,7 @@ export type PlaceType = Node & {
   type?: Maybe<PlaceTypeType>;
   activities: TripActivitieTypeConnection;
   videos: PlaceVideoTypeConnection;
-  toursPlaces: TourTypeConnection;
+  toursOfPlace: TourTypeConnection;
   tripsInPlace: TripTypeConnection;
   plansPlaces: TripPlanTypeConnection;
   feelsOfPlace: PlaceFeelTypeConnection;
@@ -2696,33 +2695,13 @@ export type PlaceTypeVideosArgs = {
 };
 
 
-export type PlaceTypeToursPlacesArgs = {
+export type PlaceTypeToursOfPlaceArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3007,27 +2986,7 @@ export type ProvinceTypeToursOfProvinceArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3120,7 +3079,6 @@ export type ProvinceTypeEdge = {
 export type PublishTripMutation = {
   __typename?: 'PublishTripMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   trip?: Maybe<TripType>;
 };
 
@@ -3212,7 +3170,10 @@ export type Query = {
   /** The ID of the object */
   tour?: Maybe<TourType>;
   allTour?: Maybe<TourTypeConnection>;
-  tourCategories?: Maybe<Array<Maybe<TourCategoryType>>>;
+  /** The ID of the object */
+  tourExecution?: Maybe<TourExecutionType>;
+  allTourExecution?: Maybe<TourExecutionTypeConnection>;
+  tourCategories?: Maybe<TourCategoryTypeConnection>;
   /** The ID of the object */
   trip?: Maybe<TripType>;
   allTrip?: Maybe<TripTypeConnection>;
@@ -3715,27 +3676,32 @@ export type QueryAllTourArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryTourExecutionArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAllTourExecutionArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  tour?: Maybe<Scalars['ID']>;
+};
+
+
+export type QueryTourCategoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -3946,13 +3912,20 @@ export type Register = {
 export type RegisterSms = {
   __typename?: 'RegisterSMS';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
+};
+
+/** register tour leader.  */
+export type RegisterTourLeader = {
+  __typename?: 'RegisterTourLeader';
+  success?: Maybe<Scalars['Boolean']>;
+  tourLeader?: Maybe<TourLeaderType>;
 };
 
 /** user register to tour mutation.  */
 export type RegisterTourMutation = {
   __typename?: 'RegisterTourMutation';
-  userRegisterTour?: Maybe<UserRegisteredTourType>;
+  batchRegisterTour?: Maybe<BatchRegisterTourType>;
+  success?: Maybe<Scalars['Boolean']>;
 };
 
 /**
@@ -3975,14 +3948,12 @@ export type ResendActivationEmail = {
 export type ResendVerificationSms = {
   __typename?: 'ResendVerificationSMS';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 /** reset password */
 export type ResetPasswordSms = {
   __typename?: 'ResetPasswordSMS';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 /** Same as `grapgql_jwt` implementation, with standard output. */
@@ -4089,12 +4060,42 @@ export type SocialNodeEdge = {
   cursor: Scalars['String'];
 };
 
-export type TourCategoryType = {
+export type TourCategoryType = Node & {
   __typename?: 'TourCategoryType';
+  /** The ID of the object. */
   id: Scalars['ID'];
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   svg: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
+  toursOfCategory: TourTypeConnection;
+};
+
+
+export type TourCategoryTypeToursOfCategoryArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title_Iexact?: Maybe<Scalars['String']>;
+};
+
+export type TourCategoryTypeConnection = {
+  __typename?: 'TourCategoryTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<TourCategoryTypeEdge>>;
+};
+
+/** A Relay edge containing a `TourCategoryType` and its cursor. */
+export type TourCategoryTypeEdge = {
+  __typename?: 'TourCategoryTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<TourCategoryType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
 };
 
 export type TourCollectionsType = Node & {
@@ -4122,6 +4123,62 @@ export type TourCollectionsTypeEdge = {
   cursor: Scalars['String'];
 };
 
+export type TourExecutionType = Node & {
+  __typename?: 'TourExecutionType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  tour: TourType;
+  description?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  startDate?: Maybe<Scalars['Date']>;
+  endDate?: Maybe<Scalars['Date']>;
+  registerStartDate?: Maybe<Scalars['Date']>;
+  registerEndDate?: Maybe<Scalars['Date']>;
+  requirement?: Maybe<Scalars['String']>;
+  price: Scalars['Int'];
+  discountPrice?: Maybe<Scalars['Int']>;
+  published: Scalars['Boolean'];
+  capacity: Scalars['Int'];
+  capacityLeft: Scalars['Int'];
+  batchregistertourSet: BatchRegisterTourTypeConnection;
+  registertourmodelSet: UserRegisteredTourTypeConnection;
+};
+
+
+export type TourExecutionTypeBatchregistertourSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type TourExecutionTypeRegistertourmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type TourExecutionTypeConnection = {
+  __typename?: 'TourExecutionTypeConnection';
+  /** Pagination data for this connection. */
+  pageInfo: PageInfo;
+  /** Contains the nodes in this connection. */
+  edges: Array<Maybe<TourExecutionTypeEdge>>;
+};
+
+/** A Relay edge containing a `TourExecutionType` and its cursor. */
+export type TourExecutionTypeEdge = {
+  __typename?: 'TourExecutionTypeEdge';
+  /** The item at the end of the edge */
+  node?: Maybe<TourExecutionType>;
+  /** A cursor for use in pagination */
+  cursor: Scalars['String'];
+};
+
 export type TourInput = {
   title: Scalars['String'];
   published: Scalars['Boolean'];
@@ -4129,6 +4186,50 @@ export type TourInput = {
   startDate?: Maybe<Scalars['Date']>;
   endDate?: Maybe<Scalars['Date']>;
   activities?: Maybe<Scalars['UUID']>;
+};
+
+export type TourLeaderInput = {
+  tourLeadingId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+};
+
+/** An enumeration. */
+export enum TourLeaderTourLeadingSpecialType {
+  /** طبیعت‌گردی-حیات وحش */
+  ECOWT = 'ECOWT'
+}
+
+/** An enumeration. */
+export enum TourLeaderTourLeadingType {
+  /** راهنمای داخلی */
+  DG = 'DG',
+  /** راهنمای بین‌المللی */
+  IG = 'IG',
+  /** راهنمای تخصصی */
+  SG = 'SG'
+}
+
+export type TourLeaderType = {
+  __typename?: 'TourLeaderType';
+  id: Scalars['ID'];
+  user: UserType;
+  tourLeadingId: Scalars['String'];
+  tourLeadingType: TourLeaderTourLeadingType;
+  tourLeadingSpecialType?: Maybe<TourLeaderTourLeadingSpecialType>;
+  name: Scalars['String'];
+  successfulToursCount: Scalars['Int'];
+  tourmodelSet: TourTypeConnection;
+};
+
+
+export type TourLeaderTypeTourmodelSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 export type TourLikeType = {
@@ -4162,39 +4263,26 @@ export type TourType = Node & {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published: Scalars['Boolean'];
-  price: Scalars['Decimal'];
-  discountPrice?: Maybe<Scalars['Decimal']>;
-  capacity: Scalars['Int'];
-  capacityLeft: Scalars['Int'];
+  defaultImage?: Maybe<Scalars['String']>;
   likes: Scalars['Int'];
-  author: UserType;
+  days?: Maybe<Scalars['Int']>;
+  published: Scalars['Boolean'];
+  verified: Scalars['Boolean'];
+  tourLeader: TourLeaderType;
   activities: TripActivitieTypeConnection;
-  categories: TripCategoryTypeConnection;
+  category?: Maybe<TourCategoryType>;
   places: PlaceTypeConnection;
   country: CountryType;
-  provinces: ProvinceTypeConnection;
+  province?: Maybe<ProvinceType>;
   cities: CityTypeConnection;
   tourLike: Array<TourLikeType>;
   reviewsOfTour: Array<TourReviewType>;
-  userregisteredtourmodelSet: UserRegisteredTourTypeConnection;
+  tourExecution: TourExecutionTypeConnection;
   usersSavedTour: TourCollectionsTypeConnection;
 };
 
 
 export type TourTypeActivitiesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-};
-
-
-export type TourTypeCategoriesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -4231,19 +4319,6 @@ export type TourTypePlacesArgs = {
 };
 
 
-export type TourTypeProvincesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  country?: Maybe<Scalars['ID']>;
-  country_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country_Name_Iexact?: Maybe<Scalars['String']>;
-  country_Name_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
 export type TourTypeCitiesArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -4261,12 +4336,13 @@ export type TourTypeCitiesArgs = {
 };
 
 
-export type TourTypeUserregisteredtourmodelSetArgs = {
+export type TourTypeTourExecutionArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+  tour?: Maybe<Scalars['ID']>;
 };
 
 
@@ -4421,27 +4497,7 @@ export type TripActivitieTypeToursActivitiesArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  title_Iexact?: Maybe<Scalars['String']>;
 };
 
 
@@ -4558,39 +4614,8 @@ export type TripCategoryType = Node & {
   descriptionFa?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   svg?: Maybe<Scalars['String']>;
-  toursCategories: TourTypeConnection;
   tripmodelSet: TripTypeConnection;
   plansCategory: TripPlanTypeConnection;
-};
-
-
-export type TripCategoryTypeToursCategoriesArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 
@@ -5088,7 +5113,6 @@ export type TripType = Node & {
   experiences?: Maybe<ExperienceTypeConnection>;
   transfers: TransferTypeConnection;
   cities: CityTypeConnection;
-  accommodations: AccommodationTypeConnection;
   likes: Scalars['Int'];
   tripLikes?: Maybe<TripLikeType>;
   reviewsOfTrip: TripReviewTypeConnection;
@@ -5261,20 +5285,6 @@ export type TripTypeCitiesArgs = {
 
 
 /** Trip description */
-export type TripTypeAccommodationsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  city?: Maybe<Scalars['ID']>;
-  city_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodationType?: Maybe<Scalars['ID']>;
-  accommodationType_In?: Maybe<Array<Maybe<Scalars['ID']>>>;
-};
-
-
-/** Trip description */
 export type TripTypeReviewsOfTripArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -5378,14 +5388,7 @@ export type TripVideoTypeEdge = {
 export type UnPublishTripMutation = {
   __typename?: 'UnPublishTripMutation';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
   trip?: Maybe<TripType>;
-};
-
-/** unregister user from tour mutation.  */
-export type UnRegisterTourMutation = {
-  __typename?: 'UnRegisterTourMutation';
-  deleted?: Maybe<Scalars['Boolean']>;
 };
 
 /**
@@ -5421,7 +5424,6 @@ export type UpdateTrip = {
   __typename?: 'UpdateTrip';
   trip?: Maybe<TripType>;
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type UpdateTripInput = {
@@ -5480,6 +5482,7 @@ export type UserNode = Node & {
   /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
   isActive: Scalars['Boolean'];
   dateJoined: Scalars['DateTime'];
+  userType: UserUserType;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars['String'];
   phoneNumber?: Maybe<Scalars['String']>;
@@ -5492,10 +5495,10 @@ export type UserNode = Node & {
   followingUsers: FollowingTypeConnection;
   followerUsers: FollowingTypeConnection;
   socialAuth: SocialNodeConnection;
-  tourmodelSet: TourTypeConnection;
+  tourleader?: Maybe<TourLeaderType>;
   tourLike: Array<TourLikeType>;
   tourReviewsOfUser: Array<TourReviewType>;
-  userregisteredtourmodelSet: UserRegisteredTourTypeConnection;
+  batchregistertourSet: BatchRegisterTourTypeConnection;
   tripVideos: TripVideoTypeConnection;
   tripImages: TripImageTypeConnection;
   trips: TripTypeConnection;
@@ -5566,37 +5569,7 @@ export type UserNodeSocialAuthArgs = {
 };
 
 
-export type UserNodeTourmodelSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-};
-
-
-export type UserNodeUserregisteredtourmodelSetArgs = {
+export type UserNodeBatchregistertourSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -5927,17 +5900,25 @@ export type UserNodeExperiencesOfUserArgs = {
   activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
-export type UserRegisteredTourType = Node & {
-  __typename?: 'UserRegisteredTourType';
-  /** The ID of the object. */
-  id: Scalars['ID'];
-  tour: TourType;
-  user: UserType;
+export type UserRegisterTourInput = {
   nationalId: Scalars['String'];
   firstName: Scalars['String'];
   familyName: Scalars['String'];
   phone: Scalars['String'];
-  emergencyPhone: Scalars['String'];
+  vaccinated: Scalars['Boolean'];
+};
+
+export type UserRegisteredTourType = Node & {
+  __typename?: 'UserRegisteredTourType';
+  /** The ID of the object. */
+  id: Scalars['ID'];
+  tourExecution: TourExecutionType;
+  batch: BatchRegisterTourType;
+  nationalId: Scalars['String'];
+  firstName: Scalars['String'];
+  familyName: Scalars['String'];
+  phone: Scalars['String'];
+  vaccinated: Scalars['Boolean'];
 };
 
 export type UserRegisteredTourTypeConnection = {
@@ -5969,6 +5950,7 @@ export type UserType = Node & {
   /** Designates whether this user should be treated as active. Unselect this instead of deleting accounts. */
   isActive: Scalars['Boolean'];
   dateJoined: Scalars['DateTime'];
+  userType: UserUserType;
   /** Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only. */
   username: Scalars['String'];
   email?: Maybe<Scalars['String']>;
@@ -5978,10 +5960,10 @@ export type UserType = Node & {
   followingUsers: FollowingTypeConnection;
   followerUsers: FollowingTypeConnection;
   socialAuth: SocialNodeConnection;
-  tourmodelSet: TourTypeConnection;
+  tourleader?: Maybe<TourLeaderType>;
   tourLike: Array<TourLikeType>;
   tourReviewsOfUser: Array<TourReviewType>;
-  userregisteredtourmodelSet: UserRegisteredTourTypeConnection;
+  batchregistertourSet: BatchRegisterTourTypeConnection;
   tripVideos: TripVideoTypeConnection;
   tripImages: TripImageTypeConnection;
   trips: TripTypeConnection;
@@ -6052,37 +6034,7 @@ export type UserTypeSocialAuthArgs = {
 };
 
 
-export type UserTypeTourmodelSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  title?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  startDate?: Maybe<Scalars['Date']>;
-  endDate?: Maybe<Scalars['Date']>;
-  published?: Maybe<Scalars['Boolean']>;
-  price?: Maybe<Scalars['Float']>;
-  discountPrice?: Maybe<Scalars['Float']>;
-  capacity?: Maybe<Scalars['Int']>;
-  capacityLeft?: Maybe<Scalars['Int']>;
-  likes?: Maybe<Scalars['Int']>;
-  author?: Maybe<Scalars['ID']>;
-  activities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  categories?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  images?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  places?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  accommodation?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  country?: Maybe<Scalars['ID']>;
-  transfers?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  provinces?: Maybe<Array<Maybe<Scalars['ID']>>>;
-  cities?: Maybe<Array<Maybe<Scalars['ID']>>>;
-};
-
-
-export type UserTypeUserregisteredtourmodelSetArgs = {
+export type UserTypeBatchregistertourSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -6430,6 +6382,14 @@ export type UserTypeEdge = {
   cursor: Scalars['String'];
 };
 
+/** An enumeration. */
+export enum UserUserType {
+  /** normal user */
+  N = 'N',
+  /** tour leader */
+  T = 'T'
+}
+
 export type Verify = {
   __typename?: 'Verify';
   payload?: Maybe<Scalars['GenericScalar']>;
@@ -6452,7 +6412,6 @@ export type VerifyAccount = {
 export type VerifySms = {
   __typename?: 'VerifySMS';
   success?: Maybe<Scalars['Boolean']>;
-  errors?: Maybe<Scalars['ExpectedErrorType']>;
 };
 
 export type VerifySmsMutationVariables = Exact<{
@@ -6465,7 +6424,7 @@ export type VerifySmsMutation = (
   { __typename?: 'Mutation' }
   & { verifySms?: Maybe<(
     { __typename?: 'VerifySMS' }
-    & Pick<VerifySms, 'success' | 'errors'>
+    & Pick<VerifySms, 'success'>
   )> }
 );
 
@@ -6481,7 +6440,7 @@ export type RegisterSmsMutation = (
   { __typename?: 'Mutation' }
   & { registerSms?: Maybe<(
     { __typename?: 'RegisterSMS' }
-    & Pick<RegisterSms, 'success' | 'errors'>
+    & Pick<RegisterSms, 'success'>
   )> }
 );
 
@@ -6510,7 +6469,7 @@ export type ResetPasswordSmsMutation = (
   { __typename?: 'Mutation' }
   & { resetPasswordSms?: Maybe<(
     { __typename?: 'ResetPasswordSMS' }
-    & Pick<ResetPasswordSms, 'success' | 'errors'>
+    & Pick<ResetPasswordSms, 'success'>
   )> }
 );
 
@@ -6523,7 +6482,7 @@ export type ForgotPasswordSmsMutation = (
   { __typename?: 'Mutation' }
   & { forgotPasswordSms?: Maybe<(
     { __typename?: 'ForgotPasswordSMS' }
-    & Pick<ForgotPasswordSms, 'success' | 'errors'>
+    & Pick<ForgotPasswordSms, 'success'>
   )> }
 );
 
@@ -6539,7 +6498,7 @@ export type TokenAuthMutation = (
   { __typename?: 'Mutation' }
   & { tokenAuth?: Maybe<(
     { __typename?: 'ObtainJSONWebToken' }
-    & Pick<ObtainJsonWebToken, 'token' | 'success' | 'errors' | 'refreshToken'>
+    & Pick<ObtainJsonWebToken, 'token' | 'success' | 'refreshToken'>
   )> }
 );
 
@@ -6552,7 +6511,7 @@ export type ResendVerificationSmsMutation = (
   { __typename?: 'Mutation' }
   & { resendVerificationSms?: Maybe<(
     { __typename?: 'ResendVerificationSMS' }
-    & Pick<ResendVerificationSms, 'success' | 'errors'>
+    & Pick<ResendVerificationSms, 'success'>
   )> }
 );
 
@@ -6567,7 +6526,7 @@ export type PasswordChangeMutation = (
   { __typename?: 'Mutation' }
   & { passwordChange?: Maybe<(
     { __typename?: 'ChangePasswordMutation' }
-    & Pick<ChangePasswordMutation, 'success' | 'errors'>
+    & Pick<ChangePasswordMutation, 'success'>
   )> }
 );
 
@@ -6580,7 +6539,7 @@ export type UsernameChangeMutation = (
   { __typename?: 'Mutation' }
   & { changeUsername?: Maybe<(
     { __typename?: 'ChangeUsernameMutation' }
-    & Pick<ChangeUsernameMutation, 'success' | 'errors'>
+    & Pick<ChangeUsernameMutation, 'success'>
   )> }
 );
 
@@ -6996,6 +6955,54 @@ export type ArticleQuery = (
         )> }
       )>> }
     ) }
+  )> }
+);
+
+export type AllTourCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTourCategoriesQuery = (
+  { __typename?: 'Query' }
+  & { tourCategories?: Maybe<(
+    { __typename?: 'TourCategoryTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TourCategoryTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TourCategoryType' }
+        & Pick<TourCategoryType, 'id' | 'title' | 'image' | 'svg'>
+      )> }
+    )>> }
+  )> }
+);
+
+export type AllTourQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllTourQuery = (
+  { __typename?: 'Query' }
+  & { allTour?: Maybe<(
+    { __typename?: 'TourTypeConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'TourTypeEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'TourType' }
+        & Pick<TourType, 'id' | 'days' | 'title' | 'description' | 'defaultImage' | 'likes'>
+        & { tourLeader: (
+          { __typename?: 'TourLeaderType' }
+          & Pick<TourLeaderType, 'id' | 'name'>
+          & { user: (
+            { __typename?: 'UserType' }
+            & Pick<UserType, 'avatar' | 'username'>
+          ) }
+        ), category?: Maybe<(
+          { __typename?: 'TourCategoryType' }
+          & Pick<TourCategoryType, 'title'>
+        )>, province?: Maybe<(
+          { __typename?: 'ProvinceType' }
+          & Pick<ProvinceType, 'name'>
+        )> }
+      )> }
+    )>> }
   )> }
 );
 
@@ -7482,7 +7489,21 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'UserType' }
-    & Pick<UserType, 'id' | 'username' | 'avatar'>
+    & Pick<UserType, 'id' | 'username' | 'avatar' | 'userType'>
+  )> }
+);
+
+export type MeTourLeaderQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeTourLeaderQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'UserType' }
+    & { tourleader?: Maybe<(
+      { __typename?: 'TourLeaderType' }
+      & Pick<TourLeaderType, 'id' | 'name' | 'tourLeadingId' | 'successfulToursCount'>
+    )> }
   )> }
 );
 
@@ -7535,6 +7556,24 @@ export type UserDetailQuery = (
       )>> }
     ) }
     & UserFieldsFragment
+  )> }
+);
+
+export type TourLeaderDetailQueryVariables = Exact<{
+  username: Scalars['String'];
+  followedUsername: Scalars['String'];
+}>;
+
+
+export type TourLeaderDetailQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'followedUser'>
+  & { user?: Maybe<(
+    { __typename?: 'UserType' }
+    & { tourleader?: Maybe<(
+      { __typename?: 'TourLeaderType' }
+      & Pick<TourLeaderType, 'id' | 'name' | 'tourLeadingId' | 'successfulToursCount'>
+    )> }
   )> }
 );
 
@@ -7755,7 +7794,7 @@ export type PublisTripMutation = (
   { __typename?: 'Mutation' }
   & { publishTrip?: Maybe<(
     { __typename?: 'PublishTripMutation' }
-    & Pick<PublishTripMutation, 'success' | 'errors'>
+    & Pick<PublishTripMutation, 'success'>
     & { trip?: Maybe<(
       { __typename?: 'TripType' }
       & Pick<TripType, 'published'>
@@ -7772,7 +7811,7 @@ export type UnPublisTripMutation = (
   { __typename?: 'Mutation' }
   & { undoPublishTrip?: Maybe<(
     { __typename?: 'UnPublishTripMutation' }
-    & Pick<UnPublishTripMutation, 'success' | 'errors'>
+    & Pick<UnPublishTripMutation, 'success'>
     & { trip?: Maybe<(
       { __typename?: 'TripType' }
       & Pick<TripType, 'published'>
@@ -7870,7 +7909,6 @@ export const VerifySmsDocument = gql`
     mutation VerifySms($verifySmsCode: String!, $verifySmsPhoneNumber: String!) {
   verifySms(code: $verifySmsCode, phoneNumber: $verifySmsPhoneNumber) {
     success
-    errors
   }
 }
     `;
@@ -7910,7 +7948,6 @@ export const RegisterSmsDocument = gql`
     username: $registerSmsUsername
   ) {
     success
-    errors
   }
 }
     `;
@@ -7987,7 +8024,6 @@ export const ResetPasswordSmsDocument = gql`
     phoneNumber: $resetPasswordSmsPhoneNumber
   ) {
     success
-    errors
   }
 }
     `;
@@ -8024,7 +8060,6 @@ export const ForgotPasswordSmsDocument = gql`
     mutation ForgotPasswordSms($forgotPasswordSmsPhoneNumber: String!) {
   forgotPasswordSms(phoneNumber: $forgotPasswordSmsPhoneNumber) {
     success
-    errors
   }
 }
     `;
@@ -8064,7 +8099,6 @@ export const TokenAuthDocument = gql`
   ) {
     token
     success
-    errors
     refreshToken
   }
 }
@@ -8102,7 +8136,6 @@ export const ResendVerificationSmsDocument = gql`
     mutation ResendVerificationSms($resendVerificationSmsPhoneNumber: String!) {
   resendVerificationSms(phoneNumber: $resendVerificationSmsPhoneNumber) {
     success
-    errors
   }
 }
     `;
@@ -8140,7 +8173,6 @@ export const PasswordChangeDocument = gql`
     newPassword2: $passwordChangeNewPassword2
   ) {
     success
-    errors
   }
 }
     `;
@@ -8176,7 +8208,6 @@ export const UsernameChangeDocument = gql`
     mutation UsernameChange($username: String!) {
   changeUsername(username: $username) {
     success
-    errors
   }
 }
     `;
@@ -9034,6 +9065,104 @@ export function useArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ar
 export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
 export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
 export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
+export const AllTourCategoriesDocument = gql`
+    query AllTourCategories {
+  tourCategories {
+    edges {
+      node {
+        id
+        title
+        image
+        svg
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllTourCategoriesQuery__
+ *
+ * To run a query within a React component, call `useAllTourCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTourCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTourCategoriesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTourCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<AllTourCategoriesQuery, AllTourCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTourCategoriesQuery, AllTourCategoriesQueryVariables>(AllTourCategoriesDocument, options);
+      }
+export function useAllTourCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTourCategoriesQuery, AllTourCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTourCategoriesQuery, AllTourCategoriesQueryVariables>(AllTourCategoriesDocument, options);
+        }
+export type AllTourCategoriesQueryHookResult = ReturnType<typeof useAllTourCategoriesQuery>;
+export type AllTourCategoriesLazyQueryHookResult = ReturnType<typeof useAllTourCategoriesLazyQuery>;
+export type AllTourCategoriesQueryResult = Apollo.QueryResult<AllTourCategoriesQuery, AllTourCategoriesQueryVariables>;
+export const AllTourDocument = gql`
+    query AllTour {
+  allTour {
+    edges {
+      node {
+        id
+        days
+        title
+        description
+        defaultImage
+        likes
+        tourLeader {
+          id
+          name
+          user {
+            avatar
+            username
+          }
+        }
+        category {
+          title
+        }
+        province {
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAllTourQuery__
+ *
+ * To run a query within a React component, call `useAllTourQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllTourQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllTourQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllTourQuery(baseOptions?: Apollo.QueryHookOptions<AllTourQuery, AllTourQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllTourQuery, AllTourQueryVariables>(AllTourDocument, options);
+      }
+export function useAllTourLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllTourQuery, AllTourQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllTourQuery, AllTourQueryVariables>(AllTourDocument, options);
+        }
+export type AllTourQueryHookResult = ReturnType<typeof useAllTourQuery>;
+export type AllTourLazyQueryHookResult = ReturnType<typeof useAllTourLazyQuery>;
+export type AllTourQueryResult = Apollo.QueryResult<AllTourQuery, AllTourQueryVariables>;
 export const AllTransferTypesDocument = gql`
     query AllTransferTypes {
   allTransferType {
@@ -9809,6 +9938,7 @@ export const MeDocument = gql`
     id
     username
     avatar
+    userType
   }
 }
     `;
@@ -9839,6 +9969,45 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MeTourLeaderDocument = gql`
+    query MeTourLeader {
+  me {
+    tourleader {
+      id
+      name
+      tourLeadingId
+      successfulToursCount
+    }
+  }
+}
+    `;
+
+/**
+ * __useMeTourLeaderQuery__
+ *
+ * To run a query within a React component, call `useMeTourLeaderQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeTourLeaderQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeTourLeaderQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeTourLeaderQuery(baseOptions?: Apollo.QueryHookOptions<MeTourLeaderQuery, MeTourLeaderQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeTourLeaderQuery, MeTourLeaderQueryVariables>(MeTourLeaderDocument, options);
+      }
+export function useMeTourLeaderLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeTourLeaderQuery, MeTourLeaderQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeTourLeaderQuery, MeTourLeaderQueryVariables>(MeTourLeaderDocument, options);
+        }
+export type MeTourLeaderQueryHookResult = ReturnType<typeof useMeTourLeaderQuery>;
+export type MeTourLeaderLazyQueryHookResult = ReturnType<typeof useMeTourLeaderLazyQuery>;
+export type MeTourLeaderQueryResult = Apollo.QueryResult<MeTourLeaderQuery, MeTourLeaderQueryVariables>;
 export const MeDetailDocument = gql`
     query MeDetail {
   me {
@@ -9934,6 +10103,48 @@ export function useUserDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type UserDetailQueryHookResult = ReturnType<typeof useUserDetailQuery>;
 export type UserDetailLazyQueryHookResult = ReturnType<typeof useUserDetailLazyQuery>;
 export type UserDetailQueryResult = Apollo.QueryResult<UserDetailQuery, UserDetailQueryVariables>;
+export const TourLeaderDetailDocument = gql`
+    query TourLeaderDetail($username: String!, $followedUsername: String!) {
+  user(username: $username) {
+    tourleader {
+      id
+      name
+      tourLeadingId
+      successfulToursCount
+    }
+  }
+  followedUser(username: $followedUsername)
+}
+    `;
+
+/**
+ * __useTourLeaderDetailQuery__
+ *
+ * To run a query within a React component, call `useTourLeaderDetailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTourLeaderDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTourLeaderDetailQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *      followedUsername: // value for 'followedUsername'
+ *   },
+ * });
+ */
+export function useTourLeaderDetailQuery(baseOptions: Apollo.QueryHookOptions<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>(TourLeaderDetailDocument, options);
+      }
+export function useTourLeaderDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>(TourLeaderDetailDocument, options);
+        }
+export type TourLeaderDetailQueryHookResult = ReturnType<typeof useTourLeaderDetailQuery>;
+export type TourLeaderDetailLazyQueryHookResult = ReturnType<typeof useTourLeaderDetailLazyQuery>;
+export type TourLeaderDetailQueryResult = Apollo.QueryResult<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>;
 export const IsFollowedDocument = gql`
     query isFollowed($followedUsername: String!) {
   followedUser(username: $followedUsername)
@@ -10323,7 +10534,6 @@ export const PublisTripDocument = gql`
     mutation PublisTrip($tripId: ID!) {
   publishTrip(tripId: $tripId) {
     success
-    errors
     trip {
       published
     }
@@ -10360,7 +10570,6 @@ export const UnPublisTripDocument = gql`
     mutation UnPublisTrip($tripId: ID!) {
   undoPublishTrip(tripId: $tripId) {
     success
-    errors
     trip {
       published
     }
@@ -10441,6 +10650,8 @@ export const namedOperations = {
     AllArticle: 'AllArticle',
     AllArticleCategoryies: 'AllArticleCategoryies',
     Article: 'Article',
+    AllTourCategories: 'AllTourCategories',
+    AllTour: 'AllTour',
     AllTransferTypes: 'AllTransferTypes',
     AllTrip: 'AllTrip',
     AllTripList: 'AllTripList',
@@ -10454,8 +10665,10 @@ export const namedOperations = {
     AllCitiesOfProvince: 'AllCitiesOfProvince',
     TripReviewLikeStatus: 'TripReviewLikeStatus',
     Me: 'Me',
+    MeTourLeader: 'MeTourLeader',
     MeDetail: 'MeDetail',
     UserDetail: 'UserDetail',
+    TourLeaderDetail: 'TourLeaderDetail',
     isFollowed: 'isFollowed',
     userFollowings: 'userFollowings',
     UserFollowers: 'UserFollowers',

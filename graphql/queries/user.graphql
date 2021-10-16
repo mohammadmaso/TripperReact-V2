@@ -3,6 +3,19 @@ query Me {
     id
     username
     avatar
+    userType
+  }
+}
+
+query MeTourLeader {
+  me {
+    tourleader {
+      id
+      name
+
+      tourLeadingId
+      successfulToursCount
+    }
   }
 }
 
@@ -34,6 +47,18 @@ query UserDetail($username: String!, $followedUsername: String!) {
           ...TripSimpleFields
         }
       }
+    }
+  }
+  followedUser(username: $followedUsername)
+}
+
+query TourLeaderDetail($username: String!, $followedUsername: String!) {
+  user(username: $username) {
+    tourleader {
+      id
+      name
+      tourLeadingId
+      successfulToursCount
     }
   }
   followedUser(username: $followedUsername)
@@ -191,7 +216,6 @@ mutation DeleteTrip($deleteTripTripId: ID!) {
 mutation PublisTrip($tripId: ID!) {
   publishTrip(tripId: $tripId) {
     success
-    errors
     trip {
       published
     }
@@ -201,7 +225,6 @@ mutation PublisTrip($tripId: ID!) {
 mutation UnPublisTrip($tripId: ID!) {
   undoPublishTrip(tripId: $tripId) {
     success
-    errors
     trip {
       published
     }

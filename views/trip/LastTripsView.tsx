@@ -1,4 +1,4 @@
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Stack } from '@chakra-ui/react';
 import React from 'react';
 import WikiCarusal from '../../componenets/carousals/WikiCarousal';
 import ApiLoading from '../../componenets/ApiLoading';
@@ -12,6 +12,7 @@ import {
 } from '../../graphql/generated/types';
 import ApiError from '../../componenets/ApiError';
 import TripCarousal from '../../componenets/carousals/TripCarousal';
+import SectionHeader from '../../componenets/SectionHeader';
 
 interface Props {}
 
@@ -57,7 +58,8 @@ const LastTripsView = (props: Props) => {
     return <ApiError />;
   }
   return (
-    <div>
+    <Stack>
+      <SectionHeader title="آخرین سفرنامه‌ها" />
       <TripCarousal
         data={data}
         actions={{
@@ -69,7 +71,7 @@ const LastTripsView = (props: Props) => {
         }}
         queries={{ likeTripStatus }}
       />
-    </div>
+    </Stack>
   );
 };
 

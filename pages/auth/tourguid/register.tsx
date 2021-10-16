@@ -6,18 +6,72 @@ import {
   Input,
   Checkbox,
   Stack,
-  Link,
   Button,
   Heading,
   Text,
   useColorModeValue,
   Center,
+  Wrap,
 } from '@chakra-ui/react';
 import CircleLogo from '../../../componenets/logos/CircleLogo';
+import useIsSignedIn from '../../../hooks/useIsSignedIn';
+import { useIsTourLeader } from '../../../hooks/useIsTourLeader';
+import Link from 'next/link';
+import Head from 'next/head';
 
 export default function SimpleCard() {
+  const isTourGuid = useIsTourLeader();
+  const { isSignedIn } = useIsSignedIn();
+
+  if (isTourGuid) {
+    return (
+      <Center minH={'100vh'}>
+        <Head>
+          <title>{`تریپر |  ثبت‌نام تورلیدر `}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Stack spacing={8} mx={'auto'} maxW={'2xl'} p={2} py="4">
+          <Text fontSize={'lg'} color={'gray.600'}>
+            شما در حال حاضر تورلیدر تریپر هستید، به داشبورد برگردید و تورهای خود
+            را مدیریت کنید.
+          </Text>
+        </Stack>
+      </Center>
+    );
+  }
+  if (!isSignedIn) {
+    return (
+      <Center minH={'100vh'}>
+        <Head>
+          <title>{`تریپر |  ثبت‌نام تورلیدر `}</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <Stack spacing={8} mx={'auto'} maxW={'2xl'} p={2} py="4">
+          <Text fontSize={'xl'} color={'gray.600'}>
+            کاربر تریپر نیستید؟
+          </Text>
+          <Text fontSize={'lg'} color={'gray.600'}>
+            ابتدا ثبت نام کنید یا وارد شوید و سپس اقدام به ثبت‌نام تورلیدر
+            بکنید.
+          </Text>
+          <Wrap>
+            <Link href="/auth/register" passHref>
+              <Button colorScheme="primary">ثبت‌ نام</Button>
+            </Link>
+            <Link href="/auth/login" passHref>
+              <Button>ورود</Button>
+            </Link>
+          </Wrap>
+        </Stack>
+      </Center>
+    );
+  }
   return (
-    <Center minH={'100vh'} bg={useColorModeValue('gray.50', 'gray.800')}>
+    <Center minH={'100vh'}>
+      <Head>
+        <title>{`تریپر |  ثبت‌نام تورلیدر `}</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Stack spacing={8} mx={'auto'} maxW={'2xl'} p={2} py="4">
         <Stack align={'center'}>
           <CircleLogo />
@@ -30,7 +84,7 @@ export default function SimpleCard() {
         </Stack>
         <Box
           rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
+          // bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           minW="auto"
           fontSize="sm"
@@ -65,7 +119,7 @@ export default function SimpleCard() {
                 <Checkbox colorScheme="primary" fontSize="sm">
                   پذیرش قوانین تریپر
                 </Checkbox>
-                <Link color={'green.400'}>قوانین و مقررات</Link>
+                <Link href="#">قوانین و مقررات</Link>
               </Stack>
               <Button colorScheme="primary">ثبت نام</Button>
             </Stack>

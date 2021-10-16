@@ -20,8 +20,11 @@ import {
   MyTripsQuery,
 } from '../../graphql/generated/types';
 import { LazyQueryResult } from '@apollo/client/react/types/types';
+import ManageToureTab from './tabs/ManageToureTab';
+import MyToursTab from './tabs/MyToursTab';
 
 interface Props {
+  isTourLeader: boolean;
   trips: any;
   actions: any;
   queries?: any;
@@ -30,12 +33,33 @@ interface Props {
 
 const ProfileTabs = (props: Props) => {
   return (
-    <Tabs colorScheme="primary" size="sm" align="center">
+    <Tabs colorScheme="primary" size="sm" variant="soft-rounded">
       <TabList
         overflowX={{ base: 'scroll', sm: 'scroll', md: 'hidden', lg: 'hidden' }}
         overflowY="hidden"
+        mx="2"
       >
-        <Tab>سفرنامه‌ها</Tab>
+        {props.isSelf && (
+          <Tab onClick={() => props.actions.getUnpublishedTrips()}>
+            تور‌های ثبت‌نامی
+          </Tab>
+        )}
+        {props.isSelf && props.isTourLeader && (
+          <Tab onClick={() => props.actions.getUnpublishedTrips()}>
+            تور‌های من
+          </Tab>
+        )}
+        {props.isTourLeader && (
+          <Tab onClick={() => props.actions.getUnpublishedTrips()}>
+            تورهای آتی
+          </Tab>
+        )}
+        {props.isTourLeader && (
+          <Tab onClick={() => props.actions.getUnpublishedTrips()}>
+            تور‌های برگزار شده
+          </Tab>
+        )}
+        <Tab id="trips">سفرنامه‌ها</Tab>
         {props.isSelf && (
           <Tab onClick={() => props.actions.getUnpublishedTrips()}>
             سفر‌نامه‌های منتشر نشده
@@ -46,6 +70,23 @@ const ProfileTabs = (props: Props) => {
       </TabList>
 
       <TabPanels>
+        {props.isSelf && (
+          <TabPanel>
+            <MyToursTab />
+          </TabPanel>
+        )}
+        {props.isSelf && props.isTourLeader && (
+          <TabPanel>
+            <ManageToureTab />
+          </TabPanel>
+        )}
+        {props.isTourLeader && (
+          <TabPanel>
+            <div></div>
+          </TabPanel>
+        )}
+        {props.isTourLeader && <TabPanel></TabPanel>}
+
         <TabPanel>
           <TripList
             data={props.trips}

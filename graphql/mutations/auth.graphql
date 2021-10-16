@@ -1,7 +1,6 @@
 mutation VerifySms($verifySmsCode: String!, $verifySmsPhoneNumber: String!) {
   verifySms(code: $verifySmsCode, phoneNumber: $verifySmsPhoneNumber) {
     success
-    errors
   }
 }
 
@@ -18,7 +17,6 @@ mutation RegisterSms(
     username: $registerSmsUsername
   ) {
     success
-    errors
   }
 }
 
@@ -43,14 +41,12 @@ mutation ResetPasswordSms(
     phoneNumber: $resetPasswordSmsPhoneNumber
   ) {
     success
-    errors
   }
 }
 
 mutation ForgotPasswordSms($forgotPasswordSmsPhoneNumber: String!) {
   forgotPasswordSms(phoneNumber: $forgotPasswordSmsPhoneNumber) {
     success
-    errors
   }
 }
 
@@ -68,14 +64,13 @@ mutation TokenAuth(
   ) {
     token
     success
-    errors
+
     refreshToken
   }
 }
 mutation ResendVerificationSms($resendVerificationSmsPhoneNumber: String!) {
   resendVerificationSms(phoneNumber: $resendVerificationSmsPhoneNumber) {
     success
-    errors
   }
 }
 
@@ -90,13 +85,11 @@ mutation PasswordChange(
     newPassword2: $passwordChangeNewPassword2
   ) {
     success
-    errors
   }
 }
 
 mutation UsernameChange($username: String!) {
   changeUsername(username: $username) {
     success
-    errors
   }
 }

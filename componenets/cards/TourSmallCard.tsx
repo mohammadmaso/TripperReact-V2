@@ -34,7 +34,7 @@ interface Props {
   actions: any;
   queries: any;
 }
-export default function TripSmallCard({ data }: Props) {
+export default function TourSmallCard({ data }: any) {
   const [isLiked, setIsLiked] = useState(data.userLiked);
   const [likeCount, setLikeCount] = useState(data.likes);
   const [likeTrip, likeTripStatus] = useLikeTripMutation({
@@ -86,24 +86,22 @@ export default function TripSmallCard({ data }: Props) {
               size="md"
               ml="1"
               mr="1"
-              src={data.author?.avatar}
-              alt={data.author?.username}
+              src={data.user?.avatar}
+              alt={data.name}
             />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>
-                {data.author?.username}
+                {data.name}
               </Text>
               <Wrap spacing="1">
-                {data.categories?.edges.map((item: any) => (
-                  <Tag
-                    size="sm"
-                    key={item.node}
-                    colorScheme="primary"
-                    variant="solid"
-                  >
-                    {item.node?.title}
-                  </Tag>
-                ))}
+                <Tag
+                  size="sm"
+                  key={data.ctegory.title}
+                  colorScheme="primary"
+                  variant="solid"
+                >
+                  {data.category.title}
+                </Tag>
               </Wrap>
             </Stack>
           </Flex>

@@ -16,6 +16,22 @@ import {
   Badge,
   useDisclosure,
   Spinner,
+  Tooltip,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  Table,
+  TableCaption,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
 } from '@chakra-ui/react';
 import {
   FollowOrUnfollowMutation,
@@ -32,6 +48,7 @@ import {
   FiCamera,
   FiEdit,
   FiEdit2,
+  FiInfo,
   FiSettings,
   FiShare2,
 } from 'react-icons/fi';
@@ -42,7 +59,9 @@ import { FetchResult } from '@apollo/client/link/core/types';
 import ProfileEditModal from '../Modals/ProfileEditModal';
 import ImageUploadModal from '../Modals/ImageUploadModal';
 import ShareModal from '../Modals/ShareModal';
+import { GoVerified } from 'react-icons/go';
 interface Props {
+  isTourLeader: boolean;
   isSelf: boolean;
   data: UserFieldsFragment & {
     profilemodel: ProfileFieldsFragment;
@@ -103,7 +122,7 @@ const ProfileHeader = ({
   return (
     <>
       <Image
-        h={{ base: '150px', sm: '150', md: '200px', lg: '350x', xl: '400px' }}
+        h={{ base: '150px', sm: '150', md: '200px', lg: '300x', xl: '300px' }}
         w={'full'}
         alt={data.username}
         src={data.profilemodel.header as string}
@@ -133,7 +152,7 @@ const ProfileHeader = ({
       ) : null}
       <Flex justify={'center'} mt="-20">
         <Avatar
-          size={'2xl'}
+          size="2xl"
           src={data.avatar}
           alt={data.username}
           css={{
@@ -173,9 +192,55 @@ const ProfileHeader = ({
               </Button>
             </Wrap>
           </Box>
-          <Heading fontSize={'2xl'} fontWeight={300} fontFamily={'body'}>
-            {data.username}
-          </Heading>
+          <Wrap align="center">
+            {rest.isTourLeader && (
+              <Tooltip label="تورلیدر احراز هویت شده">
+                <span>
+                  <Icon color="blue.500" as={GoVerified} />
+                </span>
+              </Tooltip>
+            )}
+
+            <Heading fontSize={'2xl'} fontWeight={300} fontFamily={'body'}>
+              {data.username}
+            </Heading>
+          </Wrap>
+          {rest.isTourLeader && (
+            <Wrap align="center">
+              <Tag rounded="full" colorScheme="primary">
+                راهنمای تور
+              </Tag>
+              <Popover>
+                <PopoverTrigger>
+                  <span>
+                    <Icon cursor="pointer" as={FiInfo} />
+                  </span>
+                </PopoverTrigger>
+                <PopoverContent fontSize="sm">
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader fontWeight="extrabold">
+                    اطلاعات تکمیلی تور لیدر
+                  </PopoverHeader>
+                  <PopoverBody>
+                    <Table variant="simple">
+                      <Tbody>
+                        <Tr>
+                          <Td>شماره کارت میراث</Td>
+                          <Td isNumeric>۰۲۹۵۹</Td>
+                        </Tr>
+                        <Tr>
+                          <Td>حوزه فعالیت</Td>
+                          <Td isNumeric>فلان، بهمان، بیسار، فلان و بیسار</Td>
+                        </Tr>
+                      </Tbody>
+                    </Table>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </Wrap>
+          )}
+
           <Text
             fontWeight="light"
             textAlign="center"
@@ -196,6 +261,20 @@ const ProfileHeader = ({
         </Stack>
 
         <Stack direction={'row'} justify={'center'} spacing={6}>
+          {rest.isTourLeader && (
+            <Stack cursor="pointer" spacing={0} align={'center'}>
+              <Text fontWeight={600}>
+                {isSelf
+                  ? lazyQueries?.tourLeaderDetailQuery?.data?.me?.tourleader
+                      ?.successfulToursCount
+                  : lazyQueries?.tourLeaderDetailQuery?.data?.user?.tourleader
+                      ?.successfulToursCount}
+              </Text>
+              <Text fontSize={'sm'} color={'gray.500'}>
+                تور موفق
+              </Text>
+            </Stack>
+          )}
           <Stack spacing={0} align={'center'}>
             <Text fontWeight={600}>{data.trips?.edges?.length}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>

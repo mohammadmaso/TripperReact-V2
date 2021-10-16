@@ -20,7 +20,7 @@ import {
 
 import { FiLogOut, FiUser, FiBookOpen } from 'react-icons/fi';
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
@@ -38,6 +38,8 @@ interface Props {
 
 const NavBarUserView = (props: Props) => {
   const router = useRouter();
+
+  // const userData = useContext(UserContext);
 
   const { loading, error, data } = useMeQuery();
 

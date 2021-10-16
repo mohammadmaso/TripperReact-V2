@@ -1,9 +1,10 @@
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Stack } from '@chakra-ui/react';
 import React from 'react';
 import WikiCarusal from '../../componenets/carousals/WikiCarousal';
 import ApiLoading from '../../componenets/ApiLoading';
 import { useAllArticleQuery } from '../../graphql/generated/types';
 import ApiError from '../../componenets/ApiError';
+import SectionHeader from '../../componenets/SectionHeader';
 
 interface Props {}
 
@@ -18,9 +19,13 @@ const LastArticlesView = (props: Props) => {
     return <ApiError />;
   }
   return (
-    <div>
+    <Stack>
+      <SectionHeader
+        title="آخرین مقاله‌ها"
+        subTitle="در وبلاگ تریپر یاد بگیرید"
+      />
       <WikiCarusal data={data} />
-    </div>
+    </Stack>
   );
 };
 

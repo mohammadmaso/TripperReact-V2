@@ -11,6 +11,7 @@ import {
   useMeFollowersLazyQuery,
   useMeFollowingsLazyQuery,
   useMeSavedTripsLazyQuery,
+  useTourLeaderDetailLazyQuery,
   useUpdateProfileMutation,
   useUserDetailQuery,
   useUserFollowersLazyQuery,
@@ -28,6 +29,11 @@ const ProfileDetailView = (props: Props) => {
   const { data, loading, error } = useUserDetailQuery({
     variables: { username: props.username, followedUsername: props.username },
   });
+
+  const [getTourLeaderDetail, tourLeaderDetailQuery] =
+    useTourLeaderDetailLazyQuery({
+      fetchPolicy: 'no-cache',
+    });
   const [getFollowings, followingsQuery] = useUserFollowingsLazyQuery({
     variables: { username: props.username },
     fetchPolicy: 'no-cache',
@@ -60,6 +66,7 @@ const ProfileDetailView = (props: Props) => {
         data={data}
         isSelf={false}
         actions={{
+          getTourLeaderDetail: () => getTourLeaderDetail(),
           getFollowings: () => getFollowings(),
           getFollowers: () => getFollowers(),
           followOrUnfollow: () => followOrUnfollow(),
@@ -68,6 +75,7 @@ const ProfileDetailView = (props: Props) => {
           followingsQuery,
           followersQuery,
           followOrUnfollowMutation,
+          tourLeaderDetailQuery,
         }}
       />
     </div>

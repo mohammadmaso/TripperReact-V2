@@ -8,6 +8,7 @@ import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
 import SectionHeader from '../../componenets/SectionHeader';
 import {
   useAllArticleCategoryiesQuery,
+  useAllTourCategoriesQuery,
   useAllTripCategoriesQuery,
 } from '../../graphql/generated/types';
 
@@ -15,8 +16,8 @@ interface Props {
   listView?: boolean;
 }
 
-const TripCategoriesView = (props: Props) => {
-  const { data, loading, error } = useAllTripCategoriesQuery();
+const TourCategoriesView = (props: Props) => {
+  const { data, loading, error } = useAllTourCategoriesQuery();
   if (loading) {
     return <ApiLoading />;
   }
@@ -24,16 +25,13 @@ const TripCategoriesView = (props: Props) => {
     return <ApiError />;
   }
   if (props.listView) {
-    return <TripCategoryList categories={data?.allTripCategories?.edges} />;
+    return <TripCategoryList categories={data?.tourCategories?.edges} />;
   }
   return (
     <Stack>
-      <SectionHeader
-        title="موضوع سفرنامه‌ها "
-        subTitle="مسافران چه سفرهایی رفتنه‌اند"
-      />
-      <CategoryCarousal categories={data?.allTripCategories?.edges} />
+      <SectionHeader title="دسته بندی تور‌ها" subTitle="تور برای هر سلیقه" />
+      <CategoryCarousal categories={data?.tourCategories?.edges} />
     </Stack>
   );
 };
-export default TripCategoriesView;
+export default TourCategoriesView;

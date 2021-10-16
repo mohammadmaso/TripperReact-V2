@@ -21,7 +21,6 @@ export default function TripCarousal(props: Props): ReactElement {
     slidesToScroll: 4,
     initialSlide: 0,
     arrows: true,
-    rtl: true,
     nextArrow: <CarousalNextArrow />,
     prevArrow: <CarousalPrevArrow />,
     autoplay: true,
@@ -56,20 +55,15 @@ export default function TripCarousal(props: Props): ReactElement {
     ],
   };
   return (
-    <Box py={10}>
-      <Heading size="lg" fontWeight="500" ml={3}>
-        جذاب‌ترین سفرنامه‌ها‌
-      </Heading>
-      <Slider {...settings}>
-        {props.data?.allTrip?.edges.map((item) => (
-          <TripSmallCard
-            key={item!.node!.id!}
-            data={item?.node!}
-            queries={props.queries}
-            actions={props.actions}
-          />
-        ))}
-      </Slider>
-    </Box>
+    <Slider {...settings}>
+      {props.data?.allTrip?.edges.map((item) => (
+        <TripSmallCard
+          key={item!.node!.id!}
+          data={item?.node!}
+          queries={props.queries}
+          actions={props.actions}
+        />
+      ))}
+    </Slider>
   );
 }

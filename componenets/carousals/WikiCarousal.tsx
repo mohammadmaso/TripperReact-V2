@@ -53,10 +53,7 @@ export default function WikiCarusal(props: Props): ReactElement {
     ],
   };
   return (
-    <Box py={10}>
-      <Heading size="lg" fontWeight="500" ml={3}>
-        آخرین مقاله‌ها
-      </Heading>
+    <Box>
       <Slider {...settings}>
         {props.data?.allArticle?.edges.map((item) => (
           <WikiCard key={item!.node!.id!} {...item?.node!} />

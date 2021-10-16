@@ -12,6 +12,7 @@ interface Props {
 const ArticleFilterView = (props: Props) => {
   const { data, loading, error } = useAllArticleQuery({
     variables: { allArticleCategory: props.categoryId },
+    fetchPolicy: 'no-cache',
   });
   if (loading) {
     return <ApiLoading />;

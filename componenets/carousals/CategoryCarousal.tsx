@@ -13,7 +13,7 @@ interface Props {
 export default function CategoryCarousal(props: Props): ReactElement {
   const settings: Settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
@@ -53,10 +53,7 @@ export default function CategoryCarousal(props: Props): ReactElement {
     ],
   };
   return (
-    <Box py={10}>
-      <Heading size="lg" fontWeight="500" ml={3}>
-        انواع سفر‌
-      </Heading>
+    <Box>
       <Slider {...settings}>
         {props.categories.map((item: any) => (
           <>

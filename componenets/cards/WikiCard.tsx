@@ -32,7 +32,13 @@ export default function WikiCard(props: any) {
           minHeight="24"
         >
           <Box bg={'gray.100'} mt={-6} mx={-6} mb={6} pos={'relative'}>
-            <Image alt="l" src={props?.image as string} objectFit={'cover'} />
+            <Image
+              alt="l"
+              src={props?.image as string}
+              height="200px"
+              w="full"
+              objectFit={'cover'}
+            />
           </Box>
           <Flex direction="column" justify="center" spacing="5">
             <Stack spacing="3">

@@ -41,7 +41,7 @@ const TourLeaderCTA = (props: Props) => {
               rounded="sm"
               fontSize="sm"
               // size="sm"
-              fontWeight="black"
+              // fontWeight="black"
               // textColor="white"
               // bgColor="whiteAlpha.700"
               colorScheme="primary"

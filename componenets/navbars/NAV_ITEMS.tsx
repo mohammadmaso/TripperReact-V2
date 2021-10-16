@@ -8,12 +8,19 @@ import {
 import { BiBed, BiBook, BiSupport } from 'react-icons/bi';
 import { MdCardTravel, MdFlightTakeoff } from 'react-icons/md';
 import { RiArticleLine, RiMapPinUserLine, RiRoadMapLine } from 'react-icons/ri';
-import { FiFeather, FiPhone, FiShoppingBag } from 'react-icons/fi';
+import { FiFeather, FiMap, FiPhone, FiShoppingBag } from 'react-icons/fi';
 import { FiBookOpen, FiUsers } from 'react-icons/fi';
 import { Badge } from '@chakra-ui/react';
 
 import { NavItem } from './NavItem';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { client } from '../../graphql/ApolloLink';
+import {
+  AllTourCategoriesDocument,
+  AllTourCategoriesQuery,
+  TourCategoryType,
+} from '../../graphql/generated/types';
+import async from 'react-select/async';
 
 function ComingSoonBadge() {
   return <Badge colorScheme="green">به‌ زودی</Badge>;
@@ -56,6 +63,12 @@ export const NAV_ITEMS: Array<NavItem> = [
     icon: <MdCardTravel />,
     href: '/tours',
     children: [
+      {
+        label: 'نقشه تور‌ها',
+        icon: <FiMap />,
+        subLabel: 'روی نقشه تور خود را پیدا کنید',
+        href: '/tourmap',
+      },
       {
         label: 'تمام تورها',
         icon: <FiFeather />,

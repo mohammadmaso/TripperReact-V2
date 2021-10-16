@@ -30,38 +30,38 @@ const NavBar = (props: any) => {
   const [stickyNav, setStickyNav] = useState(false);
   const { isSignedIn } = useIsSignedIn();
 
-  // const handleScroll = () => {
-  //   if (window.pageYOffset > 40) {
-  //     if (!stickyNav) {
-  //       setStickyNav(true);
-  //     }
-  //   } else {
-  //     if (stickyNav) {
-  //       setStickyNav(false);
-  //     }
-  //   }
-  // };
-  // useEventListener('scroll', handleScroll);
+  const handleScroll = () => {
+    if (window.pageYOffset > 40) {
+      if (!stickyNav) {
+        setStickyNav(true);
+      }
+    } else {
+      if (stickyNav) {
+        setStickyNav(false);
+      }
+    }
+  };
+  useEventListener('scroll', handleScroll);
 
   return (
     <Box>
       <Flex
         bg={useColorModeValue('rgba(255, 255, 255, 0.8)', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
-        style={{
-          backdropFilter: 'saturate(180%) blur(5px)',
-        }}
-        minH={'1rem'}
-        py={{ base: 2 }}
+        // style={{
+        //   backdropFilter: 'saturate(180%) blur(5px)',
+        // }}
+        // h={stickyNav ? '1rem' : '3rem'}
+        py={stickyNav ? '1' : '4'}
         px={{ base: 4, sm: 4, md: 120, lg: 120 }}
-        borderBottom={1}
+        borderBottom={stickyNav ? 1 : 0}
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
         justify="space-around"
         position="fixed"
         w="100%"
-        shadow="lg"
+        shadow={stickyNav ? 'lg' : 'none'}
         zIndex={100}
       >
         <Flex

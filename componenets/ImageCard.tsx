@@ -21,6 +21,9 @@ const ImageCard = ({ image, imageOnClick, id, style, ImageProps }: Props) => {
         src={image}
         alt={'تصویر'}
         style={style}
+        height="5rem"
+        width="7rem"
+        objectFit="cover"
         {...ImageProps}
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}
