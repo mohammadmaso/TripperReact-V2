@@ -6,7 +6,7 @@ import { RefreshTokenDocument } from "./generated/types";
 import { onError } from 'apollo-link-error';
 import introspectionResult from './fragment-matcher';
 import { createUploadLink } from 'apollo-upload-client'
-import { createStandaloneToast } from "@chakra/core"
+import { createStandaloneToast } from "@chakra-ui/react"
 
 
 const toast = createStandaloneToast()
