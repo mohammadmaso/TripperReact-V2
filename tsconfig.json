@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "graphql/ApolloLink.js", "componenets/ChakraReactSelect.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "graphql/ApolloLink.ts", "componenets/ChakraReactSelect.js"],
   "exclude": ["node_modules"]
 }
