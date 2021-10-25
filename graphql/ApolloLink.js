@@ -6,7 +6,10 @@ import { RefreshTokenDocument } from "./generated/types";
 import { onError } from 'apollo-link-error';
 import introspectionResult from './fragment-matcher';
 import { createUploadLink } from 'apollo-upload-client'
+import { createStandaloneToast } from "@chakra/core"
 
+
+const toast = createStandaloneToast()
 
 export const getNewToken = async () => {
   const refreshToken = localStorage.getItem('refresh-token')
@@ -49,6 +52,17 @@ const errorLink = onError(
                 return forward(operation);
               });
         }
+
+        toast({
+                  title: err.message,
+                  // description:
+                  //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
+                  status: 'error',
+                  duration: 4000,
+                  isClosable: true,
+                  position: 'top-right',
+                });
+
       }
     }
   }
