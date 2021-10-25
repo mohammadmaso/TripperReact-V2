@@ -28,13 +28,13 @@ setRTLTextPlugin(
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ApolloProvider client={client}>
-      <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
+      <ApolloProvider client={client}>
         <Fonts />
         <PWAInstallPrompt />
         <Component {...pageProps} />
-      </ChakraProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </ChakraProvider>
   );
 }
 export default MyApp;
