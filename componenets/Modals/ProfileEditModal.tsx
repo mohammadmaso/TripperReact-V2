@@ -160,41 +160,39 @@ const ProfileEditModal = (props: Props) => {
                     ),
                 })}
                 onSubmit={(values, { setSubmitting, setFieldError }) => {
-                  props.actions
-                    ?.changeUsername(values.username)
-                    .then((res) => {
-                      if (res.data?.changeUsername?.success == true) {
-                        setUsername(props.username);
-                        toast({
-                          title: 'یوزر نیم با موفقیت تغییر پیدا کرد',
-                          // description:
-                          //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
-                          status: 'success',
-                          duration: 6000,
-                          isClosable: true,
-                          position: 'top',
-                        });
-                      }
-                      if (res.data?.changeUsername?.errors) {
-                        setFieldError(
-                          'username',
-                          props.queries?.changeUsernameQuery?.data
-                            ?.changeUsername?.errors.nonFieldErrors[0]
-                        );
-                      }
-                    })
-                    .catch((err) => {
-                      setFieldError(
-                        'username',
-                        props.queries?.changeUsernameQuery?.data?.changeUsername
-                          ?.errors
-                          ? JSON.stringify(
-                              props.queries?.changeUsernameQuery?.data
-                                ?.changeUsername.errors
-                            )
-                          : 'خطا'
-                      );
-                    });
+                  props.actions?.changeUsername(values.username).then((res) => {
+                    if (res.data?.changeUsername?.success == true) {
+                      setUsername(props.username);
+                      toast({
+                        title: 'یوزر نیم با موفقیت تغییر پیدا کرد',
+                        // description:
+                        //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
+                        status: 'success',
+                        duration: 6000,
+                        isClosable: true,
+                        position: 'top',
+                      });
+                    }
+                    // if (res.data?.changeUsername?.errors) {
+                    //   setFieldError(
+                    //     'username',
+                    //     props.queries?.changeUsernameQuery?.data
+                    //       ?.changeUsername?.errors.nonFieldErrors[0]
+                    //   );
+                    // }
+                  });
+                  // .catch((err) => {
+                  //   setFieldError(
+                  //     'username',
+                  //     props.queries?.changeUsernameQuery?.data?.changeUsername
+                  //       ?.errors
+                  //       ? JSON.stringify(
+                  //           props.queries?.changeUsernameQuery?.data
+                  //             ?.changeUsername.errors
+                  //         )
+                  //       : 'خطا'
+                  //   );
+                  // });
                 }}
               >
                 {(formProps) => (
@@ -402,11 +400,11 @@ const ProfileEditModal = (props: Props) => {
                           position: 'top',
                         });
                       }
-                      setFieldError(
-                        'oldPassword',
-                        res.data?.passwordChange?.errors?.nonFieldErrors[0]
-                          .message
-                      );
+                      // setFieldError(
+                      //   'oldPassword',
+                      //   res.data?.passwordChange?.errors?.nonFieldErrors[0]
+                      //     .message
+                      // );
                     })
                     .catch((err) => {
                       setFieldError('oldPassword', 'خطا');

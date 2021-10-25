@@ -99,11 +99,11 @@ export default function SingUp() {
                       <FormControl>
                         <FormLabel>کد ارسال شده</FormLabel>
                         <Input id="code" {...field} type="number" />
-                        {data?.resetPasswordSms?.errors.code && (
+                        {/* {data?.resetPasswordSms?.errors.code && (
                           <Text mt="1" color="red">
                             {data?.resetPasswordSms?.errors.code[0].message}
                           </Text>
-                        )}
+                        )} */}
                       </FormControl>
                     )}
                   </Field>
@@ -112,14 +112,14 @@ export default function SingUp() {
                       <FormControl>
                         <FormLabel>رمزعبور جدید</FormLabel>
                         <Input {...field} id="password1" type="password" />
-                        {data?.resetPasswordSms?.errors.password1 && (
+                        {/* {data?.resetPasswordSms?.errors.password1 && (
                           <Text mt="1" color="red">
                             {
                               data?.resetPasswordSms?.errors.password1[0]
                                 .message
                             }
                           </Text>
-                        )}
+                        )} */}
                       </FormControl>
                     )}
                   </Field>
@@ -128,14 +128,14 @@ export default function SingUp() {
                       <FormControl>
                         <FormLabel>تکرار رمزعبور</FormLabel>
                         <Input {...field} id="password2" type="password" />
-                        {data?.resetPasswordSms?.errors.password2 && (
+                        {/* {data?.resetPasswordSms?.errors.password2 && (
                           <Text mt="1" color="red">
                             {
                               data?.resetPasswordSms?.errors.password2[0]
                                 .message
                             }
                           </Text>
-                        )}
+                        )} */}
                       </FormControl>
                     )}
                   </Field>

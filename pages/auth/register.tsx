@@ -37,7 +37,7 @@ export default function SingUp() {
 
   const [signUp, { loading, data }] = useRegisterSmsMutation({
     onCompleted: (data) => {
-      console.log(data.registerSms?.errors);
+      // console.log(data.registerSms?.errors);
       if (data && data.registerSms?.success) {
         router.push({
           pathname: '/auth/verify',
@@ -103,11 +103,11 @@ export default function SingUp() {
                         <FormControl>
                           <FormLabel>شماره موبایل</FormLabel>
                           <Input id="phoneNumber" {...field} type="phone" />
-                          {data?.registerSms?.errors.phoneNumber && (
+                          {/* {data?.registerSms?.errors.phoneNumber && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.phoneNumber[0].message}
                             </Text>
-                          )}
+                          )} */}
                         </FormControl>
                       )}
                     </Field>
@@ -116,11 +116,11 @@ export default function SingUp() {
                         <FormControl>
                           <FormLabel>نام کاربری (اختیاری)</FormLabel>
                           <Input id="username" {...field} type="username" />
-                          {data?.registerSms?.errors.username && (
+                          {/* {data?.registerSms?.errors.username && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.username[0].message}
                             </Text>
-                          )}
+                          )} */}
                         </FormControl>
                       )}
                     </Field>
@@ -129,11 +129,11 @@ export default function SingUp() {
                         <FormControl>
                           <FormLabel>رمزعبور</FormLabel>
                           <Input {...field} id="password1" type="password" />
-                          {data?.registerSms?.errors.password1 && (
+                          {/* {data?.registerSms?.errors.password1 && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.password1[0].message}
                             </Text>
-                          )}
+                          )} */}
                         </FormControl>
                       )}
                     </Field>
@@ -142,11 +142,11 @@ export default function SingUp() {
                         <FormControl>
                           <FormLabel>تکرار رمزعبور</FormLabel>
                           <Input {...field} id="password2" type="password" />
-                          {data?.registerSms?.errors.password2 && (
+                          {/* {data?.registerSms?.errors.password2 && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.password2[0].message}
                             </Text>
-                          )}
+                          )} */}
                         </FormControl>
                       )}
                     </Field>

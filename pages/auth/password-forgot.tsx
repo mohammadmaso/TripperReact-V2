@@ -86,14 +86,14 @@ export default function SingUp() {
                       <FormControl>
                         <FormLabel>شماره موبایل</FormLabel>
                         <Input id="phoneNumber" {...field} type="phone" />
-                        {data?.forgotPasswordSms?.errors.phoneNumber && (
+                        {/* {data?.forgotPasswordSms?.errors.phoneNumber && (
                           <Text mt="1" color="red">
                             {
                               data?.forgotPasswordSms?.errors.phoneNumber[0]
                                 .message
                             }
                           </Text>
-                        )}
+                        )} */}
                       </FormControl>
                     )}
                   </Field>
