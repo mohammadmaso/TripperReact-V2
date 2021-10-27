@@ -52,16 +52,16 @@ const errorLink = onError(
                 return forward(operation);
               });
         }
-          if(err.extensions?.code != "UNAUTHENTICATED"){
-        toast({
-                  title: err.message,
-                  // description:
-                  //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
-                  status: 'error',
-                  duration: 4000,
-                  isClosable: true,
-                  position: 'top-right',
-                });}
+        //   if(err.extensions?.code != "UNAUTHENTICATED"){
+        // toast({
+        //           title: err.message,
+        //           // description:
+        //           //   'برای اضافه کردن نقد و بررسی باید کاربر سایت باشید، ثبت‌نام کنید یا وارد شوید.',
+        //           status: 'error',
+        //           duration: 4000,
+        //           isClosable: true,
+        //           position: 'top-right',
+        //         });}
 
       }
     }
