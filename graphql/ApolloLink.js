@@ -52,7 +52,7 @@ const errorLink = onError(
                 return forward(operation);
               });
         }
-
+          if(err.extensions?.code != "UNAUTHENTICATED"){
         toast({
                   title: err.message,
                   // description:
@@ -61,7 +61,7 @@ const errorLink = onError(
                   duration: 4000,
                   isClosable: true,
                   position: 'top-right',
-                });
+                });}
 
       }
     }
