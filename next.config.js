@@ -1,5 +1,5 @@
 module.exports = {
-  reactStrictMode: true,
+  reactStrictMode: false,
 }
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
