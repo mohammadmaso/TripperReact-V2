@@ -124,7 +124,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
             top="20px"
             right="20px"
           />
-          <Center flexDir="column" pb="4" justify="center">
+          <Center flexDir="column" pb="4">
             <Stack justify="center" alignItems="center">
               <Image
                 h="70vh"
