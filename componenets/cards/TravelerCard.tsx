@@ -51,7 +51,7 @@ export default function TravelerCard(props: UserType) {
                 <Avatar
                   size={'xl'}
                   src={props.avatar}
-                  alt={props.username}
+                  // alt={props.username}
                   css={
                     props.profilemodel?.tripStatus == false
                       ? {

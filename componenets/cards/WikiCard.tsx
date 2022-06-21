@@ -63,7 +63,7 @@ export default function WikiCard(props: any) {
               <Avatar
                 size="sm"
                 src={props?.author.avatar}
-                alt={props?.author}
+                // alt={props?.author}
               />
               <Stack direction={'column'} spacing={0}>
                 <Text fontWeight={600}>{props?.author.username}</Text>

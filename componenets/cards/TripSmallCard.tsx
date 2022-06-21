@@ -87,7 +87,7 @@ export default function TripSmallCard({ data }: Props) {
               ml="1"
               mr="1"
               src={data.author?.avatar}
-              alt={data.author?.username}
+              // alt={data.author?.username}
             />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>

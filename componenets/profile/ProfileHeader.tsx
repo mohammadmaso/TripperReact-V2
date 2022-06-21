@@ -154,7 +154,7 @@ const ProfileHeader = ({
         <Avatar
           size="2xl"
           src={data.avatar}
-          alt={data.username}
+          // alt={data.username}
           css={{
             border: '2px solid white',
           }}

@@ -49,7 +49,7 @@ export function ArticleHeader(props: any) {
         <HStack align={'center'} justify="space-between">
           <Avatar
             src={props.author.avatar}
-            alt={props.author.username}
+            // alt={props.author.username}
             size="sm"
             ml="2"
           />

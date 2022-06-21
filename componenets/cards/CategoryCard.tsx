@@ -40,7 +40,7 @@ export default function CategoryCard(props: any) {
           bgGradient="linear(to-t, #000000cc,#ffffff00)"
           height="100%"
           width="full"
-          align="flex-end"
+          // align="flex-end"
         >
           <Text
             width="full"

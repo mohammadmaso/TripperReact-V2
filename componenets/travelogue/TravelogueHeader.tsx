@@ -157,7 +157,7 @@ export function TravelogueHeader(props: Props) {
             <HStack w="fit-content" align={'center'}>
               <Avatar
                 src={props.author?.avatar}
-                alt={props.author?.username}
+                // alt={props.author?.username}
                 size="sm"
                 ml="2"
               />

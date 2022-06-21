@@ -87,7 +87,7 @@ export default function TourSmallCard({ data }: any) {
               ml="1"
               mr="1"
               src={data.user?.avatar}
-              alt={data.name}
+              // alt={data.name}
             />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>

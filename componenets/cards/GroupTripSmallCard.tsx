@@ -45,7 +45,7 @@ export default function GroupTripSmallCard(props: any) {
               size="md"
               ml="1"
               src={'https://avatars0.githubusercontent.com/u/1164541?v=4'}
-              alt={'Author'}
+              // alt={'Author'}
             />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text mr="1" textAlign="right" fontWeight={400}>

@@ -125,7 +125,7 @@ const TripListCard = ({ data }: Props) => {
           <HStack w="fit-content" align={'center'}>
             <Avatar
               src={data.author?.avatar}
-              alt={data.author?.username}
+              // alt={data.author?.username}
               size="sm"
               ml="2"
             />
