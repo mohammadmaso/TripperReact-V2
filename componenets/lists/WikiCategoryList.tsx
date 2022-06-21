@@ -72,7 +72,6 @@ const WikiCategoryBox = (props: any) => {
               src={props.svg}
               objectFit="scale-down"
               alt={props.name}
-              }}
               filter={useColorModeValue(
                 'invert(25%) sepia(68%) saturate(0%) hue-rotate(296deg) brightness(96%) contrast(102%)',
                 'invert(99%) sepia(99%) saturate(2%) hue-rotate(123deg) brightness(108%) contrast(100%)'
