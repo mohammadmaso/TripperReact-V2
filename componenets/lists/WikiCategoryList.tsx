@@ -12,6 +12,7 @@ import {
   HStack,
   Flex,
   Wrap,
+  Img,
   WrapItem,
   SimpleGrid,
 } from '@chakra-ui/react';
