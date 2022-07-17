@@ -29,7 +29,7 @@ export default function TravelerCard(props: UserType) {
           boxShadow={'lg'}
           rounded={'md'}
           overflow={'hidden'}
-          justify="space-around"
+          justifyContent="space-around"
         >
           <Box>
             <Image
@@ -40,7 +40,7 @@ export default function TravelerCard(props: UserType) {
               objectFit={'cover'}
               fallbackSrc={'/images/placeholder.png'}
             />
-            <Flex justify={'center'} mt={-12}>
+            <Flex justifyContent={'center'} mt={-12}>
               <Tooltip
                 isDisabled={!props.profilemodel?.tripStatus}
                 hasArrow
@@ -77,7 +77,7 @@ export default function TravelerCard(props: UserType) {
             </Wrap> */}
             </Stack>
 
-            <Stack direction={'row'} justify={'center'} spacing={6}>
+            <Stack direction={'row'} justifyContent={'center'} spacing={6}>
               <Stack spacing={0} align={'center'}>
                 <Text fontWeight={600}>{props.trips.edges.length}</Text>
                 <Text fontSize={'sm'} color={'gray.500'}>

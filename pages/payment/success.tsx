@@ -9,7 +9,12 @@ const success = (props: Props) => {
   return (
     <div>
       <Center minHeight="100vh">
-        <Stack spacing="3" height="fit-content" justify="center" align="center">
+        <Stack
+          spacing="3"
+          height="fit-content"
+          justifyContent="center"
+          align="center"
+        >
           <Lottie
             options={{
               animationData: animationData,

@@ -68,7 +68,7 @@ const WikiCategoryBox = (props: any) => {
             transition={'all .3s ease'}
             _hover={{ transform: 'scale(1.1,1.1)' }}
           >
-            <HStack p="3" justify={'center'} align={'center'}>
+            <HStack p="3" justifyContent={'center'} align={'center'}>
               <Img
                 w={props.size ? `${props.size}rem` : '1.3rem'}
                 h={props.size ? `${props.size}rem` : '1.3rem'}

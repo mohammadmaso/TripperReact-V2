@@ -23,7 +23,7 @@ interface CardProps extends TransferType {
 export function TravelogueTransferCard(props: CardProps) {
   return (
     <Flex
-      justify="space-between"
+      justifyContent="space-between"
       borderRadius="full"
       bgColor={useColorModeValue('gray.100', 'gray.700')}
       fontSize="xs"

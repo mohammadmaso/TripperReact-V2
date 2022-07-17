@@ -27,7 +27,7 @@ export const MobileSubNav = ({
       <Flex
         py={2}
         as={ChakraLink}
-        justify={'space-between'}
+        justifyContent={'space-between'}
         align={'center'}
         _hover={{
           textDecoration: 'none',

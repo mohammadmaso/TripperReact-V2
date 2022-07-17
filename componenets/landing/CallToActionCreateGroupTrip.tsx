@@ -20,7 +20,7 @@ export default function CallToActionCreateGroupTrip() {
     >
       <VStack
         w={'full'}
-        justify={'center'}
+        justifyContent={'center'}
         align="flex-start"
         bgGradient={'linear(to-l, blackAlpha.900, transparent)'}
         rounded="md"

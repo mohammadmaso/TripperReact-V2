@@ -19,7 +19,7 @@ export function TravelogueAccomodations() {
       </Wrap>
       <Wrap>
         <Flex
-          justify="space-between"
+          justifyContent="space-between"
           borderRadius="full"
           bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"
@@ -36,7 +36,7 @@ export function TravelogueAccomodations() {
         </Flex>
 
         <Flex
-          justify="space-between"
+          justifyContent="space-between"
           borderRadius="full"
           bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"

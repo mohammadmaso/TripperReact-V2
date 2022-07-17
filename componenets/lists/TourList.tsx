@@ -17,7 +17,7 @@ const TourList = (props: Props) => {
     <SimpleGrid
       spacing="2"
       columns={{ base: 1, sm: 1, md: 4 }}
-      justify="center"
+      justifyContent="center"
     >
       {props.data?.map((item: any) => (
         <TourSmallCard

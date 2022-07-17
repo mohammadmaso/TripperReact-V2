@@ -36,7 +36,11 @@ export function ActivityCard(props: Props) {
         borderRadius="md"
         // onClick={() => setTooltip(!tooltip)}
       >
-        <Stack align="center" justify="space-between" textAlign={'center'}>
+        <Stack
+          align="center"
+          justifyContent="space-between"
+          textAlign={'center'}
+        >
           <Img
             w={props.size ? `${props.size}rem` : '4rem'}
             h={props.size ? `${props.size}rem` : '4rem'}

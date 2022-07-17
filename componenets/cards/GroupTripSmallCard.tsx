@@ -39,7 +39,7 @@ export default function GroupTripSmallCard(props: any) {
           p={3}
           py={4}
         >
-          <Flex justify="flex-end">
+          <Flex justifyContent="flex-end">
             <Avatar
               showBorder
               size="md"
@@ -66,7 +66,7 @@ export default function GroupTripSmallCard(props: any) {
             </Stack>
           </Flex>
           <Box>
-            <Flex direction="column" justify="center">
+            <Flex direction="column" justifyContent="center">
               <Text fontWeight="bold">۱۲</Text>
               <Text fontSize="sm">خرداد</Text>
             </Flex>
@@ -76,7 +76,7 @@ export default function GroupTripSmallCard(props: any) {
         <Stack
           width="full"
           align="flex-start"
-          justify="flex-end"
+          justifyContent="flex-end"
           p="3"
           direction="column"
         >

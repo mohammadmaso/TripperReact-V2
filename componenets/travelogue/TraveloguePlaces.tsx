@@ -36,7 +36,7 @@ interface Props {
 function PlaceCard(props: any) {
   return (
     <Flex
-      justify="space-between"
+      justifyContent="space-between"
       borderRadius="full"
       bgColor={useColorModeValue('gray.100', 'gray.700')}
       fontSize="xs"
@@ -57,7 +57,7 @@ function PlaceCard(props: any) {
 //   return (
 //     <Stack>
 //       <Flex
-//         justify="space-between"
+//         justifyContent="space-between"
 //         borderRadius="full"
 //         bgColor={useColorModeValue('gray.100', 'gray.700')}
 //         fontSize="xs"

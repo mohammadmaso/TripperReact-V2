@@ -58,7 +58,7 @@ const NavBar = (props: any) => {
         borderStyle={'solid'}
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         align={'center'}
-        justify="space-around"
+        justifyContent="space-around"
         position="fixed"
         w="100%"
         shadow={stickyNav ? 'lg' : 'none'}
@@ -80,7 +80,10 @@ const NavBar = (props: any) => {
             aria-label={'Toggle Navigation'}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+        <Flex
+          flex={{ base: 1 }}
+          justifyContent={{ base: 'center', md: 'start' }}
+        >
           <Link href="/" passHref>
             <Box
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
@@ -96,7 +99,7 @@ const NavBar = (props: any) => {
 
           <Flex
             align="center"
-            justify="space-between"
+            justifyContent="space-between"
             wrap="wrap"
             display={{ base: 'none', md: 'flex' }}
             mr={10}
@@ -104,7 +107,7 @@ const NavBar = (props: any) => {
             <DesktopNav />
           </Flex>
         </Flex>
-        <Flex justify="flex-end" w="8rem">
+        <Flex justifyContent="flex-end" w="8rem">
           {props.children}
         </Flex>
       </Flex>

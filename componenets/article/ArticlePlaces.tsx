@@ -15,7 +15,7 @@ import { MdPlace } from 'react-icons/md';
 function PlaceCard() {
   return (
     <Flex
-      justify="space-between"
+      justifyContent="space-between"
       borderRadius="full"
       bgColor={useColorModeValue('gray.100', 'gray.700')}
       fontSize="xs"
@@ -36,7 +36,7 @@ function CityList() {
   return (
     <Stack>
       <Flex
-        justify="space-between"
+        justifyContent="space-between"
         borderRadius="full"
         bgColor={useColorModeValue('gray.100', 'gray.700')}
         fontSize="xs"

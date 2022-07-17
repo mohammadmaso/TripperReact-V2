@@ -6,7 +6,7 @@ interface Props {}
 const ToureCard1 = (props: Props) => {
   return (
     <div>
-      <div className="row  justify-content-center">
+      <div className="row  justifyContent-content-center">
         <div className="col-12 text-center align-self-center py-5">
           <div className="section text-center py-5 py-md-0">
             <input

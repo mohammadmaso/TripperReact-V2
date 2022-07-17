@@ -51,7 +51,7 @@ export const DesktopSubNav = ({
           transform={'translateX(-10px)'}
           opacity={0}
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify={'flex-end'}
+          justifyContent={'flex-end'}
           align={'center'}
           flex={1}
         >

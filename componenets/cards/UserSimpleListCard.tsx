@@ -18,7 +18,7 @@ const UserSimpleListCard = (props: any) => {
       <Link href={`/profile/${props.username}`} passHref>
         <>
           <Box rounded="md" p="2" cursor="pointer">
-            <Flex justify="space-between">
+            <Flex justifyContent="space-between">
               <Wrap align="center">
                 <Avatar src={props.avatar} />
                 <Text>{props.username}</Text>

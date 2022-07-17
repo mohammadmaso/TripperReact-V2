@@ -18,16 +18,22 @@ export function PlaceInfo(props: any) {
         <Text>اطلاعات</Text>
       </Wrap>
       <ReactMapGL
-        mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+        //      TODO:  move token to env var.
+        mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
         {...viewport}
         mapStyle="mapbox://styles/mapbox/outdoors-v11"
-        width="100%"
-        height="400px"
-        onViewportChange={(viewport: any) => setViewport(viewport)}
+        // width="100%"
+        // height="400px"
+        style={{ width: '100%', height: '400px' }}
+        // onViewportChange={(viewport: any) => setViewport(viewport)}
+        onMove={(evt) => {
+          setViewport(evt.viewState);
+        }}
+        initialViewState={viewport}
       />
       <Button>مسیر‌یابی</Button>
       <Stack fontSize="sm">
-        <Wrap justify="space-between">
+        <Wrap justifyContent="space-between">
           <Wrap align="center">
             <FiPhone />
             <Text fontWeight="bold">شماره تلفن</Text>
@@ -35,7 +41,7 @@ export function PlaceInfo(props: any) {
           <Text dir="ltr">+0214423255</Text>
         </Wrap>
         <Divider />
-        <Wrap justify="space-between">
+        <Wrap justifyContent="space-between">
           <Wrap align="center">
             <BiLocationPlus />
             <Text fontWeight="bold">آدرس</Text>
@@ -45,7 +51,7 @@ export function PlaceInfo(props: any) {
           </Text>
         </Wrap>
         <Divider />
-        <Wrap justify="space-between">
+        <Wrap justifyContent="space-between">
           <Wrap align="center">
             <FiLink />
             <Text fontWeight="bold">وبسایت</Text>

@@ -37,7 +37,7 @@ function CompanionCard(props: any) {
       pl="2"
       py="0"
       borderRadius="full"
-      justify="space-between"
+      justifyContent="space-between"
     >
       <Avatar src={props.avatar} size="sm" ml="2" />
       <Text fontWeight={300} fontSize="sm" dir="ltr">

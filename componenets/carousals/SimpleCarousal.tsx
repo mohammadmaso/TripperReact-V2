@@ -1,5 +1,5 @@
 import { Box, Grid, Heading, HStack, Stack, Text } from '@chakra-ui/react';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import Slider from 'react-slick';
 import { FiChevronRight, FiChevronLeft } from 'react-icons/fi';
 import WikiCard from '../cards/WikiCard';
@@ -12,7 +12,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 interface Props {
   title: string;
-  children: ChildNode;
+  children: ReactNode;
 }
 
 export default function SimpleCarousal(props: Props): ReactElement {

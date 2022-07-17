@@ -99,7 +99,7 @@ const ActivitiesModal = (props: Props) => {
             <SimpleGrid
               spacing="3"
               columns={{ base: 3, sm: 4, md: 4 }}
-              justify="center"
+              justifyContent="center"
             >
               {props.queries?.allActivititesQuery?.data?.allActivities?.edges.map(
                 (item) => (

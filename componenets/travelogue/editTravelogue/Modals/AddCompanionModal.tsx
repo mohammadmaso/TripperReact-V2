@@ -126,7 +126,7 @@ const AddCompanionModal = (props: Props) => {
                             p="2"
                             cursor="pointer"
                           >
-                            <Flex justify="space-between">
+                            <Flex justifyContent="space-between">
                               <Wrap align="center">
                                 <Avatar src={item?.node?.avatar} />
                                 <Text>{item?.node?.username}</Text>

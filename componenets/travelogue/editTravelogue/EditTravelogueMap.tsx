@@ -29,15 +29,16 @@ export function EditTravelogueMap(props: any) {
         </Center> */}
         <Box style={{ filter: 'blur(5px)' }}>
           <ReactMapGL
-            mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+            mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
             {...viewport}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
-            width="100%"
-            height="500px"
+            // width="100%"
+            // height="500px"
+            style={{ width: '100%', height: '500px' }}
             scrollZoom={false}
             dragPan={false}
-            touchZoom={false}
-            touchRotate={false}
+            touchPitch={false}
+            touchZoomRotate={false}
 
             // onViewportChange={(viewport: any) => setViewport(viewport)}
           />

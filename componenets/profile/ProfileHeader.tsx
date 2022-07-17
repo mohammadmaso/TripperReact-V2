@@ -130,7 +130,7 @@ const ProfileHeader = ({
         fallbackSrc="/images/placeholder.png"
       />
       {isSelf ? (
-        <Flex justify={'left'} m="2">
+        <Flex justifyContent={'left'} m="2">
           <Button
             variant="solid"
             bgColor="white"
@@ -150,7 +150,7 @@ const ProfileHeader = ({
           </Button>
         </Flex>
       ) : null}
-      <Flex justify={'center'} mt="-20">
+      <Flex justifyContent={'center'} mt="-20">
         <Avatar
           size="2xl"
           src={data.avatar}
@@ -161,7 +161,7 @@ const ProfileHeader = ({
         />
       </Flex>
       {isSelf ? (
-        <Flex justify={'center'}>
+        <Flex justifyContent={'center'}>
           <Button
             variant="solid"
             w="1rem"
@@ -260,7 +260,7 @@ const ProfileHeader = ({
           </Wrap>
         </Stack>
 
-        <Stack direction={'row'} justify={'center'} spacing={6}>
+        <Stack direction={'row'} justifyContent={'center'} spacing={6}>
           {rest.isTourLeader && (
             <Stack cursor="pointer" spacing={0} align={'center'}>
               <Text fontWeight={600}>

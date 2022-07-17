@@ -113,7 +113,7 @@ export default function SimpleCard() {
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
-                justify={'space-between'}
+                justifyContent={'space-between'}
                 fontSize="sm"
               >
                 <Checkbox colorScheme="primary" fontSize="sm">

@@ -61,11 +61,11 @@ const TripListCard = ({ data }: Props) => {
       boxShadow="md"
       p="3"
       rounded="md"
-      justify="space-between"
+      justifyContent="space-between"
       alignContent="space-between"
       bgColor={useColorModeValue('white', 'gray.900')}
     >
-      <Stack flex={2} justify="space-between">
+      <Stack flex={2} justifyContent="space-between">
         <Stack>
           <Text as="h2" fontSize="md" fontWeight="extrabold">
             {data.title}
@@ -139,7 +139,7 @@ const TripListCard = ({ data }: Props) => {
         </Stack>
       </Stack>
       <Flex
-        justify="flex-end"
+        justifyContent="flex-end"
         flex={2}
         direction={{ base: 'column', md: 'row', lg: 'row' }}
       >
@@ -148,7 +148,11 @@ const TripListCard = ({ data }: Props) => {
           my={{ base: '3', md: '0', lg: '0' }}
           ml="2"
         >
-          <Wrap spacing="1" justify="flex-start" alignContent="flex-start">
+          <Wrap
+            spacing="1"
+            justifyContent="flex-start"
+            alignContent="flex-start"
+          >
             <Wrap
               transition={'all .3s ease'}
               _hover={{ transform: 'scale(1.3,1.3)' }}

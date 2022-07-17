@@ -44,7 +44,7 @@ const MyToursTab = (props: Props) => {
               <Badge>پرداخت شده</Badge>
             </Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button size="sm" colorScheme="primary">
                   ویرایش و جزئیات
                 </Button>
@@ -65,7 +65,7 @@ const MyToursTab = (props: Props) => {
               <Badge>پرداخت شده</Badge>
             </Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button colorScheme="primary" size="sm">
                   ویرایش و جزئیات
                 </Button>
@@ -85,7 +85,7 @@ const MyToursTab = (props: Props) => {
               <Badge>پرداخت شده</Badge>
             </Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button colorScheme="primary" size="sm">
                   ویرایش و جزئیات
                 </Button>
@@ -125,7 +125,7 @@ const MyToursTab = (props: Props) => {
             <Td>۱۴۰۰/۰۱/۰۵</Td>
             <Td isNumeric>۷ از ۳۰</Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button size="sm" colorScheme="primary">
                   جزئیات
                 </Button>
@@ -143,7 +143,7 @@ const MyToursTab = (props: Props) => {
             <Td>۱۴۰۰/۰۱/۰۵</Td>
             <Td isNumeric>۱۰ از ۲۰</Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button colorScheme="primary" size="sm">
                   جزئیات
                 </Button>
@@ -161,7 +161,7 @@ const MyToursTab = (props: Props) => {
             <Td>۱۴۰۰/۰۱/۰۵</Td>
             <Td isNumeric>۵ از ۱۰</Td>
             <Td>
-              <Wrap justify="left">
+              <Wrap justifyContent="left">
                 <Button colorScheme="primary" size="sm">
                   جزئیات
                 </Button>

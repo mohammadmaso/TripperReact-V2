@@ -1,12 +1,10 @@
 import { Stack, Wrap, Text, Box, Center, Image } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, {
-  CanvasOverlay,
   Layer,
   NavigationControl,
   ScaleControl,
   Source,
-  HTMLOverlay,
   Marker,
 } from 'react-map-gl';
 import * as turf from '@turf/turf';
@@ -238,18 +236,23 @@ export function TravelogueMap({ data }: Props) {
         </Center> */}
         <Box>
           <ReactMapGL
-            mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+            mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
             {...viewport}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
-            width="100%"
-            height="500px"
+            // width="100%"
+            // height="500px"
+            style={{ width: '100%', height: '500px' }}
             scrollZoom={false}
             // dragPan={!isMobile()}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
-            touchAction="pan-y"
-            onViewportChange={(viewport: any) => setViewport(viewport)}
+            // touchAction="pan-y"
+            // onViewportChange={(viewport: any) => setViewport(viewport)}
+            cooperativeGestures={true}
+            onMove={(evt) => {
+              setViewport(evt.viewState);
+            }}
           >
             {greatCircles?.map((item, index) => (
               <div key={index}>

@@ -1,11 +1,9 @@
 import { Stack, Wrap, Box, Select } from '@chakra-ui/react';
 import ReactMapGL, {
-  CanvasOverlay,
   Layer,
   NavigationControl,
   ScaleControl,
   Source,
-  HTMLOverlay,
   Marker,
 } from 'react-map-gl';
 import React, { useState } from 'react';
@@ -54,18 +52,20 @@ const Tourmap = (props: Props) => {
         <Box position="relative">
           <Box>
             <ReactMapGL
-              mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+              mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
               {...viewport}
               mapStyle="mapbox://styles/mapbox/outdoors-v11"
-              width="100%"
-              height="700px"
+              // width="100%"
+              // height="700px"
+              style={{ width: '100%', height: '700px' }}
               scrollZoom={false}
               // dragPan={!isMobile()}
               // dragPan={false}
               // touchZoom={false}
               // touchRotate={false}
-              touchAction="pan-y"
-              onViewportChange={(viewport: any) => setViewport(viewport)}
+              // touchAction="pan-y"
+              cooperativeGestures={false}
+              // onViewportChange={(viewport: any) => setViewport(viewport)}
             >
               <NavigationControl
                 style={{

@@ -121,7 +121,7 @@ export function TravelogueHeader(props: Props) {
         // top={stickyHeader ? '60px' : undefined}
         w="full"
         transitionDuration="2"
-        justify="space-between"
+        justifyContent="space-between"
         align="center"
       >
         <Stack>
@@ -197,7 +197,7 @@ export function TravelogueHeader(props: Props) {
             direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
             spacing="2"
             alignItems="center"
-            justify="center"
+            justifyContent="center"
             align="center"
           >
             <Wrap
@@ -209,7 +209,7 @@ export function TravelogueHeader(props: Props) {
               }}
               spacing="1"
               align="center"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <Wrap fontSize="xs" spacing="1">

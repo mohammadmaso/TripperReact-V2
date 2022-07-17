@@ -14,7 +14,7 @@ const ActivitiesList = (props: Props) => {
       <SimpleGrid
         spacing="5"
         columns={{ base: 3, sm: 5, md: 10 }}
-        justify="center"
+        justifyContent="center"
       >
         {props.activities.map((item: any) => (
           <>

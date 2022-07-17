@@ -112,7 +112,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
           height="full"
           id="lightbox"
           bgColor="rgba(0, 0, 0, 0.89)"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           alignContent="center"
         >
@@ -125,7 +125,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
             right="20px"
           />
           <Center flexDir="column" pb="4">
-            <Stack justify="center" alignItems="center">
+            <Stack justifyContent="center" alignItems="center">
               <Image
                 h="70vh"
                 rounded="sm"
@@ -169,7 +169,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
           </Center>
 
           <HStack
-            justify="center"
+            justifyContent="center"
             h={{ base: '5vh', sm: '10vh', md: '10vh', lg: '10vh' }}
             bottom="10px"
             overflowY="auto"

@@ -58,7 +58,7 @@ const PayIRTrustLogo = () => {
       height="30"
       viewBox="0 0 47.3 22.005"
       onClick={() => PayirTrust()}
-      alt="پرداخت امن pay.ir"
+      // alt="پرداخت امن pay.ir"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -162,10 +162,9 @@ export default function LargeWithNewsletter() {
           <Wrap
             fontWeight="medium"
             fontSize="xs"
-            columns={{ base: 1, sm: 1, md: 2 }}
-            justify="space-around"
+            // columns={{ base: 1, sm: 1, md: 2 }}
+            justifyContent="space-around"
             textColor="gray.600"
-            spa
           >
             <Stack spacing="1" textColor="primary">
               <Link href="#">سفرنامه‌ها</Link>
@@ -182,7 +181,7 @@ export default function LargeWithNewsletter() {
             </Stack>
           </Wrap>
           <Stack
-            justify={{
+            justifyContent={{
               base: 'center',
               sm: 'center',
               md: 'flex-end',

@@ -80,7 +80,7 @@ export default function TripSmallCard({ data }: Props) {
           p={3}
           py={4}
         >
-          <Flex textColor="white" justify="flex-start">
+          <Flex textColor="white" justifyContent="flex-start">
             <Avatar
               showBorder
               size="md"
@@ -107,7 +107,7 @@ export default function TripSmallCard({ data }: Props) {
               </Wrap>
             </Stack>
           </Flex>
-          <Stack justify="flex-start" alignItems="flex-end">
+          <Stack justifyContent="flex-start" alignItems="flex-end">
             <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
               <Text fontSize="sm">{likeCount}</Text>
               <Wrap
@@ -147,7 +147,7 @@ export default function TripSmallCard({ data }: Props) {
             height="50%"
             width="full"
             align="flex-start"
-            justify="flex-end"
+            justifyContent="flex-end"
             p="3"
             direction="column"
           >

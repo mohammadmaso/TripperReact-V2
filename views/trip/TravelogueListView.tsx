@@ -20,8 +20,10 @@ const TravelogueListView = (props: Props) => {
     variables: { allTripLast: 10 },
   });
 
-  const [getProvincesOfCountry, provincesOfCountryQuery] =
-    useAllProvincesOfCountryLazyQuery();
+  const [
+    getProvincesOfCountry,
+    provincesOfCountryQuery,
+  ] = useAllProvincesOfCountryLazyQuery();
 
   const categoriesQuery = useAllTripCategoriesQuery();
 
@@ -47,7 +49,7 @@ const TravelogueListView = (props: Props) => {
         }
         onProvinceChange={(provinceId) => null}
       />
-      <Wrap spacing="3" mb="4" justify="center">
+      <Wrap spacing="3" mb="4" justifyContent="center">
         <Divider />
         {data?.allTrip?.edges.map((item) => (
           <TripListCard key={item?.node?.id} data={item?.node as TripType} />

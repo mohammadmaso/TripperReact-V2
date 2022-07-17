@@ -45,21 +45,22 @@ const TravelogueReview = (props: Props) => {
       );
     },
   });
-  const [disLikeReview, disLikeReviewStatus] =
-    useDislikeTripReviewMutationMutation({
-      variables: { dislikeTripReviewReview: props.id },
-      onCompleted: (data) => {
-        setIsDisLiked(data?.dislikeTripReview?.tripReviewLike?.value == '_1');
-        setIsLiked(!(data?.dislikeTripReview?.tripReviewLike?.value == '_1'));
-        setLikeCount(
-          data?.dislikeTripReview?.tripReviewLike?.review.likesCount as number
-        );
-        setDisLikeCount(
-          data?.dislikeTripReview?.tripReviewLike?.review
-            .dislikesCount as number
-        );
-      },
-    });
+  const [
+    disLikeReview,
+    disLikeReviewStatus,
+  ] = useDislikeTripReviewMutationMutation({
+    variables: { dislikeTripReviewReview: props.id },
+    onCompleted: (data) => {
+      setIsDisLiked(data?.dislikeTripReview?.tripReviewLike?.value == '_1');
+      setIsLiked(!(data?.dislikeTripReview?.tripReviewLike?.value == '_1'));
+      setLikeCount(
+        data?.dislikeTripReview?.tripReviewLike?.review.likesCount as number
+      );
+      setDisLikeCount(
+        data?.dislikeTripReview?.tripReviewLike?.review.dislikesCount as number
+      );
+    },
+  });
 
   const onLikeReview = () => {
     setIsLiked(!isLiked);
@@ -84,7 +85,7 @@ const TravelogueReview = (props: Props) => {
         p="3"
       >
         <Stack>
-          <Flex justify="space-between">
+          <Flex justifyContent="space-between">
             <Box>
               <Link href={`/profile/${props.author?.username}`} passHref>
                 <Wrap

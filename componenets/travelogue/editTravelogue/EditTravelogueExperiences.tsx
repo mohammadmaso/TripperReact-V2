@@ -54,7 +54,7 @@ function ExperienceCard({
   return (
     <Box borderRadius="lg" borderWidth="thin" w="full" minH="7rem" p="2">
       <Stack spacing="0.5">
-        <Flex justify="space-between">
+        <Flex justifyContent="space-between">
           <Stack>
             <Wrap spacing="3" align="center">
               <Wrap>

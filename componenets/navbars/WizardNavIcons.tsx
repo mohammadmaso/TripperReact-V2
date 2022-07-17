@@ -22,7 +22,7 @@ interface Props {
 const WizardNavIcons = (props: Props) => {
   return (
     <div>
-      <Wrap justify="center" spacing="2">
+      <Wrap justifyContent="center" spacing="2">
         <WrapItem>
           <Icon
             value="selectCategory"

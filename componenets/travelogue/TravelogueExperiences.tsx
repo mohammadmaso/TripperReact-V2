@@ -40,7 +40,7 @@ function ExperienceCard({ experience, imageOnClick }: CardProps) {
   return (
     <Box borderRadius="lg" borderWidth="thin" w="full" minH="7rem" p="2">
       <Stack spacing="0.5">
-        <Flex justify="space-between" align="center">
+        <Flex justifyContent="space-between" align="center">
           <Stack>
             <Wrap spacing="1" align="center">
               <Icon as={GoPrimitiveDot} />

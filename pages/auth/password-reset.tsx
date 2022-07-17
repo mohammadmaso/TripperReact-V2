@@ -63,7 +63,13 @@ export default function SingUp() {
           <title> تریپر | تغییر رمزعبور</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Flex p={8} flex={1} align={'center'} justify={'center'} zIndex={100}>
+        <Flex
+          p={8}
+          flex={1}
+          align={'center'}
+          justifyContent={'center'}
+          zIndex={100}
+        >
           <Stack spacing={4} w={'full'} maxW={'md'}>
             <CircleLogo />
             {/* <TextLogo height="100" width="200" /> */}

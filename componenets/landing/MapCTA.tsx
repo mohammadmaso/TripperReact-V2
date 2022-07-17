@@ -26,7 +26,7 @@ const MapCTA = (props: Props) => {
         pr={[4, 4, 10, 10]}
         bgGradient={'linear(to-l, whiteAlpha.700, transparent)'}
       >
-        <Wrap direction="column" justify="flex-start" align="flex-start">
+        <Wrap direction="column" justifyContent="flex-start" align="flex-start">
           <Heading
             w={['60%', '60%', '100%']}
             textColor="black"

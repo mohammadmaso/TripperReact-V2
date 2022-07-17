@@ -1,4 +1,4 @@
-import { Center, Text, Button, Stack } from '@chakra-ui/react';
+import { Center, Text, Button, Stack, Link } from '@chakra-ui/react';
 import React from 'react';
 import { BiSupport } from 'react-icons/bi';
 import { HiSupport } from 'react-icons/hi';
@@ -11,7 +11,12 @@ const fail = (props: Props) => {
   return (
     <div>
       <Center minHeight="100vh">
-        <Stack spacing="3" height="fit-content" justify="center" align="center">
+        <Stack
+          spacing="3"
+          height="fit-content"
+          justifyContent="center"
+          align="center"
+        >
           <Lottie
             options={{
               animationData: animationData,
@@ -27,13 +32,10 @@ const fail = (props: Props) => {
           <Text fontSize="lg">
             برای پیگیری بیشتر با پشتیبانی در تماس باشید.
           </Text>
-          <Button
-            href="tel:+989380374660"
-            leftIcon={<BiSupport />}
-            rounded="full"
-          >
+          <Link as={'button'} href="tel:+989380374660" rounded="full">
+            <BiSupport />
             09380374660
-          </Button>
+          </Link>
           <Button colorScheme="red" rounded="full">
             بازگشت به داشبورد
           </Button>

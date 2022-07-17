@@ -13,7 +13,7 @@ const TravelerList = (props: Props) => {
       <SimpleGrid
         spacing="5"
         columns={{ base: 1, sm: 2, md: 4, lg: 5 }}
-        justify="center"
+        justifyContent="center"
       >
         {props.profiles?.map((item: any) => (
           <>

@@ -1,12 +1,10 @@
 import { Stack, Wrap, Text, Box, Center, Image, Icon } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import ReactMapGL, {
-  CanvasOverlay,
   Layer,
   NavigationControl,
   ScaleControl,
   Source,
-  HTMLOverlay,
   Marker,
 } from 'react-map-gl';
 import * as turf from '@turf/turf';
@@ -43,24 +41,30 @@ export function SelectPointMap({ initialLocation, setLocation }: Props) {
       <Box position="relative">
         <Box>
           <ReactMapGL
-            mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+            mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
             {...viewport}
             mapStyle="mapbox://styles/mapbox/outdoors-v11"
-            width="100%"
-            height="400px"
+            // width="100%"
+            // height="400px"
+            style={{ width: '100%', height: '400px' }}
             scrollZoom={false}
             // dragPan={!isMobile()}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
-            touchAction="pan-y"
+            // touchAction="pan-y" // props removed
+            cooperativeGestures={true}
             // dragPan={false}
             // touchZoom={false}
             // touchRotate={false}
 
-            onViewportChange={(viewport: any) => {
-              setViewport(viewport);
-              setLocation(viewport);
+            // onViewportChange={(viewport: any) => {
+            //   setViewport(viewport);
+            //   setLocation(viewport);
+            // }}  // props removed
+            onMove={(evt) => {
+              setViewport(evt.viewState);
+              setLocation(evt.viewState);
             }}
           >
             <Marker

@@ -12,7 +12,7 @@ const ArticleAccessories = (props: any) => {
         <FiShoppingBag />
         <Text fontWeight="extrabold">تجهیزات</Text>
       </Wrap>
-      <Wrap spacing="5" justify={{ base: 'center', md: 'right' }}>
+      <Wrap spacing="5" justifyContent={{ base: 'center', md: 'right' }}>
         {props.data?.map((item: any) => (
           <AccessoryCard key={item.node.id} {...item.node} />
         ))}

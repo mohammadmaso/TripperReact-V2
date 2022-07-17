@@ -54,7 +54,13 @@ export default function SingUp() {
           <title> تریپر | ثبت نام</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Flex p={8} flex={1} align={'center'} justify={'center'} zIndex={100}>
+        <Flex
+          p={8}
+          flex={1}
+          align={'center'}
+          justifyContent={'center'}
+          zIndex={100}
+        >
           <Stack spacing={4} w={'full'} maxW={'md'}>
             <CircleLogo />
             {/* <TextLogo height="100" width="200" /> */}
@@ -155,7 +161,7 @@ export default function SingUp() {
                     <Stack
                       direction={{ base: 'column', sm: 'row' }}
                       align={'start'}
-                      justify={'space-between'}
+                      justifyContent={'space-between'}
                     >
                       <Field name="acceptTerms">
                         {({ field, form }: { field: any; form: any }) => (

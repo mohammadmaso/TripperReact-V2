@@ -46,7 +46,7 @@ export function ArticleHeader(props: any) {
         {props.title}
       </Text>
       <Wrap fontWeight="light" fontSize="sm" align="center">
-        <HStack align={'center'} justify="space-between">
+        <HStack align={'center'} justifyContent="space-between">
           <Avatar
             src={props.author.avatar}
             // alt={props.author.username}

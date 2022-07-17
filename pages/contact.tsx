@@ -26,7 +26,7 @@ export default function Home() {
       <SimpleGrid columns={{ base: 1, sm: 1, md: 2 }} spacing="5">
         <Center p="4" rounded="lg" shadow="lg">
           <Stack fontSize="sm">
-            <Wrap justify="space-between">
+            <Wrap justifyContent="space-between">
               <Wrap align="center">
                 <FiPhone />
                 <Text fontWeight="bold">شماره تلفن</Text>
@@ -36,7 +36,7 @@ export default function Home() {
               </Link>
             </Wrap>
             <Divider />
-            <Wrap justify="space-between">
+            <Wrap justifyContent="space-between">
               <Wrap align="center">
                 <HiLocationMarker />
                 <Text fontWeight="bold">آدرس</Text>
@@ -46,7 +46,7 @@ export default function Home() {
               </Text>
             </Wrap>
             <Divider />
-            <Wrap justify="space-between">
+            <Wrap justifyContent="space-between">
               <Wrap align="center">
                 <AtSignIcon />
                 <Text fontWeight="bold">ایمیل</Text>
@@ -54,7 +54,7 @@ export default function Home() {
               <Link dir="ltr">support@mytripper.ir</Link>
             </Wrap>
             <Divider />
-            <Wrap justify="center">
+            <Wrap justifyContent="center">
               <SocialButtons />
             </Wrap>
           </Stack>
@@ -63,10 +63,11 @@ export default function Home() {
         <Box position="relative">
           <Box>
             <ReactMapGL
-              mapboxApiAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
+              mapboxAccessToken="pk.eyJ1IjoibW9oYW1tYWRtYXNvIiwiYSI6ImNrYmFqdWJxNDA2NGwyem4zbjRtcGN5YWkifQ.WtmnjhRsLiqMPNYawpbqQA"
               mapStyle="mapbox://styles/mapbox/outdoors-v11"
-              width="100%"
-              height="500px"
+              // width="100%"
+              // height="500px"
+              style={{ width: '100%', height: '600px' }}
               longitude={51.4482906}
               latitude={35.7407193}
               zoom={15}
@@ -75,7 +76,8 @@ export default function Home() {
               // dragPan={false}
               // touchZoom={false}
               // touchRotate={false}
-              touchAction="pan-y"
+              // touchAction="pan-y"
+              cooperativeGestures={false}
               // dragPan={false}
               // touchZoom={false}
               // touchRotate={false}

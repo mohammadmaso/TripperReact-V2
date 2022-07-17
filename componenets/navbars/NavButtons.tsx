@@ -8,7 +8,7 @@ const NavButtons = () => {
   return (
     <Stack
       flex={{ base: 1, md: 0 }}
-      justify={'flex-end'}
+      justifyContent={'flex-end'}
       direction={'row'}
       spacing={3}
     >

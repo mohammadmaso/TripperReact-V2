@@ -22,7 +22,7 @@ export default function MinimalFooter() {
         maxW={'6xl'}
         py={4}
         spacing={4}
-        justify={'center'}
+        justifyContent={'center'}
         align={'center'}
       >
         <CircleLogo />
@@ -45,7 +45,7 @@ export default function MinimalFooter() {
           py={4}
           direction={{ base: 'column', md: 'row' }}
           spacing={4}
-          justify={{ base: 'center', md: 'space-between' }}
+          justifyContent={{ base: 'center', md: 'space-between' }}
           align={{ base: 'center', md: 'center' }}
         >
           <Wrap>

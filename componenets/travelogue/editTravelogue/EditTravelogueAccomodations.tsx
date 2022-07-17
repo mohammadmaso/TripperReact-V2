@@ -23,7 +23,7 @@ export function EditTravelogueAccomodations(props: Props) {
       </Wrap>
       <Wrap>
         <Flex
-          justify="space-between"
+          justifyContent="space-between"
           borderRadius="full"
           bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"
@@ -40,7 +40,7 @@ export function EditTravelogueAccomodations(props: Props) {
         </Flex>
 
         <Flex
-          justify="space-between"
+          justifyContent="space-between"
           borderRadius="full"
           bgColor={useColorModeValue('gray.100', 'gray.700')}
           fontSize="xs"

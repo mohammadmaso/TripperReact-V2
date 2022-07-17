@@ -6,7 +6,12 @@ interface Props {}
 
 const Page500 = (props: Props) => {
   return (
-    <Flex direction="column" height="100vh" align="center" justify="center">
+    <Flex
+      direction="column"
+      height="100vh"
+      align="center"
+      justifyContent="center"
+    >
       <Heading fontWeight="thin">خطای سمت سرور | ۵۰۰</Heading>
     </Flex>
   );

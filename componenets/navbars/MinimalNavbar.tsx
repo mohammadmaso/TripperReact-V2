@@ -58,7 +58,7 @@ const MinimalNavBar = (props: any) => {
         borderBottom={1}
         align={'center'}
         position="fixed"
-        justify="space-between"
+        justifyContent="space-between"
         w="100%"
       >
         <Wrap>
@@ -84,7 +84,7 @@ const MinimalNavBar = (props: any) => {
           fontFamily={'heading'}
           color={useColorModeValue('gray.800', 'white')}
         >
-          <Stack justify="center">
+          <Stack justifyContent="center">
             <Link href="/" passHref>
               <Logo height={100} width={180} />
             </Link>

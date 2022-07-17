@@ -29,7 +29,7 @@ function AccessoryCard(props: any) {
   return (
     <Box boxShadow="md" p="2" rounded="md" fontSize="sm" fontWeight="light">
       <Stack spacing="3">
-        <Flex justify="space-between">
+        <Flex justifyContent="space-between">
           <IconButton
             aria-label="حذف"
             rounded="full"

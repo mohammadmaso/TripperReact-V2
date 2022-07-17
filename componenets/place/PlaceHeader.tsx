@@ -38,7 +38,7 @@ export function PlaceHeader() {
 
   return (
     <Flex
-      justify="space-between"
+      justifyContent="space-between"
       position={stickyHeader ? 'fixed' : undefined}
       pt={stickyHeader ? '4' : '2'}
       pb={stickyHeader ? '2' : '2'}
@@ -66,7 +66,7 @@ export function PlaceHeader() {
         </Wrap>
       </Stack>
       <Wrap>
-        <Stack spacing="1" justify="end" color="gray.400">
+        <Stack spacing="1" justifyContent="end" color="gray.400">
           <Wrap spacing="0.5">
             <BiHappyHeartEyes size="20" />
             <BiSmile size="20" />

@@ -40,7 +40,7 @@ export default function WikiCard(props: any) {
               objectFit={'cover'}
             />
           </Box>
-          <Flex direction="column" justify="center" spacing="5">
+          <Flex direction="column" justifyContent="center">
             <Stack spacing="3">
               <Tag
                 colorScheme="green"

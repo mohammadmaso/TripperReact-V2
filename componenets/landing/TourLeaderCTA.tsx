@@ -18,7 +18,7 @@ const TourLeaderCTA = (props: Props) => {
       rounded="md"
     >
       <Center rounded="md" flexDirection="column" h="full" bgColor="#00000040">
-        <Wrap direction="column" justify="center" align="center">
+        <Wrap direction="column" justifyContent="center" align="center">
           <Heading
             textColor="white"
             fontWeight="bold"

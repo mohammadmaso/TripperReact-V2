@@ -522,7 +522,7 @@ export default function EditTravelogueContainer({
             mt="4"
             colorScheme="primary"
             rounded="none"
-            isFullWidth={true}
+            width={'full'}
             leftIcon={<FiSave />}
             isLoading={queries?.updateTripStatus?.loading}
             onClick={onSaveTrip}
@@ -535,7 +535,7 @@ export default function EditTravelogueContainer({
             mt="4"
             colorScheme="red"
             rounded="none"
-            isFullWidth={true}
+            width={'full'}
             leftIcon={<FiRotateCcw />}
             isLoading={queries?.updateTripStatus?.loading}
             onClick={onIgnoreChanges}

@@ -58,7 +58,7 @@ export function PWAInstallPrompt() {
           w="full"
           p="3"
         >
-          <Stack justify="center" textAlign="center" textColor="white">
+          <Stack justifyContent="center" textAlign="center" textColor="white">
             <CloseButton mb="-40px" onClick={cancle} />
             <Image src="/CircleLogo.svg" h="5rem" alt="Logo" onClick={cancle} />
             <Heading fontWeight="bold" fontSize="lg">

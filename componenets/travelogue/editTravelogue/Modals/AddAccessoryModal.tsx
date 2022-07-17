@@ -139,8 +139,8 @@ const AddAccessoryModal = (props: Props) => {
                       fontSize="sm"
                       fontWeight="light"
                     >
-                      <Stack spacing="3" justify="space-between">
-                        <Flex justify="space-between">
+                      <Stack spacing="3" justifyContent="space-between">
+                        <Flex justifyContent="space-between">
                           <Image
                             h="1rem"
                             fit="contain"

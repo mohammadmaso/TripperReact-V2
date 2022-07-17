@@ -127,7 +127,7 @@ export function EditTravelogueHeader(props: Props) {
         zIndex="90"
         // top={stickyHeader ? '60px' : undefined}
         w="full"
-        justify="space-between"
+        justifyContent="space-between"
         align="center"
         direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
       >

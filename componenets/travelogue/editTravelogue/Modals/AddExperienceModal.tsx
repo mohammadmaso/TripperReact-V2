@@ -269,7 +269,8 @@ const AddExperienceModal = (props: Props) => {
 
                   <Divider />
                   <Box
-                    direction="column"
+                    flexDirection={'column'}
+                    // direction="column"
                     p="2"
                     borderWidth="2px"
                     borderRadius="md"
@@ -285,7 +286,7 @@ const AddExperienceModal = (props: Props) => {
                     />
                     <Stack
                       align="center"
-                      justify="center"
+                      justifyContent="center"
                       h="100px"
                       bgColor="gray.100"
                       borderRadius="md"
@@ -303,7 +304,7 @@ const AddExperienceModal = (props: Props) => {
                     </Stack>
                     <Wrap
                       //   columns={{ base: 1, sm: 2, md: 4 }}
-                      justify="center"
+                      justifyContent="center"
                     >
                       {images.map((item) => (
                         <Image

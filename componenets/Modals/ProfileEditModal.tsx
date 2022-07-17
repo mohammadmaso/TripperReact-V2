@@ -250,7 +250,7 @@ const ProfileEditModal = (props: Props) => {
               p="2"
               align="center"
               alignItems="center"
-              justify="center"
+              justifyContent="center"
             >
               <FormControl
                 display="flex"
@@ -509,26 +509,7 @@ const ProfileEditModal = (props: Props) => {
           </Stack>
         </ModalBody>
 
-        <ModalFooter>
-          <Wrap>
-            {/* <Button
-              colorScheme="primary"
-              variant="ghost"
-              mr={3}
-              onClick={props.onClose}
-            >
-              ثبت
-            </Button> */}
-            <Button
-              colorScheme="red"
-              variant="ghost"
-              mr={3}
-              onClick={props.onClose}
-            >
-              انصراف
-            </Button>
-          </Wrap>
-        </ModalFooter>
+        <ModalFooter></ModalFooter>
       </ModalContent>
     </Modal>
   );

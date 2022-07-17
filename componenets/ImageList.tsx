@@ -13,7 +13,8 @@ const ImageList = (props: Props) => {
     <SimpleGrid
       spacing="3"
       columns={{ base: 2, sm: 2, md: 4 }}
-      justify="center"
+      // justifyContent="center"
+      justifyContent="center"
     >
       {props.images.map((item: any) => (
         <ImageCard

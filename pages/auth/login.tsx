@@ -70,7 +70,7 @@ export default function SignIn() {
         <title>تریپر | ورود</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Flex p={8} flex="1" align={'center'} justify={'center'}>
+      <Flex p={8} flex="1" align={'center'} justifyContent={'center'}>
         <Stack spacing={6} w={'full'} maxW={'md'}>
           {/* <TextLogo height="100" width="200" /> */}
           <CircleLogo />
@@ -100,7 +100,7 @@ export default function SignIn() {
               <Stack
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
-                justify={'space-between'}
+                justifyContent={'space-between'}
                 mt="2"
               >
                 <Link href="/auth/register">ثبت نام</Link>
