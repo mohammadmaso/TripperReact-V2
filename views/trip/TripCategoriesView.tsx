@@ -27,7 +27,7 @@ const TripCategoriesView = (props: Props) => {
     return <TripCategoryList categories={data?.allTripCategories?.edges} />;
   }
   return (
-    <Stack>
+    <Stack mt={'2'}>
       <SectionHeader
         title="موضوع سفرنامه‌ها "
         subTitle="مسافران چه سفرهایی رفتنه‌اند"
