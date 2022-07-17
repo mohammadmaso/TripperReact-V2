@@ -15,6 +15,7 @@ import {
   Center,
   useToast,
   useDisclosure,
+  Icon,
 } from '@chakra-ui/react';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -35,7 +36,7 @@ import ApiLoading from '../ApiLoading';
 import TravelogueReview from './TravelogueReview';
 
 import EmptyResult from '../EmptyResult';
-import { BiComment, BiCommentAdd } from 'react-icons/bi';
+import { BiComment, BiCommentAdd, BiPlus, BiPlusCircle } from 'react-icons/bi';
 import useIsSignedIn from '../../hooks/useIsSignedIn';
 import AddReviewModal from '../Modals/AddReviewModal';
 import ImageGallery, { IImage } from '../ImageGallery';
@@ -209,8 +210,22 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             {/* <Button size="sm" onClick={actions.getReviews}>
               مشاهده
             </Button> */}
+            {/* <Button
+              colorScheme="primary"
+              w="fit-content"
+              rounded="full"
+              fontWeight="light"
+              variant="solid"
+              leftIcon={<BiPlusCircle />}
+              onClick={() => handleAddReviewClick()}
+            ></Button> */}
+            <Icon
+              as={BiPlusCircle}
+              onClick={() => handleAddReviewClick()}
+              color="primary"
+            />
           </Wrap>
-          <Center>
+          {/* <Center>
             <Button
               colorScheme="primary"
               w="fit-content"
@@ -222,7 +237,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             >
               ارسال نقد و بررسی
             </Button>
-          </Center>
+          </Center> */}
           {queries.reviewsLazyQuery?.loading ? (
             <ApiLoading />
           ) : (
