@@ -26,7 +26,7 @@ export default function TripCarousal(props: Props): ReactElement {
     autoplay: true,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1261,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
