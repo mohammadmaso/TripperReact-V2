@@ -39,7 +39,7 @@ const ProfileTabs = (props: Props) => {
         overflowY="hidden"
         mx="2"
       >
-        {props.isSelf && (
+        {/* {props.isSelf && (
           <Tab onClick={() => props.actions.getUnpublishedTrips()}>
             تور‌های ثبت‌نامی
           </Tab>
@@ -58,7 +58,7 @@ const ProfileTabs = (props: Props) => {
           <Tab onClick={() => props.actions.getUnpublishedTrips()}>
             تور‌های برگزار شده
           </Tab>
-        )}
+        )} */}
         <Tab id="trips">سفرنامه‌ها</Tab>
         {props.isSelf && (
           <Tab onClick={() => props.actions.getUnpublishedTrips()}>
