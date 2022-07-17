@@ -24,7 +24,7 @@
     "**/*.ts",
     "**/*.tsx",
     "graphql/ApolloLink.ts",
-    "componenets/ChakraReactSelect.js"
+    "components/ChakraReactSelect.js"
   ],
   "exclude": [
     "node_modules"

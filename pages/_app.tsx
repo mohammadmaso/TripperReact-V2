@@ -13,8 +13,8 @@ import Fonts from '../theme/Font';
 
 import { ApolloProvider } from '@apollo/client';
 
-import { PWAInstallPrompt } from '../componenets/PWAInstallPrompt';
-
+import { PWAInstallPrompt } from '../components/PWAInstallPrompt';
+import StickyBanner from '../components/sticky-banner';
 import { client } from '../graphql/ApolloLink';
 // import setRTLTextPlugin from 'react-map-gl';
 
@@ -35,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ApolloProvider client={client}>
         <Fonts />
         <PWAInstallPrompt />
+        <StickyBanner />
         <Component {...pageProps} />
       </ApolloProvider>
     </ChakraProvider>
