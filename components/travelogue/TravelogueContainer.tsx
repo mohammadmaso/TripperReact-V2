@@ -53,6 +53,10 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
 
   const lighBox = useDisclosure();
 
+  useEffect(() => {
+    actions.getReviews;
+  }, []);
+
   const [imageIdToShow, setImageIdToShow] = useState<string>('0');
 
   const experiencesEdges = data.trip?.experiences?.edges.map(
@@ -202,9 +206,9 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
           <Wrap align="center">
             <BiComment />
             <Text fontWeight="extrabold">نقد و بررسی‌ها</Text>
-            <Button size="sm" onClick={actions.getReviews}>
+            {/* <Button size="sm" onClick={actions.getReviews}>
               مشاهده
-            </Button>
+            </Button> */}
           </Wrap>
           <Center>
             <Button
