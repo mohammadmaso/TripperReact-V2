@@ -27,7 +27,7 @@ export default function Home() {
         <TourLeaderCTA />
         {/* <ToureCard1 /> */}
         {/* <CallToActionWithVideo /> */}
-        <TourCategoriesView />
+        {/* <TourCategoriesView /> */}
         <LastTripsView />
         <TripCategoriesView />
         {/* <TriAngleNatureBanner /> */}
