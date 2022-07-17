@@ -261,7 +261,7 @@ const ProfileHeader = ({
         </Stack>
 
         <Stack direction={'row'} justifyContent={'center'} spacing={6}>
-          {rest.isTourLeader && (
+          {/* {rest.isTourLeader && (
             <Stack cursor="pointer" spacing={0} align={'center'}>
               <Text fontWeight={600}>
                 {isSelf
@@ -274,7 +274,7 @@ const ProfileHeader = ({
                 تور موفق
               </Text>
             </Stack>
-          )}
+          )} */}
           <Stack spacing={0} align={'center'}>
             <Text fontWeight={600}>{data.trips?.edges?.length}</Text>
             <Text fontSize={'sm'} color={'gray.500'}>
