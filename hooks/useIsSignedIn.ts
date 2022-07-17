@@ -10,7 +10,7 @@ const router = useRouter();
 const { data, loading } = useMeQuery();
   
 
-  const isSignedIn = (data?.me?.username ? true : false) 
+  const isSignedIn = (data?.me?.id ? true : false) 
 
 
   const goToSignUp = () =>{ 

@@ -43,6 +43,8 @@ const NavBarUserView = (props: Props) => {
 
   const { loading, error, data } = useMeQuery();
 
+  console.log(error);
+
   const signOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh-token');

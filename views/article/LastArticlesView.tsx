@@ -19,7 +19,7 @@ const LastArticlesView = (props: Props) => {
     return <ApiError />;
   }
   return (
-    <Stack>
+    <Stack pt="2">
       <SectionHeader
         title="آخرین مقاله‌ها"
         subTitle="در وبلاگ تریپر یاد بگیرید"
