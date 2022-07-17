@@ -17,6 +17,8 @@ import { PWAInstallPrompt } from '../components/PWAInstallPrompt';
 import StickyBanner from '../components/sticky-banner';
 import { client } from '../graphql/ApolloLink';
 // import setRTLTextPlugin from 'react-map-gl';
+import NProgress from 'nprogress';
+import Router from 'next/router';
 
 import { setRTLTextPlugin } from 'mapbox-gl';
 
@@ -28,6 +30,10 @@ import { setRTLTextPlugin } from 'mapbox-gl';
 //   // lazy: only load when the map first encounters Hebrew or Arabic text
 //   true
 // );
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

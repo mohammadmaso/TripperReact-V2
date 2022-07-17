@@ -55,7 +55,7 @@ export default function TripSmallCard({ data }: Props) {
 
   return (
     // <Link href={`/travelogues/${data.id}`} passHref>
-    <Center py={6} m={2} textColor="white" textAlign="right" cursor="pointer">
+    <Box py={6} m={2} textColor="white">
       <Box
         bg={useColorModeValue('white', 'gray.900')}
         boxShadow={'md'}
@@ -66,7 +66,7 @@ export default function TripSmallCard({ data }: Props) {
         h="300px"
         position="relative"
         transition={'all .3s ease'}
-        _hover={{ transform: 'scale(1.1,1.1)' }}
+        _hover={{ transform: 'scale(1.05,1.05)' }}
       >
         <Flex
           position="absolute"
@@ -80,7 +80,12 @@ export default function TripSmallCard({ data }: Props) {
           p={3}
           py={4}
         >
-          <Flex textColor="white" justifyContent="flex-start">
+          <Flex
+            flex={'10'}
+            textColor="white"
+            justifyContent="flex-start"
+            cursor="pointer"
+          >
             <Avatar
               showBorder
               size="md"
@@ -89,7 +94,12 @@ export default function TripSmallCard({ data }: Props) {
               src={data.author?.avatar}
               // alt={data.author?.username}
             />
-            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+            <Stack
+              direction={'column'}
+              spacing={0}
+              fontSize={'sm'}
+              alignItems="flex-start"
+            >
               <Text mr="1" textAlign="right" fontWeight={400}>
                 {data.author?.username}
               </Text>
@@ -107,9 +117,14 @@ export default function TripSmallCard({ data }: Props) {
               </Wrap>
             </Stack>
           </Flex>
-          <Stack justifyContent="flex-start" alignItems="flex-end">
+          <Stack
+            justifyContent="flex-end"
+            alignItems="flex-end"
+            cursor="pointer"
+            flex="4"
+          >
             <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
-              <Text fontSize="sm">{likeCount}</Text>
+              <Text fontSize="xs">{likeCount}</Text>
               <Wrap
                 spacing="0.5"
                 transition={'all .3s ease'}
@@ -125,7 +140,7 @@ export default function TripSmallCard({ data }: Props) {
               </Wrap>
             </Wrap>
             <Wrap spacing="1" justifyItems="center" alignItems="flex-end">
-              <Text fontSize="sm">{data.viewsCount}</Text>
+              <Text fontSize="xs">{data.viewsCount}</Text>
               <Icon as={FiEye} />
             </Wrap>
           </Stack>
@@ -139,32 +154,34 @@ export default function TripSmallCard({ data }: Props) {
           fallbackSrc="images/placeholder.png"
         />
         <Link href={`/travelogues/${data.id}`} passHref>
-          <Flex
-            position="absolute"
-            bottom="0"
-            right="0"
-            bgGradient="linear(to-t, #000000,#ffffff00)"
-            height="50%"
-            width="full"
-            align="flex-start"
-            justifyContent="flex-end"
-            p="3"
-            direction="column"
-          >
-            <Text fontWeight={500}>{data.title}</Text>
-            <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
-              <Wrap align="center" spacing="1">
-                <TimeIcon h="3.5" w="3.5" />
-                <Text>{getDays(data.startDate, data.endDate)}</Text>
+          <Box width={'full'} cursor="pointer">
+            <Flex
+              position="absolute"
+              bottom="0"
+              right="0"
+              bgGradient="linear(to-t, #000000,#ffffff00)"
+              height="50%"
+              width="full"
+              alignItems="flex-start"
+              justifyContent="flex-end"
+              p="3"
+              direction="column"
+            >
+              <Text fontWeight={500}>{data.title}</Text>
+              <Wrap fontSize="sm" fontWeight="light" align="center" spacing="3">
+                <Wrap align="center" spacing="1">
+                  <TimeIcon h="3.5" w="3.5" />
+                  <Text>{getDays(data.startDate, data.endDate)}</Text>
+                </Wrap>
+                <Wrap align="center" spacing="1">
+                  <FiMapPin />
+                  <Text>{`${data.country?.name} - ${data.province?.name}`}</Text>
+                </Wrap>
               </Wrap>
-              <Wrap align="center" spacing="1">
-                <FiMapPin />
-                <Text>{`${data.country?.name} - ${data.province?.name}`}</Text>
-              </Wrap>
-            </Wrap>
-          </Flex>
+            </Flex>
+          </Box>
         </Link>
       </Box>
-    </Center>
+    </Box>
   );
 }

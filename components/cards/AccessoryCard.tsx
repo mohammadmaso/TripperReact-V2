@@ -1,4 +1,13 @@
-import { Box, Stack, Wrap, Text, Image, Flex, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Stack,
+  Wrap,
+  Text,
+  Image,
+  Flex,
+  Button,
+  Link,
+} from '@chakra-ui/react';
 import React from 'react';
 import { FiBookmark, FiShoppingBag } from 'react-icons/fi';
 
@@ -20,15 +29,19 @@ function AccessoryCard(props: any) {
 
         <Image fit="contain" w="full" src={props.imageLink} alt="accessories" />
         <Text px="3">{props.name}</Text>
-        <Button
+        {/* <Link
+          isExternal
           size="sm"
+          as={Button}
+          variant="ghost"
           fontWeight="light"
-          variant="outline"
-          colorScheme="red"
-          leftIcon={<FiShoppingBag />}
+          // variant="outline"
+          color="red"
+          href={`https://www.digikala.com/product/dkp-${props.id}`}
         >
-          خرید در دیجیکالا
-        </Button>
+          <FiShoppingBag />
+          خرید از دیجیکالا
+        </Link> */}
       </Stack>
     </Box>
   );

@@ -20,7 +20,7 @@ interface Props {
 
 const TravelogueAccessories = (props: Props) => {
   return (
-    <Stack>
+    <Stack pb="5">
       <Wrap align="center">
         <FiShoppingBag />
         <Text fontWeight="extrabold">تجهیزات</Text>
