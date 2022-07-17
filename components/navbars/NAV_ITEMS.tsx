@@ -58,33 +58,33 @@ export const NAV_ITEMS: Array<NavItem> = [
   //   // href: '/fellow-traveler',
   //   badge: <ComingSoonBadge />,
   // },
+  // {
+  //   label: 'تور',
+  //   icon: <MdCardTravel />,
+  //   href: '/tours',
+  //   children: [
+  //     {
+  //       label: 'نقشه تور‌ها',
+  //       icon: <FiMap />,
+  //       subLabel: 'روی نقشه تور خود را پیدا کنید',
+  //       href: '/tourmap',
+  //     },
+  //     {
+  //       label: 'تمام تورها',
+  //       icon: <FiFeather />,
+  //       subLabel: 'تمامی تورها با دقیق‌ترین جزییات',
+  //       href: '/tours',
+  //     },
+  //     {
+  //       label: 'تور لیدرها',
+  //       icon: <RiMapPinUserLine />,
+  //       subLabel: 'تورلیدرهای  احراز هویت شده تریپر',
+  //       href: '/tourguids',
+  //     },
+  //   ],
+  // },
   {
-    label: 'تور',
-    icon: <MdCardTravel />,
-    href: '/tours',
-    children: [
-      {
-        label: 'نقشه تور‌ها',
-        icon: <FiMap />,
-        subLabel: 'روی نقشه تور خود را پیدا کنید',
-        href: '/tourmap',
-      },
-      {
-        label: 'تمام تورها',
-        icon: <FiFeather />,
-        subLabel: 'تمامی تورها با دقیق‌ترین جزییات',
-        href: '/tours',
-      },
-      {
-        label: 'تور لیدرها',
-        icon: <RiMapPinUserLine />,
-        subLabel: 'تورلیدرهای  احراز هویت شده تریپر',
-        href: '/tourguids',
-      },
-    ],
-  },
-  {
-    label: 'بلاگ',
+    label: 'دانشنامه‌ی سفر',
     icon: <RiArticleLine />,
     href: '/articles',
   },
