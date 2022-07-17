@@ -70,7 +70,7 @@ const ProfileTabs = (props: Props) => {
       </TabList>
 
       <TabPanels>
-        {props.isSelf && (
+        {/* {props.isSelf && (
           <TabPanel>
             <MyToursTab />
           </TabPanel>
@@ -85,7 +85,7 @@ const ProfileTabs = (props: Props) => {
             <div></div>
           </TabPanel>
         )}
-        {props.isTourLeader && <TabPanel></TabPanel>}
+        {props.isTourLeader && <TabPanel></TabPanel>} */}
 
         <TabPanel>
           <TripList
