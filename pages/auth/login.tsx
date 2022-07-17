@@ -50,7 +50,7 @@ export default function SignIn() {
 
   const [signIn, { loading, error, data }] = useTokenAuthMutation({
     onCompleted: (data) => {
-      setTokens(data, () => router.push('/'));
+      setTokens(data, () => router.push('/travelogues'));
     },
   });
 
