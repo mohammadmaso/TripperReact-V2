@@ -16,17 +16,18 @@ import { ApolloProvider } from '@apollo/client';
 import { PWAInstallPrompt } from '../componenets/PWAInstallPrompt';
 
 import { client } from '../graphql/ApolloLink';
+// import setRTLTextPlugin from 'react-map-gl';
+
 import { setRTLTextPlugin } from 'mapbox-gl';
 
-setRTLTextPlugin(
-  // find out the latest version at https://www.npmjs.com/package/@mapbox/mapbox-gl-rtl-text
-  'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
-  (err) => console.log(err),
-  // lazy: only load when the map first encounters Hebrew or Arabic text
-  true
-);
-
-// setRTLTextPlugin('mapbox-gl-rtl-text.js');
+// TODO: Move this to external map provider component
+// setRTLTextPlugin(
+//   // find out the latest version at https://www.npmjs.com/package/@mapbox/mapbox-gl-rtl-text
+//   '/mapbox-gl-rtl-text.js',
+//   (err) => console.log(err),
+//   // lazy: only load when the map first encounters Hebrew or Arabic text
+//   true
+// );
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
