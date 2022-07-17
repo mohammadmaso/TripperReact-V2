@@ -1,7 +1,7 @@
 import React from 'react';
-import CategoryCarousal from '../../componenets/carousals/CategoryCarousal';
-import GroupTripCarousal from '../../componenets/carousals/GroupTripCarousal';
-import CallToActionCreateGroupTrip from '../../componenets/landing/CallToActionCreateGroupTrip';
+import CategoryCarousal from '../../components/carousals/CategoryCarousal';
+import GroupTripCarousal from '../../components/carousals/GroupTripCarousal';
+import CallToActionCreateGroupTrip from '../../components/landing/CallToActionCreateGroupTrip';
 import BaseLayout from '../../layouts/BaseLayout';
 import TripCategoriesView from '../../views/trip/TripCategoriesView';
 

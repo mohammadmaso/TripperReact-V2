@@ -8,7 +8,7 @@ import ReactMapGL, {
 } from 'react-map-gl';
 import React, { useState } from 'react';
 import { FiMap } from 'react-icons/fi';
-import SectionHeader from '../componenets/SectionHeader';
+import SectionHeader from '../components/SectionHeader';
 import BaseLayout from '../layouts/BaseLayout';
 
 interface Props {}

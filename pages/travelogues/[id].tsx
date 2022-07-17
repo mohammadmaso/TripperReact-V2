@@ -14,17 +14,17 @@ import {
 import React, { useEffect, useRef, useState } from 'react';
 
 import BaseLayout from '../../layouts/BaseLayout';
-import { TravelogueAccomodations } from '../../componenets/travelogue/TravelogueAccomodations';
-import { TravelogueMap } from '../../componenets/travelogue/TravelogueMap';
-import { TravelogueHeader } from '../../componenets/travelogue/TravelogueHeader';
-import { TravelogueGallery } from '../../componenets/travelogue/TravelogueGallery';
-import { TravelogueDescription } from '../../componenets/travelogue/TravelogueDescription';
-import TravelogueCompanions from '../../componenets/travelogue/TravelogueCompanions';
-import { TravelogueExperiences } from '../../componenets/travelogue/TravelogueExperiences';
-import { TraveloguePlaces } from '../../componenets/travelogue/TraveloguePlaces';
-import TravelogueAccessories from '../../componenets/travelogue/TravelogueAccessories';
-import { Transfers } from '../../componenets/travelogue/TravelogueTransfers';
-import TravelogueActivities from '../../componenets/travelogue/TravelogueActivities';
+import { TravelogueAccomodations } from '../../components/travelogue/TravelogueAccomodations';
+import { TravelogueMap } from '../../components/travelogue/TravelogueMap';
+import { TravelogueHeader } from '../../components/travelogue/TravelogueHeader';
+import { TravelogueGallery } from '../../components/travelogue/TravelogueGallery';
+import { TravelogueDescription } from '../../components/travelogue/TravelogueDescription';
+import TravelogueCompanions from '../../components/travelogue/TravelogueCompanions';
+import { TravelogueExperiences } from '../../components/travelogue/TravelogueExperiences';
+import { TraveloguePlaces } from '../../components/travelogue/TraveloguePlaces';
+import TravelogueAccessories from '../../components/travelogue/TravelogueAccessories';
+import { Transfers } from '../../components/travelogue/TravelogueTransfers';
+import TravelogueActivities from '../../components/travelogue/TravelogueActivities';
 import TripView from '../../views/trip/TripView';
 import router, { useRouter } from 'next/router';
 import { client } from '../../graphql/ApolloLink';

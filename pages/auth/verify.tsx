@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import TextLogo from '../../componenets/logos/TextLogo';
+import TextLogo from '../../components/logos/TextLogo';
 import BeatLoader from 'react-spinners/BeatLoader';
 
 import { useMutation } from '@apollo/client';
@@ -29,7 +29,7 @@ import {
   VerifySmsMutationVariables,
 } from '../../graphql/generated/types';
 import Head from 'next/head';
-import CircleLogo from '../../componenets/logos/CircleLogo';
+import CircleLogo from '../../components/logos/CircleLogo';
 
 export default function SignIn() {
   const [code, setCode] = useState('');

@@ -12,12 +12,12 @@ import {
   useEventListener,
 } from '@chakra-ui/react';
 import React from 'react';
-import PlaceActivities from '../../componenets/place/PlaceActivities';
-import { PlaceDescription } from '../../componenets/place/PlaceDescription';
-import PlaceFacilities from '../../componenets/place/PlaceFacilities';
-import { PlaceGallery } from '../../componenets/place/PlaceGallery';
-import { PlaceHeader } from '../../componenets/place/PlaceHeader';
-import { PlaceInfo } from '../../componenets/place/PlaceInfo';
+import PlaceActivities from '../../components/place/PlaceActivities';
+import { PlaceDescription } from '../../components/place/PlaceDescription';
+import PlaceFacilities from '../../components/place/PlaceFacilities';
+import { PlaceGallery } from '../../components/place/PlaceGallery';
+import { PlaceHeader } from '../../components/place/PlaceHeader';
+import { PlaceInfo } from '../../components/place/PlaceInfo';
 
 import BaseLayout from '../../layouts/BaseLayout';
 

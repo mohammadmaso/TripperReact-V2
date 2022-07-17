@@ -3,9 +3,9 @@ import React from 'react';
 import useIsSignedIn from '../hooks/useIsSignedIn';
 
 import NavBarUserView from './NavBarUserView';
-import NavBar from '../componenets/navbars/Navbar';
-import NavButtons from '../componenets/navbars/NavButtons';
-import MinimalNavBar from '../componenets/navbars/MinimalNavbar';
+import NavBar from '../components/navbars/Navbar';
+import NavButtons from '../components/navbars/NavButtons';
+import MinimalNavBar from '../components/navbars/MinimalNavbar';
 
 const MinimalNavBarView = (props: any) => {
   const { isSignedIn } = useIsSignedIn();

@@ -3,16 +3,16 @@ import { Wrap, Divider, Flex, Stack, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import ApiError from '../../componenets/ApiError';
-import ApiLoading from '../../componenets/ApiLoading';
-import ArticleAccessories from '../../componenets/article/ArticleAccessories';
-import ArticleActivities from '../../componenets/article/ArticleActivities';
-import { ArticleContent } from '../../componenets/article/ArticleContent';
-import { ArticleDescription } from '../../componenets/article/ArticleDescription';
-import { ArticleHeader } from '../../componenets/article/ArticleHeader';
-import { ArticlePlaces } from '../../componenets/article/ArticlePlaces';
-import TravelogueContainer from '../../componenets/travelogue/TravelogueContainer';
-import { TravelogueHeader } from '../../componenets/travelogue/TravelogueHeader';
+import ApiError from '../../components/ApiError';
+import ApiLoading from '../../components/ApiLoading';
+import ArticleAccessories from '../../components/article/ArticleAccessories';
+import ArticleActivities from '../../components/article/ArticleActivities';
+import { ArticleContent } from '../../components/article/ArticleContent';
+import { ArticleDescription } from '../../components/article/ArticleDescription';
+import { ArticleHeader } from '../../components/article/ArticleHeader';
+import { ArticlePlaces } from '../../components/article/ArticlePlaces';
+import TravelogueContainer from '../../components/travelogue/TravelogueContainer';
+import { TravelogueHeader } from '../../components/travelogue/TravelogueHeader';
 import { client } from '../../graphql/ApolloLink';
 import {
   namedOperations,

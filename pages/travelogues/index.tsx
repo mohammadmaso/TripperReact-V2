@@ -1,7 +1,7 @@
 import React from 'react';
-import WikiCarusal from '../../componenets/carousals/WikiCarousal';
-import WriteTravelogueCTA from '../../componenets/landing/WriteTravelogueCTA';
-import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
+import WikiCarusal from '../../components/carousals/WikiCarousal';
+import WriteTravelogueCTA from '../../components/landing/WriteTravelogueCTA';
+import { WikiCategoryList } from '../../components/lists/WikiCategoryList';
 
 import BaseLayout from '../../layouts/BaseLayout';
 import ArticleCategoriesView from '../../views/article/ArticleCategoriesView';

@@ -1,7 +1,7 @@
 import { Box, Wrap } from '@chakra-ui/react';
 import React from 'react';
-import TripCategoryList from '../../componenets/lists/TripCategoryList';
-import DevelopingPortal from '../../componenets/Modals/DevelopingModal';
+import TripCategoryList from '../../components/lists/TripCategoryList';
+import DevelopingPortal from '../../components/Modals/DevelopingModal';
 
 import MinimalLayout from '../../layouts/MinimalLayout';
 

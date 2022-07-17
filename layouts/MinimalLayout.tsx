@@ -1,9 +1,9 @@
 import { Box } from '@chakra-ui/react';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
-import MainFooter from '../componenets/footers/MainFooter';
-import MinimalFooter from '../componenets/footers/MinimalFooter';
-import MinimalNavBar from '../componenets/navbars/MinimalNavbar';
+import MainFooter from '../components/footers/MainFooter';
+import MinimalFooter from '../components/footers/MinimalFooter';
+import MinimalNavBar from '../components/navbars/MinimalNavbar';
 import MinimalNavBarView from '../views/MinimalNavBarView';
 import NavBarView from '../views/NavBarView';
 // import NavBarView from '../views/NavBarView';

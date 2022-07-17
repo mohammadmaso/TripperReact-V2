@@ -13,7 +13,7 @@ import {
   Center,
   Wrap,
 } from '@chakra-ui/react';
-import CircleLogo from '../../../componenets/logos/CircleLogo';
+import CircleLogo from '../../../components/logos/CircleLogo';
 import useIsSignedIn from '../../../hooks/useIsSignedIn';
 import { useIsTourLeader } from '../../../hooks/useIsTourLeader';
 import Link from 'next/link';

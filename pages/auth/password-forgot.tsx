@@ -17,18 +17,18 @@ import {
 } from '@chakra-ui/react';
 import React, { useContext, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import TextLogo from '../../componenets/logos/TextLogo';
+import TextLogo from '../../components/logos/TextLogo';
 import { useRouter } from 'next/router';
 import { useFormikContext, Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 
 import Head from 'next/head';
-import TermOfUseModal from '../../componenets/Modals/TermOfUseModal';
+import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import {
   useForgotPasswordSmsMutation,
   useRegisterSmsMutation,
 } from '../../graphql/generated/types';
-import CircleLogo from '../../componenets/logos/CircleLogo';
+import CircleLogo from '../../components/logos/CircleLogo';
 
 export default function SingUp() {
   const router = useRouter();

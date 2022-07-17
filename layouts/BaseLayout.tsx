@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
-import MainFooter from '../componenets/footers/MainFooter';
+import MainFooter from '../components/footers/MainFooter';
 import NavBarView from '../views/NavBarView';
 // import NavBarView from '../views/NavBarView';
 

@@ -16,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import TextLogo from '../../componenets/logos/TextLogo';
+import TextLogo from '../../components/logos/TextLogo';
 import Link from 'next/link';
 
 import { useRouter } from 'next/router';
@@ -25,7 +25,7 @@ import {
   TokenAuthMutation,
   useTokenAuthMutation,
 } from '../../graphql/generated/types';
-import CircleLogo from '../../componenets/logos/CircleLogo';
+import CircleLogo from '../../components/logos/CircleLogo';
 
 export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState('');

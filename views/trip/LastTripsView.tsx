@@ -1,7 +1,7 @@
 import { Spinner, Stack } from '@chakra-ui/react';
 import React from 'react';
-import WikiCarusal from '../../componenets/carousals/WikiCarousal';
-import ApiLoading from '../../componenets/ApiLoading';
+import WikiCarusal from '../../components/carousals/WikiCarousal';
+import ApiLoading from '../../components/ApiLoading';
 import {
   AllTripDocument,
   AllTripQuery,
@@ -10,9 +10,9 @@ import {
   useAllTripQuery,
   useLikeTripMutation,
 } from '../../graphql/generated/types';
-import ApiError from '../../componenets/ApiError';
-import TripCarousal from '../../componenets/carousals/TripCarousal';
-import SectionHeader from '../../componenets/SectionHeader';
+import ApiError from '../../components/ApiError';
+import TripCarousal from '../../components/carousals/TripCarousal';
+import SectionHeader from '../../components/SectionHeader';
 
 interface Props {}
 

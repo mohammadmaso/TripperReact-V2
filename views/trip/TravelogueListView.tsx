@@ -1,10 +1,10 @@
 import { Wrap, Divider, Button, Stack } from '@chakra-ui/react';
 import React from 'react';
 import { FiArrowDown } from 'react-icons/fi';
-import ApiError from '../../componenets/ApiError';
-import ApiLoading from '../../componenets/ApiLoading';
-import TripListCard from '../../componenets/cards/TripListCard';
-import { TravelogueListHeader } from '../../componenets/travelogue/TravelogueListHeader';
+import ApiError from '../../components/ApiError';
+import ApiLoading from '../../components/ApiLoading';
+import TripListCard from '../../components/cards/TripListCard';
+import { TravelogueListHeader } from '../../components/travelogue/TravelogueListHeader';
 import {
   TripType,
   useAllProvincesOfCountryLazyQuery,

@@ -1,6 +1,6 @@
 import React from 'react';
-import WikiCarusal from '../../componenets/carousals/WikiCarousal';
-import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
+import WikiCarusal from '../../components/carousals/WikiCarousal';
+import { WikiCategoryList } from '../../components/lists/WikiCategoryList';
 
 import BaseLayout from '../../layouts/BaseLayout';
 import ArticleCategoriesView from '../../views/article/ArticleCategoriesView';

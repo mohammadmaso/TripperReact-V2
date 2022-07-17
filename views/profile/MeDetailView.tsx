@@ -1,7 +1,7 @@
 import { Spinner } from '@chakra-ui/react';
 import React from 'react';
-import WikiCarusal from '../../componenets/carousals/WikiCarousal';
-import ApiLoading from '../../componenets/ApiLoading';
+import WikiCarusal from '../../components/carousals/WikiCarousal';
+import ApiLoading from '../../components/ApiLoading';
 import {
   namedOperations,
   UpdateProfileInput,
@@ -20,8 +20,8 @@ import {
   useUpdateUserMutation,
   useUsernameChangeMutation,
 } from '../../graphql/generated/types';
-import ApiError from '../../componenets/ApiError';
-import ProfileContainer from '../../componenets/profile/ProfileContainer';
+import ApiError from '../../components/ApiError';
+import ProfileContainer from '../../components/profile/ProfileContainer';
 import { object } from 'yup/lib/locale';
 
 interface Props {}

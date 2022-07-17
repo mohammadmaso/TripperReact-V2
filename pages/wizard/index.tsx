@@ -1,5 +1,5 @@
 import React from 'react';
-import DevelopingPortal from '../../componenets/Modals/DevelopingModal';
+import DevelopingPortal from '../../components/Modals/DevelopingModal';
 
 import MinimalLayout from '../../layouts/MinimalLayout';
 

@@ -1,11 +1,11 @@
 import { Spinner, Stack } from '@chakra-ui/react';
 import React from 'react';
-import ApiError from '../../componenets/ApiError';
-import ApiLoading from '../../componenets/ApiLoading';
-import CategoryCarousal from '../../componenets/carousals/CategoryCarousal';
-import TripCategoryList from '../../componenets/lists/TripCategoryList';
-import { WikiCategoryList } from '../../componenets/lists/WikiCategoryList';
-import SectionHeader from '../../componenets/SectionHeader';
+import ApiError from '../../components/ApiError';
+import ApiLoading from '../../components/ApiLoading';
+import CategoryCarousal from '../../components/carousals/CategoryCarousal';
+import TripCategoryList from '../../components/lists/TripCategoryList';
+import { WikiCategoryList } from '../../components/lists/WikiCategoryList';
+import SectionHeader from '../../components/SectionHeader';
 import {
   useAllArticleCategoryiesQuery,
   useAllTourCategoriesQuery,

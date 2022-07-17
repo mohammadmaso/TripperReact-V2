@@ -16,7 +16,7 @@ import { BiLocationPlus } from 'react-icons/bi';
 import { FiPhone, FiLink } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { SocialButtons } from '../componenets/SocialButtons';
+import { SocialButtons } from '../components/SocialButtons';
 
 import BaseLayout from '../layouts/BaseLayout';
 

@@ -24,13 +24,13 @@ import React, { useContext } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
-import NavProfile from '../componenets/navbars/NavProfile';
+import NavProfile from '../components/navbars/NavProfile';
 import { useMeQuery } from '../graphql/generated/types';
 import { BeatLoader } from 'react-spinners';
 import { fromPromise } from '@apollo/client';
 import { getNewToken } from '../graphql/ApolloLink';
 import { BiError } from 'react-icons/bi';
-import NavButtons from '../componenets/navbars/NavButtons';
+import NavButtons from '../components/navbars/NavButtons';
 
 interface Props {
   minimal?: boolean;

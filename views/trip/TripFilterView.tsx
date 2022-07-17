@@ -1,8 +1,8 @@
 import React from 'react';
-import ApiError from '../../componenets/ApiError';
-import ApiLoading from '../../componenets/ApiLoading';
-import WikiCarusal from '../../componenets/carousals/WikiCarousal';
-import WikiList from '../../componenets/lists/WikiList';
+import ApiError from '../../components/ApiError';
+import ApiLoading from '../../components/ApiLoading';
+import WikiCarusal from '../../components/carousals/WikiCarousal';
+import WikiList from '../../components/lists/WikiList';
 import { useAllArticleQuery } from '../../graphql/generated/types';
 
 interface Props {

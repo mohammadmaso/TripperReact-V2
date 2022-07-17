@@ -2,10 +2,10 @@ import { useEventListener, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import ApiError from '../../componenets/ApiError';
-import ApiLoading from '../../componenets/ApiLoading';
-import EditTravelogueContainer from '../../componenets/travelogue/editTravelogue/EditTravelogueContainer';
-import { EditTravelogueHeader } from '../../componenets/travelogue/editTravelogue/EditTravelogueHeader';
+import ApiError from '../../components/ApiError';
+import ApiLoading from '../../components/ApiLoading';
+import EditTravelogueContainer from '../../components/travelogue/editTravelogue/EditTravelogueContainer';
+import { EditTravelogueHeader } from '../../components/travelogue/editTravelogue/EditTravelogueHeader';
 import {
   CreateExperienceImageMutationVariables,
   CreateExperinceMutationMutationVariables,
@@ -124,20 +124,22 @@ const EditTravelogueView = ({ id }: Props) => {
     }
   );
 
-  const [deleteTransfer, deleteTransferStatus] =
-    useDeleteSingleTransferMutation({
-      onCompleted: (data) => {
-        if (data.deleteTransfer?.success == true) {
-          toast({
-            title: 'حمل و نثل با موفقیت حذف شد.',
-            status: 'success',
-            duration: 8000,
-            isClosable: true,
-            position: 'top-right',
-          });
-        }
-      },
-    });
+  const [
+    deleteTransfer,
+    deleteTransferStatus,
+  ] = useDeleteSingleTransferMutation({
+    onCompleted: (data) => {
+      if (data.deleteTransfer?.success == true) {
+        toast({
+          title: 'حمل و نثل با موفقیت حذف شد.',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      }
+    },
+  });
 
   const [deleteTrip, deleteTripStatus] = useDeleteTripMutation({
     variables: { deleteTripTripId: id },
@@ -164,38 +166,46 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
-  const [createExperience, createExperienceStatus] =
-    useCreateExperinceMutationMutation({
-      onCompleted: (data) => {
-        toast({
-          title: 'تجربه با موفقیت افزوده شد.',
-          status: 'success',
-          duration: 8000,
-          isClosable: true,
-          position: 'top-right',
-        });
-      },
-      onError: () => {
-        toast({
-          title: 'ساخت تجربه با خطا مواجه شد.',
-          description: 'دوباره امتحان کنید',
-          status: 'error',
-          duration: 8000,
-          isClosable: true,
-          position: 'top-right',
-        });
-      },
-    });
+  const [
+    createExperience,
+    createExperienceStatus,
+  ] = useCreateExperinceMutationMutation({
+    onCompleted: (data) => {
+      toast({
+        title: 'تجربه با موفقیت افزوده شد.',
+        status: 'success',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'ساخت تجربه با خطا مواجه شد.',
+        description: 'دوباره امتحان کنید',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+  });
 
-  const [createExperienceImages, createExperienceImagesStatus] =
-    useCreateExperienceImageMutation();
+  const [
+    createExperienceImages,
+    createExperienceImagesStatus,
+  ] = useCreateExperienceImageMutation();
 
   const countriesQuery = useAllCountriesQuery();
-  const [getProvincesOfCountry, provincesOfCountryQuery] =
-    useAllProvincesOfCountryLazyQuery();
+  const [
+    getProvincesOfCountry,
+    provincesOfCountryQuery,
+  ] = useAllProvincesOfCountryLazyQuery();
 
-  const [getCitiesOfProvince, citiesOfProvinceQuery] =
-    useAllCitiesOfProvinceLazyQuery();
+  const [
+    getCitiesOfProvince,
+    citiesOfProvinceQuery,
+  ] = useAllCitiesOfProvinceLazyQuery();
 
   const [searchUsername, searchUsernameQuery] = useSearchUsernameLazyQuery({
     variables: { first: 10 },
