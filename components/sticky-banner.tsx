@@ -28,7 +28,7 @@ const StickyBanner = (props: Props) => {
       //     })
       //   }
     >
-      <Text as="span" fontWeight={500} fontSize="14px">
+      <Text as="span" fontWeight={'light'} fontSize="xs">
         <Text as="span">
           شما در حال استفاده از نسخه‌ی آزمایشی تریپر هستید.
           <Text as="span" display={['none', 'inline']}>
