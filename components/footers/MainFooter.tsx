@@ -24,6 +24,7 @@ import Link from 'next/link';
 import { ReactNode, useEffect, useRef } from 'react';
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { BiMailSend } from 'react-icons/bi';
+let year = new Date().toLocaleDateString('fa-IR', { year: 'numeric' });
 
 import {
   AiOutlineInstagram,
@@ -215,7 +216,7 @@ export default function LargeWithNewsletter() {
             </Wrap>
             <SocialButtons />
             <Text fontSize="xs" textColor="primary">
-              تمامی حقوق برای تریپر محفوظ است. | ۱۴۰۰ ©
+              تمامی حقوق برای تریپر محفوظ است. | © {year}
             </Text>
           </Stack>
         </SimpleGrid>
