@@ -37,7 +37,7 @@ export default function SingUp() {
 
   const [signUp, { loading, data }] = useRegisterSmsMutation({
     onCompleted: (data) => {
-      // console.log(data.registerSms?.errors);
+      console.log(data.registerSms?.success);
       if (data && data.registerSms?.success) {
         router.push({
           pathname: '/auth/verify',
