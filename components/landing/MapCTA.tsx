@@ -33,7 +33,7 @@ const MapCTA = (props: Props) => {
             fontWeight="extrabold"
             fontSize={['lg', 'lg', '2xl']}
           >
-            تور بعدی خودت رو با دقت انتخاب کن
+            سفر خودت رو با دقیق‌ترین جزییات بساز
           </Heading>
           <Text
             // w="70%"
@@ -41,7 +41,7 @@ const MapCTA = (props: Props) => {
             fontWeight="light"
             fontSize={['sm', 'sm', 'md']}
           >
-            جستجو میان تور‌ها با دقیق‌ترین جزییات...
+            جستجو میان سفرنامه‌‌های دیگران با دقیق‌ترین جزییات...
           </Text>
           {/* <Link href="/auth/tourguid/register" passHref>
             <Button rounded="sm" fontSize="sm" colorScheme="whiteAlpha">
