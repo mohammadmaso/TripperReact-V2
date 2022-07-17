@@ -54,7 +54,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
   const lighBox = useDisclosure();
 
   useEffect(() => {
-    actions.getReviews;
+    actions.getReviews();
   }, []);
 
   const [imageIdToShow, setImageIdToShow] = useState<string>('0');
