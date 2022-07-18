@@ -6320,7 +6320,7 @@ export type TripReviewLikeStatusQuery = { __typename?: 'Query', tripReview?: { _
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserType', id: string, username: string, avatar: string, userType: UserUserType } | null };
+export type MeQuery = { __typename?: 'Query', me?: { __typename?: 'UserType', id: string, username: string, avatar: string } | null };
 
 export type MeTourLeaderQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -8528,7 +8528,6 @@ export const MeDocument = gql`
     id
     username
     avatar
-    userType
   }
 }
     `;
