@@ -120,13 +120,16 @@ export default function SingUp() {
                     <Field name="username">
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
-                          <FormLabel>نام کاربری (اختیاری)</FormLabel>
+                          <FormLabel>نام کاربری</FormLabel>
                           <Input id="username" {...field} type="username" />
                           {/* {data?.registerSms?.errors.username && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.username[0].message}
                             </Text>
                           )} */}
+                          <Box textColor="red">
+                            <ErrorMessage name="username" component="div" />
+                          </Box>
                         </FormControl>
                       )}
                     </Field>
