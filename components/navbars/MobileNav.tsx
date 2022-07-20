@@ -44,8 +44,8 @@ export const MobileNav = ({
           <DrawerCloseButton />
 
           <DrawerHeader>
-            <CircleLogo />
-            <Divider />
+            <CircleLogo height={12} width={12} />
+            <Divider pt={3} />
           </DrawerHeader>
           <DrawerBody>
             <VStack spacing={5} align="flex-start">

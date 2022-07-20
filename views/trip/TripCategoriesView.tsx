@@ -18,7 +18,7 @@ interface Props {
 const TripCategoriesView = (props: Props) => {
   const { data, loading, error } = useAllTripCategoriesQuery();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

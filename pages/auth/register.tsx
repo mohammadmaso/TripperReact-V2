@@ -108,7 +108,12 @@ export default function SingUp() {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>شماره موبایل</FormLabel>
-                          <Input id="phoneNumber" {...field} type="phone" />
+                          <Input
+                            id="phoneNumber"
+                            required
+                            {...field}
+                            type="phone"
+                          />
                           {/* {data?.registerSms?.errors.phoneNumber && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.phoneNumber[0].message}
@@ -121,7 +126,12 @@ export default function SingUp() {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>نام کاربری</FormLabel>
-                          <Input id="username" {...field} type="username" />
+                          <Input
+                            required
+                            id="username"
+                            {...field}
+                            type="username"
+                          />
                           {/* {data?.registerSms?.errors.username && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.username[0].message}
@@ -137,7 +147,12 @@ export default function SingUp() {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>رمزعبور</FormLabel>
-                          <Input {...field} id="password1" type="password" />
+                          <Input
+                            required
+                            {...field}
+                            id="password1"
+                            type="password"
+                          />
                           {/* {data?.registerSms?.errors.password1 && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.password1[0].message}
@@ -150,7 +165,12 @@ export default function SingUp() {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تکرار رمزعبور</FormLabel>
-                          <Input {...field} id="password2" type="password" />
+                          <Input
+                            required
+                            {...field}
+                            id="password2"
+                            type="password"
+                          />
                           {/* {data?.registerSms?.errors.password2 && (
                             <Text mt="1" color="red">
                               {data?.registerSms?.errors.password2[0].message}
@@ -169,7 +189,7 @@ export default function SingUp() {
                       <Field name="acceptTerms">
                         {({ field, form }: { field: any; form: any }) => (
                           <FormControl>
-                            <Checkbox {...field}>
+                            <Checkbox {...field} required>
                               پذیرش{' '}
                               <ChakraLink
                                 textDecoration="underline"

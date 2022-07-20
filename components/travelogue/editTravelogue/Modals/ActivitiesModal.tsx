@@ -95,7 +95,9 @@ const ActivitiesModal = (props: Props) => {
               />
             </InputGroup> */}
             <Divider />
-            {props.queries.allActivititesQuery.loading && <ApiLoading />}
+            {props.queries.allActivititesQuery.loading && (
+              <ApiLoading enhanced={true} />
+            )}
             <SimpleGrid
               spacing="3"
               columns={{ base: 3, sm: 4, md: 4 }}

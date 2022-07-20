@@ -59,7 +59,7 @@ const ProfileDetailView = (props: Props) => {
   // const isFollowedQuery = useIsFollowedQuery({ variables: { followedUserId: props.id } });
 
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

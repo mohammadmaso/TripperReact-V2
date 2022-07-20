@@ -239,7 +239,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
             </Button>
           </Center> */}
           {queries.reviewsLazyQuery?.loading ? (
-            <ApiLoading />
+            <ApiLoading enhanced={true} />
           ) : (
             <Stack>
               {queries.reviewsLazyQuery?.data?.trip?.reviewsOfTrip?.edges

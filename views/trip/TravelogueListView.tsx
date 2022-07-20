@@ -28,7 +28,7 @@ const TravelogueListView = (props: Props) => {
   const categoriesQuery = useAllTripCategoriesQuery();
 
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

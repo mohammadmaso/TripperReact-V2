@@ -19,7 +19,7 @@ interface Props {
 const ActivitiesView = (props: Props) => {
   const { data, loading, error } = useAllActivitiesQuery();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

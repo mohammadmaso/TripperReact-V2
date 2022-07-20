@@ -5,9 +5,11 @@ import {
   Collapse,
   Icon,
   Wrap,
+  Box,
   Link as ChakraLink,
   useColorModeValue,
   useDisclosure,
+  HStack,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
@@ -69,8 +71,8 @@ export const MobileSubNav = ({
         >
           {children &&
             children.map((child) => (
-              <ChakraLink key={child.label} py={2} href={child.href}>
-                <Wrap align="center" spacing="4">
+              <ChakraLink width={'full'} key={child.label} href={child.href}>
+                <Wrap align="center" py={2} spacing="4" width={'full'}>
                   {child.icon}
                   {child.label}
                   {child.badge}

@@ -50,7 +50,7 @@ const MeDetailView = (props: Props) => {
 
   const [likeTrip, likeTripStatus] = useLikeTripMutation();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

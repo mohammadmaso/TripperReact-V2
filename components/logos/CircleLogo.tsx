@@ -1,16 +1,22 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Text, Image } from '@chakra-ui/react';
+import Link from 'next/link';
 
-export default function CircleLogo(props: any) {
+type Props = {
+  height?: number;
+  width?: number;
+};
+export default function CircleLogo(props: Props) {
   return (
-    <Box {...props}>
-      <Image
-        src={'/CircleLogo.svg'}
-        height={props.height ?? 60}
-        width={props.width ?? 60}
-        layout="intrinsic"
-      />
-    </Box>
+    <Link href={'/'}>
+      <Box {...props} cursor="pointer">
+        <Image
+          src={'/CircleLogo.svg'}
+          height={props.height ?? 20}
+          width={props.width ?? 20}
+          alt="Logo"
+        />
+      </Box>
+    </Link>
   );
 }

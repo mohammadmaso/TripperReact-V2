@@ -21,6 +21,8 @@ mutation CreateInitialTrip(
   $createTripTripRelatedInput: TripRelatedInput!
   $createTripProvince: ID!
   $createTripCountry: ID!
+  $startDate: Date
+  $endDate: Date
 ) {
   createTrip(
     tripInput: $createTripTripInput

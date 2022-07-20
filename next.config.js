@@ -1,5 +1,10 @@
 module.exports = {
-  reactStrictMode: false,
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+  webpack5: true,
 }
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -7,17 +12,17 @@ module.exports = {
 // })
 // module.exports = withBundleAnalyzer({})
 
-// const withPWA = require('next-pwa')
-// const runtimeCaching = require('next-pwa/cache')
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
 
-// module.exports = withPWA({
-//   pwa: {
-//     dest: 'public',
-//     runtimeCaching,
-//     register: true,
-//     skipWaiting: true,
-//   },
-// })
+module.exports = withPWA({
+  pwa: {
+    dest: 'public',
+    runtimeCaching,
+    register: true,
+    skipWaiting: true,
+  },
+})
 
 // module.exports = {
 //   images: {

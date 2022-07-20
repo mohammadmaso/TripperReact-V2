@@ -19,7 +19,7 @@ interface Props {
 const TourCategoriesView = (props: Props) => {
   const { data, loading, error } = useAllTourCategoriesQuery();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

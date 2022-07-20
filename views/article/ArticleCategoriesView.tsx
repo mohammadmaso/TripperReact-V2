@@ -8,7 +8,7 @@ import { useAllArticleCategoryiesQuery } from '../../graphql/generated/types';
 const ArticleCategoriesView = () => {
   const { data, loading, error } = useAllArticleCategoryiesQuery();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

@@ -22,9 +22,9 @@ export default function TravelerCard(props: UserType) {
     <Link href={`/profile/${props.username}`} passHref>
       <Center py={6} cursor="pointer">
         <Stack
-          maxW={'270px'}
-          w={'full'}
-          // h={'400px'}
+          w={'270px'}
+          // w={'full'}
+          h={'400px'}
           bg={useColorModeValue('white', 'gray.800')}
           boxShadow={'lg'}
           rounded={'md'}

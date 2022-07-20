@@ -5,13 +5,13 @@ import { useMeQuery } from '../graphql/generated/types';
 
 
 export default function useIsSignedIn() {
-const router = useRouter();
+  const router = useRouter();
 
-const { data, loading } = useMeQuery();
+  const { data, loading } = useMeQuery();
 
-  
+  let isSignedIn
 
-  const isSignedIn = (data?.me?.id ? true : false) 
+  isSignedIn = (data?.me?.id ? true : false) 
 
 
   const goToSignUp = () =>{ 

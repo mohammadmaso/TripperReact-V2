@@ -14,7 +14,7 @@ const TripFilterView = (props: Props) => {
     variables: { allArticleCategory: props.categoryId },
   });
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

@@ -37,7 +37,7 @@ const FollowingsModal = (props: Props) => {
           <ModalCloseButton />
           <ModalBody>
             {props.queries?.followingsQuery?.loading ? (
-              <ApiLoading />
+              <ApiLoading enhanced={true} />
             ) : followingsEdges?.length != 0 ? (
               <Stack spacing="3">
                 {followingsEdges?.map((item: any) => (

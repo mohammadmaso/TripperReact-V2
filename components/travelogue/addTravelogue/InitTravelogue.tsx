@@ -142,6 +142,8 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
               title: '',
               image: null,
               province: '',
+              endDate: '',
+              startDate: '',
               country: '',
               description: '',
               categories: [],
@@ -163,6 +165,8 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                   published: false,
                   description: values.description,
                   defaultImage: values.image,
+                  startDate: values.startDate,
+                  endDate: values.endDate,
                 },
                 createTripTripRelatedInput: {
                   categories: values.categories,
@@ -284,7 +288,11 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ شروع سفر</FormLabel>
-                          <DatePicker />
+                          <DatePicker
+                            onDateChange={(date: any) =>
+                              formProps.setFieldValue('startDate', date)
+                            }
+                          />
                           <Box textColor="red" mt="2">
                             <ErrorMessage name="startDate" component="div" />
                           </Box>
@@ -295,7 +303,11 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ پایان سفر</FormLabel>
-                          <DatePicker />
+                          <DatePicker
+                            onDateChange={(date: any) =>
+                              formProps.setFieldValue('endDate', date)
+                            }
+                          />
                           <Box textColor="red" mt="2">
                             <ErrorMessage name="endDate" component="div" />
                           </Box>

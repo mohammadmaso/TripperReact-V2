@@ -13,7 +13,7 @@ const LastArticlesView = (props: Props) => {
     variables: { allArticleLast: 10 },
   });
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

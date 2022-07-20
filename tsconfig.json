@@ -25,7 +25,7 @@
     "**/*.tsx",
     "graphql/ApolloLink.ts",
     "components/ChakraReactSelect.js"
-  ],
+, "components/DatePicker.js"  ],
   "exclude": [
     "node_modules"
   ]

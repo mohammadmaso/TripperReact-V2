@@ -52,7 +52,7 @@ const LastTripsView = (props: Props) => {
   // }
 
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

@@ -19,7 +19,7 @@ interface Props {
 const TravelersView = (props: Props) => {
   const { data, loading, error } = useAllProfilesQuery();
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

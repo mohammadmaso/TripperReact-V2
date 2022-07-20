@@ -15,7 +15,7 @@ const ArticleFilterView = (props: Props) => {
     fetchPolicy: 'no-cache',
   });
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

@@ -33,7 +33,6 @@ import EditTravelogueActivities from './EditTravelogueActivities';
 import {
   AccessoryType,
   AccessoryTypeEdge,
-  AccommodationType,
   ExperienceType,
   ExperienceTypeEdge,
   TransferType,
@@ -421,7 +420,7 @@ export default function EditTravelogueContainer({
         }}
       />
 
-      <AddAccomodationsModal
+      {/* <AddAccomodationsModal
         data={tripData}
         queries={{ ...queries }}
         actions={{ ...actions }}
@@ -435,7 +434,7 @@ export default function EditTravelogueContainer({
             ],
           }));
         }}
-      />
+      /> */}
       <AddAccessoryModal
         queries={{ ...queries }}
         actions={{ ...actions }}

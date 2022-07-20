@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import '../styles/globals.css';
 import '../styles/map.css';
+import '../styles/datepicker.css';
 
 import theme from '../theme/theme';
 import Fonts from '../theme/Font';

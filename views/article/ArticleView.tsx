@@ -24,7 +24,7 @@ const ArticleView = (props: Props) => {
     variables: { articleId: props.id },
   });
   if (loading) {
-    return <ApiLoading />;
+    return <ApiLoading enhanced={true} />;
   }
   if (error) {
     return <ApiError />;

@@ -97,7 +97,7 @@ const ProfileTabs = (props: Props) => {
         {props.isSelf && (
           <TabPanel>
             {props.queries?.unpublishedTripsQuery?.loading ? (
-              <ApiLoading />
+              <ApiLoading enhanced={true} />
             ) : props.queries?.unpublishedTripsQuery?.data?.allMyTrip?.edges
                 .length != 0 ? (
               <SimpleGrid
@@ -124,7 +124,7 @@ const ProfileTabs = (props: Props) => {
         {props.isSelf && (
           <TabPanel>
             {props.queries?.savedTripsQuery?.loading ? (
-              <ApiLoading />
+              <ApiLoading enhanced={true} />
             ) : props.queries?.savedTripsQuery?.data?.myTripCollection?.edges
                 .length != 0 ? (
               <SimpleGrid

@@ -1,5 +1,10 @@
 import React from 'react';
-import Select from './ChakraReactSelect';
+import {
+  AsyncCreatableSelect,
+  AsyncSelect,
+  CreatableSelect,
+  Select,
+} from 'chakra-react-select';
 
 interface Props {
   loading?: boolean;
@@ -25,7 +30,7 @@ const SelectForm = (props: Props) => {
         isSearchable={true}
         name={props.name}
         options={props.options}
-        label={props.name}
+        // label={props.name}
         onChange={props.inputChange}
         isMulti={props.isMulti ? props.isMulti : false}
         isDisabled={props.loading}

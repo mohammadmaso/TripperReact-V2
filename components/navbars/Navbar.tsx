@@ -24,6 +24,7 @@ import { MobileNav } from './MobileNav';
 import { DesktopNav } from './DesktopNav';
 import NavProfile from './NavProfile';
 import NavButtons from './NavButtons';
+import CircleLogo from '../logos/CircleLogo';
 
 const NavBar = (props: any) => {
   const { isOpen, onToggle, onClose } = useDisclosure();
@@ -90,10 +91,17 @@ const NavBar = (props: any) => {
               fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}
             >
-              <Logo
-                height={stickyNav ? 30 : 30}
-                width={stickyNav ? 100 : 100}
-              />
+              {stickyNav ? (
+                <CircleLogo
+                  height={stickyNav ? 30 : 30}
+                  width={stickyNav ? 100 : 100}
+                />
+              ) : (
+                <Logo
+                  height={stickyNav ? 30 : 30}
+                  width={stickyNav ? 100 : 100}
+                />
+              )}
             </Box>
           </Link>
 
