@@ -14,6 +14,8 @@ import { ArticlePlaces } from '../../components/article/ArticlePlaces';
 import TravelogueContainer from '../../components/travelogue/TravelogueContainer';
 import { TravelogueHeader } from '../../components/travelogue/TravelogueHeader';
 import { client } from '../../graphql/ApolloLink';
+import { DefaultSeo, SocialProfileJsonLd } from 'next-seo';
+
 import {
   namedOperations,
   TripDetailDocument,
@@ -32,22 +34,23 @@ import {
   useUnPublisTripMutation,
 } from '../../graphql/generated/types';
 import BaseLayout from '../../layouts/BaseLayout';
+import siteConfig from '../../site.config';
 import { getDate, getDays } from '../../utils/time';
 
 interface Props {
   id: string;
-  // data: any;
+  data: TripDetailQuery;
   // loading: boolean;
   // error: ApolloError | undefined;
 }
 
-const TripView = ({ id }: Props) => {
+const TripView = ({ data, id }: Props) => {
   const router = useRouter();
   const toast = useToast();
 
-  const { data, loading, error } = useTripDetailQuery({
-    variables: { tripId: id },
-  });
+  // const { data, loading, error } = useTripDetailQuery({
+  //   variables: { tripId: id },
+  // });
 
   const [getReviews, reviewsLazyQuery] = useTripReviewsLazyQuery({
     variables: { tripId: id },
@@ -146,18 +149,45 @@ const TripView = ({ id }: Props) => {
     },
   });
 
-  if (loading) {
-    return <ApiLoading enhanced={true} />;
-  }
-  if (error) {
-    return <ApiError />;
-  }
+  // if (loading) {
+  //   return <ApiLoading enhanced={true} />;
+  // }
+  // if (error) {
+  //   return <ApiError />;
+  // }
 
   return (
     <>
       <Head>
         <title>{`تریپر | ${data?.trip?.title} `}</title>
       </Head>
+
+      <DefaultSeo
+        title={`تریپر | ${data?.trip?.title} `}
+        // titleTemplate={`%s · ${siteConfig.title}`}
+        description={data?.trip?.description!}
+        canonical={siteConfig.url + (router.asPath || '')}
+        openGraph={{
+          title: data?.trip?.title!,
+          description: data?.trip?.description!,
+          type: 'website',
+          site_name: siteConfig.title!,
+          images: [
+            {
+              url: data.trip?.defaultImage!,
+              width: 1024,
+              height: 512,
+              alt: data.trip?.title!,
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+          handle: siteConfig.twitterUsername,
+          site: siteConfig.twitterUsername,
+        }}
+      />
+
       <TravelogueHeader
         id={data?.trip?.id as string}
         title={data?.trip?.title}

@@ -6016,6 +6016,39 @@ export type CreateExperinceMutationMutationVariables = Exact<{
 
 export type CreateExperinceMutationMutation = { __typename?: 'Mutation', createExperience?: { __typename?: 'CreateExperienceMutation', success?: boolean | null, experience?: { __typename?: 'ExperienceType', id: string, description?: string | null, title: string, images: { __typename?: 'ExperienceImageTypeConnection', edges: Array<{ __typename?: 'ExperienceImageTypeEdge', node?: { __typename?: 'ExperienceImageType', id: string, image: string } | null } | null> }, activities: { __typename?: 'TripActivitieTypeConnection', edges: Array<{ __typename?: 'TripActivitieTypeEdge', node?: { __typename?: 'TripActivitieType', id: string, titleFa?: string | null, svg?: string | null } | null } | null> } } | null } | null };
 
+export type CreateResidenceMutationVariables = Exact<{
+  name: Scalars['String'];
+  residenceType: Scalars['ID'];
+  stayDuration: Scalars['Int'];
+  tripId: Scalars['ID'];
+  longitude?: InputMaybe<Scalars['String']>;
+  latitude?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CreateResidenceMutation = { __typename?: 'Mutation', createResidence?: { __typename?: 'CreateResidence', success?: boolean | null } | null };
+
+export type DeleteResidenceMutationVariables = Exact<{
+  residenceId: Scalars['ID'];
+  tripId: Scalars['ID'];
+}>;
+
+
+export type DeleteResidenceMutation = { __typename?: 'Mutation', deleteResidence?: { __typename?: 'DeleteResidence', success?: boolean | null } | null };
+
+export type UpdateResidenceMutationVariables = Exact<{
+  residenceId: Scalars['ID'];
+  tripId: Scalars['ID'];
+  latitude?: InputMaybe<Scalars['String']>;
+  longitude?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  residenceType?: InputMaybe<Scalars['ID']>;
+  stayDuration?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type UpdateResidenceMutation = { __typename?: 'Mutation', updateResidence?: { __typename?: 'UpdateResidence', success?: boolean | null } | null };
+
 export type UpdateProfileMutationVariables = Exact<{
   updateProfileInput: UpdateProfileInput;
 }>;
@@ -6045,6 +6078,11 @@ export type SearchAccessoryQueryVariables = Exact<{
 
 
 export type SearchAccessoryQuery = { __typename?: 'Query', allAccessory?: { __typename?: 'AccessoryTypeConnection', edges: Array<{ __typename?: 'AccessoryTypeEdge', node?: { __typename?: 'AccessoryType', id: string, name: string, imageLink?: string | null, category: { __typename?: 'AccessoryCategoryType', id: string, title: string } } | null } | null> } | null };
+
+export type GetAllResidenceTypesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllResidenceTypesQuery = { __typename?: 'Query', allResidenceTypes?: { __typename?: 'ResidenceTypeTypeConnection', edges: Array<{ __typename?: 'ResidenceTypeTypeEdge', node?: { __typename?: 'ResidenceTypeType', svg: string, name: string, id: string } | null } | null> } | null };
 
 export type AllArticleQueryVariables = Exact<{
   allArticleOffset?: InputMaybe<Scalars['Int']>;
@@ -6133,7 +6171,7 @@ export type TripDetailQueryVariables = Exact<{
 }>;
 
 
-export type TripDetailQuery = { __typename?: 'Query', trip?: { __typename?: 'TripType', userLiked?: boolean | null, userSaved?: boolean | null, id: string, tripMap?: any | null, gpsTrack?: any | null, costs?: any | null, checkList?: any | null, todoList?: any | null, published: boolean, title: string, description?: string | null, createdAt: any, startDate?: any | null, endDate?: any | null, likes: number, defaultImage: string, viewsCount: number, activities: { __typename?: 'TripActivitieTypeConnection', edges: Array<{ __typename?: 'TripActivitieTypeEdge', node?: { __typename?: 'TripActivitieType', svg?: string | null, title: string, titleFa?: string | null, id: string } | null } | null> }, accessories: { __typename?: 'AccessoryTypeConnection', edges: Array<{ __typename?: 'AccessoryTypeEdge', node?: { __typename?: 'AccessoryType', id: string, likesCount: number, image?: string | null, imageLink?: string | null, name: string, brand?: { __typename?: 'AccessoryBrandType', logo: string, name: string } | null } | null } | null> }, companions: { __typename?: 'UserTypeConnection', edges: Array<{ __typename?: 'UserTypeEdge', node?: { __typename?: 'UserType', id: string, username: string, avatar: string } | null } | null> }, images: { __typename?: 'TripImageTypeConnection', edges: Array<{ __typename?: 'TripImageTypeEdge', node?: { __typename?: 'TripImageType', id: string, image: string, description?: string | null, copyrightName?: string | null } | null } | null> }, videos: { __typename?: 'TripVideoTypeConnection', edges: Array<{ __typename?: 'TripVideoTypeEdge', node?: { __typename?: 'TripVideoType', video: string, description?: string | null, copyrightName?: string | null } | null } | null> }, author: { __typename?: 'UserType', id: string, username: string, avatar: string }, experiences?: { __typename?: 'ExperienceTypeConnection', edges: Array<{ __typename?: 'ExperienceTypeEdge', node?: { __typename?: 'ExperienceType', id: string, title: string, description?: string | null, latitude?: string | null, longitude?: string | null, activities: { __typename?: 'TripActivitieTypeConnection', edges: Array<{ __typename?: 'TripActivitieTypeEdge', node?: { __typename?: 'TripActivitieType', id: string, title: string, titleFa?: string | null, svg?: string | null } | null } | null> }, images: { __typename?: 'ExperienceImageTypeConnection', edges: Array<{ __typename?: 'ExperienceImageTypeEdge', node?: { __typename?: 'ExperienceImageType', id: string, latitude?: string | null, longitude?: string | null, description?: string | null, image: string, copyrightName?: string | null } | null } | null> } } | null } | null> } | null, places: { __typename?: 'PlaceTypeConnection', edges: Array<{ __typename?: 'PlaceTypeEdge', node?: { __typename?: 'PlaceType', id: string, name: string, longitude?: any | null, latitude?: any | null } | null } | null> }, transfers: { __typename?: 'TransferTypeConnection', edges: Array<{ __typename?: 'TransferTypeEdge', node?: { __typename?: 'TransferType', id: string, duration?: number | null, startTime?: any | null, src: { __typename?: 'CityType', name: string, latitude: any, longitude: any, id: string }, destination: { __typename?: 'CityType', name: string, latitude: any, longitude: any, id: string }, transferType?: { __typename?: 'TransferTypeType', id: string, title: string, svg?: string | null } | null } | null } | null> }, country: { __typename?: 'CountryType', id: string, name: string }, province: { __typename?: 'ProvinceType', id: string, name: string, longitude: any, latitude: any }, categories: { __typename?: 'TripCategoryTypeConnection', edges: Array<{ __typename?: 'TripCategoryTypeEdge', node?: { __typename?: 'TripCategoryType', id: string, title: string } | null } | null> } } | null };
+export type TripDetailQuery = { __typename?: 'Query', trip?: { __typename?: 'TripType', userLiked?: boolean | null, userSaved?: boolean | null, id: string, tripMap?: any | null, gpsTrack?: any | null, costs?: any | null, checkList?: any | null, todoList?: any | null, published: boolean, title: string, description?: string | null, createdAt: any, startDate?: any | null, endDate?: any | null, likes: number, defaultImage: string, viewsCount: number, activities: { __typename?: 'TripActivitieTypeConnection', edges: Array<{ __typename?: 'TripActivitieTypeEdge', node?: { __typename?: 'TripActivitieType', svg?: string | null, title: string, titleFa?: string | null, id: string } | null } | null> }, accessories: { __typename?: 'AccessoryTypeConnection', edges: Array<{ __typename?: 'AccessoryTypeEdge', node?: { __typename?: 'AccessoryType', id: string, likesCount: number, image?: string | null, imageLink?: string | null, name: string, brand?: { __typename?: 'AccessoryBrandType', logo: string, name: string } | null } | null } | null> }, companions: { __typename?: 'UserTypeConnection', edges: Array<{ __typename?: 'UserTypeEdge', node?: { __typename?: 'UserType', id: string, username: string, avatar: string } | null } | null> }, images: { __typename?: 'TripImageTypeConnection', edges: Array<{ __typename?: 'TripImageTypeEdge', node?: { __typename?: 'TripImageType', id: string, image: string, description?: string | null, copyrightName?: string | null } | null } | null> }, videos: { __typename?: 'TripVideoTypeConnection', edges: Array<{ __typename?: 'TripVideoTypeEdge', node?: { __typename?: 'TripVideoType', video: string, description?: string | null, copyrightName?: string | null } | null } | null> }, author: { __typename?: 'UserType', id: string, username: string, avatar: string }, experiences?: { __typename?: 'ExperienceTypeConnection', edges: Array<{ __typename?: 'ExperienceTypeEdge', node?: { __typename?: 'ExperienceType', id: string, title: string, description?: string | null, latitude?: string | null, longitude?: string | null, activities: { __typename?: 'TripActivitieTypeConnection', edges: Array<{ __typename?: 'TripActivitieTypeEdge', node?: { __typename?: 'TripActivitieType', id: string, title: string, titleFa?: string | null, svg?: string | null } | null } | null> }, images: { __typename?: 'ExperienceImageTypeConnection', edges: Array<{ __typename?: 'ExperienceImageTypeEdge', node?: { __typename?: 'ExperienceImageType', id: string, latitude?: string | null, longitude?: string | null, description?: string | null, image: string, copyrightName?: string | null } | null } | null> } } | null } | null> } | null, residencesOfTrip: { __typename?: 'ResidenceTypeConnection', edges: Array<{ __typename?: 'ResidenceTypeEdge', node?: { __typename?: 'ResidenceType', id: string, stayDuration: number, name: string, latitude?: string | null, longitude?: string | null, residenceType: { __typename?: 'ResidenceTypeType', id: string, name: string, svg: string } } | null } | null> }, places: { __typename?: 'PlaceTypeConnection', edges: Array<{ __typename?: 'PlaceTypeEdge', node?: { __typename?: 'PlaceType', id: string, name: string, longitude?: any | null, latitude?: any | null } | null } | null> }, transfers: { __typename?: 'TransferTypeConnection', edges: Array<{ __typename?: 'TransferTypeEdge', node?: { __typename?: 'TransferType', id: string, duration?: number | null, startTime?: any | null, src: { __typename?: 'CityType', name: string, latitude: any, longitude: any, id: string }, destination: { __typename?: 'CityType', name: string, latitude: any, longitude: any, id: string }, transferType?: { __typename?: 'TransferTypeType', id: string, title: string, svg?: string | null } | null } | null } | null> }, country: { __typename?: 'CountryType', id: string, name: string }, province: { __typename?: 'ProvinceType', id: string, name: string, longitude: any, latitude: any }, categories: { __typename?: 'TripCategoryTypeConnection', edges: Array<{ __typename?: 'TripCategoryTypeEdge', node?: { __typename?: 'TripCategoryType', id: string, title: string } | null } | null> } } | null };
 
 export type TripReviewsQueryVariables = Exact<{
   tripId: Scalars['ID'];
@@ -7152,6 +7190,132 @@ export function useCreateExperinceMutationMutation(baseOptions?: Apollo.Mutation
 export type CreateExperinceMutationMutationHookResult = ReturnType<typeof useCreateExperinceMutationMutation>;
 export type CreateExperinceMutationMutationResult = Apollo.MutationResult<CreateExperinceMutationMutation>;
 export type CreateExperinceMutationMutationOptions = Apollo.BaseMutationOptions<CreateExperinceMutationMutation, CreateExperinceMutationMutationVariables>;
+export const CreateResidenceDocument = gql`
+    mutation CreateResidence($name: String!, $residenceType: ID!, $stayDuration: Int!, $tripId: ID!, $longitude: String, $latitude: String) {
+  createResidence(
+    name: $name
+    residenceType: $residenceType
+    stayDuration: $stayDuration
+    tripId: $tripId
+    longitude: $longitude
+    latitude: $latitude
+  ) {
+    success
+  }
+}
+    `;
+export type CreateResidenceMutationFn = Apollo.MutationFunction<CreateResidenceMutation, CreateResidenceMutationVariables>;
+
+/**
+ * __useCreateResidenceMutation__
+ *
+ * To run a mutation, you first call `useCreateResidenceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateResidenceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createResidenceMutation, { data, loading, error }] = useCreateResidenceMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      residenceType: // value for 'residenceType'
+ *      stayDuration: // value for 'stayDuration'
+ *      tripId: // value for 'tripId'
+ *      longitude: // value for 'longitude'
+ *      latitude: // value for 'latitude'
+ *   },
+ * });
+ */
+export function useCreateResidenceMutation(baseOptions?: Apollo.MutationHookOptions<CreateResidenceMutation, CreateResidenceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateResidenceMutation, CreateResidenceMutationVariables>(CreateResidenceDocument, options);
+      }
+export type CreateResidenceMutationHookResult = ReturnType<typeof useCreateResidenceMutation>;
+export type CreateResidenceMutationResult = Apollo.MutationResult<CreateResidenceMutation>;
+export type CreateResidenceMutationOptions = Apollo.BaseMutationOptions<CreateResidenceMutation, CreateResidenceMutationVariables>;
+export const DeleteResidenceDocument = gql`
+    mutation DeleteResidence($residenceId: ID!, $tripId: ID!) {
+  deleteResidence(residenceId: $residenceId, tripId: $tripId) {
+    success
+  }
+}
+    `;
+export type DeleteResidenceMutationFn = Apollo.MutationFunction<DeleteResidenceMutation, DeleteResidenceMutationVariables>;
+
+/**
+ * __useDeleteResidenceMutation__
+ *
+ * To run a mutation, you first call `useDeleteResidenceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteResidenceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteResidenceMutation, { data, loading, error }] = useDeleteResidenceMutation({
+ *   variables: {
+ *      residenceId: // value for 'residenceId'
+ *      tripId: // value for 'tripId'
+ *   },
+ * });
+ */
+export function useDeleteResidenceMutation(baseOptions?: Apollo.MutationHookOptions<DeleteResidenceMutation, DeleteResidenceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteResidenceMutation, DeleteResidenceMutationVariables>(DeleteResidenceDocument, options);
+      }
+export type DeleteResidenceMutationHookResult = ReturnType<typeof useDeleteResidenceMutation>;
+export type DeleteResidenceMutationResult = Apollo.MutationResult<DeleteResidenceMutation>;
+export type DeleteResidenceMutationOptions = Apollo.BaseMutationOptions<DeleteResidenceMutation, DeleteResidenceMutationVariables>;
+export const UpdateResidenceDocument = gql`
+    mutation UpdateResidence($residenceId: ID!, $tripId: ID!, $latitude: String, $longitude: String, $name: String, $residenceType: ID, $stayDuration: Int) {
+  updateResidence(
+    residenceId: $residenceId
+    tripId: $tripId
+    latitude: $latitude
+    longitude: $longitude
+    name: $name
+    residenceType: $residenceType
+    stayDuration: $stayDuration
+  ) {
+    success
+  }
+}
+    `;
+export type UpdateResidenceMutationFn = Apollo.MutationFunction<UpdateResidenceMutation, UpdateResidenceMutationVariables>;
+
+/**
+ * __useUpdateResidenceMutation__
+ *
+ * To run a mutation, you first call `useUpdateResidenceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateResidenceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateResidenceMutation, { data, loading, error }] = useUpdateResidenceMutation({
+ *   variables: {
+ *      residenceId: // value for 'residenceId'
+ *      tripId: // value for 'tripId'
+ *      latitude: // value for 'latitude'
+ *      longitude: // value for 'longitude'
+ *      name: // value for 'name'
+ *      residenceType: // value for 'residenceType'
+ *      stayDuration: // value for 'stayDuration'
+ *   },
+ * });
+ */
+export function useUpdateResidenceMutation(baseOptions?: Apollo.MutationHookOptions<UpdateResidenceMutation, UpdateResidenceMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateResidenceMutation, UpdateResidenceMutationVariables>(UpdateResidenceDocument, options);
+      }
+export type UpdateResidenceMutationHookResult = ReturnType<typeof useUpdateResidenceMutation>;
+export type UpdateResidenceMutationResult = Apollo.MutationResult<UpdateResidenceMutation>;
+export type UpdateResidenceMutationOptions = Apollo.BaseMutationOptions<UpdateResidenceMutation, UpdateResidenceMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($updateProfileInput: UpdateProfileInput!) {
   updateProfile(input: $updateProfileInput) {
@@ -7313,6 +7477,46 @@ export function useSearchAccessoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type SearchAccessoryQueryHookResult = ReturnType<typeof useSearchAccessoryQuery>;
 export type SearchAccessoryLazyQueryHookResult = ReturnType<typeof useSearchAccessoryLazyQuery>;
 export type SearchAccessoryQueryResult = Apollo.QueryResult<SearchAccessoryQuery, SearchAccessoryQueryVariables>;
+export const GetAllResidenceTypesDocument = gql`
+    query getAllResidenceTypes {
+  allResidenceTypes {
+    edges {
+      node {
+        svg
+        name
+        id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllResidenceTypesQuery__
+ *
+ * To run a query within a React component, call `useGetAllResidenceTypesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllResidenceTypesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllResidenceTypesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllResidenceTypesQuery(baseOptions?: Apollo.QueryHookOptions<GetAllResidenceTypesQuery, GetAllResidenceTypesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllResidenceTypesQuery, GetAllResidenceTypesQueryVariables>(GetAllResidenceTypesDocument, options);
+      }
+export function useGetAllResidenceTypesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllResidenceTypesQuery, GetAllResidenceTypesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllResidenceTypesQuery, GetAllResidenceTypesQueryVariables>(GetAllResidenceTypesDocument, options);
+        }
+export type GetAllResidenceTypesQueryHookResult = ReturnType<typeof useGetAllResidenceTypesQuery>;
+export type GetAllResidenceTypesLazyQueryHookResult = ReturnType<typeof useGetAllResidenceTypesLazyQuery>;
+export type GetAllResidenceTypesQueryResult = Apollo.QueryResult<GetAllResidenceTypesQuery, GetAllResidenceTypesQueryVariables>;
 export const AllArticleDocument = gql`
     query AllArticle($allArticleOffset: Int, $allArticleBefore: String, $allArticleAfter: String, $allArticleFirst: Int, $allArticleLast: Int, $allArticleCategory: ID) {
   allArticle(
@@ -8079,6 +8283,22 @@ export const TripDetailDocument = gql`
                 copyrightName
               }
             }
+          }
+        }
+      }
+    }
+    residencesOfTrip {
+      edges {
+        node {
+          id
+          stayDuration
+          name
+          latitude
+          longitude
+          residenceType {
+            id
+            name
+            svg
           }
         }
       }
@@ -9089,6 +9309,7 @@ export type SearchUsernameQueryResult = Apollo.QueryResult<SearchUsernameQuery, 
 export const namedOperations = {
   Query: {
     SearchAccessory: 'SearchAccessory',
+    getAllResidenceTypes: 'getAllResidenceTypes',
     AllArticle: 'AllArticle',
     AllArticleCategoryies: 'AllArticleCategoryies',
     Article: 'Article',
@@ -9142,6 +9363,9 @@ export const namedOperations = {
     SaveTripMutation: 'SaveTripMutation',
     CreateExperienceImage: 'CreateExperienceImage',
     CreateExperinceMutation: 'CreateExperinceMutation',
+    CreateResidence: 'CreateResidence',
+    DeleteResidence: 'DeleteResidence',
+    UpdateResidence: 'UpdateResidence',
     UpdateProfile: 'UpdateProfile',
     UpdateUser: 'UpdateUser',
     FollowOrUnfollow: 'FollowOrUnfollow',
