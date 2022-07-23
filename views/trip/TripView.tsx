@@ -158,20 +158,21 @@ const TripView = ({ data, id }: Props) => {
 
   return (
     <>
-      <Head>
-        <title>{`تریپر | ${data?.trip?.title} `}</title>
-      </Head>
-
       <DefaultSeo
-        title={`تریپر | ${data?.trip?.title} `}
+        title={data?.trip?.title}
+        titleTemplate="تریپر | %s"
+        defaultTitle="تریپر"
         // titleTemplate={`%s · ${siteConfig.title}`}
         description={data?.trip?.description!}
         canonical={siteConfig.url + (router.asPath || '')}
         openGraph={{
           title: data?.trip?.title!,
           description: data?.trip?.description!,
-          type: 'website',
+          type: 'profile',
           site_name: siteConfig.title!,
+          profile: {
+            username: data.trip?.author.username,
+          },
           images: [
             {
               url: data.trip?.defaultImage!,
