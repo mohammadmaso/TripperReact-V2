@@ -75,7 +75,7 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
           } as IImage)
       ) as IImage[]
   ) as IImage[][];
-  const experiencesImages = experiencesImagesArray.flat();
+  const experiencesImages = experiencesImagesArray?.flat();
 
   const tripImages = [
     {
@@ -136,43 +136,52 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
                   // videos={data?.trip?.videos.edges}
                 />
               )}
-
-              <Divider />
-              <TravelogueAccomodations />
-              <Divider />
-              <Transfers transfers={data.trip?.transfers.edges} />
+              {data?.trip?.residencesOfTrip.edges.length != 0 && (
+                <>
+                  <TravelogueAccomodations
+                    residences={data.trip?.residencesOfTrip?.edges!}
+                  />
+                  <Divider />
+                </>
+              )}
+              {data?.trip?.transfers.edges.length != 0 && (
+                <>
+                  <Transfers transfers={data.trip?.transfers.edges} />
+                  <Divider />
+                </>
+              )}
 
               {data?.trip?.places.edges.length != 0 && (
                 <>
-                  <Divider />
                   <TraveloguePlaces places={data?.trip?.places.edges} />
+                  <Divider />
                 </>
               )}
               {data?.trip?.description && (
                 <>
-                  <Divider />
                   <TravelogueDescription
                     description={data?.trip?.description}
                   />
+                  <Divider />
                 </>
               )}
 
               {data?.trip?.experiences?.edges.length != 0 && (
                 <>
-                  <Divider />
                   <TravelogueExperiences
                     experiences={data?.trip?.experiences?.edges!}
                     imageOnClick={(id: string) => showImage(id)}
                   />
+                  <Divider />
                 </>
               )}
 
               {data?.trip?.companions.edges.length != 0 && (
                 <>
-                  <Divider />
                   <TravelogueCompanions
                     companions={data?.trip?.companions.edges!}
                   />
+                  <Divider />
                 </>
               )}
             </Stack>
@@ -184,19 +193,19 @@ export default function TravelogueContainer({ data, queries, actions }: Props) {
 
               {data?.trip?.activities.edges.length != 0 && (
                 <>
-                  <Divider />
                   <TravelogueActivities
                     activities={data?.trip?.activities.edges!}
                   />
+                  <Divider />
                 </>
               )}
 
               {data?.trip?.accessories.edges.length != 0 && (
                 <>
-                  <Divider />
                   <TravelogueAccessories
                     accessories={data?.trip?.accessories.edges}
                   />
+                  <Divider />
                 </>
               )}
             </Stack>

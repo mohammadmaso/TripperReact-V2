@@ -12,6 +12,7 @@ const siteConfig = {
     "twitter": "",
     "youtube": "",
   },
+  "twitterUsername": "mytripper_ir",
   "keywords": [
     "travel",
     "social"

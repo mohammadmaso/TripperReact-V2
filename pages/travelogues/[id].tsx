@@ -28,8 +28,18 @@ import TravelogueActivities from '../../components/travelogue/TravelogueActiviti
 import TripView from '../../views/trip/TripView';
 import router, { useRouter } from 'next/router';
 import { client } from '../../graphql/ApolloLink';
-import { TripDetailDocument } from '../../graphql/generated/types';
+import {
+  TripDetailDocument,
+  TripDetailQuery,
+  useTripDetailQuery,
+} from '../../graphql/generated/types';
 import { ApolloError } from '@apollo/client/core';
+import {
+  GetStaticProps,
+  GetStaticPaths,
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+} from 'next';
 
 // interface Props {
 //   data: any;
@@ -47,11 +57,23 @@ import { ApolloError } from '@apollo/client/core';
 //   return { props: { data, loading, error } };
 // }
 
-export default function Travelogue() {
-  const router = useRouter();
+function Travelogue(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   return (
     <BaseLayout>
-      <TripView id={router.query.id! as string} />
+      <TripView data={props.data} id={props.data.trip?.id as string} />
     </BaseLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data, loading, error } = await client.query({
+    query: TripDetailDocument,
+    variables: { tripId: context.query.id },
+  });
+  // Pass travelogue data to the page via props
+  return { props: { data } };
+};
+
+export default Travelogue;

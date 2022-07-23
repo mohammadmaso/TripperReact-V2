@@ -8,6 +8,20 @@ import introspectionResult from './fragment-matcher';
 import { createUploadLink } from 'apollo-upload-client'
 import { createStandaloneToast } from "@chakra-ui/react"
 
+import { RetryLink } from "@apollo/client/link/retry";
+
+
+const retryLink = new RetryLink({
+  delay: {
+    initial: 300,
+    max: Infinity,
+    jitter: true
+  },
+  attempts: {
+    max: 5,
+    retryIf: (error, _operation) => !!error
+  }
+});
 
 const toast = createStandaloneToast()
 
@@ -20,7 +34,8 @@ export const getNewToken = async () => {
 };
 
 const errorLink = onError(
-  ({ graphQLErrors, networkError, operation, forward }) => {
+  ({ graphQLErrors, networkError, operation, forward, error }) => {
+      console.log("ERROR in SigninBox ", { error });
     if (graphQLErrors) {
       for (let err of graphQLErrors) {
         switch (err.extensions?.code) {
@@ -65,11 +80,18 @@ const errorLink = onError(
 
       }
     }
-  }
+  if (networkError) console.log({networkError});
+
+
+  },
+
+
 );
 
+
+
 const httpLink = createUploadLink({
-  // ssrMode: typeof window === "undefined",
+  ssrMode: typeof window === "undefined",
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URL, 
   // fetchOptions: {
   //   mode: 'cors',
@@ -78,16 +100,30 @@ const httpLink = createUploadLink({
   
 });
 
+
+
 const authLink = setContext( (_, { headers }) =>  {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token')
+  
+  const ISSERVER = typeof window === "undefined";
+
   // return the headers to the context so httpLink can read them
-  return {
-    headers: {
-      ...headers,
-      authorization: `JWT ${localStorage.getItem('token')}`,
-    },
-  };
+  if(!ISSERVER){
+    return {
+      headers: {
+        ...headers,
+        authorization: `JWT ${localStorage.getItem('token')}`,
+      },
+    };
+  }
+  else {
+    return  {
+      headers: {
+        ...headers,
+      },
+    };
+  }
+  
 });
 const cache = new InMemoryCache({    
   possibleTypes: introspectionResult.possibleTypes,
@@ -110,7 +146,7 @@ const cache = new InMemoryCache({
 export const client = new ApolloClient({
   // link: authLink.concat(httpLink),
   // to use errorLink functinality
-  link: ApolloLink.from([errorLink, authLink, httpLink]),
+  link: ApolloLink.from([errorLink, authLink, httpLink,retryLink]),
   
   cache: cache
 });

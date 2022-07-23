@@ -138,3 +138,51 @@ mutation CreateExperinceMutation(
     }
   }
 }
+
+mutation CreateResidence(
+  $name: String!
+  $residenceType: ID!
+  $stayDuration: Int!
+  $tripId: ID!
+  $longitude: String
+  $latitude: String
+) {
+  createResidence(
+    name: $name
+    residenceType: $residenceType
+    stayDuration: $stayDuration
+    tripId: $tripId
+    longitude: $longitude
+    latitude: $latitude
+  ) {
+    success
+  }
+}
+
+mutation DeleteResidence($residenceId: ID!, $tripId: ID!) {
+  deleteResidence(residenceId: $residenceId, tripId: $tripId) {
+    success
+  }
+}
+
+mutation UpdateResidence(
+  $residenceId: ID!
+  $tripId: ID!
+  $latitude: String
+  $longitude: String
+  $name: String
+  $residenceType: ID
+  $stayDuration: Int
+) {
+  updateResidence(
+    residenceId: $residenceId
+    tripId: $tripId
+    latitude: $latitude
+    longitude: $longitude
+    name: $name
+    residenceType: $residenceType
+    stayDuration: $stayDuration
+  ) {
+    success
+  }
+}
