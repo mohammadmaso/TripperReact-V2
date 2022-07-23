@@ -81,7 +81,7 @@ const ProfileDetailView = ({ data }: Props) => {
         openGraph={{
           title: data?.user?.username,
           description: data?.user?.profilemodel?.about!,
-          type: 'profile',
+          type: 'website',
           site_name: siteConfig.title!,
           profile: {
             username: data?.user?.username,

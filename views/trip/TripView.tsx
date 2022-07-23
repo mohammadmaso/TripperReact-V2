@@ -168,11 +168,11 @@ const TripView = ({ data, id }: Props) => {
         openGraph={{
           title: data?.trip?.title!,
           description: data?.trip?.description!,
-          type: 'profile',
+          type: 'website',
           site_name: siteConfig.title!,
-          profile: {
-            username: data.trip?.author.username,
-          },
+          // profile: {
+          //   username: data.trip?.author.username,
+          // },
           images: [
             {
               url: data.trip?.defaultImage!,
