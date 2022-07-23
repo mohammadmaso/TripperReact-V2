@@ -54,11 +54,11 @@ import {
   CreateExperienceImageMutation,
 } from '../../../../graphql/generated/types';
 import { ActivityCard } from '../../../cards/ActivityCard';
-import SelectForm from '../../../SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
 import { Form, Formik, ErrorMessage, Field } from 'formik';
 import { FetchResult } from '@apollo/client/link/core/types';
 import { SelectPointMap } from './SelectPointMap';
+import SelectForm from '../../../SelectForm';
 
 interface Props {
   data: any;

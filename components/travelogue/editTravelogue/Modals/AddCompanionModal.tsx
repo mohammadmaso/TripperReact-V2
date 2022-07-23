@@ -159,7 +159,7 @@ const AddCompanionModal = (props: Props) => {
                 </Stack>
               </TabPanel>
               <TabPanel>
-                <p>در دست توسعه</p>
+                <div>در دست توسعه</div>
               </TabPanel>
             </TabPanels>
           </Tabs>

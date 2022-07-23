@@ -157,7 +157,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
                 />
               </div>
             </Stack>
-            <Text
+            {/* <Text
               w={{ base: '90vw', sm: '90vw', md: '50vw', lg: '50vw' }}
               textAlign="center"
               color="white"
@@ -165,7 +165,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
               mb="3"
             >
               {imageToShow?.description}
-            </Text>
+            </Text> */}
           </Center>
 
           <HStack

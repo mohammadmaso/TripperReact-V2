@@ -33,8 +33,12 @@ import EditTravelogueActivities from './EditTravelogueActivities';
 import {
   AccessoryType,
   AccessoryTypeEdge,
+  CreateResidenceMutationVariables,
   ExperienceType,
   ExperienceTypeEdge,
+  InputMaybe,
+  ResidenceType,
+  Scalars,
   TransferType,
   TripActivitieType,
   TripActivitieTypeEdge,
@@ -166,6 +170,12 @@ export default function EditTravelogueContainer({
     experiences: data.trip?.experiences?.edges,
   });
 
+  const [residenceData, setResidenceData] = useState<{
+    [key: string]: any;
+  }>({
+    residencesOfTrip: data.trip?.residencesOfTrip.edges,
+  });
+
   const [tripData, setTripData] = useState<{
     [key: string]: any;
   }>({
@@ -249,6 +259,33 @@ export default function EditTravelogueContainer({
       });
   };
 
+  const onAddResidence = (residenceInput: {
+    name: Scalars['String'];
+    residenceType: Scalars['ID'];
+    stayDuration: Scalars['Int'];
+    longitude?: InputMaybe<string> | undefined;
+    latitude?: InputMaybe<string> | undefined;
+  }) => {
+    actions
+      .createResidence({
+        tripId: data.trip?.id as string,
+        ...residenceInput,
+      })
+      .then((res: any) => {
+        if (res.data?.success == true) {
+        }
+        if (res.data?.createResidence?.success == false) {
+          toast({
+            title: 'خطا در بروزرسانی سفر',
+            status: 'error',
+            duration: 8000,
+            isClosable: true,
+            position: 'top-right',
+          });
+        }
+      });
+  };
+
   const onIgnoreChanges = () => {
     setTripData(initialTripData);
   };
@@ -299,6 +336,15 @@ export default function EditTravelogueContainer({
               <Divider />
               <EditTravelogueAccomodations
                 onAddButtonClick={addAccomodationModal.onOpen}
+                residences={data.trip?.residencesOfTrip?.edges!}
+                onDeleteClick={(id: string) => {
+                  setResidenceData((prevState) => ({
+                    residencesOfTrip: prevState?.residencesOfTrip.filter(
+                      (item: any) => item?.node?.id !== id
+                    ),
+                  }));
+                  // TODO: delete residence api call
+                }}
               />
               <Divider />
               <EditTravelogueTransfers
@@ -420,21 +466,15 @@ export default function EditTravelogueContainer({
         }}
       />
 
-      {/* <AddAccomodationsModal
+      <AddAccomodationsModal
         data={tripData}
         queries={{ ...queries }}
         actions={{ ...actions }}
         {...addAccomodationModal}
-        onAddAccomodation={(accomodation: AccommodationType) => {
-          setTripData((prevState) => ({
-            ...prevState,
-            accomodation: [
-              ...(prevState.accomodation as Array<any>),
-              { node: accomodation },
-            ],
-          }));
+        onAddAccomodation={(residence: any) => {
+          onAddResidence(residence);
         }}
-      /> */}
+      />
       <AddAccessoryModal
         queries={{ ...queries }}
         actions={{ ...actions }}

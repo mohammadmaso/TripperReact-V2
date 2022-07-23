@@ -118,7 +118,7 @@ export function EditTravelogueHeader(props: Props) {
 
   return (
     <>
-      <Wrap
+      <Stack
         // position={stickyHeader ? 'fixed' : undefined}
         pt={'2'}
         pb={'2'}
@@ -128,7 +128,7 @@ export function EditTravelogueHeader(props: Props) {
         // top={stickyHeader ? '60px' : undefined}
         w="full"
         justifyContent="space-between"
-        align="center"
+        alignItems="center"
         direction={{ base: 'column', sm: 'column', md: 'row', lg: 'row' }}
       >
         <Stack>
@@ -236,7 +236,7 @@ export function EditTravelogueHeader(props: Props) {
             />
           </ButtonGroup>
         </Wrap>
-      </Wrap>
+      </Stack>
       <DeleteConfirmModal
         {...deleteModal}
         title={props.title}

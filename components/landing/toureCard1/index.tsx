@@ -28,11 +28,11 @@ const ToureCard1 = (props: Props) => {
                     <h2 className="mb-2">
                       <sup>$</sup>39 / 4<sup>hrs</sup>
                     </h2>
-                    <p className="mb-4">per person</p>
-                    <p className="mb-1">
+                    <div className="mb-4">per person</div>
+                    <div className="mb-1">
                       <i className="uil uil-location-pin-alt size-22"></i>
-                    </p>
-                    <p className="mb-4">Drina, Serbia</p>
+                    </div>
+                    <div className="mb-4">Drina, Serbia</div>
                     <a href="#0" className="link">
                       Choose Date
                     </a>
@@ -68,11 +68,11 @@ const ToureCard1 = (props: Props) => {
                     <h2 className="mb-2">
                       <sup>$</sup>29 / 8<sup>hrs</sup>
                     </h2>
-                    <p className="mb-4">per person</p>
-                    <p className="mb-1">
+                    <div className="mb-4">per person</div>
+                    <div className="mb-1">
                       <i className="uil uil-location-pin-alt size-22"></i>
-                    </p>
-                    <p className="mb-4">Tara, Serbia</p>
+                    </div>
+                    <div className="mb-4">Tara, Serbia</div>
                     <a href="#0" className="link">
                       Choose Date
                     </a>

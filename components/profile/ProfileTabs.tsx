@@ -149,7 +149,7 @@ const ProfileTabs = (props: Props) => {
           </TabPanel>
         )}
         <TabPanel>
-          <p>two!</p>
+          <>two!</>
         </TabPanel>
       </TabPanels>
     </Tabs>

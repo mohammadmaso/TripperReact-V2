@@ -342,6 +342,22 @@ query TripDetail($tripId: ID!) {
         }
       }
     }
+    residencesOfTrip {
+      edges {
+        node {
+          id
+          stayDuration
+          name
+          latitude
+          longitude
+          residenceType {
+            id
+            name
+            svg
+          }
+        }
+      }
+    }
     places {
       edges {
         node {

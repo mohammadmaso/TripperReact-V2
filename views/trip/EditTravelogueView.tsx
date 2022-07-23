@@ -30,6 +30,10 @@ import {
   useTripDetailQuery,
   useUnPublisTripMutation,
   useUpdateTripMutation,
+  useCreateResidenceMutation,
+  useUpdateResidenceMutation,
+  CreateResidenceMutationVariables,
+  useGetAllResidenceTypesLazyQuery,
 } from '../../graphql/generated/types';
 import { getDate, getDays } from '../../utils/time';
 
@@ -166,6 +170,28 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
+  const [createResidence, createResidenceStatus] = useCreateResidenceMutation({
+    onCompleted: (data) => {
+      toast({
+        title: 'اقامتگاه با موفقیت افزوده شد.',
+        status: 'success',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'ساخت اقامتگاه با خطا مواجه شد.',
+        description: 'دوباره امتحان کنید',
+        status: 'error',
+        duration: 8000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    },
+  });
+
   const [
     createExperience,
     createExperienceStatus,
@@ -206,6 +232,11 @@ const EditTravelogueView = ({ id }: Props) => {
     getCitiesOfProvince,
     citiesOfProvinceQuery,
   ] = useAllCitiesOfProvinceLazyQuery();
+
+  const [
+    getAllResidenceType,
+    allResidenceTypeQuery,
+  ] = useGetAllResidenceTypesLazyQuery();
 
   const [searchUsername, searchUsernameQuery] = useSearchUsernameLazyQuery({
     variables: { first: 10 },
@@ -277,6 +308,7 @@ const EditTravelogueView = ({ id }: Props) => {
           updateTrip: (inputs: UpdateTripMutationVariables) =>
             updateTrip({ variables: { ...inputs } }),
           getAllActivitites: () => getAllActivitites(),
+          getAllResidenceType: () => getAllResidenceType(),
           getProvincesOfCountry: (countryId: string) =>
             getProvincesOfCountry({
               variables: { allProvincesCountry: countryId },
@@ -296,6 +328,8 @@ const EditTravelogueView = ({ id }: Props) => {
           createExperience: (
             inputs: CreateExperinceMutationMutationVariables
           ) => createExperience({ variables: { ...inputs } }),
+          createResidence: (inputs: CreateResidenceMutationVariables) =>
+            createResidence({ variables: { ...inputs } }),
         }}
         queries={{
           deleteTripStatus,
@@ -308,12 +342,14 @@ const EditTravelogueView = ({ id }: Props) => {
           searchUsernameQuery,
           searchAccessoryQuery,
           allActivititesQuery,
+          allResidenceTypeQuery,
           deleteTransferStatus,
           createTransferStatus,
           citiesOfProvinceQuery,
           transferTypesQuery,
           createExperienceStatus,
           createExperienceImagesStatus,
+          createResidenceStatus,
         }}
       />
     </>

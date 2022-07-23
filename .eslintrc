@@ -1,4 +1,7 @@
 {
   "extends": ["next", "next/core-web-vitals",
-    "prettier"]
+    "prettier"],
+  "plugins": [
+    "eslint-plugin-storybook"
+  ]
 }

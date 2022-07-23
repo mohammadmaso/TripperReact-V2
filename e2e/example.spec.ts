@@ -8,6 +8,4 @@ test('should navigate to the about page', async ({ page }) => {
   await page.click('text=درباره تریپر')
   // The new url should be "/about" (baseURL is used there)
   await expect(page).toHaveURL('http://localhost:3000/about')
-  // The new page should contain an h1 with "About Page"
-  await expect(page.locator('h1')).toContainText('در مسیر یک رویا')
 })

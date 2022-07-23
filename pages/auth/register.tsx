@@ -83,7 +83,7 @@ export default function SingUp() {
                 ),
                 username: Yup.string().matches(
                   usernameRegex,
-                  'نام کاربری باید تنها شامل حروف انگلیسی، اعداد، خط تیره و نقطه باشد.'
+                  'نام کاربری باید تنها شامل حروف انگلیسی، اعداد، خط تیره و نقطه باشد واز ۳ کارکتر بیشتر باشد. و با یککارکتر انگلیسی شروع شود.'
                 ),
               })}
               onSubmit={(values, { setSubmitting, setFieldError }) => {
