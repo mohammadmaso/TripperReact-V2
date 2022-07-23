@@ -68,6 +68,10 @@ function Travelogue(
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
   const { data, loading, error } = await client.query({
     query: TripDetailDocument,
     variables: { tripId: context.query.id },
