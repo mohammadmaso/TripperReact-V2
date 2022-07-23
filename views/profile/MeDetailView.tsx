@@ -58,6 +58,7 @@ const MeDetailView = (props: Props) => {
   return (
     <div>
       <ProfileContainer
+        isFollowed={false}
         data={data}
         isSelf={true}
         actions={{
