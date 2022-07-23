@@ -1058,6 +1058,7 @@ export type CreatePlace = {
 /** create Residence mutation. */
 export type CreateResidence = {
   __typename?: 'CreateResidence';
+  residence?: Maybe<ResidenceType>;
   success?: Maybe<Scalars['Boolean']>;
 };
 
@@ -6223,11 +6224,17 @@ export type MeDetailQuery = { __typename?: 'Query', me?: { __typename?: 'UserTyp
 
 export type UserDetailQueryVariables = Exact<{
   username: Scalars['String'];
+}>;
+
+
+export type UserDetailQuery = { __typename?: 'Query', user?: { __typename?: 'UserType', id: string, username: string, avatar: string, email?: string | null, dateJoined: any, profilemodel?: { __typename?: 'ProfileType', about?: string | null, tripStatus?: boolean | null, header?: string | null, gender?: ProfileModelGender | null, followersCount: number, followingsCount: number } | null, trips: { __typename?: 'TripTypeConnection', edges: Array<{ __typename?: 'TripTypeEdge', node?: { __typename?: 'TripType', id: string, title: string, description?: string | null, createdAt: any, startDate?: any | null, endDate?: any | null, defaultImage: string, viewsCount: number, published: boolean, userLiked?: boolean | null, likes: number, author: { __typename?: 'UserType', id: string, username: string, avatar: string }, country: { __typename?: 'CountryType', name: string }, province: { __typename?: 'ProvinceType', name: string }, categories: { __typename?: 'TripCategoryTypeConnection', edges: Array<{ __typename?: 'TripCategoryTypeEdge', node?: { __typename?: 'TripCategoryType', title: string } | null } | null> }, places: { __typename?: 'PlaceTypeConnection', edges: Array<{ __typename?: 'PlaceTypeEdge', node?: { __typename?: 'PlaceType', id: string } | null } | null> }, experiences?: { __typename?: 'ExperienceTypeConnection', edges: Array<{ __typename?: 'ExperienceTypeEdge', node?: { __typename?: 'ExperienceType', id: string } | null } | null> } | null } | null } | null> } } | null };
+
+export type IsFollowedQueryVariables = Exact<{
   followedUsername: Scalars['String'];
 }>;
 
 
-export type UserDetailQuery = { __typename?: 'Query', followedUser?: boolean | null, user?: { __typename?: 'UserType', id: string, username: string, avatar: string, email?: string | null, dateJoined: any, profilemodel?: { __typename?: 'ProfileType', about?: string | null, tripStatus?: boolean | null, header?: string | null, gender?: ProfileModelGender | null, followersCount: number, followingsCount: number } | null, trips: { __typename?: 'TripTypeConnection', edges: Array<{ __typename?: 'TripTypeEdge', node?: { __typename?: 'TripType', id: string, title: string, description?: string | null, createdAt: any, startDate?: any | null, endDate?: any | null, defaultImage: string, viewsCount: number, published: boolean, userLiked?: boolean | null, likes: number, author: { __typename?: 'UserType', id: string, username: string, avatar: string }, country: { __typename?: 'CountryType', name: string }, province: { __typename?: 'ProvinceType', name: string }, categories: { __typename?: 'TripCategoryTypeConnection', edges: Array<{ __typename?: 'TripCategoryTypeEdge', node?: { __typename?: 'TripCategoryType', title: string } | null } | null> }, places: { __typename?: 'PlaceTypeConnection', edges: Array<{ __typename?: 'PlaceTypeEdge', node?: { __typename?: 'PlaceType', id: string } | null } | null> }, experiences?: { __typename?: 'ExperienceTypeConnection', edges: Array<{ __typename?: 'ExperienceTypeEdge', node?: { __typename?: 'ExperienceType', id: string } | null } | null> } | null } | null } | null> } } | null };
+export type IsFollowedQuery = { __typename?: 'Query', followedUser?: boolean | null };
 
 export type TourLeaderDetailQueryVariables = Exact<{
   username: Scalars['String'];
@@ -6236,13 +6243,6 @@ export type TourLeaderDetailQueryVariables = Exact<{
 
 
 export type TourLeaderDetailQuery = { __typename?: 'Query', followedUser?: boolean | null, user?: { __typename?: 'UserType', tourleader?: { __typename?: 'TourLeaderType', id: string, name: string, tourLeadingId: string, successfulToursCount: number } | null } | null };
-
-export type IsFollowedQueryVariables = Exact<{
-  followedUsername: Scalars['String'];
-}>;
-
-
-export type IsFollowedQuery = { __typename?: 'Query', followedUser?: boolean | null };
 
 export type UserFollowingsQueryVariables = Exact<{
   username: Scalars['String'];
@@ -8717,7 +8717,7 @@ export type MeDetailQueryHookResult = ReturnType<typeof useMeDetailQuery>;
 export type MeDetailLazyQueryHookResult = ReturnType<typeof useMeDetailLazyQuery>;
 export type MeDetailQueryResult = Apollo.QueryResult<MeDetailQuery, MeDetailQueryVariables>;
 export const UserDetailDocument = gql`
-    query UserDetail($username: String!, $followedUsername: String!) {
+    query UserDetail($username: String!) {
   user(username: $username) {
     ...UserFields
     profilemodel {
@@ -8731,7 +8731,6 @@ export const UserDetailDocument = gql`
       }
     }
   }
-  followedUser(username: $followedUsername)
 }
     ${UserFieldsFragmentDoc}
 ${ProfileFieldsFragmentDoc}
@@ -8750,7 +8749,6 @@ ${TripSimpleFieldsFragmentDoc}`;
  * const { data, loading, error } = useUserDetailQuery({
  *   variables: {
  *      username: // value for 'username'
- *      followedUsername: // value for 'followedUsername'
  *   },
  * });
  */
@@ -8765,6 +8763,39 @@ export function useUserDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type UserDetailQueryHookResult = ReturnType<typeof useUserDetailQuery>;
 export type UserDetailLazyQueryHookResult = ReturnType<typeof useUserDetailLazyQuery>;
 export type UserDetailQueryResult = Apollo.QueryResult<UserDetailQuery, UserDetailQueryVariables>;
+export const IsFollowedDocument = gql`
+    query isFollowed($followedUsername: String!) {
+  followedUser(username: $followedUsername)
+}
+    `;
+
+/**
+ * __useIsFollowedQuery__
+ *
+ * To run a query within a React component, call `useIsFollowedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsFollowedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsFollowedQuery({
+ *   variables: {
+ *      followedUsername: // value for 'followedUsername'
+ *   },
+ * });
+ */
+export function useIsFollowedQuery(baseOptions: Apollo.QueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
+      }
+export function useIsFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
+        }
+export type IsFollowedQueryHookResult = ReturnType<typeof useIsFollowedQuery>;
+export type IsFollowedLazyQueryHookResult = ReturnType<typeof useIsFollowedLazyQuery>;
+export type IsFollowedQueryResult = Apollo.QueryResult<IsFollowedQuery, IsFollowedQueryVariables>;
 export const TourLeaderDetailDocument = gql`
     query TourLeaderDetail($username: String!, $followedUsername: String!) {
   user(username: $username) {
@@ -8807,39 +8838,6 @@ export function useTourLeaderDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type TourLeaderDetailQueryHookResult = ReturnType<typeof useTourLeaderDetailQuery>;
 export type TourLeaderDetailLazyQueryHookResult = ReturnType<typeof useTourLeaderDetailLazyQuery>;
 export type TourLeaderDetailQueryResult = Apollo.QueryResult<TourLeaderDetailQuery, TourLeaderDetailQueryVariables>;
-export const IsFollowedDocument = gql`
-    query isFollowed($followedUsername: String!) {
-  followedUser(username: $followedUsername)
-}
-    `;
-
-/**
- * __useIsFollowedQuery__
- *
- * To run a query within a React component, call `useIsFollowedQuery` and pass it any options that fit your needs.
- * When your component renders, `useIsFollowedQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useIsFollowedQuery({
- *   variables: {
- *      followedUsername: // value for 'followedUsername'
- *   },
- * });
- */
-export function useIsFollowedQuery(baseOptions: Apollo.QueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
-      }
-export function useIsFollowedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IsFollowedQuery, IsFollowedQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IsFollowedQuery, IsFollowedQueryVariables>(IsFollowedDocument, options);
-        }
-export type IsFollowedQueryHookResult = ReturnType<typeof useIsFollowedQuery>;
-export type IsFollowedLazyQueryHookResult = ReturnType<typeof useIsFollowedLazyQuery>;
-export type IsFollowedQueryResult = Apollo.QueryResult<IsFollowedQuery, IsFollowedQueryVariables>;
 export const UserFollowingsDocument = gql`
     query userFollowings($username: String!) {
   user(username: $username) {
@@ -9331,8 +9329,8 @@ export const namedOperations = {
     MeTourLeader: 'MeTourLeader',
     MeDetail: 'MeDetail',
     UserDetail: 'UserDetail',
-    TourLeaderDetail: 'TourLeaderDetail',
     isFollowed: 'isFollowed',
+    TourLeaderDetail: 'TourLeaderDetail',
     userFollowings: 'userFollowings',
     UserFollowers: 'UserFollowers',
     MeFollowings: 'MeFollowings',

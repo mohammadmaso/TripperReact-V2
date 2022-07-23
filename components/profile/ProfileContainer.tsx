@@ -24,6 +24,7 @@ interface Props {
   isSelf: boolean;
   actions: any;
   lazyQueries: any;
+  isFollowed: boolean;
 }
 
 const ProfileContainer = (props: Props) => {
@@ -49,7 +50,7 @@ const ProfileContainer = (props: Props) => {
           isTourLeader={isTourLeader}
           isSelf={props.isSelf}
           data={props.isSelf ? props.data?.me : props.data?.user}
-          isFollowed={props.data?.followedUser}
+          isFollowed={props.isFollowed}
           actions={props.actions}
           lazyQueries={props.lazyQueries}
         />

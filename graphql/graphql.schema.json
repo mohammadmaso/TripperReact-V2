@@ -8497,6 +8497,18 @@
         "description": "create Residence mutation.",
         "fields": [
           {
+            "name": "residence",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ResidenceType",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "success",
             "description": null,
             "args": [],

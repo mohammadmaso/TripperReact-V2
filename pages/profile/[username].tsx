@@ -1,14 +1,29 @@
 import { useRouter } from 'next/router';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next/types';
 import React from 'react';
+import { client } from '../../graphql/ApolloLink';
+import { UserDetailDocument } from '../../graphql/generated/types';
 
 import BaseLayout from '../../layouts/BaseLayout';
 import ProfileDetailView from '../../views/profile/ProfileDetailView';
 
-export default function Home() {
-  const router = useRouter();
+export default function Home(
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) {
   return (
     <BaseLayout>
-      <ProfileDetailView username={router.query.username! as string} />
+      <ProfileDetailView data={props.data} />
     </BaseLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { data, loading, error } = await client.query({
+    query: UserDetailDocument,
+    variables: {
+      username: context.query.username,
+    },
+  });
+  // Pass travelogue data to the page via props
+  return { props: { data } };
+};

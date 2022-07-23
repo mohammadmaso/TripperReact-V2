@@ -34,7 +34,7 @@ query MeDetail {
   }
 }
 
-query UserDetail($username: String!, $followedUsername: String!) {
+query UserDetail($username: String!) {
   user(username: $username) {
     ...UserFields
     profilemodel {
@@ -48,6 +48,9 @@ query UserDetail($username: String!, $followedUsername: String!) {
       }
     }
   }
+}
+
+query isFollowed($followedUsername: String!) {
   followedUser(username: $followedUsername)
 }
 
