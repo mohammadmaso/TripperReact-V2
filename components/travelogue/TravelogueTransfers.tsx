@@ -39,6 +39,7 @@ export function TravelogueTransferCard(props: CardProps) {
           w="15"
           src={props.transferType?.svg!}
           alt=""
+          fallbackSrc="images/placeholder.png"
         />
       </Center>
       <Wrap align="center">

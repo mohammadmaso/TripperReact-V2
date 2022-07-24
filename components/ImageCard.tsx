@@ -28,6 +28,7 @@ const ImageCard = ({ image, imageOnClick, id, style, ImageProps }: Props) => {
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}
         cursor="zoom-in"
+        fallbackSrc="images/placeholder.png"
       />
     </>
   );

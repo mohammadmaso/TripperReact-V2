@@ -27,6 +27,7 @@ import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
 import { usernameRegex } from '../../utils/regex';
 import CircleLogo from '../../components/logos/CircleLogo';
+import siteConfig from '../../site.config';
 
 export default function SingUp() {
   const router = useRouter();
@@ -243,7 +244,8 @@ export default function SingUp() {
           <Image
             alt={'Login Image'}
             objectFit={'cover'}
-            src={'/images/angelo-pantazis-zXVk8mNl9M0-unsplash.jpg'}
+            src={siteConfig.loginImage!}
+            fallbackSrc="images/placeholder.png"
           />
         </Flex>
       </Stack>

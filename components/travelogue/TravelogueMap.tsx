@@ -148,6 +148,7 @@ export function TravelogueMap({ data }: Props) {
                     w="15"
                     src={experience?.node?.svg!}
                     alt=""
+                    fallbackSrc="images/placeholder.png"
                   />
                 ))}
               </Wrap>
@@ -179,6 +180,7 @@ export function TravelogueMap({ data }: Props) {
                 w="15"
                 src={item?.transferData?.transferType?.svg!}
                 alt=""
+                fallbackSrc="images/placeholder.png"
               />
             </Center>
           </Marker>

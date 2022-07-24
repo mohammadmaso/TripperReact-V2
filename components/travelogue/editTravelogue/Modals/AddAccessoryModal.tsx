@@ -146,6 +146,7 @@ const AddAccessoryModal = (props: Props) => {
                             fit="contain"
                             src="/images/Digikala.png"
                             alt="digikala"
+                            fallbackSrc="images/placeholder.png"
                           />
                         </Flex>
 
@@ -153,6 +154,7 @@ const AddAccessoryModal = (props: Props) => {
                           fit="contain"
                           w="full"
                           src={item?.node?.imageLink!}
+                          fallbackSrc="images/placeholder.png"
                           alt="accessories"
                         />
                         <Text>{item?.node?.name}</Text>

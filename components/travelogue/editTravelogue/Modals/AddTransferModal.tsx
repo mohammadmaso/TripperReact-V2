@@ -325,6 +325,7 @@ const AddTransferModal = (props: Props) => {
                           <Radio key={item?.node?.id} value={item?.node?.id!}>
                             <Image
                               h="30"
+                              fallbackSrc="images/placeholder.png"
                               src={item?.node?.svg!}
                               alt={item?.node?.title!}
                             />

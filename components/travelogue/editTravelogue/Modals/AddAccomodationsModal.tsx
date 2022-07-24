@@ -184,6 +184,7 @@ const AddAccomodationsModal = (props: Props) => {
                               h="30"
                               src={item?.node?.svg!}
                               alt={item?.node?.name!}
+                              fallbackSrc="images/placeholder.png"
                             />{' '}
                             <Text fontSize={'sm'}>{item?.node?.name!}</Text>
                           </Stack>

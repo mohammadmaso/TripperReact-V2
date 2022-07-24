@@ -68,6 +68,7 @@ export function EditTravelogueAccomodations({
                   alt=""
                   h="15"
                   w="15"
+                  fallbackSrc="images/placeholder.png"
                 />
               </Center>
               <Wrap align="center">

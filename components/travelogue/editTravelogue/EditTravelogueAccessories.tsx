@@ -43,10 +43,17 @@ function AccessoryCard(props: any) {
             fit="contain"
             src="/images/Digikala.png"
             alt="digikala"
+            fallbackSrc="images/placeholder.png"
           />
         </Flex>
 
-        <Image fit="contain" w="full" src={props.imageLink} alt="accessories" />
+        <Image
+          fit="contain"
+          w="full"
+          src={props.imageLink}
+          alt="accessories"
+          fallbackSrc="images/placeholder.png"
+        />
         <Text px="3">{props.name}</Text>
         <Button
           size="sm"

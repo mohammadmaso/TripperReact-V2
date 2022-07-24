@@ -133,6 +133,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
                 id="lightbox-img"
                 src={imageToShow?.image}
                 objectFit="contain"
+                fallbackSrc="images/placeholder.png"
               />
               <div>
                 <IconButton

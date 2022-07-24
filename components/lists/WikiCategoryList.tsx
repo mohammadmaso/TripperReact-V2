@@ -57,7 +57,7 @@ const WikiCategoryBox = (props: any) => {
         }}
         passHref
       >
-        <Center cursor="pointer">
+        <Center my="4" cursor="pointer">
           <Box
             bg={useColorModeValue('green.100', 'green.900')}
             boxShadow={'sm'}

@@ -38,6 +38,7 @@ export default function WikiCard(props: any) {
               height="200px"
               w="full"
               objectFit={'cover'}
+              fallbackSrc="images/placeholder.png"
             />
           </Box>
           <Flex direction="column" justifyContent="center">

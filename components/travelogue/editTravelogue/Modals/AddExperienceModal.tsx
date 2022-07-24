@@ -314,6 +314,7 @@ const AddExperienceModal = (props: Props) => {
                           alt=""
                           h="100px"
                           borderRadius="md"
+                          fallbackSrc="images/placeholder.png"
                         />
                       ))}
                     </Wrap>

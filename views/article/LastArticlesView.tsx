@@ -22,7 +22,7 @@ const LastArticlesView = (props: Props) => {
     <Stack pt="2">
       <SectionHeader
         title="آخرین مقاله‌ها"
-        subTitle="در وبلاگ تریپر یاد بگیرید"
+        subTitle="در دانشنامه‌ی تریپر تریپر یاد بگیرید"
       />
       <WikiCarusal data={data} />
     </Stack>

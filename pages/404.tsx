@@ -22,6 +22,7 @@ const Page404 = (props: Props) => {
         src={'/images/4956803.svg'}
         height={600}
         width={700}
+        fallbackSrc="images/placeholder.png"
         // layout="intrinsic"
         alt={'تریپر'}
       />

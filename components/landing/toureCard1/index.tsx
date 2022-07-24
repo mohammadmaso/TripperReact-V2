@@ -40,24 +40,28 @@ const ToureCard1 = (props: Props) => {
                       <Image
                         src="https://assets.codepen.io/1462889/sea.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-1">
                       <Image
                         src="https://assets.codepen.io/1462889/kayak.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-3">
                       <Image
                         src="https://assets.codepen.io/1462889/water.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-6">
                       <Image
                         src="https://assets.codepen.io/1462889/Stone.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                   </div>
@@ -80,24 +84,28 @@ const ToureCard1 = (props: Props) => {
                       <Image
                         src="https://assets.codepen.io/1462889/grass.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-4">
                       <Image
                         src="https://assets.codepen.io/1462889/camp.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-5">
                       <Image
                         src="https://assets.codepen.io/1462889/Ivy.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                     <div className="img-wrap img-7">
                       <Image
                         src="https://assets.codepen.io/1462889/IvyRock.png"
                         alt=""
+                        fallbackSrc="images/placeholder.png"
                       />
                     </div>
                   </div>

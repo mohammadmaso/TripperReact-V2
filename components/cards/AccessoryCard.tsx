@@ -27,7 +27,13 @@ function AccessoryCard(props: any) {
           />
         </Flex>
 
-        <Image fit="contain" w="full" src={props.imageLink} alt="accessories" />
+        <Image
+          fit="contain"
+          fallbackSrc="images/placeholder.png"
+          w="full"
+          src={props.imageLink}
+          alt="accessories"
+        />
         <Text px="3">{props.name}</Text>
         {/* <Link
           isExternal

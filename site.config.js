@@ -16,7 +16,8 @@ const siteConfig = {
   "keywords": [
     "travel",
     "social"
-  ]
+  ],
+  "loginImage" : "/images/photo-1598651616012-22589d9a7fad.avif",
 }
 
 

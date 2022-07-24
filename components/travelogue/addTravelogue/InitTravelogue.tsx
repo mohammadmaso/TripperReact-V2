@@ -398,6 +398,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           rounded="lg"
                           src={imagePreview}
                           alt="تصویر سفر"
+                          fallbackSrc="images/placeholder.png"
                         />
                       </Box>
                     </Flex>

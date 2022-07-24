@@ -26,6 +26,7 @@ import {
   useTokenAuthMutation,
 } from '../../graphql/generated/types';
 import CircleLogo from '../../components/logos/CircleLogo';
+import siteConfig from '../../site.config';
 
 export default function SignIn() {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -136,7 +137,8 @@ export default function SignIn() {
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
-          src={'/images/angelo-pantazis-zXVk8mNl9M0-unsplash.jpg'}
+          src={siteConfig.loginImage!}
+          fallbackSrc="images/placeholder.png"
         />
       </Flex>
     </Stack>

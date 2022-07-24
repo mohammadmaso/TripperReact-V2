@@ -61,6 +61,7 @@ function TravelogueTransferCard(props: CardProps) {
             }
             h="15"
             w="15"
+            fallbackSrc="images/placeholder.png"
             src={props.transferType?.svg!}
             alt=""
           />
@@ -121,6 +122,7 @@ function TravelogueTransferCard(props: CardProps) {
                   w="15"
                   src={props.transferType?.svg!}
                   alt=""
+                  fallbackSrc="images/placeholder.png"
                 />
               </Center>
               <Wrap align="center">

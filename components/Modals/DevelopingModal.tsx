@@ -40,6 +40,7 @@ const DevelopingPortal = (props: Props) => {
               h="300px"
               w="500px"
               my="2"
+              fallbackSrc="images/placeholder.png"
             />
             <Text fontSize="xl" fontWeight="light">
               این صفحه در دست توسعه می‌باشد.

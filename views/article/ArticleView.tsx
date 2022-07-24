@@ -1,5 +1,7 @@
 import { Wrap, Divider, Flex, Stack } from '@chakra-ui/react';
+import { DefaultSeo } from 'next-seo';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React from 'react';
 import ApiError from '../../components/ApiError';
 import ApiLoading from '../../components/ApiLoading';
@@ -10,31 +12,61 @@ import { ArticleDescription } from '../../components/article/ArticleDescription'
 import { ArticleHeader } from '../../components/article/ArticleHeader';
 import { ArticlePlaces } from '../../components/article/ArticlePlaces';
 import {
+  ArticleQuery,
   useAllArticleQuery,
   useArticleQuery,
 } from '../../graphql/generated/types';
 import BaseLayout from '../../layouts/BaseLayout';
+import siteConfig from '../../site.config';
 
 interface Props {
-  id: string;
+  data: ArticleQuery;
 }
 
-const ArticleView = (props: Props) => {
-  const { data, loading, error } = useArticleQuery({
-    variables: { articleId: props.id },
-  });
-  if (loading) {
-    return <ApiLoading enhanced={true} />;
-  }
-  if (error) {
-    return <ApiError />;
-  }
+const ArticleView = ({ data }: Props) => {
+  // const { data, loading, error } = useArticleQuery({
+  //   variables: { articleId: props.id },
+  // });
+  // if (loading) {
+  //   return <ApiLoading enhanced={true} />;
+  // }
+  // if (error) {
+  //   return <ApiError />;
+  // }
+  const router = useRouter();
 
   return (
     <>
-      <Head>
-        <title>{`تریپر | ${data?.article?.title} `}</title>
-      </Head>
+      <DefaultSeo
+        title={data?.article?.title}
+        titleTemplate="تریپر | %s"
+        defaultTitle="تریپر"
+        // titleTemplate={`%s · ${siteConfig.title}`}
+        description={data?.article?.shortDescription!}
+        canonical={siteConfig.url + (router.asPath || '')}
+        openGraph={{
+          title: data?.article?.title!,
+          description: data?.article?.shortDescription!,
+          type: 'website',
+          site_name: siteConfig.title!,
+          // profile: {
+          //   username: data.trip?.author.username,
+          // },
+          images: [
+            {
+              url: data.article?.image!,
+              width: 1024,
+              height: 512,
+              alt: data.article?.title!,
+            },
+          ],
+        }}
+        twitter={{
+          cardType: 'summary_large_image',
+          handle: siteConfig.twitterUsername,
+          site: siteConfig.twitterUsername,
+        }}
+      />
       <ArticleHeader
         title={data?.article?.title}
         category={data?.article?.category}
