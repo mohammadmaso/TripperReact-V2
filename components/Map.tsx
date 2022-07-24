@@ -1,5 +1,4 @@
 import { Center } from '@chakra-ui/react';
-import React from 'react';
 interface Props {}
 
 const Map = (props: Props) => {
