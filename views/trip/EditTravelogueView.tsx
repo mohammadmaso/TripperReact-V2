@@ -1,7 +1,6 @@
-import { useEventListener, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
 import ApiError from '../../components/ApiError';
 import ApiLoading from '../../components/ApiLoading';
 import EditTravelogueContainer from '../../components/travelogue/editTravelogue/EditTravelogueContainer';
@@ -9,6 +8,7 @@ import { EditTravelogueHeader } from '../../components/travelogue/editTravelogue
 import {
   CreateExperienceImageMutationVariables,
   CreateExperinceMutationMutationVariables,
+  CreateResidenceMutationVariables,
   CreateSinglTransferMutationVariables,
   namedOperations,
   TripDetailQuery,
@@ -21,19 +21,17 @@ import {
   useAllTripCategoriesQuery,
   useCreateExperienceImageMutation,
   useCreateExperinceMutationMutation,
+  useCreateResidenceMutation,
   useCreateSinglTransferMutation,
   useDeleteSingleTransferMutation,
   useDeleteTripMutation,
+  useGetAllResidenceTypesLazyQuery,
   usePublisTripMutation,
   useSearchAccessoryLazyQuery,
   useSearchUsernameLazyQuery,
   useTripDetailQuery,
   useUnPublisTripMutation,
   useUpdateTripMutation,
-  useCreateResidenceMutation,
-  useUpdateResidenceMutation,
-  CreateResidenceMutationVariables,
-  useGetAllResidenceTypesLazyQuery,
 } from '../../graphql/generated/types';
 import { getDate, getDays } from '../../utils/time';
 
@@ -128,22 +126,20 @@ const EditTravelogueView = ({ id }: Props) => {
     }
   );
 
-  const [
-    deleteTransfer,
-    deleteTransferStatus,
-  ] = useDeleteSingleTransferMutation({
-    onCompleted: (data) => {
-      if (data.deleteTransfer?.success == true) {
-        toast({
-          title: 'حمل و نثل با موفقیت حذف شد.',
-          status: 'success',
-          duration: 8000,
-          isClosable: true,
-          position: 'top-right',
-        });
-      }
-    },
-  });
+  const [deleteTransfer, deleteTransferStatus] =
+    useDeleteSingleTransferMutation({
+      onCompleted: (data) => {
+        if (data.deleteTransfer?.success == true) {
+          toast({
+            title: 'حمل و نثل با موفقیت حذف شد.',
+            status: 'success',
+            duration: 8000,
+            isClosable: true,
+            position: 'top-right',
+          });
+        }
+      },
+    });
 
   const [deleteTrip, deleteTripStatus] = useDeleteTripMutation({
     variables: { deleteTripTripId: id },
@@ -192,51 +188,41 @@ const EditTravelogueView = ({ id }: Props) => {
     },
   });
 
-  const [
-    createExperience,
-    createExperienceStatus,
-  ] = useCreateExperinceMutationMutation({
-    onCompleted: (data) => {
-      toast({
-        title: 'تجربه با موفقیت افزوده شد.',
-        status: 'success',
-        duration: 8000,
-        isClosable: true,
-        position: 'top-right',
-      });
-    },
-    onError: () => {
-      toast({
-        title: 'ساخت تجربه با خطا مواجه شد.',
-        description: 'دوباره امتحان کنید',
-        status: 'error',
-        duration: 8000,
-        isClosable: true,
-        position: 'top-right',
-      });
-    },
-  });
+  const [createExperience, createExperienceStatus] =
+    useCreateExperinceMutationMutation({
+      onCompleted: (data) => {
+        toast({
+          title: 'تجربه با موفقیت افزوده شد.',
+          status: 'success',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      },
+      onError: () => {
+        toast({
+          title: 'ساخت تجربه با خطا مواجه شد.',
+          description: 'دوباره امتحان کنید',
+          status: 'error',
+          duration: 8000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      },
+    });
 
-  const [
-    createExperienceImages,
-    createExperienceImagesStatus,
-  ] = useCreateExperienceImageMutation();
+  const [createExperienceImages, createExperienceImagesStatus] =
+    useCreateExperienceImageMutation();
 
   const countriesQuery = useAllCountriesQuery();
-  const [
-    getProvincesOfCountry,
-    provincesOfCountryQuery,
-  ] = useAllProvincesOfCountryLazyQuery();
+  const [getProvincesOfCountry, provincesOfCountryQuery] =
+    useAllProvincesOfCountryLazyQuery();
 
-  const [
-    getCitiesOfProvince,
-    citiesOfProvinceQuery,
-  ] = useAllCitiesOfProvinceLazyQuery();
+  const [getCitiesOfProvince, citiesOfProvinceQuery] =
+    useAllCitiesOfProvinceLazyQuery();
 
-  const [
-    getAllResidenceType,
-    allResidenceTypeQuery,
-  ] = useGetAllResidenceTypesLazyQuery();
+  const [getAllResidenceType, allResidenceTypeQuery] =
+    useGetAllResidenceTypesLazyQuery();
 
   const [searchUsername, searchUsernameQuery] = useSearchUsernameLazyQuery({
     variables: { first: 10 },

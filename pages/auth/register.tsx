@@ -1,33 +1,31 @@
 import {
+  Box,
   Button,
+  Center,
   Checkbox,
   Flex,
   FormControl,
   FormLabel,
-  Heading,
+  Image,
   Input,
+  Link as ChakraLink,
   Link,
   Stack,
-  Center,
   Text,
-  Box,
   useDisclosure,
-  Link as ChakraLink,
-  Image,
 } from '@chakra-ui/react';
-import React, { useContext, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import TextLogo from '../../components/logos/TextLogo';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
-import { useFormikContext, Formik, Form, Field, ErrorMessage } from 'formik';
+import { useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
 
 import Head from 'next/head';
+import CircleLogo from '../../components/logos/CircleLogo';
 import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
-import { usernameRegex } from '../../utils/regex';
-import CircleLogo from '../../components/logos/CircleLogo';
 import siteConfig from '../../site.config';
+import { usernameRegex } from '../../utils/regex';
 
 export default function SingUp() {
   const router = useRouter();
@@ -245,7 +243,7 @@ export default function SingUp() {
             alt={'Login Image'}
             objectFit={'cover'}
             src={siteConfig.loginImage!}
-            fallbackSrc="images/placeholder.png"
+            fallbackSrc="/images/placeholder.png"
           />
         </Flex>
       </Stack>

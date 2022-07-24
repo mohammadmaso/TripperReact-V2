@@ -1,8 +1,5 @@
-import { Button, Flex, Heading, Image } from '@chakra-ui/react';
-import React from 'react';
+import { Flex, Heading, Image } from '@chakra-ui/react';
 import Head from 'next/head';
-import { FiHome } from 'react-icons/fi';
-import Link from 'next/link';
 import GoBack from '../components/go-back';
 
 interface Props {}
@@ -22,7 +19,7 @@ const Page404 = (props: Props) => {
         src={'/images/4956803.svg'}
         height={600}
         width={700}
-        fallbackSrc="images/placeholder.png"
+        fallbackSrc="/images/placeholder.png"
         // layout="intrinsic"
         alt={'تریپر'}
       />

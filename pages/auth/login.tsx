@@ -1,31 +1,27 @@
 import {
   Button,
-  Checkbox,
+  Center,
   Flex,
   FormControl,
   FormLabel,
-  Heading,
-  Input,
-  Stack,
-  Center,
-  Text,
-  Box,
-  Spinner,
   Image,
+  Input,
+  Spinner,
+  Stack,
+  Text,
   useToast,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
-import TextLogo from '../../components/logos/TextLogo';
 import Link from 'next/link';
+import { useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 
-import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import CircleLogo from '../../components/logos/CircleLogo';
 import {
   TokenAuthMutation,
   useTokenAuthMutation,
 } from '../../graphql/generated/types';
-import CircleLogo from '../../components/logos/CircleLogo';
 import siteConfig from '../../site.config';
 
 export default function SignIn() {
@@ -138,7 +134,7 @@ export default function SignIn() {
           alt={'Login Image'}
           objectFit={'cover'}
           src={siteConfig.loginImage!}
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
         />
       </Flex>
     </Stack>
