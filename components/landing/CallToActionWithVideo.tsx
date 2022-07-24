@@ -12,7 +12,6 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import siteConfig from '../../site.config';
 
 export default function CallToActionWithVideo() {
   return (
@@ -120,7 +119,7 @@ export default function CallToActionWithVideo() {
               align={'center'}
               w={'100%'}
               h={'100%'}
-              src={siteConfig.loginImage!}
+              src={getRandomFilePath()()}
               fallbackSrc="/images/placeholder.png"
             />
           </Box>

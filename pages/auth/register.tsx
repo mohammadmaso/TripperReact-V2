@@ -15,17 +15,16 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import * as Yup from 'yup';
-
-import Head from 'next/head';
 import CircleLogo from '../../components/logos/CircleLogo';
 import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
-import siteConfig from '../../site.config';
 import { usernameRegex } from '../../utils/regex';
+import getRandomFilePath from '../../utils/selectRandomFile';
 
 export default function SingUp() {
   const router = useRouter();
@@ -242,7 +241,7 @@ export default function SingUp() {
           <Image
             alt={'Login Image'}
             objectFit={'cover'}
-            src={siteConfig.loginImage!}
+            src={getRandomFilePath()}
             fallbackSrc="/images/placeholder.png"
           />
         </Flex>

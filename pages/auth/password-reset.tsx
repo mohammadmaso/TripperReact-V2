@@ -13,12 +13,12 @@ import {
 import { Field, Form, Formik } from 'formik';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import getRandomFilePath from '../../utils/selectRandomFile';
 
 import Head from 'next/head';
 import CircleLogo from '../../components/logos/CircleLogo';
 import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import { useResetPasswordSmsMutation } from '../../graphql/generated/types';
-import siteConfig from '../../site.config';
 
 export default function SingUp() {
   const router = useRouter();
@@ -154,7 +154,7 @@ export default function SingUp() {
           <Image
             alt={'Login Image'}
             objectFit={'cover'}
-            src={siteConfig.loginImage!}
+            src={getRandomFilePath()}
             fallbackSrc="/images/placeholder.png"
           />
         </Flex>

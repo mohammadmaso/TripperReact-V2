@@ -20,7 +20,7 @@ import {
   useResendVerificationSmsMutation,
   useVerifySmsMutation,
 } from '../../graphql/generated/types';
-import siteConfig from '../../site.config';
+import getRandomFilePath from '../../utils/selectRandomFile';
 
 export default function SignIn() {
   const [code, setCode] = useState('');
@@ -172,7 +172,7 @@ export default function SignIn() {
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
-          src={siteConfig.loginImage!}
+          src={getRandomFilePath()}
           fallbackSrc="/images/placeholder.png"
         />
       </Flex>
