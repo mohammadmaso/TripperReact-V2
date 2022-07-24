@@ -1,12 +1,11 @@
-import { fromPromise, createHttpLink, ApolloClient, InMemoryCache, ApolloLink } from "@apollo/client";
+import { ApolloClient, ApolloLink, fromPromise, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { relayStylePagination } from "@apollo/client/utilities";
-import Router  from "next/router";
-import { RefreshTokenDocument } from "./generated/types";
+import { createStandaloneToast } from "@chakra-ui/react";
 import { onError } from 'apollo-link-error';
+import { createUploadLink } from 'apollo-upload-client';
 import introspectionResult from './fragment-matcher';
-import { createUploadLink } from 'apollo-upload-client'
-import { createStandaloneToast } from "@chakra-ui/react"
+import { RefreshTokenDocument } from "./generated/types";
 
 import { RetryLink } from "@apollo/client/link/retry";
 
@@ -146,7 +145,7 @@ const cache = new InMemoryCache({
 export const client = new ApolloClient({
   // link: authLink.concat(httpLink),
   // to use errorLink functinality
-  link: ApolloLink.from([errorLink, authLink, httpLink,retryLink]),
+  link: ApolloLink.from([retryLink, errorLink, authLink, httpLink]),
   
   cache: cache
 });
