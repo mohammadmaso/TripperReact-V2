@@ -1,16 +1,15 @@
 import {
-  Container,
-  Stack,
-  Flex,
   Box,
+  Container,
+  createIcon,
+  Flex,
   Heading,
-  Text,
-  Button,
-  Image,
   Icon,
   IconButton,
-  createIcon,
   IconProps,
+  Image,
+  Stack,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import siteConfig from '../../site.config';
@@ -122,7 +121,7 @@ export default function CallToActionWithVideo() {
               w={'100%'}
               h={'100%'}
               src={siteConfig.loginImage!}
-              fallbackSrc="images/placeholder.png"
+              fallbackSrc="/images/placeholder.png"
             />
           </Box>
         </Flex>

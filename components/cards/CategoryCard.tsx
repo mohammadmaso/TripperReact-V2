@@ -1,16 +1,4 @@
-import React, { ReactElement } from 'react';
-
-import {
-  Box,
-  Center,
-  Heading,
-  Text,
-  Stack,
-  Avatar,
-  useColorModeValue,
-  Image,
-  Flex,
-} from '@chakra-ui/react';
+import { Box, Center, Image, Text, useColorModeValue } from '@chakra-ui/react';
 
 export default function CategoryCard(props: any) {
   return (
@@ -31,7 +19,7 @@ export default function CategoryCard(props: any) {
           src={props.image}
           objectFit={'cover'}
           objectPosition="top"
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
         />
         <Center
           position="absolute"

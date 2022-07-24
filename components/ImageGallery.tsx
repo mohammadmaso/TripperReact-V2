@@ -1,25 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { IconButton } from '@chakra-ui/button';
+import { CloseButton } from '@chakra-ui/close-button';
 import { Image } from '@chakra-ui/image';
-import {
-  Box,
-  Center,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Wrap,
-  Text,
-} from '@chakra-ui/layout';
+import { Center, HStack, Stack } from '@chakra-ui/layout';
+import { useEffect, useState } from 'react';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { UserType } from '../graphql/generated/types';
 import ImageCard from './ImageCard';
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CloseIcon,
-  Icon,
-} from '@chakra-ui/icons';
-import { CloseButton } from '@chakra-ui/close-button';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import { ButtonGroup, IconButton } from '@chakra-ui/button';
 
 export type IImage = {
   id: string;
@@ -133,7 +119,7 @@ const ImageGallery = ({ images, ...rest }: Props) => {
                 id="lightbox-img"
                 src={imageToShow?.image}
                 objectFit="contain"
-                fallbackSrc="images/placeholder.png"
+                fallbackSrc="/images/placeholder.png"
               />
               <div>
                 <IconButton

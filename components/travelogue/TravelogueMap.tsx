@@ -1,17 +1,14 @@
-import { Stack, Wrap, Text, Box, Center, Image } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
+import { Box, Center, Image, Stack, Text, Wrap } from '@chakra-ui/react';
+import * as turf from '@turf/turf';
+import React, { useState } from 'react';
+import { FiMap } from 'react-icons/fi';
 import ReactMapGL, {
   Layer,
-  NavigationControl,
-  ScaleControl,
-  Source,
   Marker,
+  NavigationControl,
+  Source,
 } from 'react-map-gl';
-import * as turf from '@turf/turf';
-import { FiMap } from 'react-icons/fi';
 import { TripDetailQuery } from '../../graphql/generated/types';
-import { TravelogueTransferCard } from './TravelogueTransfers';
-import { FeatureCollection, LineString } from '@turf/turf';
 import useMobileDetect from '../../hooks/useMobileDetect';
 
 const getArchRoute = (originAirport: any, destinationAirport: any) => {
@@ -148,7 +145,7 @@ export function TravelogueMap({ data }: Props) {
                     w="15"
                     src={experience?.node?.svg!}
                     alt=""
-                    fallbackSrc="images/placeholder.png"
+                    fallbackSrc="/images/placeholder.png"
                   />
                 ))}
               </Wrap>
@@ -180,7 +177,7 @@ export function TravelogueMap({ data }: Props) {
                 w="15"
                 src={item?.transferData?.transferType?.svg!}
                 alt=""
-                fallbackSrc="images/placeholder.png"
+                fallbackSrc="/images/placeholder.png"
               />
             </Center>
           </Marker>

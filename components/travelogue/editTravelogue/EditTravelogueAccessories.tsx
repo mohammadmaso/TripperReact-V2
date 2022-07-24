@@ -1,22 +1,17 @@
 import {
   Box,
-  Stack,
-  Wrap,
-  Text,
-  Image,
-  Flex,
   Button,
-  SimpleGrid,
+  Flex,
   IconButton,
+  Image,
+  SimpleGrid,
+  Stack,
+  Text,
+  Wrap,
 } from '@chakra-ui/react';
-import { Maybe } from 'graphql/jsutils/Maybe';
-import React from 'react';
-import { FiBookmark, FiShoppingBag } from 'react-icons/fi';
+import { FiShoppingBag } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
-import {
-  AccessoryType,
-  AccessoryTypeEdge,
-} from '../../../graphql/generated/types';
+import { AccessoryTypeEdge } from '../../../graphql/generated/types';
 import AddEditButton from './AddEditButton';
 
 interface Props {
@@ -43,7 +38,7 @@ function AccessoryCard(props: any) {
             fit="contain"
             src="/images/Digikala.png"
             alt="digikala"
-            fallbackSrc="images/placeholder.png"
+            fallbackSrc="/images/placeholder.png"
           />
         </Flex>
 
@@ -52,7 +47,7 @@ function AccessoryCard(props: any) {
           w="full"
           src={props.imageLink}
           alt="accessories"
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
         />
         <Text px="3">{props.name}</Text>
         <Button

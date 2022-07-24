@@ -1,22 +1,18 @@
-import React from 'react';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   Button,
   Center,
-  Heading,
-  Text,
   Divider,
   Image,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
-import { FiArrowRight } from 'react-icons/fi';
 import { useRouter } from 'next/router';
+import { FiArrowRight } from 'react-icons/fi';
 interface Props {}
 
 const DevelopingPortal = (props: Props) => {
@@ -40,7 +36,7 @@ const DevelopingPortal = (props: Props) => {
               h="300px"
               w="500px"
               my="2"
-              fallbackSrc="images/placeholder.png"
+              fallbackSrc="/images/placeholder.png"
             />
             <Text fontSize="xl" fontWeight="light">
               این صفحه در دست توسعه می‌باشد.

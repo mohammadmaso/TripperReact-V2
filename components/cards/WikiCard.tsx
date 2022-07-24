@@ -1,19 +1,15 @@
-import React, { ReactElement } from 'react';
-
 import {
+  Avatar,
   Box,
   Center,
-  Heading,
-  Text,
-  Stack,
-  Avatar,
-  useColorModeValue,
-  Image,
-  Tag,
-  HStack,
   Flex,
+  HStack,
+  Image,
+  Stack,
+  Tag,
+  Text,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import { AllArticleQuery, ArticleType } from '../../graphql/generated/types';
 import Link from 'next/link';
 
 export default function WikiCard(props: any) {
@@ -38,7 +34,7 @@ export default function WikiCard(props: any) {
               height="200px"
               w="full"
               objectFit={'cover'}
-              fallbackSrc="images/placeholder.png"
+              fallbackSrc="/images/placeholder.png"
             />
           </Box>
           <Flex direction="column" justifyContent="center">

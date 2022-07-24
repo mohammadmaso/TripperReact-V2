@@ -1,70 +1,51 @@
 import {
-  Container,
-  Flex,
-  Heading,
-  Stack,
-  Wrap,
-  WrapItem,
-  Divider,
-  TagRightIcon,
-  TagLabel,
   Box,
-  useEventListener,
-  Text,
   Button,
-  Center,
-  useToast,
-  useDisclosure,
+  Divider,
+  Flex,
   Slide,
+  Stack,
+  useDisclosure,
+  useToast,
+  Wrap,
 } from '@chakra-ui/react';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import BaseLayout from '../../../layouts/BaseLayout';
-import { EditTravelogueAccomodations } from './EditTravelogueAccomodations';
-import { EditTravelogueHeader } from './EditTravelogueHeader';
-import { EditTravelogueGallery } from './EditTravelogueGallery';
-import { EditTravelogueDescription } from './EditTravelogueDescription';
-import EditTravelogueCompanions from './EditTravelogueCompanions';
-import { EditTravelogueExperiences } from './EditTravelogueExperiences';
-import { EditTraveloguePlaces } from './EditTraveloguePlaces';
-import EditTravelogueAccessories from './EditTravelogueAccessories';
-import EditTravelogueTransfers from './EditTravelogueTransfers';
-import EditTravelogueActivities from './EditTravelogueActivities';
 import {
   AccessoryType,
   AccessoryTypeEdge,
-  CreateResidenceMutationVariables,
   ExperienceType,
   ExperienceTypeEdge,
-  InputMaybe,
-  ResidenceType,
-  Scalars,
   TransferType,
   TripActivitieType,
   TripActivitieTypeEdge,
   TripDetailQuery,
-  TripType,
   UserType,
-  UserTypeConnection,
   UserTypeEdge,
 } from '../../../graphql/generated/types';
-import ApiLoading from '../../ApiLoading';
+import EditTravelogueAccessories from './EditTravelogueAccessories';
+import { EditTravelogueAccomodations } from './EditTravelogueAccomodations';
+import EditTravelogueActivities from './EditTravelogueActivities';
+import EditTravelogueCompanions from './EditTravelogueCompanions';
+import { EditTravelogueDescription } from './EditTravelogueDescription';
+import { EditTravelogueExperiences } from './EditTravelogueExperiences';
+import { EditTravelogueGallery } from './EditTravelogueGallery';
+import { EditTraveloguePlaces } from './EditTraveloguePlaces';
+import EditTravelogueTransfers from './EditTravelogueTransfers';
 
-import EmptyResult from '../../EmptyResult';
-import { BiComment, BiCommentAdd } from 'react-icons/bi';
 import useIsSignedIn from '../../../hooks/useIsSignedIn';
 import ImageGallery, { IImage } from '../../ImageGallery';
 import EditInitTravelogue from './EditInitTravelogue';
-import AddCompanionModal from './Modals/AddCompanionModal';
 import AddAccessoryModal from './Modals/AddAccessoryModal';
+import AddCompanionModal from './Modals/AddCompanionModal';
 
 import _ from 'lodash';
 import { FiRotateCcw, FiSave } from 'react-icons/fi';
-import ActivitiesModal from './Modals/ActivitiesModal';
-import AddTransferModal from './Modals/AddTransferModal';
-import AddExperienceModal from './Modals/AddExperienceModal';
 import { TravelogueMap } from '../TravelogueMap';
-import AddAccomodationsModal from './Modals/AddAccomodationsModal';
+import ActivitiesModal from './Modals/ActivitiesModal';
+import AddAccommodationsModal from './Modals/AddAccomodationsModal';
+import AddExperienceModal from './Modals/AddExperienceModal';
+import AddTransferModal from './Modals/AddTransferModal';
 
 interface Props {
   data: TripDetailQuery;
@@ -85,7 +66,7 @@ export default function EditTravelogueContainer({
   const editeInitModal = useDisclosure();
   const selectActivitiesModal = useDisclosure();
   const addTransferModal = useDisclosure();
-  const addAccomodationModal = useDisclosure();
+  const addAccommodationsModal = useDisclosure();
   const addExperienceModal = useDisclosure();
   const addAccessoryModal = useDisclosure();
   const addCompanionModal = useDisclosure();
@@ -170,11 +151,9 @@ export default function EditTravelogueContainer({
     experiences: data.trip?.experiences?.edges,
   });
 
-  const [residenceData, setResidenceData] = useState<{
-    [key: string]: any;
-  }>({
-    residencesOfTrip: data.trip?.residencesOfTrip.edges,
-  });
+  const [residenceData, setResidenceData] = useState<any[]>(
+    data.trip?.residencesOfTrip?.edges!
+  );
 
   const [tripData, setTripData] = useState<{
     [key: string]: any;
@@ -259,33 +238,6 @@ export default function EditTravelogueContainer({
       });
   };
 
-  const onAddResidence = (residenceInput: {
-    name: Scalars['String'];
-    residenceType: Scalars['ID'];
-    stayDuration: Scalars['Int'];
-    longitude?: InputMaybe<string> | undefined;
-    latitude?: InputMaybe<string> | undefined;
-  }) => {
-    actions
-      .createResidence({
-        tripId: data.trip?.id as string,
-        ...residenceInput,
-      })
-      .then((res: any) => {
-        if (res.data?.success == true) {
-        }
-        if (res.data?.createResidence?.success == false) {
-          toast({
-            title: 'خطا در بروزرسانی سفر',
-            status: 'error',
-            duration: 8000,
-            isClosable: true,
-            position: 'top-right',
-          });
-        }
-      });
-  };
-
   const onIgnoreChanges = () => {
     setTripData(initialTripData);
   };
@@ -335,14 +287,12 @@ export default function EditTravelogueContainer({
 
               <Divider />
               <EditTravelogueAccomodations
-                onAddButtonClick={addAccomodationModal.onOpen}
-                residences={data.trip?.residencesOfTrip?.edges!}
+                onAddButtonClick={addAccommodationsModal.onOpen}
+                residences={residenceData}
                 onDeleteClick={(id: string) => {
-                  setResidenceData((prevState) => ({
-                    residencesOfTrip: prevState?.residencesOfTrip.filter(
-                      (item: any) => item?.node?.id !== id
-                    ),
-                  }));
+                  setResidenceData((prevState) =>
+                    prevState?.filter((item: any) => item?.node?.id !== id)
+                  );
                   // TODO: delete residence api call
                 }}
               />
@@ -466,13 +416,13 @@ export default function EditTravelogueContainer({
         }}
       />
 
-      <AddAccomodationsModal
+      <AddAccommodationsModal
         data={tripData}
         queries={{ ...queries }}
         actions={{ ...actions }}
-        {...addAccomodationModal}
-        onAddAccomodation={(residence: any) => {
-          onAddResidence(residence);
+        {...addAccommodationsModal}
+        onAddAccommodation={(residence) => {
+          setResidenceData((prevState) => prevState.concat(residence));
         }}
       />
       <AddAccessoryModal

@@ -1,22 +1,11 @@
-import React, { useRef, useState } from 'react';
 import {
-  Heading,
   Avatar,
   Box,
-  Center,
-  Image,
-  Flex,
-  Text,
-  Stack,
   Button,
-  useColorModeValue,
-  Tag,
-  Wrap,
+  Flex,
+  Heading,
   Icon,
-  Badge,
-  useDisclosure,
-  Spinner,
-  Tooltip,
+  Image,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -24,42 +13,31 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverTrigger,
+  Stack,
   Table,
-  TableCaption,
+  Tag,
   Tbody,
   Td,
-  Tfoot,
-  Th,
-  Thead,
+  Text,
+  Tooltip,
   Tr,
+  useDisclosure,
+  Wrap,
 } from '@chakra-ui/react';
+import { useState } from 'react';
+import { FiCamera, FiEdit2, FiInfo, FiShare2 } from 'react-icons/fi';
+import { GoVerified } from 'react-icons/go';
+import { RiUserFollowLine } from 'react-icons/ri';
 import {
-  FollowOrUnfollowMutation,
   ProfileFieldsFragment,
   TripSimpleFieldsFragment,
-  UpdateProfileMutation,
-  UpdateUserInput,
-  UpdateUserMutation,
   UserFieldsFragment,
-  UserType,
 } from '../../graphql/generated/types';
-import Link from 'next/link';
-import {
-  FiCamera,
-  FiEdit,
-  FiEdit2,
-  FiInfo,
-  FiSettings,
-  FiShare2,
-} from 'react-icons/fi';
 import FollowersModal from '../Modals/FollowersModal';
 import FollowingsModal from '../Modals/FollowingsModal';
-import { RiUserFollowLine } from 'react-icons/ri';
-import { FetchResult } from '@apollo/client/link/core/types';
-import ProfileEditModal from '../Modals/ProfileEditModal';
 import ImageUploadModal from '../Modals/ImageUploadModal';
+import ProfileEditModal from '../Modals/ProfileEditModal';
 import ShareModal from '../Modals/ShareModal';
-import { GoVerified } from 'react-icons/go';
 interface Props {
   isTourLeader: boolean;
   isSelf: boolean;

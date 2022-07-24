@@ -1,26 +1,23 @@
-import { TimeIcon, CalendarIcon } from '@chakra-ui/icons';
+import { CalendarIcon, TimeIcon } from '@chakra-ui/icons';
 import {
   Avatar,
-  Box,
+  Button,
   Divider,
+  Flex,
   HStack,
+  Icon,
+  Image,
   Stack,
   Tag,
-  Wrap,
   Text,
-  Flex,
-  Image,
-  Center,
   useColorModeValue,
-  Icon,
-  Button,
+  Wrap,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { FaFire } from 'react-icons/fa';
-import { FiBookmark, FiEye, FiHeart, FiMoreHorizontal } from 'react-icons/fi';
+import { FiEye } from 'react-icons/fi';
 import { HiLocationMarker } from 'react-icons/hi';
 import {
   namedOperations,
@@ -28,7 +25,6 @@ import {
   useLikeTripMutation,
 } from '../../graphql/generated/types';
 import { getDate, getDays } from '../../utils/time';
-import TravelogueActivities from '../travelogue/TravelogueActivities';
 import { ActivityCard } from './ActivityCard';
 
 interface Props {

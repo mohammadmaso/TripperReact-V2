@@ -1,62 +1,34 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Text,
-  Stack,
-  Icon,
-  Wrap,
-  Center,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  Textarea,
   Box,
-  useToast,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  InputGroup,
-  InputRightElement,
-  Spinner,
+  Button,
   Divider,
   Flex,
-  Avatar,
-  IconButton,
+  Icon,
   Image,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   SimpleGrid,
+  Spinner,
+  Stack,
+  Text,
+  useToast,
+  Wrap,
 } from '@chakra-ui/react';
-import { Field, Form, Formik, ErrorMessage } from 'formik';
 import React, { useState } from 'react';
-import { BiCommentAdd } from 'react-icons/bi';
 import {
   AccessoryTypeEdge,
-  CreateTripReviewMutation,
   SearchAccessoryQueryResult,
-  SearchUsernameQuery,
-  SearchUsernameQueryResult,
-  useMeFollowingsQuery,
-  UserTypeEdge,
 } from '../../../../graphql/generated/types';
-import ApiLoading from '../../../ApiLoading';
-import UserSimpleListCard from '../../../cards/UserSimpleListCard';
 
-import * as Yup from 'yup';
-import { FetchResult } from '@apollo/client/link/core/types';
-import {
-  FiBookmark,
-  FiPlus,
-  FiShoppingBag,
-  FiUserPlus,
-  FiUsers,
-} from 'react-icons/fi';
+import { FiPlus, FiShoppingBag } from 'react-icons/fi';
 
 interface Props {
   isOpen: boolean;
@@ -146,7 +118,7 @@ const AddAccessoryModal = (props: Props) => {
                             fit="contain"
                             src="/images/Digikala.png"
                             alt="digikala"
-                            fallbackSrc="images/placeholder.png"
+                            fallbackSrc="/images/placeholder.png"
                           />
                         </Flex>
 
@@ -154,7 +126,7 @@ const AddAccessoryModal = (props: Props) => {
                           fit="contain"
                           w="full"
                           src={item?.node?.imageLink!}
-                          fallbackSrc="images/placeholder.png"
+                          fallbackSrc="/images/placeholder.png"
                           alt="accessories"
                         />
                         <Text>{item?.node?.name}</Text>

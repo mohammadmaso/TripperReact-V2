@@ -1,19 +1,16 @@
-import { ArrowLeftIcon } from '@chakra-ui/icons';
 import {
-  Flex,
-  Stack,
-  Wrap,
-  Text,
   Center,
-  useColorModeValue,
+  Flex,
   Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  Wrap,
 } from '@chakra-ui/react';
 import React from 'react';
-import { BiSquareRounded, BiTransfer } from 'react-icons/bi';
-import { FaCampground } from 'react-icons/fa';
-import { FiArrowLeft, FiHome } from 'react-icons/fi';
-import { MdFlightTakeoff, MdPlace } from 'react-icons/md';
-import { TransferType, TransferTypeEdge } from '../../graphql/generated/types';
+import { BiTransfer } from 'react-icons/bi';
+import { FiArrowLeft } from 'react-icons/fi';
+import { TransferType } from '../../graphql/generated/types';
 interface Props {
   transfers: any;
 }
@@ -39,7 +36,7 @@ export function TravelogueTransferCard(props: CardProps) {
           w="15"
           src={props.transferType?.svg!}
           alt=""
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
         />
       </Center>
       <Wrap align="center">

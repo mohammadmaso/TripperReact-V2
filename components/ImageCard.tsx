@@ -1,7 +1,6 @@
 import { Image } from '@chakra-ui/image';
 import { ImageProps } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import ImageGallery, { IImage } from './ImageGallery';
+import React from 'react';
 
 interface Props {
   image: any;
@@ -28,7 +27,7 @@ const ImageCard = ({ image, imageOnClick, id, style, ImageProps }: Props) => {
         transition={'all .3s ease'}
         _hover={{ transform: 'scale(1.1,1.1)' }}
         cursor="zoom-in"
-        fallbackSrc="images/placeholder.png"
+        fallbackSrc="/images/placeholder.png"
       />
     </>
   );

@@ -1,33 +1,26 @@
-import React, { ReactElement, useState } from 'react';
+import { useState } from 'react';
 
-import {
-  Box,
-  Center,
-  Heading,
-  Text,
-  Stack,
-  Avatar,
-  useColorModeValue,
-  Image,
-  Flex,
-  HStack,
-  Tag,
-  Wrap,
-  WrapItem,
-  Spinner,
-  Icon,
-} from '@chakra-ui/react';
-import { FiEye, FiHeart, FiMapPin } from 'react-icons/fi';
 import { TimeIcon } from '@chakra-ui/icons';
-import { getDays } from '../../utils/time';
+import {
+  Avatar,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Stack,
+  Tag,
+  Text,
+  useColorModeValue,
+  Wrap,
+} from '@chakra-ui/react';
 import Link from 'next/link';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { FiEye, FiMapPin } from 'react-icons/fi';
 import {
   namedOperations,
-  TripSimpleFieldsFragment,
-  TripType,
   useLikeTripMutation,
 } from '../../graphql/generated/types';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { getDays } from '../../utils/time';
 
 interface Props {
   data: any;
@@ -151,7 +144,7 @@ export default function TripSmallCard({ data }: Props) {
           src={data.defaultImage}
           objectFit="cover"
           h="full"
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
         />
         <Link href={`/travelogues/${data.id}`} passHref>
           <Box width={'full'} cursor="pointer">

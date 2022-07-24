@@ -1,15 +1,5 @@
-import {
-  Box,
-  Stack,
-  Wrap,
-  Text,
-  Image,
-  Flex,
-  Button,
-  Link,
-} from '@chakra-ui/react';
-import React from 'react';
-import { FiBookmark, FiShoppingBag } from 'react-icons/fi';
+import { Box, Flex, Image, Stack, Text } from '@chakra-ui/react';
+import { FiBookmark } from 'react-icons/fi';
 
 interface Props {}
 
@@ -29,7 +19,7 @@ function AccessoryCard(props: any) {
 
         <Image
           fit="contain"
-          fallbackSrc="images/placeholder.png"
+          fallbackSrc="/images/placeholder.png"
           w="full"
           src={props.imageLink}
           alt="accessories"

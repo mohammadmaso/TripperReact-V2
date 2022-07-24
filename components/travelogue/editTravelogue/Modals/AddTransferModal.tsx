@@ -1,51 +1,42 @@
 import { LazyQueryResult } from '@apollo/client/react/types/types';
 import {
-  Modal,
-  Input,
-  Divider,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  Wrap,
-  Icon,
-  Text,
-  ModalCloseButton,
-  ModalBody,
-  Stack,
-  InputGroup,
-  InputRightElement,
-  Spinner,
-  ModalFooter,
-  SimpleGrid,
   Box,
   Button,
-  Checkbox,
-  RadioGroup,
-  Radio,
+  Divider,
+  Icon,
   Image,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+  Wrap,
 } from '@chakra-ui/react';
 import * as Yup from 'yup';
 
+import { FetchResult } from '@apollo/client/link/core/types';
+import { ErrorMessage, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { BiTransfer } from 'react-icons/bi';
-import { FiShoppingBag, FiActivity, FiMapPin } from 'react-icons/fi';
+import { FiMapPin } from 'react-icons/fi';
 import {
-  AllActivitiesQueryResult,
-  AllProvincesOfCountryQuery,
-  Maybe,
-  Exact,
-  TripActivitieType,
-  TripActivitieTypeEdge,
   AllCitiesOfProvinceQuery,
+  AllProvincesOfCountryQuery,
   AllTransferTypesQuery,
-  CreateSinglTransferMutationVariables,
   CreateSinglTransferMutation,
+  CreateSinglTransferMutationVariables,
+  Exact,
+  Maybe,
+  TripActivitieTypeEdge,
 } from '../../../../graphql/generated/types';
-import { ActivityCard } from '../../../cards/ActivityCard';
-import SelectForm from '../../../SelectForm';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
-import { Form, Formik, ErrorMessage } from 'formik';
-import { FetchResult } from '@apollo/client/link/core/types';
+import SelectForm from '../../../SelectForm';
 
 interface Props {
   isOpen: boolean;
@@ -325,7 +316,7 @@ const AddTransferModal = (props: Props) => {
                           <Radio key={item?.node?.id} value={item?.node?.id!}>
                             <Image
                               h="30"
-                              fallbackSrc="images/placeholder.png"
+                              fallbackSrc="/images/placeholder.png"
                               src={item?.node?.svg!}
                               alt={item?.node?.title!}
                             />

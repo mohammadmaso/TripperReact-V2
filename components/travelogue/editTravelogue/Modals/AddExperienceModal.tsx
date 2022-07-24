@@ -1,64 +1,43 @@
+import { MutationResult } from '@apollo/client/react/types/types';
 import {
-  LazyQueryResult,
-  MutationResult,
-} from '@apollo/client/react/types/types';
-import {
-  Modal,
-  Input,
-  Divider,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  Wrap,
-  Icon,
-  Text,
-  ModalCloseButton,
-  ModalBody,
-  Stack,
-  InputGroup,
-  InputRightElement,
-  Spinner,
-  ModalFooter,
-  SimpleGrid,
   Box,
   Button,
-  Checkbox,
-  RadioGroup,
-  Radio,
-  Image,
+  Divider,
   FormControl,
   FormLabel,
+  Icon,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
   Textarea,
-  Center,
+  Wrap,
 } from '@chakra-ui/react';
-import * as Yup from 'yup';
 import Compressor from 'compressorjs';
+import * as Yup from 'yup';
 
+import { FetchResult } from '@apollo/client/link/core/types';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { BiTransfer } from 'react-icons/bi';
-import { FiShoppingBag, FiActivity, FiMapPin, FiImage } from 'react-icons/fi';
+import { FiImage } from 'react-icons/fi';
 import {
   AllActivitiesQueryResult,
-  AllProvincesOfCountryQuery,
-  Maybe,
-  Exact,
-  TripActivitieType,
-  TripActivitieTypeEdge,
-  AllCitiesOfProvinceQuery,
-  AllTransferTypesQuery,
-  CreateSinglTransferMutationVariables,
-  CreateSinglTransferMutation,
+  CreateExperienceImageMutation,
+  CreateExperienceImageMutationVariables,
   CreateExperinceMutationMutation,
   CreateExperinceMutationMutationVariables,
-  CreateExperienceImageMutationVariables,
-  CreateExperienceImageMutation,
 } from '../../../../graphql/generated/types';
-import { ActivityCard } from '../../../cards/ActivityCard';
 import { createSelectorOptions } from '../../../../utils/selectOptions';
-import { Form, Formik, ErrorMessage, Field } from 'formik';
-import { FetchResult } from '@apollo/client/link/core/types';
-import { SelectPointMap } from './SelectPointMap';
 import SelectForm from '../../../SelectForm';
+import { SelectPointMap } from './SelectPointMap';
 
 interface Props {
   data: any;
@@ -314,7 +293,7 @@ const AddExperienceModal = (props: Props) => {
                           alt=""
                           h="100px"
                           borderRadius="md"
-                          fallbackSrc="images/placeholder.png"
+                          fallbackSrc="/images/placeholder.png"
                         />
                       ))}
                     </Wrap>

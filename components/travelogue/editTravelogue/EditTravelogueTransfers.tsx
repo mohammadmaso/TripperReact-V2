@@ -1,30 +1,27 @@
-import { ArrowLeftIcon } from '@chakra-ui/icons';
 import {
-  Flex,
-  Stack,
-  Wrap,
-  Text,
-  Center,
-  useColorModeValue,
-  IconButton,
   AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  ButtonGroup,
-  Button,
-  AlertDialogFooter,
   AlertDialogBody,
   AlertDialogCloseButton,
-  useDisclosure,
-  Image,
+  AlertDialogContent,
+  AlertDialogFooter,
   AlertDialogHeader,
+  AlertDialogOverlay,
+  Button,
+  ButtonGroup,
+  Center,
+  Flex,
+  IconButton,
+  Image,
+  Stack,
+  Text,
+  useColorModeValue,
+  useDisclosure,
+  Wrap,
 } from '@chakra-ui/react';
 import React from 'react';
-import { BiSquareRounded, BiTransfer } from 'react-icons/bi';
-import { FaCampground } from 'react-icons/fa';
-import { FiArrowLeft, FiHome } from 'react-icons/fi';
+import { BiTransfer } from 'react-icons/bi';
+import { FiArrowLeft } from 'react-icons/fi';
 import { IoClose } from 'react-icons/io5';
-import { MdFlightTakeoff, MdPlace } from 'react-icons/md';
 import {
   TransferType,
   TransferTypeEdge,
@@ -61,7 +58,7 @@ function TravelogueTransferCard(props: CardProps) {
             }
             h="15"
             w="15"
-            fallbackSrc="images/placeholder.png"
+            fallbackSrc="/images/placeholder.png"
             src={props.transferType?.svg!}
             alt=""
           />
@@ -122,7 +119,7 @@ function TravelogueTransferCard(props: CardProps) {
                   w="15"
                   src={props.transferType?.svg!}
                   alt=""
-                  fallbackSrc="images/placeholder.png"
+                  fallbackSrc="/images/placeholder.png"
                 />
               </Center>
               <Wrap align="center">

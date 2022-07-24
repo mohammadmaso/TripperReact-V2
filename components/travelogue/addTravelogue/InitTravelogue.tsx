@@ -1,68 +1,57 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Text,
-  Stack,
-  Icon,
-  Wrap,
-  Center,
-  FormControl,
-  FormErrorMessage,
-  Textarea,
-  Box,
-  useToast,
-  useDisclosure,
-  ButtonGroup,
   AlertDialog,
   AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
   AlertDialogCloseButton,
-  Input,
-  FormLabel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogOverlay,
+  Box,
+  Button,
+  ButtonGroup,
   Flex,
+  FormControl,
+  FormLabel,
+  Icon,
   Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Stack,
+  Text,
+  Textarea,
+  useDisclosure,
+  useToast,
+  Wrap,
 } from '@chakra-ui/react';
-import { Field, Form, Formik, ErrorMessage } from 'formik';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React from 'react';
-import { BiCommentAdd } from 'react-icons/bi';
-import ApiLoading from '../../ApiLoading';
-import UserSimpleListCard from '../../cards/UserSimpleListCard';
 
-import * as Yup from 'yup';
-import { useRouter } from 'next/router';
-import { FiArrowLeft, FiDelete, FiTrash, FiUpload } from 'react-icons/fi';
-import { MdCardTravel } from 'react-icons/md';
-import SelectForm from '../../SelectForm';
-import DatePicker from '../../DatePicker';
 import {
   LazyQueryResult,
   MutationResult,
-  QueryLazyOptions,
   QueryResult,
 } from '@apollo/client/react/types/types';
+import { useRouter } from 'next/router';
+import { FiArrowLeft, FiTrash, FiUpload } from 'react-icons/fi';
+import { MdCardTravel } from 'react-icons/md';
+import * as Yup from 'yup';
 import {
   AllCountriesQuery,
   AllProvincesOfCountryQuery,
   AllTripCategoriesQuery,
   CreateInitialTripMutation,
-  CreateInitialTripMutationVariables,
   Exact,
   Maybe,
-  Scalars,
   TripInput,
   TripRelatedInput,
 } from '../../../graphql/generated/types';
 import { createSelectorOptions } from '../../../utils/selectOptions';
-import { FetchResult } from '@apollo/client/link/core/types';
+import DatePicker from '../../DatePicker';
+import SelectForm from '../../SelectForm';
 
 interface Props {
   actions: {
@@ -373,7 +362,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                             rounded="md"
                             colorScheme="red"
                             onClick={() => {
-                              setImagePreview('/images/placeholder.png');
+                              setImagePreview('//images/placeholder.png');
                               formProps.setFieldValue('image', null);
                             }}
                             rightIcon={<FiTrash />}
@@ -398,7 +387,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                           rounded="lg"
                           src={imagePreview}
                           alt="تصویر سفر"
-                          fallbackSrc="images/placeholder.png"
+                          fallbackSrc="/images/placeholder.png"
                         />
                       </Box>
                     </Flex>

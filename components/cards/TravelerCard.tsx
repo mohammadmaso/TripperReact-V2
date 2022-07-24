@@ -1,20 +1,17 @@
 import {
-  Heading,
   Avatar,
   Box,
   Center,
-  Image,
   Flex,
-  Text,
+  Heading,
+  Image,
   Stack,
-  Button,
-  useColorModeValue,
-  Tag,
-  Wrap,
+  Text,
   Tooltip,
+  useColorModeValue,
+  Wrap,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import React from 'react';
 import { UserType } from '../../graphql/generated/types';
 
 export default function TravelerCard(props: UserType) {
