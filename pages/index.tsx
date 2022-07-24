@@ -1,7 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 import MapCTA from '../components/landing/MapCTA';
 import TourLeaderCTA from '../components/landing/TourLeaderCTA';
-import Map from '../components/Map';
 
 import BaseLayout from '../layouts/BaseLayout';
 import LastArticlesView from '../views/article/LastArticlesView';
@@ -13,7 +12,7 @@ export default function Home() {
     <BaseLayout>
       <Stack spacing="10">
         {/* <LandingGallery /> */}
-        <Map />
+        {/* <Map /> */}
         <MapCTA />
         {/* <ToureCard1 /> */}
         {/* <CallToActionWithVideo /> */}
