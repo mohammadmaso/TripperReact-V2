@@ -4,5 +4,8 @@
         "Formik",
         "mapbox",
         "setClosed"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
 }
