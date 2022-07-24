@@ -1,53 +1,45 @@
-import React, { useEffect, useState } from 'react';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Text,
-  Stack,
-  Icon,
-  Wrap,
-  Center,
-  FormControl,
-  Input,
-  FormErrorMessage,
-  Textarea,
   Box,
-  useToast,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  InputGroup,
-  InputRightElement,
-  Spinner,
+  Button,
   Divider,
-  Flex,
-  Avatar,
-  IconButton,
-  Radio,
-  Image,
-  RadioGroup,
+  FormControl,
   FormLabel,
+  Icon,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+  useToast,
+  Wrap,
 } from '@chakra-ui/react';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
-import { Form, Formik, ErrorMessage, Field } from 'formik';
 
-import { BiBed } from 'react-icons/bi';
-import { SelectPointMap } from './SelectPointMap';
+import { FetchResult } from '@apollo/client/link/core/types';
 import {
+  LazyQueryResult,
+  MutationResult,
+} from '@apollo/client/react/types/types';
+import { BiBed } from 'react-icons/bi';
+import { HiOutlineHome } from 'react-icons/hi';
+import {
+  CreateResidenceMutation,
+  CreateResidenceMutationVariables,
   Exact,
   GetAllResidenceTypesQuery,
+  ResidenceType,
 } from '../../../../graphql/generated/types';
-import { LazyQueryResult } from '@apollo/client/react/types/types';
-import { FiMapPin } from 'react-icons/fi';
-import { HiOutlineHome } from 'react-icons/hi';
+import { SelectPointMap } from './SelectPointMap';
 
 interface Props {
   data: any;
@@ -55,6 +47,15 @@ interface Props {
   onClose: any;
   actions: {
     getAllResidenceType: () => void;
+    createResidence: (
+      inputs: CreateResidenceMutationVariables
+    ) => Promise<
+      FetchResult<
+        CreateResidenceMutation,
+        Record<string, any>,
+        Record<string, any>
+      >
+    >;
   };
   queries: {
     allResidenceTypeQuery: LazyQueryResult<
@@ -63,18 +64,20 @@ interface Props {
         [key: string]: never;
       }>
     >;
+    createResidenceStatus: MutationResult<CreateResidenceMutation>;
   };
-  onAddAccomodation: any;
+  onAddAccommodation: (residence: ResidenceType) => void;
 }
 
-const AddAccomodationsModal = (props: Props) => {
+const AddAccommodationsModal = (props: Props) => {
   const [location, setLocation] = useState<any>([]);
+  const toast = useToast();
 
   useEffect(() => {
     if (props.isOpen == true) {
       props.actions?.getAllResidenceType();
     }
-  }, [props.isOpen]);
+  }, [props.isOpen, props.actions]);
 
   return (
     <Modal
@@ -95,40 +98,42 @@ const AddAccomodationsModal = (props: Props) => {
         <ModalCloseButton />
         <Formik
           initialValues={{
-            srcProvince: '',
-            destProvince: '',
-            destCity: '',
-            srcCity: '',
-            type: '',
+            name: '',
+            stayDuration: 0,
+            latitude: '',
+            longitude: '',
+            residenceType: '',
           }}
           validationSchema={Yup.object().shape({
-            srcProvince: Yup.string().required(
-              'استان مبدا نمی‌تواند خالی باشد.'
+            name: Yup.string().required('نام اقامتگاه نمی‌تواند خالی باشد.'),
+            residenceType: Yup.string().required(
+              'نوع اقامتگاه نمی‌تواند خالی باشد.'
             ),
-            destProvince: Yup.string().required(
-              'استان مقصد نمی‌تواند خالی باشد.'
-            ),
-            destCity: Yup.string().required('شهر مقصد نمی‌تواند خالی باشد.'),
-            srcCity: Yup.string().required('شهر مبدا نمی‌تواند خالی باشد.'),
-            type: Yup.string().required('نوع رفت آمد نمی تواند خالی باشد.'),
           })}
           onSubmit={(values, { setSubmitting, setFieldError }) => {
-            // props.actions
-            //   .createTransfer({
-            //     src: values.srcCity,
-            //     destination: values.destCity,
-            //     transferType: values.type,
-            //     transferInput: {
-            //       startTime: null,
-            //       duration: 0,
-            //     },
-            //   })
-            //   .then((res) => {
-            //     if (res.data?.createTransfer?.success === true) {
-            //       props.onClose();
-            //       props.onAddTransfer(res.data.createTransfer?.transfer);
-            //     }
-            //   });
+            props.actions
+              .createResidence({
+                tripId: props.data.id as string,
+                name: values.name,
+                stayDuration: values.stayDuration,
+                latitude: location.latitude,
+                longitude: location.longitude,
+                residenceType: values.residenceType,
+              })
+              .then((res) => {
+                if (res.data?.createResidence?.success == true) {
+                  props.onClose();
+                }
+                if (res.data?.createResidence?.success == false) {
+                  toast({
+                    title: 'خطا در بارگذاری اقامتگاه',
+                    status: 'error',
+                    duration: 8000,
+                    isClosable: true,
+                    position: 'top-right',
+                  });
+                }
+              });
           }}
         >
           {(formProps) => (
@@ -145,11 +150,18 @@ const AddAccomodationsModal = (props: Props) => {
                     </FormControl>
                   )}
                 </Field>
-                <Field name="titstayDurationle">
+                <Field name="stayDuration">
                   {({ field, form }: { field: any; form: any }) => (
                     <FormControl>
                       <FormLabel>مدت روز اقامت</FormLabel>
-                      <Input id="stayDuration" {...field} type="number" />
+                      <Input
+                        onChange={(value) =>
+                          formProps.setFieldValue('stayDuration', value)
+                        }
+                        id="stayDuration"
+                        {...field}
+                        type="number"
+                      />
                       <Box textColor="red" fontSize="sm" my="2">
                         <ErrorMessage name="stayDuration" component="div" />
                       </Box>
@@ -168,36 +180,43 @@ const AddAccomodationsModal = (props: Props) => {
                   <HiOutlineHome />
                   <Text fontWeight="extrabold">نوع اقامتگاه</Text>
                 </Wrap>
-                <RadioGroup
-                  onChange={(value) => formProps.setFieldValue('type', value)}
-                  value={formProps.values.type}
-                >
-                  <Wrap>
-                    {props.queries.allResidenceTypeQuery.data?.allResidenceTypes?.edges.map(
-                      (item) => (
-                        <Radio key={item?.node?.id} value={item?.node?.id!}>
-                          <Stack
-                            justifyContent={'center'}
-                            alignItems={'center'}
-                          >
-                            <Image
-                              h="30"
-                              src={item?.node?.svg!}
-                              alt={item?.node?.name!}
-                              fallbackSrc="images/placeholder.png"
-                            />{' '}
-                            <Text fontSize={'sm'}>{item?.node?.name!}</Text>
-                          </Stack>
-                        </Radio>
-                      )
-                    )}
-                  </Wrap>
-                </RadioGroup>
+                <FormControl>
+                  <RadioGroup
+                    onChange={(value) =>
+                      formProps.setFieldValue('residenceType', value)
+                    }
+                    value={formProps.values.residenceType}
+                  >
+                    <Wrap>
+                      {props.queries.allResidenceTypeQuery.data?.allResidenceTypes?.edges.map(
+                        (item) => (
+                          <Radio key={item?.node?.id} value={item?.node?.id!}>
+                            <Stack
+                              justifyContent={'center'}
+                              alignItems={'center'}
+                            >
+                              <Image
+                                h="30"
+                                src={item?.node?.svg!}
+                                alt={item?.node?.name!}
+                                fallbackSrc="/images/placeholder.png"
+                              />{' '}
+                              <Text fontSize={'sm'}>{item?.node?.name!}</Text>
+                            </Stack>
+                          </Radio>
+                        )
+                      )}
+                    </Wrap>
+                  </RadioGroup>
+                  <Box textColor="red" my="2">
+                    <ErrorMessage name="residenceType" component="div" />
+                  </Box>
+                </FormControl>
               </ModalBody>
               <ModalFooter>
                 <Wrap>
                   <Button
-                    isLoading={false}
+                    isLoading={props.queries?.createResidenceStatus?.loading}
                     colorScheme="primary"
                     variant="ghost"
                     size="sm"
@@ -223,4 +242,4 @@ const AddAccomodationsModal = (props: Props) => {
   );
 };
 
-export default AddAccomodationsModal;
+export default AddAccommodationsModal;
