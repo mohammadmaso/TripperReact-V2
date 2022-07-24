@@ -15,7 +15,6 @@ export default function Home() {
         {/* <LandingGallery /> */}
         <Map />
         <MapCTA />
-        {/* <Box h={['20px', '20px', '40px']} /> */}
         {/* <ToureCard1 /> */}
         {/* <CallToActionWithVideo /> */}
         {/* <TourCategoriesView /> */}

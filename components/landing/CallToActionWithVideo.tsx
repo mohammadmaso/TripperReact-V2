@@ -12,6 +12,7 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
+import getRandomFilePath from '../../utils/selectRandomFile';
 
 export default function CallToActionWithVideo() {
   return (
@@ -119,7 +120,7 @@ export default function CallToActionWithVideo() {
               align={'center'}
               w={'100%'}
               h={'100%'}
-              src={getRandomFilePath()()}
+              src={getRandomFilePath()}
               fallbackSrc="/images/placeholder.png"
             />
           </Box>
