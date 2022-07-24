@@ -17,7 +17,7 @@ const siteConfig = {
     "travel",
     "social"
   ],
-  "loginImage" : "/images/photo-1598651616012-22589d9a7fad.avif",
+  "loginImage" : "/images/10.avif",
 }
 
 
