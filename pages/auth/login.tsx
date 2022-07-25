@@ -132,7 +132,7 @@ export default function SignIn() {
       <Flex flex="1">
         <Image
           alt={'Login Image'}
-          objectFit={'cover'}
+          objectFit="cover"
           src={getRandomFilePath()}
           fallbackSrc="/images/placeholder.png"
         />

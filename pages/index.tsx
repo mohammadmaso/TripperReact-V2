@@ -12,7 +12,6 @@ export default function Home() {
     <BaseLayout>
       <Stack spacing="10">
         {/* <LandingGallery /> */}
-        {/* <Map /> */}
         <MapCTA />
         {/* <ToureCard1 /> */}
         {/* <CallToActionWithVideo /> */}
