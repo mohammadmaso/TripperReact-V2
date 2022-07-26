@@ -7,7 +7,7 @@ export const useRandomPicture = () => {
   const router = useRouter();
 
   useEffect(() => {
-    getRandomFilePath();
+    setPicturePath(getRandomFilePath());
   }, [router.pathname]);
 
   return picturePath;
