@@ -23,8 +23,8 @@ import * as Yup from 'yup';
 import CircleLogo from '../../components/logos/CircleLogo';
 import TermOfUseModal from '../../components/Modals/TermOfUseModal';
 import { useRegisterSmsMutation } from '../../graphql/generated/types';
+import { useRandomPicture } from '../../hooks/useRandomePicture';
 import { usernameRegex } from '../../utils/regex';
-import getRandomFilePath from '../../utils/selectRandomFile';
 
 export default function SingUp() {
   const router = useRouter();
@@ -240,8 +240,8 @@ export default function SingUp() {
         <Flex flex="1">
           <Image
             alt={'Login Image'}
-            objectFit={'cover'}
-            src={getRandomFilePath()}
+            objectFit={'contain'}
+            src={useRandomPicture()}
             fallbackSrc="/images/placeholder.png"
           />
         </Flex>
