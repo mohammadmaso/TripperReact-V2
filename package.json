@@ -52,6 +52,7 @@
     "react-cropper": "^2.1.8",
     "react-datepicker2": "^3.3.13",
     "react-dom": "18.2.0",
+    "react-globe.gl": "^2.22.1",
     "react-icons": "^4.2.0",
     "react-image-gallery": "^1.2.6",
     "react-insta-stories": "^2.2.3",
@@ -69,7 +70,9 @@
     "slick-carousel": "^1.8.1",
     "stylis": "^4.0.10",
     "stylis-plugin-rtl": "^2.1.0",
+    "three": "^0.142.0",
     "three-globe": "^2.24.6",
+    "three-glow-mesh": "^0.1.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {
@@ -93,6 +96,7 @@
     "@types/moment-jalaali": "^0.7.5",
     "@types/react": "18.0.15",
     "@types/react-slick": "^0.23.10",
+    "@types/three": "^0.142.0",
     "apollo": "^2.33.4",
     "babel-loader": "^8.2.5",
     "eslint": "8.20.0",
