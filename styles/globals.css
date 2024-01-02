@@ -123,3 +123,8 @@ body {
   margin-right: 8px !important;
 }
 
+.datepicker{
+  border: #777777;
+  border-radius: 20px;
+}
+

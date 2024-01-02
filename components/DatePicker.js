@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Calendar, DatePicker as DatePicker2 } from 'fixed-persian-datepicker';
-import { Moment } from 'moment-jalaali';
+import { DatePicker as DatePicker2 } from 'fixed-persian-datepicker';
+import { useState } from 'react';
 
 // interface Props {
 //   onDateChange: (date: Moment) => void;
@@ -18,6 +17,7 @@ const DatePicker = (props) => {
         timePicker={false}
         value={state}
         isGregorian={false}
+        className={"datepicker"}
       />
     </div>
   );
