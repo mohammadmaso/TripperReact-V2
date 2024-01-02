@@ -1,5 +1,9 @@
 # Use an official Node runtime as a parent image
+<<<<<<< HEAD
 FROM node:16
+=======
+FROM node:18
+>>>>>>> 54eeaeb (add docker file)
 
 # Set the working directory in the container
 WORKDIR /usr/src/app

@@ -1,0 +1,253 @@
+{
+  "aspectWidth": 16,
+  "aspectHeight": 9,
+  "enableKeyboardZoom": true,
+  "enableKeyboardRotation": true,
+  "enableKeyboardNavigation": true,
+  "enableMouseTranslation": true,
+  "enableMouseZoom": true,
+  "enableMouseRotation": true,
+  "enableMouseNavigation": true,
+  "updateURLOnFrameChange": true,
+  "exportType": "pdf",
+  "exportToPDFPageSize": "A4",
+  "exportToPDFPageOrientation": "landscape",
+  "exportToPDFInclude": "",
+  "exportToPDFExclude": "",
+  "exportToPPTXSlideSize": "screen4x3",
+  "exportToPPTXInclude": "",
+  "exportToPPTXExclude": "",
+  "exportToVideoFormat": "webm",
+  "exportToVideoWidth": 1280,
+  "exportToVideoHeight": 720,
+  "exportToVideoFrameRate": 50,
+  "exportToVideoBitRate": 2000000,
+  "frames": [
+    {
+      "frameId": "frame3128",
+      "title": "New frame",
+      "titleLevel": 0,
+      "notes": "",
+      "timeoutMs": 0,
+      "timeoutEnable": false,
+      "transitionDurationMs": 1000,
+      "showInFrameList": true,
+      "showFrameNumber": true,
+      "layerProperties": {
+        "Shadows": {
+          "link": false,
+          "referenceElementId": "path--inject-214",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Background_Complete": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Desk": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Beverages": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "PC": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Speech_Code": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Character_2": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "Character_1": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        },
+        "__sozi_auto__": {
+          "link": false,
+          "referenceElementId": "",
+          "outlineElementId": "",
+          "transitionTimingFunction": "linear",
+          "transitionRelativeZoom": 0,
+          "transitionPathId": ""
+        }
+      },
+      "cameraStates": {
+        "Shadows": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Background_Complete": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Desk": {
+          "cx": 152.24696698214834,
+          "cy": 183.3117350593942,
+          "width": 644.7288411458333,
+          "height": 362.65997314453125,
+          "opacity": 1,
+          "angle": 0,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Beverages": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "PC": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Speech_Code": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Character_2": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "Character_1": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        },
+        "__sozi_auto__": {
+          "cx": 868.8592234594412,
+          "cy": -574.5790763118673,
+          "width": 5800.915228003755,
+          "height": 3263.0148157521126,
+          "opacity": 1,
+          "angle": 42.11285603301778,
+          "clipped": false,
+          "clipXOffset": 0,
+          "clipYOffset": 0,
+          "clipWidthFactor": 1,
+          "clipHeightFactor": 1
+        }
+      },
+      "cameraOffsets": {
+        "Shadows": {
+          "deltaX": 658.4592295629568,
+          "deltaY": -925.9190726497579,
+          "widthFactor": 14.95929456461038,
+          "heightFactor": 144.1260999876194,
+          "deltaAngle": 42.11285603301778
+        }
+      }
+    }
+  ],
+  "elementsToHide": [
+    ""
+  ],
+  "customFiles": [],
+  "selectedFrames": [
+    "frame3128"
+  ],
+  "selectedLayers": [
+    "Desk"
+  ],
+  "editableLayers": [
+    "Desk"
+  ]
+}
