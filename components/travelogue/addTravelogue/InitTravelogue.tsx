@@ -155,6 +155,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                   description: values.description,
                   defaultImage: values.image,
                   startDate: values.startDate,
+                  
                   endDate: values.endDate,
                 },
                 createTripTripRelatedInput: {
