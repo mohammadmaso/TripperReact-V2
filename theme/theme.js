@@ -1,5 +1,4 @@
 import { extendTheme } from '@chakra-ui/react';
-import { createBreakpoints } from "@chakra-ui/theme-tools"
 
 const colors = {
   primary: 
@@ -54,8 +53,8 @@ const config = {
 
 
 const fonts = {
-    heading: "peyda",
-    body: "iranyekanfanum",
+    heading: "Alibaba",
+    body: "Alibaba",
 }
 const direction = "rtl"
 

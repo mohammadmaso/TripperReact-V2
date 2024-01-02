@@ -107,6 +107,28 @@ const Fonts = () => (
                 url('/fonts/PeydaWeb/ttf/PeydaWeb-Regular.ttf') format('truetype');
         }
 
+		@font-face {
+			font-family: "Alibaba";
+			src:
+			  url('/fonts/alibaba-black.woff2') format('woff2');
+			font-weight: black;
+			font-style: normal;
+		  }
+		  @font-face {
+			font-family: "Alibaba";
+			src:
+			  url('/fonts/alibaba-bold.woff2') format('woff2');
+			font-weight: bold;
+			font-style: normal;
+		  }
+		  @font-face {
+			font-family: "Alibaba";
+			src: 
+			  url('/fonts/alibaba-regular.woff2') format('woff2');
+			font-weight: normal;
+			font-style: normal;
+		  }
+
 
       /**
 *
