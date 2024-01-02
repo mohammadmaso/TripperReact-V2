@@ -5962,8 +5962,6 @@ export type CreateInitialTripMutationVariables = Exact<{
   createTripTripRelatedInput: TripRelatedInput;
   createTripProvince: Scalars['ID'];
   createTripCountry: Scalars['ID'];
-  startDate?: InputMaybe<Scalars['Date']>;
-  endDate?: InputMaybe<Scalars['Date']>;
 }>;
 
 
@@ -6885,7 +6883,7 @@ export type CreateTripReviewMutationHookResult = ReturnType<typeof useCreateTrip
 export type CreateTripReviewMutationResult = Apollo.MutationResult<CreateTripReviewMutation>;
 export type CreateTripReviewMutationOptions = Apollo.BaseMutationOptions<CreateTripReviewMutation, CreateTripReviewMutationVariables>;
 export const CreateInitialTripDocument = gql`
-    mutation CreateInitialTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput!, $createTripProvince: ID!, $createTripCountry: ID!, $startDate: Date, $endDate: Date) {
+    mutation CreateInitialTrip($createTripTripInput: TripInput!, $createTripTripRelatedInput: TripRelatedInput!, $createTripProvince: ID!, $createTripCountry: ID!) {
   createTrip(
     tripInput: $createTripTripInput
     tripRelatedInput: $createTripTripRelatedInput
@@ -6918,8 +6916,6 @@ export type CreateInitialTripMutationFn = Apollo.MutationFunction<CreateInitialT
  *      createTripTripRelatedInput: // value for 'createTripTripRelatedInput'
  *      createTripProvince: // value for 'createTripProvince'
  *      createTripCountry: // value for 'createTripCountry'
- *      startDate: // value for 'startDate'
- *      endDate: // value for 'endDate'
  *   },
  * });
  */

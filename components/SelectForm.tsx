@@ -1,9 +1,5 @@
-import React from 'react';
 import {
-  AsyncCreatableSelect,
-  AsyncSelect,
-  CreatableSelect,
-  Select,
+  Select
 } from 'chakra-react-select';
 
 interface Props {
@@ -19,6 +15,9 @@ const SelectForm = (props: Props) => {
   return (
     <>
       <Select
+        menuPortalTarget={document.body} 
+        styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
+  
         placeholder={props.name as string}
         className="basic-single"
         classNamePrefix={props.name}

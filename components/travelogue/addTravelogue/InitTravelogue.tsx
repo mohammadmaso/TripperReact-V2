@@ -11,6 +11,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
+  HStack,
   Icon,
   Image,
   Input,
@@ -155,7 +156,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                   description: values.description,
                   defaultImage: values.image,
                   startDate: values.startDate,
-                  
+
                   endDate: values.endDate,
                 },
                 createTripTripRelatedInput: {
@@ -206,7 +207,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       loading={queries.categoriesQuery.loading}
                     />
                     <Box textColor="red" my="2">
-                      <ErrorMessage name="province" component="div" />
+                      <ErrorMessage name="categories" component="div" />
                     </Box>
                   </Stack>
                   <Field name="description">
@@ -272,9 +273,8 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                       </Box>
                     </Stack>
                   </Wrap>
-
-                  <Wrap>
-                    <Field flex={1} name="startDate">
+                  <HStack>
+                    <Field  name="startDate">
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ شروع سفر</FormLabel>
@@ -289,7 +289,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                         </FormControl>
                       )}
                     </Field>
-                    <Field flex={1} name="endDate">
+                    <Field  name="endDate">
                       {({ field, form }: { field: any; form: any }) => (
                         <FormControl>
                           <FormLabel>تاریخ پایان سفر</FormLabel>
@@ -304,7 +304,7 @@ const InitTravelogue = ({ queries, actions, status }: Props) => {
                         </FormControl>
                       )}
                     </Field>
-                  </Wrap>
+                    </HStack>
                   <Box
                     my="3"
                     border="gray"

@@ -1,4 +1,5 @@
 import { DatePicker as DatePicker2 } from 'fixed-persian-datepicker';
+import moment from "moment-jalaali";
 import { useState } from 'react';
 
 // interface Props {
@@ -6,20 +7,22 @@ import { useState } from 'react';
 // }
 
 const DatePicker = (props) => {
-  const [state, setState] = useState();
+  const [state, setState] = useState("");
   return (
-    <div>
       <DatePicker2
+      
         onChange={(value) => {
-          props.onDateChange(value);
+          const date = moment(value).format('YYYY-MM-DD')
+          props.onDateChange(date);
           setState(value);
         }}
         timePicker={false}
         value={state}
         isGregorian={false}
         className={"datepicker"}
+        
+
       />
-    </div>
   );
 };
 
